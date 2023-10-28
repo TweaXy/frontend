@@ -1,0 +1,32 @@
+.appleSignUp {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 100%;
+  color: #3c4043;
+  text-align: center;
+
+  padding: 0px;
+  height: 40px;
+  width: 298px;
+
+  background-color: white;
+  border: 3px solid #dadce0;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.appleSignUp:hover {
+  background-color: #f8faff;
+  border-color: #d2e3fc;
+  cursor: pointer;
+}
+
+.appleSignUp:active {
+  background-color: #ecf3fe;
+}
+
+.logo {
+  padding-top: 1.5px;
+  padding-right: 20px;
+}
