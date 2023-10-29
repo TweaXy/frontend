@@ -8,6 +8,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route exact={true} path="/" element={<WelcomePage />} />
+          {/*  <Route path="/Mail" element={<Mail />} />*/}
         </Routes>
       </BrowserRouter>
     </>

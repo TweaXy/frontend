@@ -4,26 +4,41 @@ import classes from "./WelcomePageStyle/Footer.module.css";
 import Headerclasses from "./WelcomePageStyle/Header.module.css";
 import Posterclasses from "./WelcomePageStyle/PosterImage.module.css";
 import backgroundImage from "../assets/X.png";
+import welcomePage from "./WelcomePageStyle/WelcomePage.module.css";
 import XLogo from "../assets/X.png";
 import GoogleSignUp from "../components/Buttons/GoogleSignUp";
 import AppleSignUp from "../components/Buttons/SignUpApple";
+import SignUpButton from "../components/Buttons/SignUpButton";
+import ORclasses from "./WelcomePageStyle/OrLabel.module.css";
 export default function WelcomePage() {
   return (
     <React.Fragment>
       <div>
-        <div className={Headerclasses.loginSection}>
+        <div className={welcomePage.loginSection}>
           <div>
             <div className={Headerclasses.container}>
               <img className={Headerclasses.Xlogo} src={XLogo} alt="XLogo" />
               <h1 className={Headerclasses.heading}>Happening now</h1>
               <p className={Headerclasses.content}>Join today.</p>
             </div>
-            <GoogleSignUp content="Sign up with Google" />
-            <AppleSignUp content="Sign up with Apple" />
-            {/*}  
-           
-            <OrLabel />
-  <ButtonSignUp />*/}
+            <GoogleSignUp />
+            <AppleSignUp />
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <div className={ORclasses.straightLine}></div>
+                  </td>
+                  <td>
+                    <div className={ORclasses.label}>or</div>
+                  </td>
+                  <td>
+                    <div className={ORclasses.straightLine}></div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <SignUpButton />
             <p className={Privacyclasses.privacyPolicy}>
               By signing up, you agree to the{" "}
               <a href="https://twitter.com/en/tos">Terms of Service</a> and{" "}
@@ -33,6 +48,7 @@ export default function WelcomePage() {
                 Cookie Use
               </a>
             </p>
+            
             {/*<SignInButton />*/}
           </div>
         </div>

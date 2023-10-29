@@ -7,25 +7,22 @@
 
 .background {
   width: 100%;
-  height: 98.5%;
+  height: 90%;
   margin: 0%;
-
-  object-fit: cover;
+  object-fit: fill;
 }
 
 .logoContainer {
-  /* border: 3px solid black; */
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 98.5%;
-  position: absolute;
+  height: 90%;
+  position: relative;
 }
 
 .logo {
   width: 350px;
-  /* width: 42%; */
 }
 
 @media only screen and (min-width: 0px) and (max-width: 700px) {
@@ -37,9 +34,6 @@
 
   .logo {
     width: 56%;
-    /* width: 300px; */
-    /* top: 19%;
-    left: 21%; */
   }
 }
 
@@ -52,43 +46,5 @@
 
   .logo {
     width: 39%;
-    /* width: 300px; */
-    /* top: 19%;
-    left: 21%; */
-  }
-}
-
-/* @media only screen and (min-width: 280px) and (max-width: 280px) {
-  .posterSection {
-    width: 280px;
-  }
-} */
-
-@media only screen and (min-width: 1000px) and (max-width: 1200px) {
-  .posterSection {
-    width: 41%;
-  }
-
-  /* .background {
-    object-position: 48% 10%;
-    transform: scale(1.1, 1);
-  } */
-
-  /* .logo {
-    width: 340px;
-    top: 33%;
-    left: 13%;
-  } */
-}
-
-@media only screen and (min-width: 1024px) and (max-width: 1024px) {
-  .posterSection {
-    height: 115vh;
-  }
-}
-
-@media only screen and (width: 280px) {
-  .posterSection {
-    width: 347px;
   }
 }

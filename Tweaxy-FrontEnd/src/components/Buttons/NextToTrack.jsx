@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import classes from "./buttonsStyle/NextToTrack.module.css";
 
-const NextToTrack = () => {
+export default function NextToTrack() {
   return (
     <div>
       <NavLink to="/TrackOption" style={{ textDecoration: "none" }}>
@@ -12,6 +12,4 @@ const NextToTrack = () => {
       </NavLink>
     </div>
   );
-};
-
-export default NextToTrack;
+}

@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import classes from "./buttonsStyle/NextToVerify.module.css";
 
-const NextToVerify = () => {
+export default function NextToVerify() {
   return (
     <div>
       <NavLink to="/phoneVerify" style={{ textDecoration: "none" }}>
@@ -12,6 +12,4 @@ const NextToVerify = () => {
       </NavLink>
     </div>
   );
-};
-
-export default NextToVerify;
+}

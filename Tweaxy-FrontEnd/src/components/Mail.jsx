@@ -6,9 +6,6 @@ import { NavLink } from "react-router-dom";
 const Mail = () => {
   return (
     <>
-      <NavLink to="/" >
-       
-      </NavLink>
 
       <div>
         <p>Create your account</p>
@@ -21,11 +18,6 @@ const Mail = () => {
           placeholder="Email address"
         />
 
-        <NavLink to="/Phone">
-          <div >
-            <p >Use phone number instead</p>
-          </div>
-        </NavLink>
         <div  style={{ fontWeight: "bold" }}>
           Date of birth{" "}
         </div>

@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./ButtonSignUp.module.css";
 import { NavLink } from "react-router-dom";
 
-const NextToPhone = (props) => {
+const NextToPhone = () => {
   return (
     <div className={classes.container}>
       <NavLink to="/AddPhone" className={classes.navLink}>

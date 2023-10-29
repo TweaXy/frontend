@@ -2,21 +2,17 @@ import React, { useContext } from "react";
 import classes from "./buttonsStyle/GoogleSignUp.module.css";
 import googleLogo from "../../assets/googleLogo.png";
 
-const GoogleSignUp = (props) => {
+const GoogleSignUp = () => {
   const handleClick = () => {
     window.open("https://backlb.twittercloneteamone.tk/auth/google", "_self");
   };
 
   return (
-    <div
-      className={classes.googleSignUp}
-      style={props.style}
-      onClick={handleClick}
-    >
+    <div className={classes.googleSignUp} onClick={handleClick}>
       <p className={classes.logo}>
-        <img src={googleLogo} alt="GoogleLogo" width="20px" />
+        <img src={googleLogo} width="20px" />
       </p>{" "}
-      {props.content}
+      Sign up with Google
     </div>
   );
 };

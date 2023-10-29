@@ -12,7 +12,6 @@
   margin: 7.5%;
   margin-top: 12%;
   margin-left: 0%;
-  /* margin-left: -1%; */
 }
 
 .content {
@@ -22,58 +21,4 @@
   margin-top: 7%;
   margin-bottom: 4%;
   margin-left: 0%;
-}
-
-@media only screen and (min-width: 0px) and (max-width: 700px) {
-  .container {
-    margin-top: 4%;
-  }
-
-  .twitterBluelogo {
-    margin-top: 7.5%;
-    width: 39.5px;
-  }
-
-  .heading {
-    font-size: 180%;
-    margin: 13% 0%;
-    margin-top: 17%;
-    margin-left: -1%;
-  }
-
-  .content {
-    font-size: 90%;
-    margin-bottom: 7%;
-  }
-}
-
-@media only screen and (min-width: 540px) and (max-width: 540px) {
-  .container {
-    margin-top: 1%;
-  }
-
-  .heading {
-    margin-top: 15%;
-    font-size: 270%;
-  }
-
-  .content {
-    margin-top: 5%;
-    font-weight: 900;
-    font-size: 130%;
-  }
-}
-
-@media only screen and (min-width: 700px) and (max-width: 1000px) {
-  .heading {
-    margin-top: 17%;
-    margin-bottom: 10%;
-    font-size: 270%;
-  }
-}
-
-@media only screen and (min-width: 1000px) and (max-width: 1300px) {
-  .heading {
-    font-size: 230%;
-  }
 }
