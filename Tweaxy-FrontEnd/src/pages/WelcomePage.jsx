@@ -8,6 +8,8 @@ import welcomePage from "./WelcomePageStyle/WelcomePage.module.css";
 import XLogo from "../assets/X.png";
 import GoogleSignUp from "../components/Buttons/GoogleSignUp";
 import AppleSignUp from "../components/Buttons/SignUpApple";
+import GithubSignUp from "../components/Buttons/GithubSignUp";
+import FacebookSignUp from "../components/Buttons/FacebookSignUp";
 import SignUpButton from "../components/Buttons/SignUpButton";
 import ORclasses from "./WelcomePageStyle/OrLabel.module.css";
 export default function WelcomePage() {
@@ -23,6 +25,8 @@ export default function WelcomePage() {
             </div>
             <GoogleSignUp />
             <AppleSignUp />
+            <GithubSignUp />
+            <FacebookSignUp />
             <table>
               <tbody>
                 <tr>

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import classes from "./buttonsStyle/GoogleSignUp.module.css";
-import googleLogo from "../../assets/googleLogo.png";
+import FacebookLogo from "../../assets/facebookLogo.png";
 
-export default function GoogleSignUp () {
+export default function FacebookSignUp() {
   const handleClick = () => {
     window.open("https://backlb.twittercloneteamone.tk/auth/google", "_self");
   };
@@ -10,10 +10,9 @@ export default function GoogleSignUp () {
   return (
     <div className={classes.googleSignUp} onClick={handleClick}>
       <p className={classes.logo}>
-        <img src={googleLogo} width="20px" />
+        <img src={FacebookLogo} width="20px" />
       </p>{" "}
-      Sign up with Google
+      Sign up with Facebook
     </div>
   );
-};
-
+}

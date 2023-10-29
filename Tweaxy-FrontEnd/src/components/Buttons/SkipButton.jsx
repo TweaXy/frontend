@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import classes from "./buttonsStyle/SkipButton.module.css";
 
-const SkipButton = () => {
+export default function SkipButton() {
   return (
     <div>
       <NavLink to="/" style={{ textDecoration: "none" }}>
@@ -12,6 +12,4 @@ const SkipButton = () => {
       </NavLink>
     </div>
   );
-};
-
-export default SkipButton;
+}

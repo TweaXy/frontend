@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./ButtonSignUp.module.css";
 import { NavLink } from "react-router-dom";
 
-const NextToPhone = () => {
+export default function NextToPhone() {
   return (
     <div className={classes.container}>
       <NavLink to="/AddPhone" className={classes.navLink}>
@@ -12,6 +12,4 @@ const NextToPhone = () => {
       </NavLink>
     </div>
   );
-};
-
-export default NextToPhone;
+}

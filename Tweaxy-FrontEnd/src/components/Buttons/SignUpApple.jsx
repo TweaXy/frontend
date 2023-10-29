@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./SignUpApple.module.css";
 import AppleIcon from "../../assets/AppleLogo.png";
-export default function AppleSignUp ()  {
+export default function AppleSignUp() {
   const handleClick = () => {
     window.open("https://backlb.twittercloneteamone.tk/auth/apple", "_self");
   };
@@ -14,6 +14,4 @@ export default function AppleSignUp ()  {
       Sign up with Apple
     </div>
   );
-};
-
-
+}
