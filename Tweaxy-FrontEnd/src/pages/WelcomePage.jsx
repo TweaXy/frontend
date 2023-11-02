@@ -3,9 +3,9 @@ import Privacyclasses from "./WelcomePageStyle/PrivacyAndPolicy.module.css";
 import classes from "./WelcomePageStyle/Footer.module.css";
 import Headerclasses from "./WelcomePageStyle/Header.module.css";
 import Posterclasses from "./WelcomePageStyle/PosterImage.module.css";
-import backgroundImage from "../assets/X.png";
+import backgroundImage from "../assets/Tweaxy.jpeg";
 import welcomePage from "./WelcomePageStyle/WelcomePage.module.css";
-import XLogo from "../assets/X.png";
+
 import GoogleSignUp from "../components/Buttons/GoogleSignUp";
 import AppleSignUp from "../components/Buttons/SignUpApple";
 import GithubSignUp from "../components/Buttons/GithubSignUp";
