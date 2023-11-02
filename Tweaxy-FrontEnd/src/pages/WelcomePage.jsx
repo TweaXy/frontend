@@ -19,7 +19,6 @@ export default function WelcomePage() {
         <div className={welcomePage.loginSection}>
           <div>
             <div className={Headerclasses.container}>
-              <img className={Headerclasses.Xlogo} src={XLogo} alt="XLogo" />
               <h1 className={Headerclasses.heading}>Happening now</h1>
               <p className={Headerclasses.content}>Join today.</p>
             </div>
@@ -52,7 +51,7 @@ export default function WelcomePage() {
                 Cookie Use
               </a>
             </p>
-            
+
             {/*<SignInButton />*/}
           </div>
         </div>
