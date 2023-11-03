@@ -1,15 +1,13 @@
 import { useState } from "react";
-import "./LoginPage.css";
-import { useNavigate } from "react-router-dom";
+import "./ForgetPasswordPage.css";
 
-const LoginPage = ({ onClose }) => {
+const ForgetPassswordPage = ({ onClose }) => {
   const [curWindow, setWindow] = useState(0);
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [userEmailError, setUserEmailError] = useState("");
   const [userPasswordError, setUserPasswordError] = useState("");
 
-  const navigate = useNavigate();
 
   const handleForgetPassword = () => {
     navigate("forget-password");
@@ -39,7 +37,6 @@ const LoginPage = ({ onClose }) => {
     // TODO: handle login and other password checkers
   };
 
-  const enterEmailWindow = () => {
     return (
       <div className="enter-email-window">
         <h2>Login to TweaXy</h2>
@@ -88,47 +85,4 @@ const LoginPage = ({ onClose }) => {
     );
   };
 
-  const enterPasswordWindow = () => {
-    return (
-      <div className="enter-password-window">
-        <h2>Enter your password</h2>
-        <form>
-          <input type="email" placeholder={userEmail} className="email-input" />
-          <input
-            type="password"
-            placeholder="Password"
-            value={userPassword}
-            onChange={handlePasswordChange}
-          />
-        </form>
-        <a onClick={handleForgetPassword}>Forgot password?</a>{" "}
-        {/* TODO:: remove this it has no meaning or make it a button and pass it to function handleforgetpassword*/}
-        <button onClick={handleLogin}>Login</button>
-        {userPasswordError && (
-          <div className="user-password-error">{userPasswordError}</div>
-        )}
-        <p>
-          Don't have an account? <a href="#">Sign up</a>{" "}
-          {/* TODO: handle sign up */}
-        </p>
-      </div>
-    );
-  };
-
-  return (
-    <div className="login-window-wrapper">
-      <div className="overlay" onClick={onClose}></div>
-      <div className="login-window">
-        <div className="login-window-header">
-          <button className="login-window-close-button" onClick={onClose}>
-            &times;
-          </button>
-        </div>
-        {curWindow == 0 && enterEmailWindow()}
-        {curWindow == 1 && enterPasswordWindow()}
-      </div>
-    </div>
-  );
-};
-
-export default LoginPage;
+export default ForgetPassswordPage;

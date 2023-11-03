@@ -1,22 +1,18 @@
 import { useState } from "react";
-import LoginPage from "./pages/login/LoginPage";
+import HomePage from "./pages/home/HomePage.jsx";
+import ForgetPasswordPopUp from "./pages/forget-password/ForgetPasswordPage.jsx"
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
-  const [isLoginPageOpen, setIsLoginPageOpen] = useState(false);
-
-  const openLoginPage = () => {
-    setIsLoginPageOpen(true);
-  };
-
-  const closeLoginPage = () => {
-    setIsLoginPageOpen(false);
-  };
 
   return (
-    <div>
-      <button onClick={openLoginPage}>Login</button>
-      {isLoginPageOpen && <LoginPage onClose={closeLoginPage} />}
-    </div>
+    <Router>
+      <Routes>
+        <Route index element={<HomePage />} />
+        <Route path="/forget-password" element={<ForgetPasswordPopUp />} />
+        {/*TODO:: put the other routes here*/}
+      </Routes>
+    </Router>
   );
 }
 
