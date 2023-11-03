@@ -3,9 +3,9 @@ import Privacyclasses from "./WelcomePageStyle/PrivacyAndPolicy.module.css";
 import classes from "./WelcomePageStyle/Footer.module.css";
 import Headerclasses from "./WelcomePageStyle/Header.module.css";
 import Posterclasses from "./WelcomePageStyle/PosterImage.module.css";
-import backgroundImage from "../assets/Tweaxy.jpeg";
+import backgroundImage from "../assets/Tweexy.jpg";
 import welcomePage from "./WelcomePageStyle/WelcomePage.module.css";
-
+import XLogo from "../assets/Tweexy.jpg";
 import GoogleSignUp from "../components/Buttons/GoogleSignUp";
 import AppleSignUp from "../components/Buttons/SignUpApple";
 import GithubSignUp from "../components/Buttons/GithubSignUp";
@@ -19,6 +19,7 @@ export default function WelcomePage() {
         <div className={welcomePage.loginSection}>
           <div>
             <div className={Headerclasses.container}>
+              <img className={Headerclasses.Xlogo} src={XLogo} alt="XLogo" />
               <h1 className={Headerclasses.heading}>Happening now</h1>
               <p className={Headerclasses.content}>Join today.</p>
             </div>

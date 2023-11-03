@@ -1,0 +1,110 @@
+.containerStep {
+    text-align: left;
+    margin: 3% 15%;
+    font-style: bold;
+}
+
+.container {
+    text-align: left;
+    margin: 5% 10%;
+
+}
+
+.containerHalf {
+    text-align: left;
+    margin: 5% 0%;
+    width: fit-content;
+}
+
+.closeIcon {
+    color: rgb(15, 20, 25);
+    padding: 3px;
+    padding-left: 4px;
+
+    display: flex;
+    position: relative;
+    width: 40px;
+    height: 33px;
+    border-radius: 9999px;
+    margin: 3%;
+    float: left;
+}
+
+.closeIcon:hover {
+    background-color: rgb(15, 20, 25, 0.1);
+    transition-property: background-color, box-shadow;
+    transition-duration: 0.2s;
+}
+
+.input {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 70%;
+    color: rgb(83, 100, 113);
+    text-align: left;
+
+    padding: 0px;
+    padding-left: 7px;
+    height: 56px;
+    width: 450px;
+
+    background-color: white;
+    border: 1px solid rgb(207, 217, 222);
+    border-radius: 4px;
+}
+
+
+.placeholder {
+    font-size: 80%;
+    margin-top: -8%;
+    margin-bottom: 1%;
+    margin-left: 1.5%;
+}
+
+.signUp {
+    font-size: 90%;
+    color: rgb(29, 155, 240);
+    text-decoration: none;
+}
+
+.signUp:hover {
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    cursor: pointer;
+}
+
+.Minor {
+    text-align: left;
+    font-size: 120%;
+    font-weight: bold;
+    color: #000000;
+}
+
+.DateOfBirth {
+    text-align: left;
+    margin: 0% 10%;
+    margin-left: 0;
+    font-size: 80%;
+    color: #000000;
+}
+
+.Minor3 {
+    
+    text-align: left;
+    margin: 1% 8%;
+    margin-left: 0;
+    font-size: 60%;
+    color: #4d4c4c;
+}
+
+.Minor4 {
+    text-align: left;
+    
+    margin: 5% 8%;
+    margin-left: 0;
+    font-size: 60%;
+    color: rgb(29, 155, 240);
+}
+
+.Minor4:hover{
+    cursor: pointer;
+}
