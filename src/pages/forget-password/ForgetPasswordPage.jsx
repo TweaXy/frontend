@@ -1,88 +1,40 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./ForgetPasswordPage.css";
 
-const ForgetPassswordPage = ({ onClose }) => {
-  const [curWindow, setWindow] = useState(0);
-  const [userEmail, setUserEmail] = useState("");
-  const [userPassword, setUserPassword] = useState("");
-  const [userEmailError, setUserEmailError] = useState("");
-  const [userPasswordError, setUserPasswordError] = useState("");
+const ForgetPasswordPage = ({ onClose }) => {
+  const [userInput, setEmail] = useState("");
 
-
-  const handleForgetPassword = () => {
-    navigate("forget-password");
-  };
-
-  const handleEmailChange = (e) => {
-    setUserEmail(e.target.value);
-  };
-  const handlePasswordChange = (e) => {
-    setUserPassword(e.target.value);
-  };
-  const handleEmailSubmission = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (!userEmail) {
-      setUserEmailError("Please enter your email.");
-      return;
-    }
-    // TODO: handle other email error before proceeding to enter password window
-    setWindow(1);
-  };
-  const handleLogin = (e) => {
-    e.preventDefault();
-    if (!userPassword) {
-      setUserPasswordError("Please enter your password.");
-      return;
-    }
-    // TODO: handle login and other password checkers
+    console.log("Email submitted: ${userInput}");
+    onClose();
   };
 
-    return (
-      <div className="enter-email-window">
-        <h2>Login to TweaXy</h2>
-        <button>
-          <img
-            src="https://img.icons8.com/color/48/google-logo.png"
-            alt="Google Icon"
-          />
-          Login with Google
-        </button>
-        <button>
-          <img
-            src="https://img.icons8.com/ios-glyphs/30/github.png"
-            alt="GitHub Icon"
-          />
-          Login with Github
-        </button>
-        <button>
-          <img
-            src="https://img.icons8.com/fluency/48/facebook-new.png"
-            alt="Facebook Icon"
-          />
-          Login with Facebook
-        </button>
-        <hr></hr>
-        <span>Or</span>
-        <form>
+  return (
+    <div className="popup">
+      <div className="popup-inner">
+        <h2>Find your X account</h2>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Enter the email, phone number or username associated with your
+            account to change your password.
+          </label>
           <input
-            type="email"
-            placeholder="Email"
-            value={userEmail}
-            onChange={handleEmailChange}
+            type="text"
+            value={userInput}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email address, phone number or username"
+            className="custom-input"
           />
-          <button onClick={handleEmailSubmission}>Next</button>
+          <button type="submit">next</button>
+          <button className="close-button" onClick={onClose}>
+            {" "}
+            x{" "}
+          </button>
         </form>
-        {userEmailError && (
-          <div className="user-email-error">{userEmailError}</div>
-        )}
-        <button onClick={handleForgetPassword}>Forgot password?</button>{" "}
-        {/* TODO: handle button click */}
-        <p>
-          Don't have an account? <a href="#">Sign up</a>{" "}
-          {/* TODO: handle sign up */}
-        </p>
       </div>
-    );
-  };
+    </div>
+  );
+};
 
-export default ForgetPassswordPage;
+export default ForgetPasswordPage;

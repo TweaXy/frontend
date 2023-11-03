@@ -1,9 +1,8 @@
 import { useState } from "react";
-import LoginPage from "../login/LoginPage";
+import LoginPage from "./LoginPage.jsx";
 
-function StartPage() {
+function LoginStartPage() {
   const [isLoginPageOpen, setIsLoginPageOpen] = useState(false);
-  const [isForgetPasswordPopupOpen, setIsForgetPasswordPopupOpen] = useState(false);
 
   const openLoginPage = () => {
     setIsLoginPageOpen(true);
@@ -11,14 +10,6 @@ function StartPage() {
 
   const closeLoginPage = () => {
     setIsLoginPageOpen(false);
-  };
-
-  const openForgetPasswordPopup = () => {
-    setIsForgetPasswordPopupOpen(true);
-  };
-
-  const closeForgetPasswordPopup = () => {
-    setIsForgetPasswordPopupOpen(false);
   };
 
   return (
@@ -29,4 +20,4 @@ function StartPage() {
   );
 }
 
-export default StartPage;
+export default LoginStartPage;

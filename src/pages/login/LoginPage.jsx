@@ -120,7 +120,7 @@ const LoginPage = ({ onClose }) => {
       <div className="overlay" onClick={onClose}></div>
       <div className="login-window">
         <div className="login-window-header">
-          <button className="login-window-close-button" onClick={onClose}>
+          <button className="close-button" onClick={onClose}>
             &times;
           </button>
         </div>
