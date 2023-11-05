@@ -1,40 +1,48 @@
 import { useState } from "react";
 import "./LoginPage.css";
+import { loginSchema } from "../../validations/authSchema";
 
 const LoginPage = ({ onClose }) => {
   const [curWindow, setWindow] = useState(0);
-  const [userEmail, setUserEmail] = useState("");
+  const [userUUID, setUserUUID] = useState("");
   const [userPassword, setUserPassword] = useState("");
-  const [userEmailError, setUserEmailError] = useState("");
+  const [userUUIDError, setUserUUIDError] = useState("");
   const [userPasswordError, setUserPasswordError] = useState("");
 
-  const handleEmailChange = (e) => {
-    setUserEmail(e.target.value);
+  const handleUUIDChange = (e) => {
+    setUserUUID(e.target.value);
   };
   const handlePasswordChange = (e) => {
     setUserPassword(e.target.value);
   };
-  const handleEmailSubmission = (e) => {
+  const handleUUIDSubmission = (e) => {
     e.preventDefault();
-    if (!userEmail) {
-      setUserEmailError("Please enter your email.");
-      return;
-    }
-    // TODO: handle other email error before proceeding to enter password window
-    setWindow(1);
+    loginSchema
+      .validate({ body: { UUID: userUUID, password: "" } })
+      .then(() => {
+        setUserUUIDError("");
+        setWindow(1);
+      })
+      .catch((error) => {
+        setUserUUIDError(error.message);
+      });
   };
   const handleLogin = (e) => {
     e.preventDefault();
-    if (!userPassword) {
-      setUserPasswordError("Please enter your password.");
-      return;
-    }
-    // TODO: handle login and other password checkers
+    loginSchema
+      .validate({ body: { UUID: userUUID, password: userPassword } })
+      .then(() => {
+        setUserPasswordError("");
+        // TODO: Handle the login process here
+      })
+      .catch((error) => {
+        setUserPasswordError(error.message);
+      });
   };
 
-  const enterEmailWindow = () => {
+  const enterUUIDWindow = () => {
     return (
-      <div className="enter-email-window">
+      <div className="enter-uuid-window">
         <h2>Login to TweaXy</h2>
         <button>
           <img
@@ -61,15 +69,15 @@ const LoginPage = ({ onClose }) => {
         <span>Or</span>
         <form>
           <input
-            type="email"
-            placeholder="Email"
-            value={userEmail}
-            onChange={handleEmailChange}
+            type="text"
+            placeholder="Phone, email, or username"
+            value={userUUID}
+            onChange={handleUUIDChange}
           />
-          <button onClick={handleEmailSubmission}>Next</button>
+          <button onClick={handleUUIDSubmission}>Next</button>
         </form>
-        {userEmailError && (
-          <div className="user-email-error">{userEmailError}</div>
+        {userUUIDError && (
+          <div className="user-uuid-error">{userUUIDError}</div>
         )}
         <button>Forgot password?</button> {/* TODO: handle button click */}
         <p>
@@ -85,7 +93,7 @@ const LoginPage = ({ onClose }) => {
       <div className="enter-password-window">
         <h2>Enter your password</h2>
         <form>
-          <input type="email" placeholder={userEmail} className="email-input" />
+          <input type="text" placeholder={userUUID} className="uuid-input" />
           <input
             type="password"
             placeholder="Password"
@@ -115,7 +123,7 @@ const LoginPage = ({ onClose }) => {
             &times;
           </button>
         </div>
-        {curWindow == 0 && enterEmailWindow()}
+        {curWindow == 0 && enterUUIDWindow()}
         {curWindow == 1 && enterPasswordWindow()}
       </div>
     </div>
