@@ -14,7 +14,7 @@ function App() {
       <Sidebar/>
       {/**News feed */}
 
-      <Feed/>
+      <Feed />
      
       {/**Widgets */}
 
