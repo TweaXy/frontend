@@ -1,47 +1,55 @@
 import { useState } from "react";
 import "./LoginPage.css";
+import { loginSchema } from "../../validations/authSchema";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = ({ onClose }) => {
   const [curWindow, setWindow] = useState(0);
-  const [userEmail, setUserEmail] = useState("");
+  const [userUUID, setUserUUID] = useState("");
   const [userPassword, setUserPassword] = useState("");
-  const [userEmailError, setUserEmailError] = useState("");
+  const [userUUIDError, setUserUUIDError] = useState("");
   const [userPasswordError, setUserPasswordError] = useState("");
 
   const navigate = useNavigate();
 
-  const handleForgetPassword = () => {
+  const handleForgetPasswordButton = (e) => {
     navigate("forget-password");
   };
 
-  const handleEmailChange = (e) => {
-    setUserEmail(e.target.value);
+  const handleUUIDChange = (e) => {
+    setUserUUID(e.target.value);
   };
   const handlePasswordChange = (e) => {
     setUserPassword(e.target.value);
   };
-  const handleEmailSubmission = (e) => {
+  const handleUUIDSubmission = (e) => {
     e.preventDefault();
-    if (!userEmail) {
-      setUserEmailError("Please enter your email.");
-      return;
-    }
-    // TODO: handle other email error before proceeding to enter password window
-    setWindow(1);
+    loginSchema
+      .validate({ body: { UUID: userUUID, password: "" } })
+      .then(() => {
+        setUserUUIDError("");
+        setWindow(1);
+      })
+      .catch((error) => {
+        setUserUUIDError(error.message);
+      });
   };
   const handleLogin = (e) => {
     e.preventDefault();
-    if (!userPassword) {
-      setUserPasswordError("Please enter your password.");
-      return;
-    }
-    // TODO: handle login and other password checkers
+    loginSchema
+      .validate({ body: { UUID: userUUID, password: userPassword } })
+      .then(() => {
+        setUserPasswordError("");
+        // TODO: Handle the login process here
+      })
+      .catch((error) => {
+        setUserPasswordError(error.message);
+      });
   };
 
-  const enterEmailWindow = () => {
+  const enterUUIDWindow = () => {
     return (
-      <div className="enter-email-window">
+      <div className="enter-uuid-window">
         <h2>Login to TweaXy</h2>
         <button>
           <img
@@ -68,18 +76,17 @@ const LoginPage = ({ onClose }) => {
         <span>Or</span>
         <form>
           <input
-            type="email"
-            placeholder="Email"
-            value={userEmail}
-            onChange={handleEmailChange}
+            type="text"
+            placeholder="Phone, email, or username"
+            value={userUUID}
+            onChange={handleUUIDChange}
           />
-          <button onClick={handleEmailSubmission}>Next</button>
+          <button onClick={handleUUIDSubmission}>Next</button>
         </form>
-        {userEmailError && (
-          <div className="user-email-error">{userEmailError}</div>
+        {userUUIDError && (
+          <div className="user-uuid-error">{userUUIDError}</div>
         )}
-        <button onClick={handleForgetPassword}>Forgot password?</button>{" "}
-        {/* TODO: handle button click */}
+        <button onClick={handleForgetPasswordButton}>Forgot password?</button>
         <p>
           Don't have an account? <a href="#">Sign up</a>{" "}
           {/* TODO: handle sign up */}
@@ -93,7 +100,7 @@ const LoginPage = ({ onClose }) => {
       <div className="enter-password-window">
         <h2>Enter your password</h2>
         <form>
-          <input type="email" placeholder={userEmail} className="email-input" />
+          <input type="text" placeholder={userUUID} className="uuid-input" />
           <input
             type="password"
             placeholder="Password"
@@ -101,8 +108,7 @@ const LoginPage = ({ onClose }) => {
             onChange={handlePasswordChange}
           />
         </form>
-        <a onClick={handleForgetPassword}>Forgot password?</a>{" "}
-        {/* TODO:: remove this it has no meaning or make it a button and pass it to function handleforgetpassword*/}
+        <a href="#">Forgot password?</a> {/* TODO: handle forgot password*/}
         <button onClick={handleLogin}>Login</button>
         {userPasswordError && (
           <div className="user-password-error">{userPasswordError}</div>
@@ -120,11 +126,11 @@ const LoginPage = ({ onClose }) => {
       <div className="overlay" onClick={onClose}></div>
       <div className="login-window">
         <div className="login-window-header">
-          <button className="close-button" onClick={onClose}>
+          <button className="login-window-close-button" onClick={onClose}>
             &times;
           </button>
         </div>
-        {curWindow == 0 && enterEmailWindow()}
+        {curWindow == 0 && enterUUIDWindow()}
         {curWindow == 1 && enterPasswordWindow()}
       </div>
     </div>
