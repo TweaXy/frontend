@@ -1,11 +1,14 @@
 .tweetbox{
     border-bottom:2px solid var(--twitter-background) ;
     padding: 0 16px;
+    width :598px;
     /* padding-bottom: 10px; */
     display: flex;
     /* flex-direction: column; */
 }
-
+.tweetbox > .avatar-box{
+    padding-top: 16px;
+}
 .tweetbox-form{
     flex: 1;
     display: flex;

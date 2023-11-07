@@ -2,7 +2,8 @@ body{
   --twitter-color:#34a1ee;
   --twitter-background:#e6ecf0;
   --twitter-cianHover:#d8eaf8;
-  
+  --twitter-greyColor:#536471;
+  --twitter-greyHover:#eae9e9;
 }
 .app{
   display: flex;

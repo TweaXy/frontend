@@ -3,7 +3,7 @@ import './Avatar.css'
 export default function AvatarBox({img}){
     return(
 
-        <div className="avatar-container">           
+        <div className="avatar-box">           
         <Avatar src={img}></Avatar>
         </div>
 

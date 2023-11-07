@@ -1,0 +1,104 @@
+.tweet{
+    padding: 0 16px;
+    border-bottom: 1px solid var(--twitter-background);
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI Emoji', 'Arial' !important; /* Use a fallback font */ ;
+    
+}
+.avatar-container{
+    display: flex;
+    align-items: flex-start;
+}
+.repost{
+    padding-top: 12px;
+    
+}
+.tweet-container{
+    display: flex;
+}
+.tweet-main{
+    flex: 1;
+    padding-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+
+}
+.tweet-user{
+    display: flex;
+}
+.tweet-user >.info-container{
+    flex: 1;
+    display: flex ;
+    align-items: center;
+    font-size: 15px;
+    color: var(--twitter-greyColor);
+}
+.tweet-user >.info-container > .username{
+    font-weight: bolder;
+    color: black;
+    /* font-family: 'Segoe UI Emoji', 'Arial'; Use a fallback font */
+}
+.tweet-user > .info-container > .dot-container > .dot{
+    padding-bottom: 5px;
+}
+.tweet-user >.options-container{
+    
+    justify-self: flex-end;
+    
+}
+
+.tweet-user > .info-container > .dot-container {
+    padding: 0 4px;
+    display: flex;
+    
+}
+
+.tweet-text-container{
+    flex: 1;
+}
+.tweet-text-container > .tweet-text{
+    line-height: 20px;
+}
+
+
+
+.tweet-main > .tweet-activity{
+    display: flex;
+    align-items: end;
+    height: 32px;
+    color: var(--twitter-greyColor);
+}
+
+.tweet-activity > .tweet-icon{
+    flex: 0.25;
+    display: flex;
+    align-items: center;
+}
+.tweet-icon > .icon-interaction {
+    padding: 0 8px;
+    font-size: 15px;
+} 
+.tweet-icon  > .MuiSvgIcon-root{
+    font-size: 17.5px;
+    color: var(--twitter-greyColor);
+}
+
+.tweet-activity > .side-icon{
+    display: flex; 
+    width: 34px;
+    height: 34px;
+}
+.tweet-activity > .side-icon > .MuiSvgIcon-root{
+    align-self: flex-end;
+    font-size: 21px;
+    color: var(--twitter-greyColor);
+}
+
+
+
+
+
+
+
+

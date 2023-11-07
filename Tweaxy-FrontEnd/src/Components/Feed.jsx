@@ -9,7 +9,9 @@ export default function Feed(){
         <div className="feed">  
         <FeedHeader feedHeader_acitve={0}/>
         <TweetBox/>
-        <Tweet/>
+        <Tweet avatar={'myphoto.jpg'} username={'mohamed'}
+        handle={'korydemo'} uploadTime={'7h'} tweetText={'Dof3ty enahrda shafoni wana bashrab sgaayr w mstnya ba2a el judgment bukraaa 🫠'}comments={5} reposts={10} likes={30} insights={'4K'}/>
+       
             {/*Tweet */} 
             {/*Tweet */}
             {/*Tweet */}

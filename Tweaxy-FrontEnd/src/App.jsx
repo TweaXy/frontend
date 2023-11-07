@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import './App.css'
-import Sidebar from './Sidebar'
-import Feed from './Feed'
-import Widget from './Widget'
+import Sidebar from './Components/Sidebar'
+import Feed from './Components/Feed'
+import Widget from './Components/Widget'
 function App() {
 
 
