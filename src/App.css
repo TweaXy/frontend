@@ -1,10 +1,9 @@
-body{
-  --twitter-color:#34a1ee;
-  --twitter-background:#e6ecf0;
-  --twitter-cianHover:#d8eaf8;
-  
+body {
+  --twitter-color: #34a1ee;
+  --twitter-background: #e6ecf0;
+  --twitter-cianHover: #d8eaf8;
 }
-.app{
+.app {
   display: flex;
 
   height: 100vh;
