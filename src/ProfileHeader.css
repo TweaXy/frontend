@@ -2,10 +2,10 @@
     border-bottom-width: 1px;
     border-bottom-color: rgb(38 38 38);
     padding: 2px;
-    margin-left:20px;
     height: 53px;
     max-width: 600px;
     width: 100%;
+
 }
 .container{
     display: flex;

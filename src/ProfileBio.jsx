@@ -1,10 +1,22 @@
 import { BiCalendar } from "react-icons/bi";
-
+import { Avatar } from "@mui/material";
 import "./ProfileBio.css";
 
 const ProfileBio = () => {
   return (
     <div className="biocontainer">
+      <div className="backgroundImage"></div>
+      <div className="profileTitle">
+        <div className="profileImage">
+          <Avatar
+            sx={{ width: 134, height: 134 }}
+            src="https://www.istockphoto.com/photos/avatar-images-for-profile"
+          />
+        </div>
+        <div className="editProfile">
+          <span>Edit profile</span>
+        </div>
+      </div>
       <div className="profileBiography">
         <span className="profileBiography-username">ebraam atef</span>
         <span className="profileBiography-email">@ebraamatef</span>
