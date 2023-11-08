@@ -57,7 +57,7 @@
   font-weight: 800;
 }
 .profileBiography-email {
-  color: rgb(72, 72, 72);
+  color: #707070;
   font-size: 15px;
 }
 
@@ -67,7 +67,7 @@
 .profileBiography-joinDate {
   display: flex;
   align-items: center;
-  color: rgb(72, 72, 72);
+  color: #707070;
   font-size: 16px;
 }
 .profile-followers-following-number {
@@ -84,6 +84,6 @@
   margin-top: 10px;
 }
 .profile-followers-following-text {
-  color: rgb(72, 72, 72);
+  color: #707070;
   font-size: 15px;
 }

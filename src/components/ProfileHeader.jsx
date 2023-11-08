@@ -5,12 +5,13 @@ import "./ProfileHeader.css"
 const ProfileHeader = () => {
 
   return (
-    <div className="header">
+    <div className="profile-header">
       <div className="container">
-        <BiArrowBack  color="black" size={18} className="arrow"/>
-        <h1 className="text">
-          ebraam atef
-        </h1>
+        <BiArrowBack  color="black" size={20} className="arrow"/>
+        <div>
+            <span className="text-name">ebraam atef</span>
+            <span className="text-posts">2 Posts</span>
+          </div>
       </div>
     </div>
   );

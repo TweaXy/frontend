@@ -3,9 +3,7 @@ import "./App.css";
 import Sidebar from "./components/Sidebar";
 import Feed from "./components/Feed";
 import Widget from "./components/Widget";
-import ProfileHeader from "./ProfileHeader";
-import "./Profile.css";
-import ProfileBio from "./ProfileBio";
+import Profile from "./components/Profile";
 function App() {
   return (
     <>
@@ -15,13 +13,7 @@ function App() {
         {/**News feed */}
 
         {/*<Feed />*/}
-        <div className="profile">
-          <ProfileHeader />
-
-          {/**Widgets */}
-
-          <ProfileBio />
-        </div>
+        <Profile />
         <Widget />
       </div>
     </>
