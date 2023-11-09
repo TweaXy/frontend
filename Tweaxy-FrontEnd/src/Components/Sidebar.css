@@ -2,13 +2,14 @@
   border-right: 1px solid ;
   border-color:var(--twitter-background);
 padding-left: 20px;
-padding-right: 37px;
+padding-right: 20px;
 /* margin-top: 20px; */
 /* min-width: 250px; */
 display: flex;
 flex-direction: column;
 flex: 0.195;
-}
+height: 100vh;
+}   
 
 
 .sidebar--tweet{

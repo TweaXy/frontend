@@ -7,6 +7,14 @@
   -webkit-text-size-adjust: 100%;
 }
 
+span {
+  /* Reset specific styles if needed */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  white-space: normal; /* Reset white-space if it was set to nowrap */
+}
+
 body {
   height: 100vh !important; 
   font-family: 'Segoe UI Emoji', 'Arial'; /* Use a fallback font */

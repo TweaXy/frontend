@@ -13,7 +13,7 @@ function App() {
       {/**Side bar */}
       <Sidebar/>
       {/**News feed */}
-
+      
       <Feed />
      
       {/**Widgets */}
