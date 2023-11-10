@@ -6,15 +6,21 @@ import SignUp2 from "./Signup2";
 import Signup3 from "./Signup3";
 import SignUp4 from "./Signup4";
 import SignUp5 from "./Signup5";
+import {sendEmailVerification} from "../apis/EmailVerfication";
 const Errors = {
   Email: "",
   Username: "",
-  Password: "",
+  Password:
+    "password must contain 8 or more characters with at least one of each: uppercase, lowercase, number and special",
+  Verficationcode:""
 };
 const LoginWindow = ({ onClose }) => {
   const [windowOpened, setwindowOpned] = useState(0);
   const nextWindowHandler = (ev) => {
-    ev.preventDefault();
+    // ev.preventDefault();
+    if (windowOpened === 2) {
+      sendEmailVerification(Data1.usermail);
+    }
     if (windowOpened === 4) {
       console.log("Done Go TO Home Page");
       return;
@@ -74,4 +80,4 @@ const LoginWindow = ({ onClose }) => {
     </div>
   );
 };
-export {LoginWindow as default,Errors};
+export { LoginWindow as default, Errors };

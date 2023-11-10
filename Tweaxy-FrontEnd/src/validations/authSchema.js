@@ -48,6 +48,11 @@ const forgetPasswordSchema = yup.object({
         UUID: UUIDField,
     }),
 });
+const passwordSchema = yup.object({
+    body: yup.object({
+        password: passwordField,
+    }),
+});
 
 const resetPasswordSchema = yup.object({
     body: yup.object({
@@ -73,4 +78,5 @@ export {
     loginSchema,
     resetPasswordSchema,
     signupSchema,
+    passwordSchema
 };

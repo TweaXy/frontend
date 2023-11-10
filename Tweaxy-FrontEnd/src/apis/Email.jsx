@@ -2,6 +2,7 @@ import {
   isEmailUniqueSchema,
   isUsernameUniqueSchema,
 } from "../validations/userSchema";
+import { passwordSchema } from "../validations/authSchema";
 import { Errors } from "../components/FloatingWindow";
 const isUniqeEmail = (usermail, setuniqueEmail) => {
   isEmailUniqueSchema
@@ -35,4 +36,18 @@ const isUniqueUsername = (username, setisuniqueusername) => {
       Errors["Username"] = error.message;
     });
 };
-export { isUniqeEmail, isUniqueUsername };
+const isAcceptebalePass = (pass, setAcceptedPass) => {
+  passwordSchema
+    .validate({
+      body: {
+        password: pass,
+      },
+    })
+    .then(() => {
+      setAcceptedPass(true);
+    })
+    .catch((error) => {
+      setAcceptedPass(false);
+    });
+};
+export { isUniqeEmail, isUniqueUsername, isAcceptebalePass };
