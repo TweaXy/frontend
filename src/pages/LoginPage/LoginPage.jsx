@@ -5,6 +5,7 @@ import EnterPasswordPage from "./EnterPasswordPage";
 import signInWithGoogle from "../../apis/signInWithGoogle";
 import LoginWindowHeader from "../../components/LoginWindowHeader/LoginWindowHeader";
 import checkUserUUID from "../../apis/checkUserUUID";
+import login from "../../apis/login";
 
 const LoginPage = ({ onClose }) => {
   const [curPage, setCurPage] = useState(0);
@@ -15,6 +16,7 @@ const LoginPage = ({ onClose }) => {
   });
 
   const [UUIDError, setUUIDError] = useState("");
+  const [LoginError, setLoginError] = useState("");
 
   const handleUUIDChange = (uuid) => {
     setFormData((prevData) => ({
@@ -29,6 +31,7 @@ const LoginPage = ({ onClose }) => {
       ...prevData,
       password: password,
     }));
+    setLoginError("");
   };
 
   const handleUUIDSubmit = async () => {
@@ -53,8 +56,24 @@ const LoginPage = ({ onClose }) => {
     }
   };
 
-  const handlePasswordSubmit = () => {
-    // TODO: handle login
+  const handleLogin = async () => {
+    if (formData.password.trim() === "") {
+      setUUIDError("Please enter your password.");
+    } else {
+      try {
+        const result = await login(formData.UUID, formData.password);
+
+        if (result.status === "success") {
+          // TODO route to home page
+          console.log("logged in successfully!");
+          console.log("user data: ", result);
+        } else {
+          setLoginError("Wrong password!");
+        }
+      } catch (error) {
+        console.error("Error signing in:", error.message);
+      }
+    }
   };
 
   const handleForgotPassword = () => {
@@ -83,8 +102,9 @@ const LoginPage = ({ onClose }) => {
         <EnterPasswordPage
           UUID={formData.UUID}
           password={formData.password}
+          LoginError={LoginError}
           handlePasswordChange={handlePasswordChange}
-          handlePasswordSubmit={handlePasswordSubmit}
+          handleLogin={handleLogin}
           handleForgotPassword={handleForgotPassword}
           handleSignUp={handleSignUp}
         />

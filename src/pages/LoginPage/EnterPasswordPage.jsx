@@ -12,8 +12,9 @@ import "./LoginPage.css";
 const EnterPasswordPage = ({
   UUID,
   password,
+  LoginError,
   handlePasswordChange,
-  handlePasswordSubmit,
+  handleLogin,
   handleForgotPassword,
   handleSignUp,
 }) => {
@@ -78,7 +79,8 @@ const EnterPasswordPage = ({
           label="Password"
         />
       </FormControl>
-      <button className="black-wide-button" onClick={handlePasswordSubmit}>
+      {LoginError && <p className="error-message">{LoginError}</p>}
+      <button className="black-wide-button" onClick={handleLogin}>
         Login
       </button>
       <button className="white-wide-button" onClick={handleForgotPassword}>
