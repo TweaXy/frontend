@@ -115,6 +115,12 @@ button.white-wide-button:hover {
     width: 300px;
 }
 
+div.login-page-body p.error-message {
+    color: #ff0000;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
 .login-page-body h1 {
     font-family: 'Arial', sans-serif;
     font-size: 32px;

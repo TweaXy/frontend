@@ -5,9 +5,11 @@ import "./LoginPage.css";
 
 const EnterUUIDPage = ({
   UUID,
+  UUIDError,
   handleUUIDChange,
   handleUUIDSubmit,
   handleForgotPassword,
+  handleLoginWithGoogle,
   handleSignUp,
 }) => {
   const googleLogoSrc = "https://img.icons8.com/color/48/google-logo.png";
@@ -16,6 +18,7 @@ const EnterUUIDPage = ({
     <div className="login-page-body">
       <h1>Login to TweaXy</h1>
       <LoginWithButton
+        onClick={handleLoginWithGoogle}
         text={"Login with Google"}
         imgSrc={googleLogoSrc}
         imgAlt={"google-logo"}
@@ -29,6 +32,7 @@ const EnterUUIDPage = ({
         value={UUID}
         onChange={(e) => handleUUIDChange(e.target.value)}
       />
+      {UUIDError && <p className="error-message">{UUIDError}</p>}
       <button className="black-button" onClick={handleUUIDSubmit}>
         Next
       </button>
