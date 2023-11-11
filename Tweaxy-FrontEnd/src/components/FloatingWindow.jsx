@@ -6,32 +6,45 @@ import SignUp2 from "./Signup2";
 import Signup3 from "./Signup3";
 import SignUp4 from "./Signup4";
 import SignUp5 from "./Signup5";
-import {sendEmailVerification} from "../apis/EmailVerfication";
+import { sendEmailVerification } from "../apis/EmailVerfication";
+import { signup } from "../apis/Signup";
 const Errors = {
   Email: "",
   Username: "",
   Password:
-    "password must contain 8 or more characters with at least one of each: uppercase, lowercase, number and special",
-  Verficationcode:""
+    "Password must contain 8 or more characters with at least one of: uppercase, lowercase, number and special",
+  Verficationcode: "",
+  Signup: "",
 };
+const Finish = "You Are A Tweexy User Now";
 const LoginWindow = ({ onClose }) => {
   const [windowOpened, setwindowOpned] = useState(0);
+  const [Data1, changeData1] = useState({ username: "", usermail: "" });
+  const [Data2, changeData2] = useState({ day: "", month: "", year: "" });
+  const [password, setpassword] = useState("");
+  const [verficationcode, setverficationcode] = useState("");
+  const [canbeuser, setcanbeuser] = useState(true);
   const nextWindowHandler = (ev) => {
     // ev.preventDefault();
     if (windowOpened === 2) {
       sendEmailVerification(Data1.usermail);
     }
     if (windowOpened === 4) {
-      console.log("Done Go TO Home Page");
-      return;
+      signup(
+        Data1.usermail,
+        Data1.username,
+        "Manga",
+        Data2,
+        password,
+        verficationcode,
+        setcanbeuser
+      );
     }
-    setwindowOpned(windowOpened + 1);
+    if (canbeuser===true) setwindowOpned(windowOpened + 1);
   };
-  const [Data1, changeData1] = useState({ username: "", usermail: "" });
-  const [Data2, changeData2] = useState({ day: "", month: "", year: "" });
-  const [password, setpassword] = useState("");
   const passwordhandler = (ev) => {
     setpassword(ev.target.value);
+    setcanrender(true);
   };
   const EditInformation = () => {
     setwindowOpned(windowOpened - 2);
@@ -67,10 +80,16 @@ const LoginWindow = ({ onClose }) => {
           />
         )}
         {windowOpened === 3 && (
-          <SignUp4 Data1={Data1} nextWindowHandler={nextWindowHandler} />
+          <SignUp4
+            verficationcode={verficationcode}
+            setverficationcode={setverficationcode}
+            Data1={Data1}
+            nextWindowHandler={nextWindowHandler}
+          />
         )}
         {windowOpened === 4 && (
           <SignUp5
+            canbeuser={canbeuser}
             password={password}
             passwordhandler={passwordhandler}
             nextWindowHandler={nextWindowHandler}

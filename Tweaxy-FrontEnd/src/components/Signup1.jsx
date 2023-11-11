@@ -21,6 +21,7 @@ const Signup1 = ({
   const [iscomplete, setiscomplete] = useState(false);
   const [uniqueEmail, setuniqueEmail] = useState(false);
   const [uniqueusername, setisuniqueusername] = useState(false);
+  const [verficationcode, setverficationcode] = useState("");
   useEffect(
     function checkEmailUniqness() {
       console.log(uniqueEmail);
