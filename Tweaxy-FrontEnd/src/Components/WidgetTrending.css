@@ -1,0 +1,19 @@
+.widget-trending {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--widget-background);
+  border-radius: 20px;
+  width: inherit;
+  margin-top: 15px;
+}
+
+.widget-trending > .header {
+  font-weight: bolder;
+  padding: 12px 16px;
+  width: inherit;
+  font-size: 20px;
+  width: inherit;
+  box-sizing: border-box;
+}

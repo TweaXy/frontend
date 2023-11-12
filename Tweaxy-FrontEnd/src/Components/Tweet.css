@@ -6,7 +6,7 @@
   font-family: "Segoe UI Emoji", "Arial" !important; /* Use a fallback font */
 }
 body {
-    --twitter-color:#35a4f4;
+  --twitter-color: #35a4f4;
   --twitter-background: #e6ecf0;
   --twitter-cianHover: #d8eaf8ed;
   --twitter-greyColor: #536471;
@@ -18,7 +18,7 @@ body {
 }
 
 .tweet:hover {
-  background-color: #f3f3f37c;
+  background-color: #f3f3f395;
   transition: background-color 200ms ease-out;
   cursor: pointer;
 }
