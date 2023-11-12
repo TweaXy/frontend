@@ -1,0 +1,6 @@
+.avatar-box {
+  margin-right: 12px;
+}
+.avatar-container > .MuiAvatar-root {
+  align-self: flex-start;
+}

@@ -1,0 +1,19 @@
+button.login-button {
+    height: 40px;
+    width: 300px;
+    min-width: 36px;
+    min-height: 36px;
+    margin: 12px 0;
+    padding: 0 16px;
+    border-radius: 9999px;
+    border: 1px solid #dadce0;
+    background: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background 200ms, box-shadow 200ms;
+}
+
+button:hover {
+    background: #e1e8ed;
+    box-shadow: 0 0 5px #e1e8ed;
+}

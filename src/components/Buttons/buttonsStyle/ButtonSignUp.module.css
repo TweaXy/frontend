@@ -1,0 +1,27 @@
+.ButtonSignUp {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 70%;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  padding: 0px;
+  height: 40px;
+  width: 298px;
+
+  background-color: rgb(29, 155, 240);
+  border: 3px solid #dadce0;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ButtonSignUp:hover {
+  background-color: rgb(29, 155, 240);
+  border-color: #d2e3fc;
+  cursor: pointer;
+}
+
+.ButtonSignUp:active {
+  background-color: rgb(29, 155, 240);
+}
