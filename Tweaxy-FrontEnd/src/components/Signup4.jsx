@@ -72,7 +72,7 @@ const SignUp4 = ({ verficationcode,setverficationcode,Data1, nextWindowHandler }
           marginTop: "215px",
           backgroundColor: iscompleteverficationcode ? "black" : "gray",
         }}
-        onClick={nextWindowHandler}
+        onClick={onclickHandler}
       >
         {" "}
         Next

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./ComponentsStyles/FloatingWindow.css";
 import "./ComponentsStyles/Signup1.css";
+import TextField from '@mui/material/TextField';
 import React from "react";
 import BirthDate from "./BirthDate";
 const create = "Create your account";
@@ -21,7 +22,6 @@ const Signup1 = ({
   const [iscomplete, setiscomplete] = useState(false);
   const [uniqueEmail, setuniqueEmail] = useState(false);
   const [uniqueusername, setisuniqueusername] = useState(false);
-  const [verficationcode, setverficationcode] = useState("");
   useEffect(
     function checkEmailUniqness() {
       console.log(uniqueEmail);
