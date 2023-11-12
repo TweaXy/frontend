@@ -1,7 +1,8 @@
-* {
+.welcome-page {
   box-sizing: border-box;
   font-size: 105%;
 }
+
 .loginSection {
   font-family: "Montserrat", sans-serif;
   width: 40%;

@@ -9,6 +9,7 @@ import checkUserUUID from "../../apis/checkUserUUID";
 import login from "../../apis/login";
 
 const LoginPage = ({ onClose }) => {
+  const navigate = useNavigate();
   const [curPage, setCurPage] = useState(0);
 
   const [formData, setFormData] = useState({
@@ -68,6 +69,7 @@ const LoginPage = ({ onClose }) => {
           // TODO route to home page
           console.log("logged in successfully!");
           console.log("user data: ", result);
+          navigate("home");
         } else {
           setLoginError("Wrong password!");
         }
@@ -76,8 +78,6 @@ const LoginPage = ({ onClose }) => {
       }
     }
   };
-
-  const navigate = useNavigate();
 
   const handleForgotPassword = () => {
     navigate("forget-password");

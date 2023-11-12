@@ -128,7 +128,7 @@ const SignUpPage1 = ({
           onChange={Data1_Handler}
         />
       </div>
-      <span>{date}</span>
+      <span className="sign-up-span">{date}</span>
       <div className="sign-up-birth-date">
         <TextField
           className="sign-up-birth-date-selection"

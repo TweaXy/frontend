@@ -11,7 +11,7 @@ import SignInButton from "../../components/Buttons/SignInButton";
 export default function WelcomePage() {
   return (
     <React.Fragment>
-      <div>
+      <div className="wlecome-page">
         <div className={welcomePage.loginSection}>
           <div>
             <div className={Headerclasses.container}>
