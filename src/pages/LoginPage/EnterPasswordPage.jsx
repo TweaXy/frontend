@@ -38,7 +38,7 @@ const EnterPasswordPage = ({
         disabled
         InputProps={{
           style: {
-            background: "#dcdcdc",
+            background: "#d8eaf8ed",
           },
         }}
         sx={{
@@ -53,7 +53,7 @@ const EnterPasswordPage = ({
         sx={{
           m: 1,
           width: "100%",
-          height: "80px",
+          height: "62px",
           maxWidth: "440px",
         }}
         variant="outlined"

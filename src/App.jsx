@@ -1,4 +1,4 @@
-import LoginStartPage from "./pages/LoginPage/LoginStartPage";
+import LoginStartPage from "./pages/login/LoginStartPage";
 import ForgetPasswordStartPage from "./pages/forget-password/ForgetPasswordStartPage.jsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
