@@ -5,7 +5,7 @@ const LoginWindowHeader = ({ onClose }) => (
     <button className="login-window-header-close-button" onClick={onClose}>
       &times;
     </button>
-    <img src="../../assets/logo2.ico" alt="TweaXy Logo" />
+    <img src="../../../assets/logo2.ico" alt="TweaXy Logo" />
   </div>
 );
 

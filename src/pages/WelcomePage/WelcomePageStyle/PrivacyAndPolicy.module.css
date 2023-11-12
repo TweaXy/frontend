@@ -1,0 +1,33 @@
+.privacyPolicy {
+  width: 320px;
+
+  margin: 5%;
+  margin-top: 1%;
+  margin-left: 0%;
+
+  font-size: 45%;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(83, 100, 113);
+  line-height: 12px;
+  font-weight: 400;
+  font-size: 11px;
+}
+
+.privacyPolicy a {
+  color: rgb(29, 155, 240);
+  text-decoration: none;
+}
+
+.privacyPolicy a:hover {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 0px) and (max-width: 700px) {
+  .privacyPolicy {
+    font-size: 43%;
+    margin-top: 2%;
+    margin-bottom: 10%;
+  }
+}
