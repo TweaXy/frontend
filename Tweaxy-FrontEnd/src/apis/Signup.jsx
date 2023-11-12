@@ -32,7 +32,6 @@ const signup = (
         setcanbeuser(true)
       } else {
         Errors["Signup"] = data.message;
-        console.log("A")
         setcanbeuser(false);
       }
     })
