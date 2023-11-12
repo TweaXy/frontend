@@ -1,5 +1,5 @@
 import { useState } from "react";
-import LoginPage from "./LoginPage.jsx";
+import LoginPage from "../LoginPage/LoginPage";
 
 function LoginStartPage() {
   const [isLoginPageOpen, setIsLoginPageOpen] = useState(false);

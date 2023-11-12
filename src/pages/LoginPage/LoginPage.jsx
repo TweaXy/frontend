@@ -1,5 +1,6 @@
 import "./LoginPage.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import EnterUUIDPage from "./EnterUUIDPage";
 import EnterPasswordPage from "./EnterPasswordPage";
 import signInWithGoogle from "../../apis/signInWithGoogle";
@@ -76,8 +77,10 @@ const LoginPage = ({ onClose }) => {
     }
   };
 
+  const navigate = useNavigate();
+
   const handleForgotPassword = () => {
-    // TODO: route to forgot password page
+    navigate("forget-password");
   };
 
   const handleSignUp = () => {
