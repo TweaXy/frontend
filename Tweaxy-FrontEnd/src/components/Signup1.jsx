@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import "./ComponentsStyles/FloatingWindow.css";
 import "./ComponentsStyles/Signup1.css";
-import TextField from '@mui/material/TextField';
+import TextField from "@mui/material/TextField";
+import "./ComponentsStyles/HamdyStyling.css";
 import React from "react";
 import BirthDate from "./BirthDate";
 const create = "Create your account";
@@ -20,19 +21,22 @@ const Signup1 = ({
   changeData2,
 }) => {
   const [iscomplete, setiscomplete] = useState(false);
-  const [uniqueEmail, setuniqueEmail] = useState(false);
-  const [uniqueusername, setisuniqueusername] = useState(false);
+  const [uniqueEmail, setuniqueEmail] = useState(true);
+  const [uniqueusername, setisuniqueusername] = useState(true);
   useEffect(
     function checkEmailUniqness() {
-      console.log(uniqueEmail);
-      isUniqeEmail(Data1.usermail, setuniqueEmail);
+      if (Data1.usermail.length > 0) {
+        isUniqeEmail(Data1.usermail, setuniqueEmail);
+      }
+      else setuniqueEmail(true)
     },
     [Data1.usermail]
   );
   useEffect(
     function checkUsernameUniqness() {
-      console.log(uniqueusername);
-      isUniqueUsername(Data1.username, setisuniqueusername);
+      if (Data1.username.length > 0) {
+        isUniqueUsername(Data1.username, setisuniqueusername);
+      } else setisuniqueusername(true);
     },
     [Data1.username]
   );
