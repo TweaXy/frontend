@@ -9,6 +9,7 @@ import LoginWindowHeader from "../../components/LoginWindowHeader/LoginWindowHea
 
 import { sendEmailVerification } from "../../apis/EmailVerfication";
 import { signup } from "../../apis/Signup";
+import { useNavigate } from "react-router-dom";
 
 const Errors = {
   Email: "",
@@ -29,6 +30,8 @@ const SignUpPage = ({ onClose }) => {
   const [canbeuser, setcanbeuser] = useState(true);
   const [verficationcode, setverficationcode] = useState("");
 
+  const navigate = useNavigate();
+
   const nextWindowHandler = (ev) => {
     // ev.preventDefault();
     if (windowOpened === 1) {
@@ -43,6 +46,7 @@ const SignUpPage = ({ onClose }) => {
         password,
         verficationcode,
       );
+      navigate("home");
     }
     setwindowOpned(windowOpened + 1);
   };
