@@ -3,6 +3,7 @@ import {
   isUsernameUniqueSchema,
 } from "../validations/userSchema";
 import { passwordSchema } from "../validations/authSchema";
+import { apiCheckEmailUnique, apicheckUsernameUnique } from "./UniqnessApis";
 import { Errors } from "../pages/SignUpPage/SignUpPage";
 const isUniqeEmail = (usermail, setuniqueEmail) => {
   isEmailUniqueSchema
@@ -12,7 +13,7 @@ const isUniqeEmail = (usermail, setuniqueEmail) => {
       },
     })
     .then(() => {
-      setuniqueEmail(true);
+      apiCheckEmailUnique(usermail, setuniqueEmail);
     })
     .catch((error) => {
       console.log(error.message);
@@ -28,7 +29,7 @@ const isUniqueUsername = (username, setisuniqueusername) => {
       },
     })
     .then(() => {
-      setisuniqueusername(true);
+      apicheckUsernameUnique(username, setisuniqueusername);
     })
     .catch((error) => {
       console.log(error.message);
@@ -43,9 +44,7 @@ const isAcceptebalePass = (pass, setAcceptedPass) => {
         password: pass,
       },
     })
-    .then(() => {
-      setAcceptedPass(true);
-    })
+    .then(() => {setAcceptedPass(true)})
     .catch((error) => {
       setAcceptedPass(false);
     });

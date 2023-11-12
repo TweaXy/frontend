@@ -15,9 +15,9 @@ const sendEmailVerification = (usermail) => {
     .then((response) => response.json())
     .then((data) => {
       console.log("Response from the API:", data);
-      if (data.status === "success") {}
-      else{
-        // to continue -resend him another token 
+      if (data.status === "success") {
+      } else {
+        // to continue -resend him another token
       }
     })
     .catch((error) => {
@@ -43,9 +43,11 @@ const checkEmailVerification = (
       } else {
         Errors["Verficationcode"] = data.message;
         setisokverficationcode(false);
-        console.log(Errors["Verficationcode"])
+        console.log(Errors["Verficationcode"]);
       }
     })
-    .catch((error) => {});
+    .catch((error) => {
+      Errors["Verficationcode"] = data.message;
+    });
 };
 export { sendEmailVerification, checkEmailVerification };

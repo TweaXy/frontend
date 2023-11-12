@@ -3,8 +3,6 @@ import "./SignUpPage.css";
 import { MenuItem, TextField } from "@mui/material";
 import { isUniqeEmail, isUniqueUsername } from "../../apis/Email";
 import { Errors } from "./SignUpPage";
-
-const p3 = "Step 1 of 5";
 const date = "Date of birth";
 const create = "Create your account";
 
@@ -52,9 +50,7 @@ const SignUpPage1 = ({
   );
   useEffect(
     function Check_Information() {
-      isUniqeEmail(Data1.usermail);
-      isUniqueUsername(Data1.username);
-      const isdata1ok = Data1.username && Data1.usermail;
+      const isdata1ok = Data1.username.length>3 && Data1.usermail;
       const isdata2ok = Data2.day && Data2.month && Data2.year;
       setiscomplete(isdata1ok && isdata2ok && uniqueEmail && uniqueusername);
     },

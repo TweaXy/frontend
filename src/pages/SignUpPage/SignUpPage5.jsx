@@ -7,7 +7,8 @@ import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useState, useEffect } from "react";
-
+import { isAcceptebalePass } from "../../apis/Email";
+import { Errors } from "./SignUpPage";
 const SignUpPage5 = ({
   canbeuser,
   password,
@@ -24,12 +25,9 @@ const SignUpPage5 = ({
     event.preventDefault();
   };
   const [isOKPass, setisOKPass] = useState(true);
-  const pass = "You'll need a password";
-  const P3 = "Step 5 of 5";
-  const p2 = "Make sure it’s 8 characters or more.";
-  // useEffect(() => {
-  //   if (password.length > 3) isAcceptebalePass(password, setisOKPass);
-  // }, [password]);
+  useEffect(() => {
+    if (password.length > 3) isAcceptebalePass(password, setisOKPass);
+  }, [password]);
   return (
     <div className="sign-up-page-body">
       <h1 style={{ marginTop: "-100px" }}>You'll need a password</h1>
@@ -39,7 +37,7 @@ const SignUpPage5 = ({
           width: "100%",
           height: "62px",
           maxWidth: "440px",
-          marginTop: "50px"
+          marginTop: "50px",
         }}
         variant="outlined"
       >
@@ -63,12 +61,18 @@ const SignUpPage5 = ({
           }
           label="Password"
         />
+        {!isOKPass && <p className="error-message">{Errors["Password"]}</p>}
+        {!canbeuser && <p className="error-message">{Errors["Signup"]}</p>}
       </FormControl>
       <button
         className="black-wide-button"
         onClick={nextWindowHandler}
         disabled={!isOKPass}
-        style={{ background: isOKPass ? "black" : "gray", marginTop: "220px", marginBottom: "-100px" }}
+        style={{
+          background: isOKPass ? "black" : "gray",
+          marginTop: "220px",
+          marginBottom: "-100px",
+        }}
       >
         Next
       </button>

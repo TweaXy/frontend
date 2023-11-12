@@ -1,7 +1,8 @@
 import { TextField } from "@mui/material";
 import "./SignUpPage.css";
 import { useState, useEffect } from "react";
-
+import { sendEmailVerification,checkEmailVerification } from "../../apis/EmailVerfication";
+import { Errors } from "./SignUpPage";
 const SignUpPage4 = ({
   verficationcode,
   setverficationcode,
@@ -61,12 +62,13 @@ const SignUpPage4 = ({
       </a>
       <button
         className="black-wide-button"
+        disabled={!iscompleteverficationcode}
         style={{
           background: iscompleteverficationcode ? "black" : "gray",
           marginTop: "170px",
           marginBottom: "-140px",
         }}
-        onClick={nextWindowHandler}
+        onClick={onclickHandler}
       >
         Next
       </button>
