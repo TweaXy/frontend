@@ -1,19 +1,21 @@
 .googleSignUp {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 100%;
+  font-size: 70%;
+  font-weight: bold;
   color: #3c4043;
   text-align: center;
-
+  margin-bottom: 10px;
   padding: 0px;
   height: 40px;
   width: 298px;
-
+margin-left:px;
   background-color: white;
-  border: 3px solid #dadce0;
+  border: 2px solid #dadce0;
   border-radius: 20px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items:center;
+  
 }
 
 .googleSignUp:hover {
