@@ -1,0 +1,16 @@
+body {
+  --twitter-color: #34a1ee;
+  --twitter-background: #e6ecf0;
+  --twitter-cianHover: #d8eaf8;
+}
+.app {
+  display: flex;
+
+  height: 100vh;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  padding: 0 10px;
+}

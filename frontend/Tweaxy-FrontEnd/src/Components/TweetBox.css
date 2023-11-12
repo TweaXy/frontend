@@ -1,0 +1,126 @@
+.tweetbox{
+    border-bottom:2px solid var(--twitter-background) ;
+    padding: 0 16px;
+    /* padding-bottom: 10px; */
+    display: flex;
+    /* flex-direction: column; */
+}
+
+.tweetbox-form{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.tweetbox-form > .tweetbox-input{
+    display: flex;
+    align-items: center;
+    /* padding: 15px; */
+    padding-top: 18px;
+    padding-right: 1px;
+    /* padding-bottom: 0; */
+}
+.text-container{
+    padding:10px 0;
+    flex: 1;
+    box-sizing:border-box ;
+    padding-left: 2px;
+    display: flex;
+
+}
+ textarea{
+/* height: 24px; */
+padding:10px 0;
+box-sizing:border-box ;
+padding-left: 2px;
+flex: 1;
+border: none;
+outline: none;
+font-size: 20px;
+font-family: Arial, sans-serif;
+overflow:hidden ;
+resize: none;
+overflow-y: hidden;
+line-height: 1.5;
+}
+
+.privacy-lay{
+    border-bottom: 1px solid var(--twitter-background);
+    margin-bottom: 1px;
+    padding-top: 4px;
+}
+.container-privacy{
+    display: flex;
+    align-items: center;
+    color: var(--twitter-color);
+    width: fit-content;
+    padding-bottom: 3px ;
+    margin-bottom: 12px;
+    /* margin-top: 10px; */
+}
+.container-privacy:hover{   
+    cursor: pointer;
+    background-color: var(--twitter-cianHover);
+    transition: background-color 200ms ease-out;
+    border-radius: 50px;
+}
+.container-privacy > .MuiSvgIcon-root{
+    font-size: 16px;
+    margin-right: 4px;
+    padding-left: 8px;
+    padding-top: 3px;
+}
+.container-privacy > h3{
+    font-size: 15px;
+    font-weight: 800;
+    padding-right: 10px;
+    margin:  0 !important;
+}
+.tweetbox-post{
+display: flex;
+padding-bottom: 8px;
+}
+.post-attach{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 1px;
+    padding-top: 10px;
+}
+    .post-attach > .attach-icon{
+        display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    }
+    .post-attach > .attach-icon:hover{
+        background-color:#d8eaf8;
+        border-radius: 50px;
+        transition: background-color 200ms ease-out;
+        cursor: pointer;
+        
+    }
+    .post-attach > .attach-icon > .MuiSvgIcon-root{
+        color: var(--twitter-color);
+        font-size: 21px;
+    }
+    
+
+.tweetbox-button{
+    outline: none !important;
+    background-color:#24a1ee !important;
+    color: white !important;
+    font-weight: 550 !important;
+    font-size: 15px !important;
+    /* height: 40px !important; */
+    border-radius: 30px !important;
+    border: none !important;
+    text-transform: inherit !important;
+    padding: 4px !important;
+    width: 68px !important;
+     margin-left: auto !important;
+     margin-top: 10px !important;
+}
+.tweetbox-button:hover{
+    background-color:#1a89ce !important;
+}
