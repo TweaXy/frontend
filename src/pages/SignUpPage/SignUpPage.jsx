@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import SignUpPage1 from "./SignUpPage1";
-import SignUpPage2 from "./SignUpPage2";
 import SignUpPage3 from "./SignUpPage3";
 import SignUpPage4 from "./SignUpPage4";
 import SignUpPage5 from "./SignUpPage5";
@@ -32,10 +31,10 @@ const SignUpPage = ({ onClose }) => {
 
   const nextWindowHandler = (ev) => {
     // ev.preventDefault();
-    if (windowOpened === 2) {
+    if (windowOpened === 1) {
       sendEmailVerification(Data1.usermail);
     }
-    if (windowOpened === 4) {
+    if (windowOpened === 3) {
       signup(
         Data1.usermail,
         Data1.username,
@@ -43,7 +42,6 @@ const SignUpPage = ({ onClose }) => {
         Data2,
         password,
         verficationcode,
-        setcanbeuser
       );
     }
     setwindowOpned(windowOpened + 1);
@@ -51,7 +49,7 @@ const SignUpPage = ({ onClose }) => {
 
   const passwordhandler = (ev) => {
     setpassword(ev.target.value);
-    setcanrender(true);
+    // setcanrender(true);
   };
 
   const EditInformation = () => {
@@ -69,9 +67,6 @@ const SignUpPage = ({ onClose }) => {
           Data2={Data2}
           changeData2={changeData2}
         />
-      )}
-      {windowOpened === 50 && (
-        <SignUpPage2 nextWindowHandler={nextWindowHandler} />
       )}
       {windowOpened === 1 && (
         <SignUpPage3
