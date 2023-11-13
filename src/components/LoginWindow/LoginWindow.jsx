@@ -5,6 +5,7 @@ import LoginTextField from "../LoginTextField/LoginTextField";
 import LoginWindowHeader from "../LoginWindowHeader/LoginWindowHeader";
 import LoginOrSpan from "../LoginOrSpan/LoginOrSpan";
 import "./LoginWindow.css";
+import SignInSelectors from "../../shared/selectors/SignIn";
 
 const LoginWindow = () => {
   const googleLogoSrc = "https://img.icons8.com/color/48/google-logo.png";
@@ -50,6 +51,7 @@ const LoginWindow = () => {
         <LoginOrSpan />
         <LoginTextField
           value={UUID}
+          data_test={SignInSelectors.EMAIL}
           label={"Phone, email, or username"}
           onChange={handleUUIDChange}
         />

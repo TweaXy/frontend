@@ -8,6 +8,7 @@ import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import "./LoginPage.css";
+import SignInSelectors from "../../shared/selectors/SignIn";
 
 const EnterPasswordPage = ({
   UUID,
@@ -59,7 +60,8 @@ const EnterPasswordPage = ({
         variant="outlined"
       >
         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-        <OutlinedInput
+        <OutlinedInput 
+           data-test={SignInSelectors.PASSWORD} 
           id="outlined-adornment-password"
           type={showPassword ? "text" : "password"}
           value={password}
@@ -80,7 +82,7 @@ const EnterPasswordPage = ({
         />
       </FormControl>
       {LoginError && <p className="error-message">{LoginError}</p>}
-      <button className="black-wide-button" onClick={handleLogin}>
+      <button data-test={SignInSelectors.NEXT} className="black-wide-button" onClick={handleLogin}>
         Login
       </button>
       <button className="white-wide-button" onClick={handleForgotPassword}>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./LoginPage.css";
 import { loginSchema } from "../../validations/authSchema";
 import { useNavigate } from "react-router-dom";
+import SignInSelectors from "../../shared/selectors/SignIn";
 
 const LoginPage = ({ onClose }) => {
   const [curWindow, setWindow] = useState(0);
@@ -104,6 +105,7 @@ const LoginPage = ({ onClose }) => {
           <input
             type="password"
             placeholder="Password"
+            data-test={SignInSelectors.PASSWORD}
             value={userPassword}
             onChange={handlePasswordChange}
           />

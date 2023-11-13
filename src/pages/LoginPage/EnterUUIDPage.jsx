@@ -2,6 +2,7 @@ import { TextField } from "@mui/material";
 import LoginOrSpan from "../../components/LoginOrSpan/LoginOrSpan";
 import LoginWithButton from "../../components/LoginWithButton/LoginWithButton";
 import "./LoginPage.css";
+import SignInSelectors from "../../shared/selectors/SignIn";
 
 const EnterUUIDPage = ({
   UUID,
@@ -29,11 +30,12 @@ const EnterUUIDPage = ({
         id="outlined-basic"
         className="login-uuid-field"
         label="Phone, email, or username"
+        data-test={SignInSelectors.EMAIL}
         value={UUID}
         onChange={(e) => handleUUIDChange(e.target.value)}
       />
       {UUIDError && <p className="error-message">{UUIDError}</p>}
-      <button className="black-button" onClick={handleUUIDSubmit}>
+      <button data-test={SignInSelectors.NEXT} className="black-button" onClick={handleUUIDSubmit}>
         Next
       </button>
       <button className="white-button" onClick={handleForgotPassword}>

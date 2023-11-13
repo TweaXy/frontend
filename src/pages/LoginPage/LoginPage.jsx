@@ -7,6 +7,7 @@ import signInWithGoogle from "../../apis/signInWithGoogle";
 import LoginWindowHeader from "../../components/LoginWindowHeader/LoginWindowHeader";
 import checkUserUUID from "../../apis/checkUserUUID";
 import login from "../../apis/login";
+import SignInErrors from "../../shared/errors/SignInErrors";
 
 const LoginPage = ({ onClose }) => {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ const LoginPage = ({ onClose }) => {
           setCurPage(1);
         } else {
           if (result.message == "no user found ") {
-            setUUIDError("Sorry, we couldn't find your account.");
+            setUUIDError(`${SignInErrors.UNREGISTERED_EMAIL}`);
           } else {
             setUUIDError("Please retry enter your UUID");
           }
@@ -71,7 +72,7 @@ const LoginPage = ({ onClose }) => {
           console.log("user data: ", result);
           navigate("home");
         } else {
-          setLoginError("Wrong password!");
+          setLoginError(`${SignInErrors.WRONG_PASSWORD}`);
         }
       } catch (error) {
         console.error("Error signing in:", error.message);
