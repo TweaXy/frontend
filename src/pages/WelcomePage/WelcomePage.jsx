@@ -53,13 +53,13 @@ export default function WelcomePage() {
             </div>
           </div>
         </div>
-        <div className={Posterclasses.posterSection}>
+        {/*<div className={Posterclasses.posterSection}>
           <img
             className={Posterclasses.background}
             src={backgroundImage}
             alt="TwitterBackground"
           />
-        </div> 
+</div> */}
       </div>
     </React.Fragment>
   );
