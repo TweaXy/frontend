@@ -15,12 +15,12 @@ import { useState } from "react";
 export default function Sidebar() {
   const path = "../assets/logo2.ico";
   const [activeHome, setActiveHome] = useState(1);
- const  [activeProfile, setActiveProfile] =useState(0);
+  const [activeProfile, setActiveProfile] = useState(0);
   const navigate = useNavigate();
   const toProfile = () => {
-    navigate("/profile");
     setActiveHome(0);
     setActiveProfile(1);
+    navigate("/profile");
   };
   const toHome = () => {
     navigate("/home");
