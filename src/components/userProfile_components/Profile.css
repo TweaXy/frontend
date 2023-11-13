@@ -1,0 +1,8 @@
+.profile {
+  flex-direction: column;
+
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+  z-index: 0;
+}
