@@ -61,7 +61,7 @@ const EnterPasswordPage = ({
       >
         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
         <OutlinedInput 
-           data-test={SignInSelectors.PASSWORD} 
+           data-test={SignInSelectors.PASSWORD_FIELD} 
           id="outlined-adornment-password"
           type={showPassword ? "text" : "password"}
           value={password}
@@ -82,10 +82,10 @@ const EnterPasswordPage = ({
         />
       </FormControl>
       {LoginError && <p className="error-message">{LoginError}</p>}
-      <button data-test={SignInSelectors.NEXT} className="black-wide-button" onClick={handleLogin}>
+      <button data-test={SignInSelectors.NEXT_BUTTON} className="black-wide-button" onClick={handleLogin}>
         Login
       </button>
-      <button className="white-wide-button" onClick={handleForgotPassword}>
+      <button data-test={SignInSelectors.FORGET_PASSWORD_BUTTON} className="white-wide-button" onClick={handleForgotPassword}>
         Forgot password?
       </button>
       <p>

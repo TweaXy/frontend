@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./ForgetPasswordPage.css";
 import { forgetPasswordSchema } from "../../validations/authSchema";
 import { useNavigate } from "react-router-dom";
+import SignInErrors from "../../shared/errors/SignInErrors";
+import SignInSelectors from "../../shared/selectors/SignIn";
 
 const ForgetPasswordPage = ({ onClose }) => {
   const [curWindow, setWindow] = useState(0);
@@ -134,12 +136,14 @@ const ForgetPasswordPage = ({ onClose }) => {
             account to change your password.
           </label>
           <input
+            data-test={SignInSelectors.FORGET_PASSWORD_EMAIL_FIELD}
             type="text"
             placeholder="Email address, phone number or user name"
             value={userUUID}
             onChange={handleUUIDChange}
           />
           <button
+            data-test={SignInSelectors.NEXT_BUTTON}
             disabled={isSubmitButtonDisabled || isPending}
             onClick={handleUUIDSubmission}
           >
@@ -166,12 +170,13 @@ const ForgetPasswordPage = ({ onClose }) => {
             request a new code, go back and reselect a confirmation method.
           </label>
           <input
+            data-test={SignInSelectors.FORGET_PASSWORD_VERIFICATION_FIELD}
             type="text"
             placeholder="Enter your code"
             value={userCode}
             onChange={handleCodeChange}
           />
-          <button disabled={isPending} onClick={handleCodeSubmission}>
+          <button data-test={SignInSelectors.NEXT_BUTTON} disabled={isPending} onClick={handleCodeSubmission}>
             {buttonText}
           </button>
         </form>
@@ -199,17 +204,20 @@ const ForgetPasswordPage = ({ onClose }) => {
           </label>
           <input
             type="password"
+            data-test={SignInSelectors.FORGET_PASSWORD_NEW_PASSWORD_FIELD}
             placeholder="Enter a new password"
             value={newPassword1}
             onChange={handleNewPassword1Change}
           />
           <input
+            data-test={SignInSelectors.FORGET_PASSWORD_CONFIRM_PASSWORD_FIELD}
             type="password"
             placeholder="Confirm your password"
             value={newPassword2}
             onChange={handleNewPassword2Change}
           />
             <button
+            data-test={SignInSelectors.NEXT_BUTTON}
             disabled={isSubmitButtonDisabled || isPending}
             onClick={handleChangePasswordSubmission}
           >

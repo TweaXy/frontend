@@ -30,15 +30,15 @@ const EnterUUIDPage = ({
         id="outlined-basic"
         className="login-uuid-field"
         label="Phone, email, or username"
-        data-test={SignInSelectors.EMAIL}
+        data-test={SignInSelectors.EMAIL_FIELD}
         value={UUID}
         onChange={(e) => handleUUIDChange(e.target.value)}
       />
       {UUIDError && <p className="error-message">{UUIDError}</p>}
-      <button data-test={SignInSelectors.NEXT} className="black-button" onClick={handleUUIDSubmit}>
+      <button data-test={SignInSelectors.NEXT_BUTTON} className="black-button" onClick={handleUUIDSubmit}>
         Next
       </button>
-      <button className="white-button" onClick={handleForgotPassword}>
+      <button data-test={SignInSelectors.FORGET_PASSWORD_BUTTON} className="white-button" onClick={handleForgotPassword}>
         Forgot password?
       </button>
       <p>

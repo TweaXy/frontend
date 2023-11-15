@@ -105,7 +105,7 @@ const LoginPage = ({ onClose }) => {
           <input
             type="password"
             placeholder="Password"
-            data-test={SignInSelectors.PASSWORD}
+            data-test={SignInSelectors.PASSWORD_FIELD}
             value={userPassword}
             onChange={handlePasswordChange}
           />

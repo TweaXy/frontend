@@ -8,7 +8,7 @@ export default function NextButton() {
   return (
     <div>
       <NavLink to="/" style={{ textDecoration: "none" }}>
-        <div data-test={SignInSelectors.NEXT} className={classes.buttonNext}>
+        <div data-test={SignInSelectors.NEXT_BUTTON} className={classes.buttonNext}>
           <p className={classes.content}>Next</p>
         </div>
       </NavLink>

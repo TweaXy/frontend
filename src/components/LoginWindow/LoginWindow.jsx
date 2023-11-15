@@ -51,7 +51,7 @@ const LoginWindow = () => {
         <LoginOrSpan />
         <LoginTextField
           value={UUID}
-          data_test={SignInSelectors.EMAIL}
+          data_test={SignInSelectors.EMAIL_FIELD}
           label={"Phone, email, or username"}
           onChange={handleUUIDChange}
         />
