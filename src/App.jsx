@@ -5,7 +5,7 @@ import HomePage from "./pages/HomePage/HomePage.jsx";
 import './pages/HomePage/HomePage.css'
 import ProfilePage from "./pages/userProfile/ProfilePage.jsx";
 function App() {
-  return (    
+  return (
     <Router>
       <Routes>
         <Route index element={<WelcomePage />} />
