@@ -1,5 +1,7 @@
 .container {
   margin-top: 2%;
+  box-sizing: border-box;
+  font-size: 105%;
 }
 
 .Xlogo {
@@ -11,6 +13,8 @@
   }
 }
 .heading {
+  box-sizing: border-box;
+ 
   font-size: 270%;
   font-weight: 900;
   margin: 7.5%;
@@ -19,6 +23,8 @@
 }
 
 .content {
+  box-sizing: border-box;
+  
   font-weight: 900;
   font-size: 130%;
 

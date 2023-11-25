@@ -1,7 +1,4 @@
-.welcome-page {
-  box-sizing: border-box;
-  font-size: 105%;
-}
+
 
 .loginSection {
   font-family: "Montserrat", sans-serif;
@@ -9,10 +6,19 @@
   height: 85%;
   float: right;
   padding: 1.5%;
+  font-size: 105%;
+}
+.PosterSection {
+  width: 50%;
+  height: 85%;
+  float: right;
+  padding: 1.5%;
+  font-size: 105%;
 }
 .buttonSection {
-  float: right;
   margin-right: 10%;
+  box-sizing: border-box;
+  font-size:larger;
 }
 @media only screen and (min-width: 0px) and (max-width: 700px) {
   .loginSection {
