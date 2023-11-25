@@ -1,14 +1,14 @@
-import LoginWindowHeader from '../components/LoginWindowHeader/LoginWindowHeader';
+import LoginWindowHeader from '../../components/LoginWindowHeader/LoginWindowHeader';
 import { MenuItem, TextField } from '@mui/material';
-import './SignUpPage/SignUpPage.css';
+import "../userProfile/EditProfilePage.css"
 export default function EditProfilePage({ onClose }) {
     return (
         <>
             {' '}
-            <div className="sign-up-page-container">
+            <div className="edit-profile-page-container">
                 <LoginWindowHeader onClose={onClose} />
 
-                <div className="sign-up-page-body">
+                <div className="edit-profile-page-body">
                     <div className="sign-up-uuid-field">
                         <TextField
                             className="sign-up-uuid-field"

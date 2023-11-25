@@ -1,6 +1,6 @@
 import './ProfileBio.css';
 import { useState } from 'react';
-import EditProfilePage from '../../pages/EditProfilePage';
+import EditProfilePage from '../../pages/userProfile/EditProfilePage';
 export default function EditProfile() {
     const [isWindowOpen, setIsWindowOpen] = useState(false);
     const openWindow = () => {
