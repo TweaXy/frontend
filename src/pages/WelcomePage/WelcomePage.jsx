@@ -64,7 +64,7 @@ export default function WelcomePage() {
                         </div>
                     </div>
                 </div>
-                {/*}  <div  className={welcomePage.PosterSection}>
+                <div className={welcomePage.PosterSection}>
                     <div className={Posterclasses.posterSection}>
                         <img
                             className={Posterclasses.background}
@@ -72,7 +72,7 @@ export default function WelcomePage() {
                             alt="TwitterBackground"
                         />
                     </div>
-</div>*/}
+                </div>
             </div>
         </React.Fragment>
     );
