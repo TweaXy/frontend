@@ -10,9 +10,11 @@ export default function EditProfile() {
         setIsWindowOpen(false);
     };
     return (
-        <div className="editProfile" onClick={openWindow}>
-            <span>Edit profile</span>
+        <>
+            <div className="editProfile" onClick={openWindow}>
+                <span>Edit profile</span>
+            </div>
             {isWindowOpen && <EditProfilePage onClose={closeWindow} />}
-        </div>
+        </>
     );
 }
