@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import "./ProfileHeader.css"
 
-const ProfileHeader = () => {
+const ProfileHeader = (props) => {
   let navigate =useNavigate();
   const arrowBackRoute =() => navigate(-1)
   return (
@@ -11,8 +11,8 @@ const ProfileHeader = () => {
       <div className="container">
         <BiArrowBack  color="black" size={20} className="arrow" onClick={arrowBackRoute}/>
         <div>
-            <span className="text-name">ebraam atef</span>
-            <span className="text-posts">2 Posts</span>
+            <span className="text-name">{props.username}</span>
+            <span className="text-posts">{props.noPosts} Posts</span>
           </div>
       </div>
     </div>

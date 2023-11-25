@@ -60,6 +60,10 @@
   color: #707070;
   font-size: 15px;
 }
+.profileBiography-Bio {
+  color: #535353;
+  font-size: 18px;
+}
 
 .profileBiography-dateMargin {
   padding-top: 15px;
