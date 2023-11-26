@@ -52,8 +52,9 @@ export default function EditProfilePage({ onClose }) {
         <>
             {' '}
             <div className="edit-profile-page-container">
-                <EditProfileWindowHeader onClose={onClose} />
-                {/*} <div className="background-image">
+                <div className="temp">
+                    <EditProfileWindowHeader onClose={onClose} />
+                    {/*} <div className="background-image">
                     <img  alt="" />
                 </div>
                 <div className="profile-title">
@@ -67,110 +68,115 @@ export default function EditProfilePage({ onClose }) {
                     
                 </div> */}
 
-                <div className="edit-profile-page-body">
-                    <div className="background-image">
-                        <img alt="" src={selectedImage} />
-                    </div>
-                    <div>
-                        <div className="profile-image">
-                            <Avatar
-                                sx={{ width: 100, height: 100 }}
-                                src="https://www.istockphoto.com/photos/avatar-images-for-profile"
-                            />
-                            {/*<CameraEnhanceOutlinedIcon
+                    <div className="edit-profile-page-body">
+                        <div>
+                            <div className="background-image">
+                                <img alt="" src={selectedImage} />
+                                <div className="profile-image">
+                                    <Avatar
+                                        sx={{ width: 100, height: 100 }}
+                                        src="https://www.istockphoto.com/photos/avatar-images-for-profile"
+                                    />
+                                    {/*<CameraEnhanceOutlinedIcon
                         className='camera-enhance'
                        />*/}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div className="edit-profile-uuid-field">
-                        <TextField
-                            className="edit-profile-uuid-field"
-                            variant="outlined"
-                            id="outlined-basic"
-                            label="Name"
-                            name="name"
-                        />
-                    </div>
-                    <div className="edit-profile-uuid-field">
-                        <TextField
-                            className="edit-profile-uuid-field"
-                            id="outlined-multiline-flexible"
-                            multiline
-                            rows={3}
-                            label="Bio"
-                            name="bio"
-                        />
-                    </div>
+                        <div></div>
+                        <div className="edit-profile-uuid-field">
+                            <TextField
+                                className="edit-profile-uuid-field"
+                                variant="outlined"
+                                id="outlined-basic"
+                                label="Name"
+                                name="name"
+                            />
+                        </div>
+                        <div className="edit-profile-uuid-field">
+                            <TextField
+                                className="edit-profile-uuid-field"
+                                id="outlined-multiline-flexible"
+                                multiline
+                                rows={3}
+                                label="Bio"
+                                name="bio"
+                            />
+                        </div>
 
-                    <div className="edit-profile-uuid-field">
-                        <TextField
-                            className="edit-profile-uuid-field"
-                            variant="outlined"
-                            id="outlined-basic"
-                            label="Location"
-                        />
-                    </div>
-                    <div className="edit-profile-uuid-field">
-                        <TextField
-                            className="edit-profile-uuid-field"
-                            variant="outlined"
-                            name="website"
-                            label="website"
-                        />
-                    </div>
-                    <span className="date-birth-text">Date of Birth</span>
-                    <div className="sign-up-birth-date">
-                        <TextField
-                            className="sign-up-birth-date-selection"
-                            id="outlined-select-currency"
-                            select
-                            label="Month"
-                            defaultValue="Select Month"
-                            name="month"
-                            sw={{
-                                width: '300px',
-                            }}
-                        >
-                            {months.map((month) => (
-                                <MenuItem key={month.value} value={month.value}>
-                                    {month.name}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                        <TextField
-                            className="sign-up-birth-date-selection"
-                            id="outlined-select-currency"
-                            select
-                            label="Day"
-                            defaultValue="Select Day"
-                            name="day"
-                            sw={{
-                                width: '300px',
-                            }}
-                        >
-                            {Render_Days().map((day) => (
-                                <MenuItem key={day} value={day}>
-                                    {day}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                        <TextField
-                            className="sign-up-birth-date-selection"
-                            id="outlined-select-currency"
-                            select
-                            label="Year"
-                            name="year"
-                            defaultValue="Select Year"
-                            sw={{
-                                width: '300px',
-                            }}
-                        >
-                            {years.map((year) => (
-                                <MenuItem key={year} value={year}>
-                                    {year}
-                                </MenuItem>
-                            ))}
-                        </TextField>{' '}
+                        <div className="edit-profile-uuid-field">
+                            <TextField
+                                className="edit-profile-uuid-field"
+                                variant="outlined"
+                                id="outlined-basic"
+                                label="Location"
+                            />
+                        </div>
+                        <div className="edit-profile-uuid-field">
+                            <TextField
+                                className="edit-profile-uuid-field"
+                                variant="outlined"
+                                name="website"
+                                label="website"
+                            />
+                        </div>
+                        <span className="date-birth-text">Date of Birth</span>
+                        <div className="sign-up-birth-date">
+                            <TextField
+                                className="sign-up-birth-date-selection"
+                                id="outlined-select-currency"
+                                select
+                                label="Month"
+                                defaultValue="Select Month"
+                                name="month"
+                                sw={{
+                                    width: '300px',
+                                }}
+                            >
+                                {months.map((month) => (
+                                    <MenuItem
+                                        key={month.value}
+                                        value={month.value}
+                                    >
+                                        {month.name}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                            <TextField
+                                className="sign-up-birth-date-selection"
+                                id="outlined-select-currency"
+                                select
+                                label="Day"
+                                defaultValue="Select Day"
+                                name="day"
+                                sw={{
+                                    width: '300px',
+                                }}
+                            >
+                                {Render_Days().map((day) => (
+                                    <MenuItem key={day} value={day}>
+                                        {day}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                            <TextField
+                                className="sign-up-birth-date-selection"
+                                id="outlined-select-currency"
+                                select
+                                label="Year"
+                                name="year"
+                                defaultValue="Select Year"
+                                sw={{
+                                    width: '300px',
+                                }}
+                            >
+                                {years.map((year) => (
+                                    <MenuItem key={year} value={year}>
+                                        {year}
+                                    </MenuItem>
+                                ))}
+                            </TextField>{' '}
+                        </div>
                     </div>
                 </div>
             </div>
