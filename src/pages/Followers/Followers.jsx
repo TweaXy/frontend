@@ -14,26 +14,18 @@ const Followers = () => {
             }}
         >
             <UserCell
-                userAvatar={'../assets/female-avatar.svg'}
-                name={'Kosbara Hanem'}
-                username={'Roaa_Hosam'}
-                doesFollowMe={true}
-                userState={'Follow'}
-                userBio={'Killua ❤️'}
-            />
-            <UserCell
                 userAvatar={'../assets/male-avatar-1.svg'}
-                name={'Angry Beeh'}
+                name={'Hamdy Salem'}
                 username={'Hamdy_Salem'}
                 doesFollowMe={true}
                 userState={'Following'}
-                userBio={'Kosbara Hanem norm awyyyy'}
+                userBio={'What is the point?'}
             />
             <UserCell
                 userAvatar={'../assets/male-avatar-2.svg'}
-                name={'Al Manga'}
+                name={'Manga'}
                 username={'Mostafa_Magdy'}
-                doesFollowMe={false}
+                doesFollowMe={true}
                 userState={'Follow'}
                 userBio={''}
             />
