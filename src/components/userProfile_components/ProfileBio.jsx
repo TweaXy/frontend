@@ -34,15 +34,17 @@ const ProfileBio = (props) => {
                 </div>
             </div>
             <div className="profile-div-followers">
-                <span className="profile-distance-between">
-                    <span className="profile-followers-following-number">
-                        {props.followingNum}
-                    </span>
-                    <span className="profile-followers-following-text">
-                        Following
+                <span className="follow-link">
+                    <span className="profile-distance-between">
+                        <span className="profile-followers-following-number">
+                            {props.followingNum}
+                        </span>
+                        <span className="profile-followers-following-text">
+                            Following
+                        </span>
                     </span>
                 </span>
-                <span>
+                <span className="follow-link">
                     <span className="profile-followers-following-number">
                         {' '}
                         {props.followersNum}
