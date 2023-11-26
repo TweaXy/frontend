@@ -8,10 +8,9 @@ const signInWithGoogle = async (tokenResponse) => {
         const response = await fetch(url, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${tokenResponse.access_token}`,
+                'Content-Type': 'applicatio1n/json',
             },
-            body: JSON.stringify({}),
+            body: JSON.stringify({ code: tokenResponse.code }),
         });
 
         return await response.json();

@@ -107,6 +107,7 @@ const LoginPage = ({ onClose }) => {
             setLoginWithGoogleError(`${SignInErrors.UNREGISTERED_EMAIL}`);
             console.error('Error signing in with google: ', err.message);
         },
+        flow: 'auth-code',
     });
 
     const handleForgotPassword = () => {
