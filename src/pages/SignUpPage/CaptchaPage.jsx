@@ -7,7 +7,7 @@ const CaptchaPage = ({ nextWindowHandler }) => {
     const p3 = 'Step 3 of 5';
     return (
         <div className="sign-up-page-body">
-            <ReCAPTCHA sitekey=" 6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe" />
+            <ReCAPTCHA sitekey="6Le61wEpAAAAAGgZRq-B51uGQpEP3J4_YIUDCU-o" />
 
             <button
                 className="black-wide-button"

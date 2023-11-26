@@ -8,8 +8,7 @@
   width: 90%;
   height: 90%;
   margin: 0%;
-  size: 80%;
-  object-fit:cover;
+  object-fit:fill;
 }
 
 @media only screen and (min-width: 0px) and (max-width: 1000px) {

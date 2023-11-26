@@ -2,7 +2,7 @@ import React from 'react';
 import Privacyclasses from './WelcomePageStyle/PrivacyAndPolicy.module.css';
 import Headerclasses from './WelcomePageStyle/Header.module.css';
 import Posterclasses from './WelcomePageStyle/PosterImage.module.css';
-import backgroundImage from '../../../assets/tweaxy-logo.jpg';
+import backgroundImage from '../../../assets/logo.svg';
 import welcomePage from './WelcomePageStyle/WelcomePage.module.css';
 import XLogo from '../../../assets/logo.ico';
 import SignUpButton from '../../components/Buttons/SignUpButton';
