@@ -1,0 +1,9 @@
+.users-cells-container {
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    border-right: 1px solid var(--twitter-background);
+}
+
+.users-cells-container::-webkit-scrollbar {
+    display: none;
+}
