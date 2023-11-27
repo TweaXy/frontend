@@ -4,15 +4,18 @@ import WelcomePage from './pages/WelcomePage/WelcomePage';
 import HomePage from './pages/HomePage/HomePage.jsx';
 import './pages/HomePage/HomePage.css';
 import ProfilePage from './pages/userProfile/ProfilePage.jsx';
-import FollowersPage from './pages/Followers/FollowersPage.jsx';
+import FollowingFollowersPage from './pages/Followers/FollowingFollowersPage.jsx';
 
 function App() {
     return (
         <>
             <Router>
                 <Routes>
-                    {/* <Route index element={<HomePage />} /> */}
-                    <Route index element={<FollowersPage />} />
+                    {/* <Route index element={<WelcomePage />} /> */}
+                    <Route
+                        index
+                        element={<FollowingFollowersPage activePage={0} />}
+                    />
                     <Route
                         path="/forget-password"
                         element={<ForgetPasswordStartPage />}

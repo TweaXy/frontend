@@ -11,7 +11,11 @@ const UserCell = ({
     userBio,
     onClickHandler,
     onNameClickHandler,
+    onNameHovering,
+    stopNameHovering,
     onAvatarClickHandler,
+    onAvatarHovering,
+    stopAvatarHovering,
     onButtonClickHandler,
 }) => {
     const [isFollowingButtonHovered, setIsFollowingButtonHovered] =
@@ -26,6 +30,8 @@ const UserCell = ({
             <div
                 className="user-cell-avatar-container"
                 onClick={onAvatarClickHandler}
+                onMouseEnter={onAvatarHovering}
+                onMouseLeave={stopAvatarHovering}
             >
                 <Avatar
                     className="user-cell-avatar"
@@ -39,6 +45,8 @@ const UserCell = ({
                         <span
                             className="user-cell-upper-left-top"
                             onClick={onNameClickHandler}
+                            onMouseEnter={onNameHovering}
+                            onMouseLeave={stopNameHovering}
                         >
                             {name}
                         </span>

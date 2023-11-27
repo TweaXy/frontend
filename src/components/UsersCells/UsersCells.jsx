@@ -1,18 +1,45 @@
 import './UsersCells.css';
 import UserCell from '../UserCell/UserCell';
 
-const UsersCells = ({ followers }) => {
+const UsersCells = ({
+    users,
+    curPage,
+    username,
+    onClickHandler,
+    onNameClickHandler,
+    onNameHovering,
+    stopNameHovering,
+    onAvatarClickHandler,
+    onAvatarHovering,
+    stopAvatarHovering,
+    onButtonClickHandler,
+}) => {
+    if (users.length === 0) {
+        return (
+            <div className="users-cells-container">
+                {/* TODO no followers or following */}
+            </div>
+        );
+    }
     return (
         <div className="users-cells-container">
-            {followers.map((follower) => (
+            {users.map((user) => (
                 <UserCell
-                    key={follower.username}
-                    userAvatar={follower.userAvatar}
-                    name={follower.name}
-                    username={follower.username}
-                    doesFollowMe={follower.doesFollowMe}
-                    userState={follower.userState}
-                    userBio={follower.userBio}
+                    key={user.username}
+                    userAvatar={user.userAvatar}
+                    name={user.name}
+                    username={user.username}
+                    doesFollowMe={user.doesFollowMe}
+                    userState={user.userState}
+                    userBio={user.userBio}
+                    onClickHandler={onClickHandler}
+                    onNameClickHandler={onNameClickHandler}
+                    onNameHovering={onNameHovering}
+                    stopNameHovering={stopNameHovering}
+                    onAvatarClickHandler={onAvatarClickHandler}
+                    onAvatarHovering={onAvatarHovering}
+                    stopAvatarHovering={stopAvatarHovering}
+                    onButtonClickHandler={onButtonClickHandler}
                 />
             ))}
         </div>
