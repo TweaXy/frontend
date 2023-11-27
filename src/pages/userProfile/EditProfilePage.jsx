@@ -1,26 +1,33 @@
 import EditProfileWindowHeader from '../../components/userProfile_components/EditProfileWindowHeader';
+import AvatarEditor from 'react-avatar-editor';
 import { Avatar } from '@mui/material';
 import { MenuItem, TextField } from '@mui/material';
 import '../userProfile/EditProfilePage.css';
 import '../SignUpPage/SignUpPage.css';
 import { useState } from 'react';
+import { useEffect } from 'react';
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
+{
+    /*}   src="https://www.istockphoto.com/photos/avatar-images-for-profile"*/
+}
 
 export default function EditProfilePage({ onClose }) {
     const [selectedImage, setSelectedImage] = useState(null);
-    {
-        /*}   const reader = new FileReader();
-    const handleImageChange = (event) => {
-        if (event.target.files && event.target.files[0]) {
-          let img = event.target.files[0];
-          setSelectedImage(img);
-        }
-      };
-    */
-    }
+    const [ProfileImage, setProfileImage] = useState(
+        'https://www.istockphoto.com/photos/avatar-images-for-profile'
+    );
+
     const handleNewImage = (e) => {
         const file = e.target.files[0];
         if (file) {
             setSelectedImage(URL.createObjectURL(e.target.files[0]));
+        }
+    };
+    const handleProfileImage = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setProfileImage(URL.createObjectURL(e.target.files[0]));
         }
     };
     const [ProfileData, changeProfileData] = useState({
@@ -63,6 +70,7 @@ export default function EditProfilePage({ onClose }) {
         }
         return days;
     };
+
     const ProfileData_Handler = (evt) => {
         const changedelement = evt.target.name;
         const newvalue = evt.target.value;
@@ -94,6 +102,7 @@ export default function EditProfilePage({ onClose }) {
                                     className="image-position"
                                     src={selectedImage}
                                 />
+
                                 <input
                                     type="file"
                                     className="image-upload"
@@ -102,18 +111,32 @@ export default function EditProfilePage({ onClose }) {
 
                                 <button
                                     className="remove-button"
-                                   
                                     onClick={() => setSelectedImage(null)}
-                                >&times;</button>
+                                >
+                                    &times;
+                                </button>
 
                                 <div className="profile-image">
                                     <Avatar
                                         sx={{ width: 100, height: 100 }}
-                                        src="https://www.istockphoto.com/photos/avatar-images-for-profile"
+                                        src={ProfileImage}
                                     />
-                                    {/*<CameraEnhanceOutlinedIcon
-                        className='camera-enhance'
-                       />*/}
+                                    <input
+                                    
+                                        type="file"
+                                        className="image-upload"
+                                        onChange={handleProfileImage}
+                                    />
+
+                                    {/*}     <AvatarEditor
+                                        image={selectedImage}
+                                        width={100}
+                                        height={100}
+                                        border={50}
+                                        color={[255, 255, 255, 0.6]} // RGBA
+                                    
+                                    />*/}
+                                    
                                 </div>
                             </div>
                         </div>
