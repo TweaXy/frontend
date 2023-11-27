@@ -11,9 +11,7 @@ const ForgetPasswordPage = ({ onClose }) => {
   const [userCode, setUserCode] = useState("");
   const [newPassword1, setNewPassword1] = useState("");
   const [newPassword2, setNewPassword2] = useState("");
-  const [userPassword, setUserPassword] = useState("");
   const [userUUIDError, setUserUUIDError] = useState("");
-  const [userPasswordError, setUserPasswordError] = useState("");
   const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
   const [isPending, setIsPending] = useState(false);
   
@@ -26,9 +24,6 @@ const ForgetPasswordPage = ({ onClose }) => {
   const handleCodeChange = (e) => {
     setUserCode(e.target.value);
     setIsSubmitButtonDisabled(e.target.value.length === 0);
-  };
-  const handlePasswordChange = (e) => {
-    setUserPassword(e.target.value);
   };
   const handleNewPassword1Change = (e) => {
     setNewPassword1(e.target.value);
@@ -61,9 +56,12 @@ const ForgetPasswordPage = ({ onClose }) => {
             return response.json();
           })
           .then((data) => {
-            if (data.status != "success") setUserUUIDError(data.message);
+            if (data.status != "success") {
+              if (data.message == "User not found") setUserUUIDError(SignInErrors.UNREGISTERED_EMAIL);
+              else setUserUUIDError(data.message);
+            }
             else {
-              setIsSubmitButtonDisabled(true);
+              setIsSubmitButtonDisabled(userCode.length == 0);
               setWindow(1);
             }
           })
@@ -78,15 +76,41 @@ const ForgetPasswordPage = ({ onClose }) => {
 
   const handleCodeSubmission = (e) => {
     e.preventDefault();
-    setIsPending(false);
+
     if (isSubmitButtonDisabled) {
-      setIsSubmitButtonDisabled(false);
+      setIsSubmitButtonDisabled(userUUID.length == 0);
       setWindow(0);
+      return;
     }
-    else {
-      setIsSubmitButtonDisabled(true);
-      setWindow(2);
-    }
+    setIsPending(true);
+
+    const lnk = "http://16.171.65.142:3000/api/v1/auth/checkResetToken"+"/"+userUUID+"/"+userCode;
+
+    console.log(lnk);
+    fetch(lnk, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => {
+        console.log(response);
+        setIsPending(false);
+        return response.json();
+      })
+      .then((data) => {
+        if (data.status != "success") {
+          setUserUUIDError("The code is wrong or expired please try again");
+        }
+        else {
+          console.log("code entered is right!");
+          setUserUUIDError("");
+          setIsSubmitButtonDisabled(true);
+          setWindow(2);
+        }
+      })
+      .catch((error) => {
+        if (error )
+        console.log(error.message);
+      });
   };
 
   const handleChangePasswordSubmission = (e) => {
@@ -105,24 +129,16 @@ const ForgetPasswordPage = ({ onClose }) => {
     })
       .then((response) => {
         setIsPending(false);
-        if (response.ok) {
-          return response.json();
-        }
-        else {
-          alert("Code is wrong!");
-          setWindow(1);
-        }
+        return response.json();
       })
       .then((data) => {
         if (data.status != "success") setUserUUIDError(data.message);
         else {
-          alert("The password has been changed succefully!");
           navigate(-1);
         }
       })
       .catch((error) => {
-        if (error )
-        setUserUUIDError(error.message);
+        if (error) console.log(error.message);
       });
   }
 
@@ -142,6 +158,11 @@ const ForgetPasswordPage = ({ onClose }) => {
             value={userUUID}
             onChange={handleUUIDChange}
           />
+          {userUUIDError && (
+          <div className="user-uuid-error-for-forget-password">
+            {userUUIDError}
+          </div>
+          )}
           <button
             data-test={SignInSelectors.NEXT_BUTTON}
             disabled={isSubmitButtonDisabled || isPending}
@@ -150,11 +171,6 @@ const ForgetPasswordPage = ({ onClose }) => {
             Next
           </button>
         </form>
-        {userUUIDError && (
-          <div className="user-uuid-error-for-forget-password">
-            {userUUIDError}
-          </div>
-        )}
       </div>
     );
   };
@@ -176,15 +192,15 @@ const ForgetPasswordPage = ({ onClose }) => {
             value={userCode}
             onChange={handleCodeChange}
           />
+          {userUUIDError && (
+          <div className="user-uuid-error-for-forget-password">
+            {userUUIDError}
+          </div>
+           )}
           <button data-test={SignInSelectors.NEXT_BUTTON} disabled={isPending} onClick={handleCodeSubmission}>
             {buttonText}
           </button>
         </form>
-        {userUUIDError && (
-          <div className="user-uuid-error-for-forget-password">
-            {userUUIDError}
-          </div>
-        )}
       </div>
     );
   };
@@ -195,7 +211,7 @@ const ForgetPasswordPage = ({ onClose }) => {
         <h2>Choose a new password</h2>
         <form>
           <label>
-             Make sure your new password is 8 characters or more. 
+             Make sure your new password is 8 characters or more.
              Try including numbers, letters,
              and punctuation marks for a <a href="https://help.twitter.com/en/safety-and-security/account-security-tips" target="_blank">strong password</a>. 
           </label>
@@ -216,6 +232,11 @@ const ForgetPasswordPage = ({ onClose }) => {
             value={newPassword2}
             onChange={handleNewPassword2Change}
           />
+          {userUUIDError && (
+          <div className="user-uuid-error-for-forget-password">
+            {userUUIDError}
+          </div>
+          )}
             <button
             data-test={SignInSelectors.NEXT_BUTTON}
             disabled={isSubmitButtonDisabled || isPending}
@@ -224,11 +245,6 @@ const ForgetPasswordPage = ({ onClose }) => {
             Change Password
           </button>
         </form>
-        {userUUIDError && (
-          <div className="user-uuid-error-for-forget-password">
-            {userUUIDError}
-          </div>
-        )}
       </div>
     );
   };
