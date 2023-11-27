@@ -55,26 +55,40 @@
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }
-.coverPhotoEdit {
-    position: relative;
-    filter: brightness(80%);
-}
 
-.photoEditor {
+
+.image-position{
     position: absolute;
-    left: 3em;
-    top: 8em;
-    border-radius: 50%;
-    border-color: #c11d1d;
-    border-width: 2px;
-    color: white;
-    background-color: #5b5353;
+    bottom: 0%;
+    
+}
+.image-upload{
+    position: absolute;
+    bottom: 30%;
+    left: 40%;
+
+
+}
+.remove-button
+{
+    width: 34px;
+    height: 34px;
+    margin-left: 8px;
+    
+    background:#333;
+  
+    border-radius: 100%;
+    opacity: 50%;
     cursor: pointer;
+    font-size: 24px;
+    position: absolute;
+    bottom: 30%;
+    left: 60%;
 }
 .edit-profile-uuid-field {
     width: 550px;
     margin-top: 1px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 div.edit-profile-page-body p.error-message {

@@ -4,11 +4,26 @@ import { MenuItem, TextField } from '@mui/material';
 import '../userProfile/EditProfilePage.css';
 import '../SignUpPage/SignUpPage.css';
 import { useState } from 'react';
-import CameraEnhanceOutlinedIcon from '@mui/icons-material/CameraEnhanceOutlined';
+
 export default function EditProfilePage({ onClose }) {
     const [selectedImage, setSelectedImage] = useState(null);
-
-    const [Data1, changeData1] = useState({
+    {
+        /*}   const reader = new FileReader();
+    const handleImageChange = (event) => {
+        if (event.target.files && event.target.files[0]) {
+          let img = event.target.files[0];
+          setSelectedImage(img);
+        }
+      };
+    */
+    }
+    const handleNewImage = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setSelectedImage(URL.createObjectURL(e.target.files[0]));
+        }
+    };
+    const [ProfileData, changeProfileData] = useState({
         username: '',
         userbio: '',
         location: '',
@@ -48,30 +63,49 @@ export default function EditProfilePage({ onClose }) {
         }
         return days;
     };
+    const ProfileData_Handler = (evt) => {
+        const changedelement = evt.target.name;
+        const newvalue = evt.target.value;
+        changeProfileData((cur) => {
+            cur[changedelement] = newvalue;
+            return { ...cur };
+        });
+    };
+    const Data2_Handler = (evt) => {
+        const changedelement = evt.target.name;
+        const newvalue = evt.target.value;
+        changeData2((cur) => {
+            cur[changedelement] = newvalue;
+            return { ...cur };
+        });
+    };
     return (
         <>
             {' '}
             <div className="edit-profile-page-container">
                 <div className="temp">
                     <EditProfileWindowHeader onClose={onClose} />
-                    {/*} <div className="background-image">
-                    <img  alt="" />
-                </div>
-                <div className="profile-title">
-                    <div className="profile-image">
-                        <Avatar
-                            sx={{ width: 134, height: 134 }}
-                            src="https://www.istockphoto.com/photos/avatar-images-for-profile"
-                        />
-                    </div>
-   
-                    
-                </div> */}
 
                     <div className="edit-profile-page-body">
                         <div>
                             <div className="background-image">
-                                <img alt="" src={selectedImage} />
+                                <img
+                                    width={' 590px'}
+                                    className="image-position"
+                                    src={selectedImage}
+                                />
+                                <input
+                                    type="file"
+                                    className="image-upload"
+                                    onChange={handleNewImage}
+                                />
+
+                                <button
+                                    className="remove-button"
+                                   
+                                    onClick={() => setSelectedImage(null)}
+                                >&times;</button>
+
                                 <div className="profile-image">
                                     <Avatar
                                         sx={{ width: 100, height: 100 }}
@@ -83,14 +117,15 @@ export default function EditProfilePage({ onClose }) {
                                 </div>
                             </div>
                         </div>
-                        <div></div>
                         <div className="edit-profile-uuid-field">
                             <TextField
                                 className="edit-profile-uuid-field"
                                 variant="outlined"
                                 id="outlined-basic"
                                 label="Name"
-                                name="name"
+                                name="username"
+                                value={ProfileData.username}
+                                onChange={ProfileData_Handler}
                             />
                         </div>
                         <div className="edit-profile-uuid-field">
@@ -100,7 +135,9 @@ export default function EditProfilePage({ onClose }) {
                                 multiline
                                 rows={3}
                                 label="Bio"
-                                name="bio"
+                                name="userbio"
+                                value={ProfileData.userbio}
+                                onChange={ProfileData_Handler}
                             />
                         </div>
 
@@ -110,6 +147,9 @@ export default function EditProfilePage({ onClose }) {
                                 variant="outlined"
                                 id="outlined-basic"
                                 label="Location"
+                                name="location"
+                                value={ProfileData.location}
+                                onChange={ProfileData_Handler}
                             />
                         </div>
                         <div className="edit-profile-uuid-field">
@@ -118,6 +158,8 @@ export default function EditProfilePage({ onClose }) {
                                 variant="outlined"
                                 name="website"
                                 label="website"
+                                value={ProfileData.website}
+                                onChange={ProfileData_Handler}
                             />
                         </div>
                         <span className="date-birth-text">Date of Birth</span>
@@ -129,6 +171,8 @@ export default function EditProfilePage({ onClose }) {
                                 label="Month"
                                 defaultValue="Select Month"
                                 name="month"
+                                value={Data2.month}
+                                onChange={Data2_Handler}
                                 sw={{
                                     width: '300px',
                                 }}
@@ -149,6 +193,8 @@ export default function EditProfilePage({ onClose }) {
                                 label="Day"
                                 defaultValue="Select Day"
                                 name="day"
+                                value={Data2.day}
+                                onChange={Data2_Handler}
                                 sw={{
                                     width: '300px',
                                 }}
@@ -166,6 +212,8 @@ export default function EditProfilePage({ onClose }) {
                                 label="Year"
                                 name="year"
                                 defaultValue="Select Year"
+                                value={Data2.year}
+                                onChange={Data2_Handler}
                                 sw={{
                                     width: '300px',
                                 }}
