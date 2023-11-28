@@ -139,7 +139,7 @@ const following = [
 ];
 
 const FollowingFollowersPage = ({ activePage }) => {
-    const [curPage, setCurPage] = useState(activePage);
+    const [curPage, setCurPage] = useState(activePage == 'followers' ? 0 : 1);
     const navigate = useNavigate();
 
     const goBackToProfile = () => {
