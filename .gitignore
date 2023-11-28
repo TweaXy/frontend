@@ -27,4 +27,4 @@ dist-ssr
 cypress.config.js
 
 # yarn locks
-yarn.lock
+*.lock
