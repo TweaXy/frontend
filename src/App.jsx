@@ -12,6 +12,12 @@ function App() {
             <Router>
                 <Routes>
                     <Route index element={<WelcomePage />} />
+                    {/* <Route
+                        index
+                        element={
+                            <FollowingFollowersPage activePage={'following'} />
+                        }
+                    /> */}
                     <Route
                         path="/forget-password"
                         element={<ForgetPasswordStartPage />}
@@ -19,7 +25,7 @@ function App() {
                     <Route path="/profile" element={<ProfilePage />} />
                     <Route path="/home" element={<HomePage />} />
                     <Route
-                        path="/:activePage"
+                        path="/following-followers/:activePage"
                         element={<FollowingFollowersPage />}
                     />
                     {/*TODO:: put the other routes here*/}
