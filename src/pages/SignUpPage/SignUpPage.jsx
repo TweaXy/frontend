@@ -4,7 +4,7 @@ import SignUpPage1 from "./SignUpPage1";
 import SignUpPage3 from "./SignUpPage3";
 import SignUpPage4 from "./SignUpPage4";
 import SignUpPage5 from "./SignUpPage5";
-
+import CaptchaPage from "./CaptchaPage";
 import LoginWindowHeader from "../../components/LoginWindowHeader/LoginWindowHeader";
 
 import { sendEmailVerification } from "../../apis/EmailVerfication";
@@ -34,7 +34,7 @@ const SignUpPage = ({ onClose }) => {
 
   const nextWindowHandler = (ev) => {
     // ev.preventDefault();
-    if (windowOpened === 1) {
+    if (windowOpened === 2) {
       sendEmailVerification(Data1.usermail);
     }
     if (windowOpened === 3) {
@@ -80,7 +80,14 @@ const SignUpPage = ({ onClose }) => {
           nextWindowHandler={nextWindowHandler}
         />
       )}
+      
       {windowOpened === 2 && (
+        <CaptchaPage
+          
+          nextWindowHandler={nextWindowHandler}
+        />
+      )}
+      {windowOpened === 3 && (
         <SignUpPage4
           verficationcode={verficationcode}
           setverficationcode={setverficationcode}
@@ -88,7 +95,7 @@ const SignUpPage = ({ onClose }) => {
           nextWindowHandler={nextWindowHandler}
         />
       )}
-      {windowOpened === 3 && (
+      {windowOpened === 4 && (
         <SignUpPage5
           canbeuser={canbeuser}
           password={password}

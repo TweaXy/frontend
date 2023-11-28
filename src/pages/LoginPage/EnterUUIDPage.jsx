@@ -42,6 +42,7 @@ const EnterUUIDPage = ({
             <button
                 data-test={SignInSelectors.NEXT_BUTTON}
                 className="black-button"
+                disabled={UUID === ''}
                 onClick={handleUUIDSubmit}
             >
                 Next
