@@ -1,6 +1,6 @@
 import './EditProfileWindowHeader.css';
 
-const EditProfileWindowHeader = ({ onClose }) => (
+const EditProfileWindowHeader = ({ onClose, saveClick }) => (
     <div className="EditProfile-window-header">
         <button
             className="EditProfile-window-header-close-button"
@@ -9,7 +9,7 @@ const EditProfileWindowHeader = ({ onClose }) => (
             &times;
         </button>
         <span className="edit-text">Edit profile</span>
-        <button className="save-button">Save</button>
+        <button className="save-button" onClick={saveClick}>Save</button>
 
 
     </div>

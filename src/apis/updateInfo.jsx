@@ -30,10 +30,12 @@ const updateInfo = (
             cover: _cover,
             location: _location,
         }),
+        
     })
         .then((response) => response.json())
         .then((data) => {
             console.log('Response from the API:', data);
+
         })
         .catch((error) => {});
 };

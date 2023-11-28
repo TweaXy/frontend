@@ -1,13 +1,12 @@
 import EditProfileWindowHeader from '../../components/userProfile_components/EditProfileWindowHeader';
-import AvatarEditor from 'react-avatar-editor';
 import { Avatar } from '@mui/material';
 import { MenuItem, TextField } from '@mui/material';
 import '../userProfile/EditProfilePage.css';
 import '../SignUpPage/SignUpPage.css';
 import { useState } from 'react';
-import { useEffect } from 'react';
-import ReactCrop from 'react-image-crop';
-import 'react-image-crop/dist/ReactCrop.css';
+{
+    /*import { updateInfo } from '../../apis/updateInfo';*/
+}
 {
     /*}   src="https://www.istockphoto.com/photos/avatar-images-for-profile"*/
 }
@@ -17,7 +16,25 @@ export default function EditProfilePage({ onClose }) {
     const [ProfileImage, setProfileImage] = useState(
         'https://www.istockphoto.com/photos/avatar-images-for-profile'
     );
-
+    const [ProfileData, changeProfileData] = useState({
+        username: '',
+        userbio: '',
+        location: '',
+        website: '',
+    });
+    const [Data2, changeData2] = useState({ day: '', month: '', year: '' });
+    {
+        /*} updateInfo(
+        ProfileData.username,
+        Data2,
+        ProfileData.userbio,
+        null,
+        ProfileData.website,
+        ProfileImage,
+        selectedImage,
+        ProfileData.location
+   );*/
+    }
     const handleNewImage = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -30,13 +47,6 @@ export default function EditProfilePage({ onClose }) {
             setProfileImage(URL.createObjectURL(e.target.files[0]));
         }
     };
-    const [ProfileData, changeProfileData] = useState({
-        username: '',
-        userbio: '',
-        location: '',
-        website: '',
-    });
-    const [Data2, changeData2] = useState({ day: '', month: '', year: '' });
 
     const months = [
         { name: 'January', value: '0' },
@@ -92,7 +102,7 @@ export default function EditProfilePage({ onClose }) {
             {' '}
             <div className="edit-profile-page-container">
                 <div className="temp">
-                    <EditProfileWindowHeader onClose={onClose} />
+                    <EditProfileWindowHeader onClose={onClose} saveClick={onClose} />
 
                     <div className="edit-profile-page-body">
                         <div>
@@ -122,7 +132,6 @@ export default function EditProfilePage({ onClose }) {
                                         src={ProfileImage}
                                     />
                                     <input
-                                    
                                         type="file"
                                         className="image-upload"
                                         onChange={handleProfileImage}
@@ -136,7 +145,6 @@ export default function EditProfilePage({ onClose }) {
                                         color={[255, 255, 255, 0.6]} // RGBA
                                     
                                     />*/}
-                                    
                                 </div>
                             </div>
                         </div>
