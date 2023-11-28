@@ -29,6 +29,11 @@
   padding: 7px;
   border-radius: 9999px;
 }
+.arrow:hover {
+  border-radius: 250px;
+  border-color: rgb(205, 205, 207);
+  background-color: rgb(205, 205, 207);;
+}
 .text-name {
   color: black;
   font-size: 19px;

@@ -5,8 +5,14 @@ function Profile() {
   return (
     <>
       <div className="profile">
-        <ProfileHeader />
-        <ProfileBio />
+        <ProfileHeader username="ebraam atef" noPosts={0} />
+        <ProfileBio
+         username="ebraam atef"
+         userEmail="ebraamatef"
+         followingNum={2}
+         followersNum={1}
+         
+        />
       </div>
     </>
   );
