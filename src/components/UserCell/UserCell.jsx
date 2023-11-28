@@ -1,23 +1,8 @@
-import { Avatar } from '@mui/material';
 import './UserCell.css';
 import { useState } from 'react';
+import { Avatar } from '@mui/material';
 
-const UserCell = ({
-    userAvatar,
-    name,
-    username,
-    doesFollowMe,
-    userState,
-    userBio,
-    onClickHandler,
-    onNameClickHandler,
-    onNameHovering,
-    stopNameHovering,
-    onAvatarClickHandler,
-    onAvatarHovering,
-    stopAvatarHovering,
-    onButtonClickHandler,
-}) => {
+const UserCell = ({ name, username, avatar, bio, followsMe, followedByMe }) => {
     const [isFollowingButtonHovered, setIsFollowingButtonHovered] =
         useState(false);
 
@@ -25,34 +10,61 @@ const UserCell = ({
         setIsFollowingButtonHovered(!isFollowingButtonHovered);
     };
 
+    const goToUserProfile = () => {
+        // TODO
+        console.log(`redirecting to @${username}...`);
+    };
+    const onMouseEnterAvatarField = () => {
+        // TODO
+        console.log(`showing @${username} profile snippet at their avatar...`);
+    };
+    const onMouseLeaveAvatarField = () => {
+        // TODO
+        console.log(
+            `stop showing @${username} profile snippet at their avatar`
+        );
+    };
+    const onMouseEnterNameField = () => {
+        // TODO
+        console.log(`showing @${username} profile snippet at their name...`);
+    };
+    const onMouseLeaveNameField = () => {
+        // TODO
+        console.log(`stop showing @${username} profile snippet at their name`);
+    };
+    const onButtonClick = (event) => {
+        // TODO
+        event.stopPropagation();
+        console.log(`@${username} cell button is clicked..`);
+        if (followedByMe) {
+            console.log(`unfollow @${username}..`);
+        } else {
+            console.log(`follow @${username}..`);
+        }
+    };
+
     return (
-        <div className="user-cell-container" onClick={onClickHandler}>
+        <div className="user-cell-container" onClick={goToUserProfile}>
             <div
                 className="user-cell-avatar-container"
-                onClick={onAvatarClickHandler}
-                onMouseEnter={onAvatarHovering}
-                onMouseLeave={stopAvatarHovering}
+                onMouseEnter={onMouseEnterAvatarField}
+                onMouseLeave={onMouseLeaveAvatarField}
             >
-                <Avatar
-                    className="user-cell-avatar"
-                    src={userAvatar}
-                    alt={name}
-                />
+                <Avatar className="user-cell-avatar" src={avatar} alt={name} />
             </div>
             <div className="user-cell-info-container">
                 <div className="user-cell-upper-half">
                     <div className="user-cell-upper-left">
                         <span
                             className="user-cell-upper-left-top"
-                            onClick={onNameClickHandler}
-                            onMouseEnter={onNameHovering}
-                            onMouseLeave={stopNameHovering}
+                            onMouseEnter={onMouseEnterNameField}
+                            onMouseLeave={onMouseLeaveNameField}
                         >
                             {name}
                         </span>
                         <div className="user-cell-upper-left-down">
                             <span className="user-cell-username">{`@${username}`}</span>
-                            {doesFollowMe && (
+                            {followsMe && (
                                 <span className="user-cell-follows-me">
                                     Follows you
                                 </span>
@@ -60,25 +72,28 @@ const UserCell = ({
                         </div>
                     </div>
                     <div className="user-cell-upper-right">
-                        <button
-                            className={
-                                userState == 'Follow'
-                                    ? 'black-small-button'
-                                    : 'white-small-button'
-                            }
-                            onClick={onButtonClickHandler}
-                            onMouseEnter={handleFollowingButtonHover}
-                            onMouseLeave={handleFollowingButtonHover}
-                        >
-                            {userState === 'Following' &&
-                            isFollowingButtonHovered
-                                ? 'Unfollow'
-                                : userState}
-                        </button>
+                        {(followedByMe || followsMe) && (
+                            <button
+                                className={
+                                    followedByMe == false
+                                        ? 'black-small-button'
+                                        : 'white-small-button'
+                                }
+                                onClick={onButtonClick}
+                                onMouseEnter={handleFollowingButtonHover}
+                                onMouseLeave={handleFollowingButtonHover}
+                            >
+                                {followedByMe == false
+                                    ? 'Follow'
+                                    : isFollowingButtonHovered
+                                    ? 'Unfollow'
+                                    : 'Following'}
+                            </button>
+                        )}
                     </div>
                 </div>
                 <div className="user-cell-lower-half">
-                    <span>{userBio}</span>
+                    <span>{bio}</span>
                 </div>
             </div>
         </div>

@@ -1,9 +1,32 @@
 .users-cells-container {
-    overflow-y: scroll;
-    -ms-overflow-style: none;
-    border-right: 1px solid var(--twitter-background);
+    display: block;
 }
 
-.users-cells-container::-webkit-scrollbar {
-    display: none;
+.empty-users-cells-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.empty-users-cells-container>.span-container {
+    width: 400px;
+    height: 128px;
+    margin: 32px 99px;
+    padding: 0 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+.empty-users-cells-container>.span-container>span.header-span {
+    font-size: 31px;
+    font-weight: 600;
+    color: #0F1419;
+    text-align: left;
+}
+
+.span-container>span.body-span {
+    text-align: left;
+    font-size: 15px;
+    color: #536471;
 }

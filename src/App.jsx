@@ -4,7 +4,7 @@ import WelcomePage from './pages/WelcomePage/WelcomePage';
 import HomePage from './pages/HomePage/HomePage.jsx';
 import './pages/HomePage/HomePage.css';
 import ProfilePage from './pages/userProfile/ProfilePage.jsx';
-import FollowingFollowersPage from './pages/Followers/FollowingFollowersPage.jsx';
+import FollowingFollowersPage from './pages/FollowingFollowersPage/FollowingFollowersPage.jsx';
 
 function App() {
     return (
@@ -12,6 +12,7 @@ function App() {
             <Router>
                 <Routes>
                     {/* <Route index element={<WelcomePage />} /> */}
+                    {/* <Route index element={<HomePage />} /> */}
                     <Route
                         index
                         element={<FollowingFollowersPage activePage={0} />}
