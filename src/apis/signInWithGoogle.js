@@ -1,34 +1,32 @@
-const signInWithGoogle = async () => {
-  const url = "http://16.171.65.142:3000/api/v1/auth/google";
-  try {
-    console.log("Fetching Google sign-in URL...");
-    const response = await fetch(url, {
-      method: "GET",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+const signInWithGoogle = async (response) => {
+    const url = 'http://16.171.65.142:3000/api/v1/auth/google';
 
-    console.log("response: ", response);
-    if (response.ok) {
-      console.log("Google sign-in URL fetched successfully.");
-      const result = await response.json();
-      const redirectUrl = result.url;
+    console.log('signing in with google...');
+    console.log('Sign in with google token response: ', response);
 
-      if (redirectUrl) {
-        console.log("Redirecting to Google sign-in URL...");
-        window.location.href = redirectUrl;
-      } else {
-        throw new Error("Invalid redirect URL in the server response");
-      }
-    } else {
-      throw new Error("Failed to fetch Google sign-in URL");
+    try {
+        const fetchResponse = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ token: response.credential }),
+        });
+
+        if (!fetchResponse.ok) {
+            const errorData = await fetchResponse.json();
+            throw new Error(errorData.message);
+        }
+
+        const responseData = await fetchResponse.json();
+        // Assuming the token is returned in a cookie named 'token'
+        document.cookie = `token=${responseData.data.token}; Path=/; HttpOnly`;
+
+        return responseData.data.user;
+    } catch (error) {
+        console.error('Error Signing in with google: ', error.message);
+        throw error;
     }
-  } catch (err) {
-    console.error(`Error during Google Sign-in: ${err.message}`);
-    throw new Error(`Error during Google Sign-in: ${err.message}`);
-  }
 };
 
 export default signInWithGoogle;

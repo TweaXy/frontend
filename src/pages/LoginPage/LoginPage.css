@@ -47,6 +47,11 @@ button.black-button:hover {
     box-shadow: 0 0 5px #000;
 }
 
+button.black-button:disabled {
+    background: rgb(15, 20, 25, 0.7);
+    cursor: not-allowed;
+}
+
 button.white-button {
     height: 40px;
     width: 300px;
@@ -87,6 +92,11 @@ button.black-wide-button {
 button.black-wide-button:hover {
     background: rgba(0, 0, 0, 0.8);
     box-shadow: 0 0 5px #000;
+}
+
+button.black-wide-button:disabled {
+    background: rgb(15, 20, 25, 0.7);
+    cursor: not-allowed;
 }
 
 button.white-wide-button {
