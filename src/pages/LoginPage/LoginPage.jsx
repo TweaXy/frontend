@@ -1,7 +1,6 @@
 import './LoginPage.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useGoogleLogin } from '@react-oauth/google';
 import EnterUUIDPage from './EnterUUIDPage';
 import EnterPasswordPage from './EnterPasswordPage';
 import LoginWindowHeader from '../../components/LoginWindowHeader/LoginWindowHeader';
@@ -81,34 +80,23 @@ const LoginPage = ({ onClose }) => {
         }
     };
 
-    const handleLoginWithGoogle = useGoogleLogin({
-        onSuccess: async (tokenResponse) => {
-            try {
-                const response = await signInWithGoogle(tokenResponse);
+    const handleLoginWithGoogle = async (token) => {
+        try {
+            const user = await signInWithGoogle(token);
 
-                console.log('login with google api response: ', response);
-
-                if (response.status === 'success') {
-                    setLoginWithGoogleError('');
-                    console.log('user data: ', response);
-                    navigate('home');
-                    console.log('logged in successfully!');
-                } else {
-                    setLoginWithGoogleError(
-                        `${SignInErrors.UNREGISTERED_EMAIL}`
-                    );
-                }
-            } catch (err) {
-                setLoginWithGoogleError(`${SignInErrors.UNREGISTERED_EMAIL}`);
-                console.error('Error signing in with google: ', err.message);
+            if (user) {
+                console.log('User logged in successfully:', user);
+                navigate('home');
+                // Continue with handling the logged-in user as needed
+            } else {
+                console.error('Failed to sign in with Google.');
+                setLoginWithGoogleError('user is not found');
             }
-        },
-        onError: (err) => {
-            setLoginWithGoogleError(`${SignInErrors.UNREGISTERED_EMAIL}`);
-            console.error('Error signing in with google: ', err.message);
-        },
-        flow: 'auth-code',
-    });
+        } catch (error) {
+            console.error('Error in handleLoginWithGoogle: ', error.message);
+            setLoginWithGoogleError(error.message);
+        }
+    };
 
     const handleForgotPassword = () => {
         navigate('forget-password');

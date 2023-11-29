@@ -1,8 +1,8 @@
-import { TextField } from '@mui/material';
-import LoginOrSpan from '../../components/LoginOrSpan/LoginOrSpan';
-import LoginWithButton from '../../components/LoginWithButton/LoginWithButton';
 import './LoginPage.css';
+import { TextField } from '@mui/material';
+import { GoogleLogin } from '@react-oauth/google';
 import SignInSelectors from '../../shared/selectors/SignIn';
+import LoginOrSpan from '../../components/LoginOrSpan/LoginOrSpan';
 
 const EnterUUIDPage = ({
     UUID,
@@ -14,17 +14,30 @@ const EnterUUIDPage = ({
     handleLoginWithGoogle,
     handleSignUp,
 }) => {
-    const googleLogoSrc = 'https://img.icons8.com/color/48/google-logo.png';
-
     return (
         <div className="login-page-body">
             <h1>Login to TweaXy</h1>
-            <LoginWithButton
-                onClick={handleLoginWithGoogle}
-                text={'Login with Google'}
-                imgSrc={googleLogoSrc}
-                imgAlt={'google-logo'}
-            />
+            <div
+                style={{
+                    height: '40px',
+                    width: '300px',
+                    margin: '12px 0',
+                    padding: '0 16px',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                <GoogleLogin
+                    size="large"
+                    shape="pill"
+                    width="300px"
+                    type="standard"
+                    text="signin_with"
+                    theme="filled_black"
+                    logo_alignment="left"
+                    onSuccess={(response) => handleLoginWithGoogle(response)}
+                />
+            </div>
             {LoginWithGoogleError && (
                 <p className="error-message">{LoginWithGoogleError}</p>
             )}
