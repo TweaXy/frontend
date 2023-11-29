@@ -15,9 +15,9 @@ function HomePage() {
             <div className="home-page">
                 {/**Side bar */}
                 <Sidebar />
-                {/**News feed */}
+                {/**News feed   */}
 
-                <Feed />
+                <Feed userData={userData}/>
 
                 {/**Widgets */}
 

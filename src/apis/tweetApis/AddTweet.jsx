@@ -1,12 +1,13 @@
 
 const addTweetURL ="http://16.171.65.142:3000/api/v1/tweets/";
-const apiAddTweet =async ({tweetText,tweetMedia}) => {
+const apiAddTweet =async (tweetText,tweetMedia,token) => {
+    console.log("this is a token" + token);
     try {
       const response = await fetch(addTweetURL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-        //   "Authorization": `Barrier ${}`
+          "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify({text: tweetText , media:tweetMedia }),
       });

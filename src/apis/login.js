@@ -19,7 +19,7 @@ const login = async (userUUID, userPassword) => {
 
         const responseData = await response.json();
         document.cookie = `token=${responseData.data.token}; Path=/; HttpOnly`;
-        return responseData.data.user;
+        return responseData.data;
     } catch (err) {
         console.error('Error in Signing in: ', err.message);
         throw err;
