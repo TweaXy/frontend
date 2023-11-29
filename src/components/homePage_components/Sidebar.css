@@ -14,7 +14,7 @@ height: 100vh;
 
 .sidebar--tweet{
     outline: none !important;
-    background-color:#24a1ee !important;
+    background-color: var(--button-background) !important;
     color: white !important;
     font-weight: 550 !important;
     font-size: 17px !important;

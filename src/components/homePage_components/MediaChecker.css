@@ -1,0 +1,10 @@
+.media-checker {
+    display: flex;
+    align-items: end;
+}
+
+.media-checker > .media-img {
+    padding-top: 5px;
+    flex: 1;
+    border-radius: 20px;
+}

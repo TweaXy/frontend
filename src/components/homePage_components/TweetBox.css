@@ -22,29 +22,38 @@
   padding-right: 1px;
   /* padding-bottom: 0; */
 }
-.text-container {
+.tweetbox-form > .tweetbox-input  > textarea{
+  background-color: white;
+  color: black;
+    /* height: 24px; */
+    padding: 10px 0;
+    box-sizing: border-box;
+    padding-left: 2px;
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    resize: none;
+    overflow-y: hidden;
+    line-height: 1.5;
+}
+.tweetbox-form > .tweetbox-input > .media-container{
+  display: flex;
+  flex-direction:column ;
+}
+.tweetbox-input > .media-container > .span-padd{
+  height: 4px;
+}
+
+/* .text-container {
   padding: 10px 0;
   flex: 1;
   box-sizing: border-box;
   padding-left: 2px;
   display: flex;
-}
-textarea {
-  /* height: 24px; */
-  padding: 10px 0;
-  box-sizing: border-box;
-  padding-left: 2px;
-  flex: 1;
-  border: none;
-  outline: none;
-  font-size: 20px;
-  font-family: Arial, sans-serif;
-  overflow: hidden;
-  resize: none;
-  overflow-y: hidden;
-  line-height: 1.5;
-}
-
+} */
 .privacy-lay {
   border-bottom: 1px solid var(--twitter-background);
   margin-bottom: 1px;
@@ -108,7 +117,7 @@ textarea {
 
 .tweetbox-button {
   outline: none !important;
-  background-color: #24a1ee !important;
+  background-color: var(--button-background) !important;
   color: white !important;
   font-weight: 550 !important;
   font-size: 15px !important;

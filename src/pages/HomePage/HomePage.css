@@ -5,6 +5,7 @@ body{
     --twitter-greyColor:#536471;
     --twitter-greyHover:#eae9e9;
     --widget-background:rgba(38, 90, 101, 0.059);
+    --button-background:rgb(29, 155, 240);
   }
   .home-page{
      display: flex;
@@ -16,6 +17,8 @@ body{
     margin-top: 0px !important;
     margin-bottom: 0px !important;
     padding: 0 10px;
+    background-color: white;
+    color: black;
   } 
   
   

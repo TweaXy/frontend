@@ -28,11 +28,10 @@ export default function Sidebar() {
   };
   return (
     <div className="sidebar">
-      {/**Icon */}
       <TwitterIcon className="twitter--icon" />
-      {/* <img src={path} alt="tweexy-logo" /> */}
 
-      {/**Sidebar Option */}
+
+
       <div onClick={toHome}>
         <SidebarOption
           active={activeHome}
