@@ -5,6 +5,9 @@ import SignUpPageAvater from './SignUpPageAvater';
 const SignUpHome = ({ onClose, UN }) => {
     const [window, setwidnow] = useState(0);
     const next_Handler = () => {
+        if (window === 1) {
+            onClose();
+        }
         setwidnow(window + 1);
     };
     return (

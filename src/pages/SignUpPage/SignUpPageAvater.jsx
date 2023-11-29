@@ -17,7 +17,7 @@ const SignUpPageAvater = ({ next_Handler }) => {
 
             reader.onloadend = () => {
                 setAvatar(reader.result);
-                onAvatarChange(reader.result);
+                // onAvatarChange(reader.result);
             };
             reader.readAsDataURL(file);
         }
@@ -28,6 +28,7 @@ const SignUpPageAvater = ({ next_Handler }) => {
     };
     const updatepicture = () => {
         Pictureupload(avatar);
+        next_Handler(); 
     };
     return (
         <>

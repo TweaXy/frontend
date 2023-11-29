@@ -11,7 +11,7 @@ const Setavatar = () => {
 
             reader.onloadend = () => {
                 setAvatar(reader.result);
-                onAvatarChange(reader.result);
+                // onAvatarChange(reader.result);
             };
             reader.readAsDataURL(file);
         }
@@ -31,7 +31,6 @@ const Setavatar = () => {
                         className="avatar-img"
                     />
                     <div className="avatar-actions">
-                        <button onClick={handleRemoveAvatar}></button>
                         <button onClick={handleRemoveAvatar}></button>
                     </div>
                 </div>
