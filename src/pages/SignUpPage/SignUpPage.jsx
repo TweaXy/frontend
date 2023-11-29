@@ -14,6 +14,7 @@ const Errors = {
         'Password must contain 8 or more characters with at least one of: uppercase, lowercase, number and special',
     Verficationcode: '',
     Signup: '',
+    Name: 'Name must be at least 4 characters',
 };
 
 const SignUpPage = ({ onClose }) => {
@@ -29,21 +30,21 @@ const SignUpPage = ({ onClose }) => {
     const [canbeuser, setcanbeuser] = useState(true);
     const [verficationcode, setverficationcode] = useState('');
     const navigate = useNavigate();
-    useEffect(
-        function handleNavigation() {
-            if (navg) navigate(`home/${UN}`);
-        },
-        [navg]
-    );
+    useEffect(() => {
+        if (navg) navigate(`home/${UN}`);
+    }, [navg]);
     const nextWindowHandler = (ev) => {
         // ev.preventDefault();
+        if (windowOpened === 4) {
+            setnavg(true);
+            setwindowOpned(windowOpened + 1);
+        }
         if (windowOpened === 1) {
             sendEmailVerification(Data1.usermail);
         }
         if (windowOpened === 3) {
             signup(
                 Data1.usermail,
-                'MoMangaManga',
                 Data1.username,
                 Data2,
                 password,
@@ -54,7 +55,6 @@ const SignUpPage = ({ onClose }) => {
                 windowOpened
             );
         }
-        if (windowOpened === 4) setnavg(true);
         if (windowOpened < 3) setwindowOpned(windowOpened + 1);
     };
     const passwordhandler = (ev) => {

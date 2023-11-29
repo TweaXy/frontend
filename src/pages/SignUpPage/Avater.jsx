@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './Avater.css';
-const AvatarInput = () => {
-    const [avatar, setAvatar] = useState(null);
+import img from '../../../assets/default.jpeg';
+const Setavatar = () => {
+    const [avatar, setAvatar] = useState(img);
     const handleAvatarChange = (event) => {
         const file = event.target.files[0];
 
@@ -31,6 +32,7 @@ const AvatarInput = () => {
                     />
                     <div className="avatar-actions">
                         <button onClick={handleRemoveAvatar}></button>
+                        <button onClick={handleRemoveAvatar}></button>
                     </div>
                 </div>
             ) : (
@@ -50,4 +52,4 @@ const AvatarInput = () => {
         </div>
     );
 };
-export default AvatarInput;
+export default Setavatar;

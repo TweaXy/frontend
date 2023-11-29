@@ -6,7 +6,6 @@ import { isUniqeEmail, isUniqueUsername } from '../../apis/Email';
 import { Errors } from './SignUpPage';
 const date = 'Date of birth';
 const create = 'Create your account';
-
 const months = [
     { name: 'January', value: '0' },
     { name: 'February', value: '1' },
@@ -32,7 +31,6 @@ const SignUpPage1 = ({
 }) => {
     const [iscomplete, setiscomplete] = useState(false);
     const [uniqueEmail, setuniqueEmail] = useState(true);
-    const [uniqueusername, setisuniqueusername] = useState(true);
     useEffect(
         function checkEmailUniqness() {
             if (Data1.usermail.length > 0) {
@@ -42,19 +40,14 @@ const SignUpPage1 = ({
         [Data1.usermail]
     );
     useEffect(
-        function checkUsernameUniqness() {
-            if (Data1.username.length > 0) {
-                isUniqueUsername(Data1.username, setisuniqueusername);
-            } else setisuniqueusername(true);
-        },
-        [Data1.username]
-    );
-    useEffect(
         function Check_Information() {
             const isdata1ok = Data1.username.length > 3 && Data1.usermail;
             const isdata2ok = Data2.day && Data2.month && Data2.year;
             setiscomplete(
-                isdata1ok && isdata2ok && uniqueEmail && uniqueusername
+                isdata1ok &&
+                    isdata2ok &&
+                    uniqueEmail &&
+                    Data1.username.length > 3
             );
         },
         [Data1, Data2]
@@ -107,8 +100,8 @@ const SignUpPage1 = ({
                     onChange={Data1_Handler}
                 />
             </div>
-            {!uniqueusername && (
-                <p className="error-message">{Errors['Username']}</p>
+            {Data1.username.length > 0 && Data1.username.length < 4 && (
+                <p className="error-message">{Errors['Name']}</p>
             )}
             <div className="sign-up-uuid-field">
                 <TextField
@@ -196,5 +189,4 @@ const SignUpPage1 = ({
         </div>
     );
 };
-
 export default SignUpPage1;

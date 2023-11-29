@@ -45,7 +45,7 @@ const apicheckUsernameUnique =async (username, setuniqueUsername) => {
     if (responseData.status == "success") {
       setuniqueUsername(true);
     } else {
-      Errors["Username"] = "Name must be unique";
+      Errors["Username"] = "Username must be unique";
       setuniqueUsername(false);
     }
   } catch (error) {

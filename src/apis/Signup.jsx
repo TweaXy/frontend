@@ -1,9 +1,9 @@
 import { Errors } from '../pages/SignUpPage/SignUpPage';
 let urlsignup = 'http://16.171.65.142:3000/api/v1/auth/signup';
 let UN = '';
+let authToken = '';
 const signup = (
     _usermail,
-    _username,
     _name,
     _birthdayDate,
     _password,
@@ -26,7 +26,6 @@ const signup = (
         },
         body: JSON.stringify({
             email: _usermail,
-            username: _username,
             name: _name,
             birthdayDate: _nwbirthdayDate,
             password: _password,
@@ -38,16 +37,17 @@ const signup = (
             console.log('Response from the API:', data);
             if (data.status === 'success') {
                 UN = data.data.user.username;
+                authToken = data.data.token;
                 console.log('UN is', UN);
                 setcanbeuser(true);
                 setwindowOpned(windowOpened + 1);
             } else {
                 Errors['Signup'] = data.message;
                 setcanbeuser(false);
-                console.log("SignUp Api",canbeuser)
+                console.log('SignUp Api', canbeuser);
             }
         })
         .catch((error) => {});
 };
 
-export { signup, UN };
+export { signup, UN, authToken };
