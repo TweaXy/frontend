@@ -12,12 +12,6 @@ function App() {
             <Router>
                 <Routes>
                     <Route index element={<WelcomePage />} />
-                    {/* <Route
-                        index
-                        element={
-                            <FollowingFollowersPage activePage={'following'} />
-                        }
-                    /> */}
                     <Route
                         path="/forget-password"
                         element={<ForgetPasswordStartPage />}

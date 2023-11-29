@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Privacyclasses from './WelcomePageStyle/PrivacyAndPolicy.module.css';
 import Headerclasses from './WelcomePageStyle/Header.module.css';
 import Posterclasses from './WelcomePageStyle/PosterImage.module.css';
@@ -9,6 +9,25 @@ import SignUpButton from '../../components/Buttons/SignUpButton';
 import SignInButton from '../../components/Buttons/SignInButton';
 
 export default function WelcomePage() {
+    const [isSignUpWindowOpen, setIsSignUpWindowOpen] = useState(false);
+    const [isSignInWindowOpen, setIsSignInWindowOpen] = useState(false);
+
+    const openSignUpWindow = () => {
+        setIsSignUpWindowOpen(true);
+    };
+
+    const closeSignUpWindow = () => {
+        setIsSignUpWindowOpen(false);
+    };
+
+    const openSignInWindow = () => {
+        setIsSignInWindowOpen(true);
+    };
+
+    const closeSignInWindow = () => {
+        setIsSignInWindowOpen(false);
+    };
+
     return (
         <React.Fragment>
             <div>
@@ -26,25 +45,11 @@ export default function WelcomePage() {
                             <p className={Headerclasses.content}>Join today.</p>
                         </div>
                         <div className={welcomePage.buttonSection}>
-                            {/*} <GoogleSignUp />
-              <FacebookSignUp />
-              <table>
-                <tbody>
-                  <tr>
-                    <td>
-                      <div className={ORclasses.straightLine}></div>
-                    </td>
-                    <td>
-                      <div className={ORclasses.label}>or</div>
-                    </td>
-                    <td>
-                      <div className={ORclasses.straightLine}></div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-  */}
-                            <SignUpButton />
+                            <SignUpButton
+                                isWindowOpen={isSignUpWindowOpen}
+                                openWindow={openSignUpWindow}
+                                onClose={closeSignUpWindow}
+                            />
                             <p className={Privacyclasses.privacyPolicy}>
                                 By signing up, you agree to the{' '}
                                 <a href="https://twitter.com/en/tos">
@@ -59,8 +64,12 @@ export default function WelcomePage() {
                                     Cookie Use
                                 </a>
                             </p>
-
-                            <SignInButton />
+                            <SignInButton
+                                isWindowOpen={isSignInWindowOpen}
+                                openWindow={openSignInWindow}
+                                onClose={closeSignInWindow}
+                                openSignUpWindow={openSignUpWindow}
+                            />
                         </div>
                     </div>
                 </div>

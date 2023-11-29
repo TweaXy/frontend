@@ -9,7 +9,7 @@ import login from '../../apis/login';
 import SignInErrors from '../../shared/errors/SignInErrors';
 import signInWithGoogle from '../../apis/signInWithGoogle';
 
-const LoginPage = ({ onClose }) => {
+const LoginPage = ({ onClose, openSignUpWindow }) => {
     const navigate = useNavigate();
     const [curPage, setCurPage] = useState(0);
 
@@ -65,31 +65,31 @@ const LoginPage = ({ onClose }) => {
             setUUIDError('Please enter your password.');
         } else {
             try {
-                const result = await login(formData.UUID, formData.password);
+                const userData = await login(formData.UUID, formData.password);
 
-                if (result.status === 'success') {
-                    console.log('user data: ', result);
-                    navigate('home');
+                if (userData) {
+                    console.log('user data: ', userData);
+                    navigate('home', { state: { userData } });
                     console.log('logged in successfully!');
                 } else {
-                    setLoginError(`${SignInErrors.WRONG_PASSWORD}`);
+                    setLoginError('user is not found');
                 }
             } catch (error) {
                 console.error('Error signing in:', error.message);
+                setLoginError('An error has occurred. Please try again.');
             }
         }
     };
 
     const handleLoginWithGoogle = async (token) => {
         try {
-            const user = await signInWithGoogle(token);
+            const userData = await signInWithGoogle(token);
 
-            if (user) {
-                console.log('User logged in successfully:', user);
-                navigate('home');
-                // Continue with handling the logged-in user as needed
+            if (userData) {
+                console.log('user data: ', userData);
+                navigate('home', { state: { userData } });
+                console.log('logged in successfully!');
             } else {
-                console.error('Failed to sign in with Google.');
                 setLoginWithGoogleError('user is not found');
             }
         } catch (error) {
@@ -103,7 +103,8 @@ const LoginPage = ({ onClose }) => {
     };
 
     const handleSignUp = () => {
-        // TODO: route to sign up page
+        onClose();
+        openSignUpWindow();
     };
 
     return (
