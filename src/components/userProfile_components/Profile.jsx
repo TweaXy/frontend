@@ -1,7 +1,7 @@
 import ProfileHeader from "./ProfileHeader";
 import "./Profile.css";
 import ProfileBio from "./ProfileBio";
-function Profile() {
+function Profile({ token, username, name }) {
   return (
     <>
       <div className="profile">
@@ -11,7 +11,9 @@ function Profile() {
          userEmail="ebraamatef"
          followingNum={2}
          followersNum={1}
-         
+         username={username}
+         name={name}
+         token={token}
         />
       </div>
     </>

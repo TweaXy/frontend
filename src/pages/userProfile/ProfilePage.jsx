@@ -3,8 +3,12 @@ import './HomePage.css'
 import Sidebar from '../../components/homePage_components/Sidebar'
 import Profile from '../../components/userProfile_components/Profile'
 import Widget from '../../components/homePage_components/Widget'
-function ProfilePage() {
+import { useLocation } from 'react-router'
 
+function ProfilePage() {
+  const location = useLocation();
+  const userData = location.state?.userData;
+  console.log('user data from profile page:', userData);
 
   return (
     <>

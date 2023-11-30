@@ -1,6 +1,6 @@
 const urlFollowers = 'http://16.171.65.142:3000/api/v1/users/followers/';
 
-const getUserFollowers = async (username) => {
+const getUserFollowers = async ({ username, token }) => {
     const fullUrl = `${urlFollowers}${username}`;
 
     try {
@@ -8,6 +8,7 @@ const getUserFollowers = async (username) => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
             },
         });
 

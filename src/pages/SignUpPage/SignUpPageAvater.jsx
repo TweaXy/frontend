@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import './SignUpHome.css';
-import { TextField } from '@mui/material';
-import Setavatar from './Avater';
 import Pictureupload from '../../apis/Pictureupload';
 import './Avater.css';
 import img from '../../../assets/default.jpeg';
 const UN = 'Pick a profile picture';
 const uniq = 'Have a favorite selfie? Upload it now.';
-const SignUpPageAvater = ({ next_Handler }) => {
+
+const SignUpPageAvater = ({ next_Handler, authToken }) => {
     const [avatar, setAvatar] = useState(img);
     const handleAvatarChange = (event) => {
         const file = event.target.files[0];
@@ -27,7 +26,7 @@ const SignUpPageAvater = ({ next_Handler }) => {
         setAvatar(null);
     };
     const updatepicture = () => {
-        Pictureupload(avatar);
+        Pictureupload(avatar, authToken);
         next_Handler(); 
     };
     return (

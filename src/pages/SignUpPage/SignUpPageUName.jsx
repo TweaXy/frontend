@@ -6,7 +6,7 @@ import { Errors } from './SignUpPage';
 const UN = 'What should we call you?';
 const uniq = 'Your @username is unique. You can always change it later.';
 import UsernameUpdate from '../../apis/Usernameupdate';
-const SignUpPageuserName = ({ next_Handler, UN }) => {
+const SignUpPageuserName = ({ next_Handler, UN, authToken }) => {
     const [username, setusername] = useState('');
     const usernameHandler = (ev) => {
         setusername(ev.target.value);
@@ -21,7 +21,7 @@ const SignUpPageuserName = ({ next_Handler, UN }) => {
         [username]
     );
     const clickHandler = () => {
-        UsernameUpdate(username);
+        UsernameUpdate(username, authToken);
         next_Handler();
     };
     return (

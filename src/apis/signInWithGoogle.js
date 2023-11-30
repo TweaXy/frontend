@@ -19,10 +19,9 @@ const signInWithGoogle = async (response) => {
         }
 
         const responseData = await fetchResponse.json();
-        // Assuming the token is returned in a cookie named 'token'
         document.cookie = `token=${responseData.data.token}; Path=/; HttpOnly`;
 
-        return responseData.data.user;
+        return responseData.data;
     } catch (error) {
         console.error('Error Signing in with google: ', error.message);
         throw error;

@@ -69,7 +69,7 @@ const LoginPage = ({ onClose, openSignUpWindow }) => {
 
                 if (userData) {
                     console.log('user data: ', userData);
-                    navigate('home', { state: { userData } });
+                    navigate('home', { state: { userData: userData, firstTime: false } });
                     console.log('logged in successfully!');
                 } else {
                     setLoginError('user is not found');
@@ -87,7 +87,7 @@ const LoginPage = ({ onClose, openSignUpWindow }) => {
 
             if (userData) {
                 console.log('user data: ', userData);
-                navigate('home', { state: { userData } });
+                navigate('home', { state: { userData: userData, firstTime: false } });
                 console.log('logged in successfully!');
             } else {
                 setLoginWithGoogleError('user is not found');

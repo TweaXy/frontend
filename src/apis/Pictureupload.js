@@ -1,7 +1,6 @@
-import { dark } from '@mui/material/styles/createPalette';
-import { authToken } from './Signup';
 const PictureupdateUrl = 'http://16.171.65.142:3000/api/v1/users';
-const Pictureupload = (_avater) => {
+
+const Pictureupload = (_avater, authToken) => {
     console.log('auth token is', authToken);
     const formData = new FormData();
     formData.append('avatar', _avater);

@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import '../../components/LoginWindowHeader/LoginWindowHeader.css';
 import SignUpPage1 from './SignUpPage1';
 import SignUpPage3 from './SignUpPage3';
 import SignUpPage4 from './SignUpPage4';
 import SignUpPage5 from './SignUpPage5';
 import { sendEmailVerification } from '../../apis/EmailVerfication';
-import { signup, UN } from '../../apis/Signup';
+import signup from '../../apis/Signup';
 import { useNavigate } from 'react-router-dom';
 const Errors = {
     Email: '',
@@ -19,7 +19,6 @@ const Errors = {
 
 const SignUpPage = ({ onClose }) => {
     const [windowOpened, setwindowOpned] = useState(0);
-    const [navg, setnavg] = useState(false);
     const [Data1, changeData1] = useState({
         username: '',
         usermail: '',
@@ -30,30 +29,31 @@ const SignUpPage = ({ onClose }) => {
     const [canbeuser, setcanbeuser] = useState(true);
     const [verficationcode, setverficationcode] = useState('');
     const navigate = useNavigate();
-    useEffect(() => {
-        if (navg) navigate(`home/${UN}`);
-    }, [navg]);
-    const nextWindowHandler = (ev) => {
-        // ev.preventDefault();
-        if (windowOpened === 4) {
-            setnavg(true);
-            setwindowOpned(windowOpened + 1);
-        }
+
+    const nextWindowHandler = async () => {
         if (windowOpened === 1) {
             sendEmailVerification(Data1.usermail);
         }
         if (windowOpened === 3) {
-            signup(
-                Data1.usermail,
-                Data1.username,
-                Data2,
-                password,
-                verficationcode,
-                setcanbeuser,
-                canbeuser,
-                setwindowOpned,
-                windowOpened
-            );
+            try {
+                const userData = await signup(
+                    Data1.usermail,
+                    Data1.username,
+                    Data2,
+                    password,
+                    verficationcode,
+                    setcanbeuser,
+                    canbeuser,
+                    setwindowOpned,
+                    windowOpened
+                );
+                navigate(`home`, { state: { userData: userData, firstTime: true } });
+                setwindowOpned(windowOpened + 1);
+            } catch {
+                (err) => {
+                    console.log('error signing up:', err.message);
+                };
+            }
         }
         if (windowOpened < 3) setwindowOpned(windowOpened + 1);
     };

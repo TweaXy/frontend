@@ -116,9 +116,12 @@ const fakeUsers = [
     },
 ];
 
-const UsersCells = ({ curPage, username }) => {
+const UsersCells = ({ curPage, username, token }) => {
     const [users, setUsers] = useState([]);
     const [isPageLoading, setIsPageLoading] = useState(true);
+
+    // console.log('username: ', username);
+    // console.log('token: ', token);
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -128,8 +131,8 @@ const UsersCells = ({ curPage, username }) => {
 
                 const fetchedUsers =
                     curPage === 0
-                        ? await getUserFollowers({ username })
-                        : await getUserFollowing({ username });
+                        ? await getUserFollowers({ username, token })
+                        : await getUserFollowing({ username, token });
 
                 setUsers(fetchedUsers);
             } catch (error) {

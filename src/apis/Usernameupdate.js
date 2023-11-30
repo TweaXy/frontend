@@ -1,7 +1,6 @@
-import { dark } from '@mui/material/styles/createPalette';
-import { authToken } from './Signup';
 let UsernameupdateUrl = 'http://16.171.65.142:3000/api/v1/users/updateUserName';
-const UsernameUpdate = (_username) => {
+
+const UsernameUpdate = (_username, authToken) => {
     fetch(UsernameupdateUrl, {
         method: 'PATCH',
         headers: {
