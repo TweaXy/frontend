@@ -12,7 +12,6 @@ function HomePage() {
     console.log('user data from home page:', userData);
 
     const [isWindowOpen, setIsWindowOpen] = useState(location.state?.firstTime);
-    const username = userData.user.username;
     const closeWindow = () => {
         setIsWindowOpen(false);
     };

@@ -21,7 +21,7 @@ export default function Sidebar({ userData, active }) {
     const toProfile = () => {
         setActiveHome(0);
         setActiveProfile(1);
-        navigate(`/profile/${userData.user.username}`, {
+        navigate("/profile", {
             state: { userData: { userData } },
         });
     };

@@ -9,7 +9,7 @@ function ProfilePage() {
   const location = useLocation();
   const userData = location.state?.userData;
   console.log('user data from profile page:', userData);
-
+ 
   return (
     <>
 
@@ -18,7 +18,7 @@ function ProfilePage() {
       <Sidebar/>
       {/**News feed */}
       
-      <Profile />
+      <Profile userData={userData}  />
      
       {/**Widgets */}
 

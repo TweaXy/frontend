@@ -11,14 +11,14 @@ function App() {
         <>
             <Router>
                 <Routes>
-                    {/* <Route index element={<WelcomePage />} /> */}
-                    <Route index element={<FollowingFollowersPage />} />
+                    { <Route index element={<WelcomePage />} /> }
+               
                     <Route
                         path="/forget-password"
                         element={<ForgetPasswordStartPage />}
                     />
                     <Route
-                        path="/profile/:username"
+                        path="/profile"
                         element={<ProfilePage />}
                     />
                     <Route path="/home" element={<HomePage />} />

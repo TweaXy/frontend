@@ -3,10 +3,10 @@ import { Avatar } from '@mui/material';
 import { MenuItem, TextField } from '@mui/material';
 import '../userProfile/EditProfilePage.css';
 import '../SignUpPage/SignUpPage.css';
+import { CameraEnhanceOutlined } from '@mui/icons-material';
 import { useState } from 'react';
-{
-    /*import { updateInfo } from '../../apis/updateInfo';*/
-}
+
+import { updateInfo } from '../../apis/updateInfo';
 {
     /*}   src="https://www.istockphoto.com/photos/avatar-images-for-profile"*/
 }
@@ -23,18 +23,19 @@ export default function EditProfilePage({ onClose }) {
         website: '',
     });
     const [Data2, changeData2] = useState({ day: '', month: '', year: '' });
-    {
-        /*} updateInfo(
-        ProfileData.username,
-        Data2,
-        ProfileData.userbio,
-        null,
-        ProfileData.website,
-        ProfileImage,
-        selectedImage,
-        ProfileData.location
-   );*/
-    }
+    const saveHandler = () => {
+        updateInfo(
+            ProfileData.username,
+            Data2,
+            ProfileData.userbio,
+            '01285075379',
+            ProfileData.website,
+            ProfileImage,
+            selectedImage,
+            ProfileData.location
+        );
+        onClose();
+    };
     const handleNewImage = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -102,7 +103,10 @@ export default function EditProfilePage({ onClose }) {
             {' '}
             <div className="edit-profile-page-container">
                 <div className="temp">
-                    <EditProfileWindowHeader onClose={onClose} saveClick={onClose} />
+                    <EditProfileWindowHeader
+                        onClose={onClose}
+                        saveHandler={saveHandler}
+                    />
 
                     <div className="edit-profile-page-body">
                         <div>
@@ -112,7 +116,7 @@ export default function EditProfilePage({ onClose }) {
                                     className="image-position"
                                     src={selectedImage}
                                 />
-
+                                <CameraEnhanceOutlined className="image-upload-2" />
                                 <input
                                     type="file"
                                     className="image-upload"
@@ -131,9 +135,11 @@ export default function EditProfilePage({ onClose }) {
                                         sx={{ width: 100, height: 100 }}
                                         src={ProfileImage}
                                     />
+                                    <CameraEnhanceOutlined className="profile-upload-2"   />
                                     <input
+                                       
                                         type="file"
-                                        className="image-upload"
+                                        className="profile-upload"
                                         onChange={handleProfileImage}
                                     />
 

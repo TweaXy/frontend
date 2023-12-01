@@ -1,4 +1,5 @@
-let urlupdateInfo = 'http://16.171.65.142:3000/api/v1//users';
+let urlupdateInfo = 'http://16.171.65.142:3000/api/v1/users';
+
 const updateInfo = (
     _name,
     _birthdayDate,
@@ -30,14 +31,12 @@ const updateInfo = (
             cover: _cover,
             location: _location,
         }),
-        
     })
         .then((response) => response.json())
         .then((data) => {
             console.log('Response from the API:', data);
-
         })
-        .catch((error) => {});
+        .catch((error) => console.log(error));
 };
 
 export { updateInfo };
