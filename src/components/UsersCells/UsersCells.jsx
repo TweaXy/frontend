@@ -27,7 +27,7 @@ const fakeUsers = [
     {
         id: 3,
         name: 'abotaha',
-        username: 'abotaha_forgot_password',
+        username: 'abotaha23',
         avatar: '../assets/avatars/male-avatar-3.svg',
         bio: "It's better to light up a candle than curse the darkness.",
         followsMe: true,

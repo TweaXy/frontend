@@ -10,7 +10,9 @@ import { token } from 'stylis';
 const FollowingFollowersPage = () => {
     const location = useLocation();
     const activePage = location.state?.activePage;
-    const token = location.state?.token;
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlwiY2xwbXhieWZ4MDAwYmprN2VpcmR4anMwM1wiIiwiaWF0IjoxNzAxNDUzMjQ1LCJleHAiOjE3MDQwNDUyNDV9.CWa5uhd31bU16pprfEk44Cfq51C0eFtr9bZa37Gt8Ac";
+    // TODO:: modify it later
+    // const token = location.state?.token;
     // console.log(activePage, token);
     
     const [curPage, setCurPage] = useState(activePage == 'followers' ? 0 : 1);
@@ -46,7 +48,7 @@ const FollowingFollowersPage = () => {
                     />
                 )}
             </div>
-            <Widget />
+            <Widget token={token}/>
         </div>
     );
 };

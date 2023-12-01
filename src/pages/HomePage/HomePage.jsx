@@ -28,7 +28,7 @@ function HomePage() {
 
                 {/**Widgets */}
 
-                <Widget />
+                <Widget token={userData.token}/>
             </div>
             {isWindowOpen && (
                 <SignUpHome
