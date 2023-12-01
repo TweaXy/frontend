@@ -8,7 +8,8 @@ const updateInfo = (
     _website,
     _avatar,
     _cover,
-    _location
+    _location,
+    authToken
 ) => {
     const _nwbirthdayDate =
         _birthdayDate.month +
@@ -16,10 +17,12 @@ const updateInfo = (
         _birthdayDate.day +
         '-' +
         _birthdayDate.year;
+        console.log('auth token is', authToken);
     fetch(urlupdateInfo, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`,
         },
         body: JSON.stringify({
             name: _name,
@@ -35,6 +38,12 @@ const updateInfo = (
         .then((response) => response.json())
         .then((data) => {
             console.log('Response from the API:', data);
+            if (data.status === 'success') {
+                console.log('data saved successfully');
+            } else {
+                console.log(data.message);
+            }
+                        
         })
         .catch((error) => console.log(error));
 };

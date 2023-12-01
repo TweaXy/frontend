@@ -1,7 +1,7 @@
 import './ProfileBio.css';
 import { useState } from 'react';
 import EditProfilePage from '../../pages/userProfile/EditProfilePage';
-export default function EditProfile() {
+export default function EditProfile({authToken}) {
     const [isWindowOpen, setIsWindowOpen] = useState(false);
     const openWindow = () => {
         setIsWindowOpen(true);
@@ -14,7 +14,7 @@ export default function EditProfile() {
             <div className="editProfile" onClick={openWindow}>
                 <span>Edit profile</span>
             </div>
-            {isWindowOpen && <EditProfilePage onClose={closeWindow} />}
+            {isWindowOpen && <EditProfilePage authToken={authToken} onClose={closeWindow} />}
         </>
     );
 }

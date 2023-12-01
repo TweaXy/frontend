@@ -11,7 +11,7 @@ import { updateInfo } from '../../apis/updateInfo';
     /*}   src="https://www.istockphoto.com/photos/avatar-images-for-profile"*/
 }
 
-export default function EditProfilePage({ onClose }) {
+export default function EditProfilePage({ onClose, authToken }) {
     const [selectedImage, setSelectedImage] = useState(null);
     const [ProfileImage, setProfileImage] = useState(
         'https://www.istockphoto.com/photos/avatar-images-for-profile'
@@ -32,7 +32,8 @@ export default function EditProfilePage({ onClose }) {
             ProfileData.website,
             ProfileImage,
             selectedImage,
-            ProfileData.location
+            ProfileData.location,
+            authToken
         );
         onClose();
     };
@@ -135,9 +136,8 @@ export default function EditProfilePage({ onClose }) {
                                         sx={{ width: 100, height: 100 }}
                                         src={ProfileImage}
                                     />
-                                    <CameraEnhanceOutlined className="profile-upload-2"   />
+                                    <CameraEnhanceOutlined className="profile-upload-2" />
                                     <input
-                                       
                                         type="file"
                                         className="profile-upload"
                                         onChange={handleProfileImage}

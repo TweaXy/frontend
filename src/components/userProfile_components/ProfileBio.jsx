@@ -15,7 +15,7 @@ const ProfileBio = (props) => {
                         src="https://www.istockphoto.com/photos/avatar-images-for-profile"
                     />
                 </div>
-                <EditProfile />
+                <EditProfile authToken={props.token} />
             </div>
             <div className="profileBiography">
                 <span className="profileBiography-username">

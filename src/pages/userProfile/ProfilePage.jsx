@@ -18,7 +18,7 @@ function ProfilePage() {
       <Sidebar/>
       {/**News feed */}
       
-      <Profile userData={userData}  />
+      <Profile userData={userData.user} token={userData.token} />
      
       {/**Widgets */}
 

@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import TabsProfile from './tabsProfile';
 
-function Profile({ token }) {
+function Profile({ token, userData }) {
   const [isWindowOpen, setIsWindowOpen] = useState(location.state?.firstTime);
   
     return (
@@ -18,7 +18,8 @@ function Profile({ token }) {
                     followingNum={1}
                     followersNum={1}
                     bio={''}
-                    token={token}
+                    
+                   token={token}
                 />
               <TabsProfile userData={userData}  />
             </div>
