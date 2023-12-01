@@ -5,23 +5,23 @@ import { useState } from 'react';
 
 import TabsProfile from './tabsProfile';
 
-function Profile({ token, userData }) {
+function Profile({ token, user }) {
   const [isWindowOpen, setIsWindowOpen] = useState(location.state?.firstTime);
-  
+  console.log(user);
     return (
         <>
             <div className="profile">
-                <ProfileHeader username="ww" noPosts={0} />
+                <ProfileHeader username={user.name} noPosts={0} />
                 <ProfileBio
-                    username="ww"
-                    userEmail="ww"
+                    name={user.name}
+                    username={user.username}
                     followingNum={1}
                     followersNum={1}
                     bio={''}
-                    
+                    ProfileImage={user.avatar}
                    token={token}
                 />
-              <TabsProfile userData={userData}  />
+              <TabsProfile userData={user}  />
             </div>
         </>
     );

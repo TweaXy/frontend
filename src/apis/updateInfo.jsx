@@ -17,7 +17,7 @@ const updateInfo = (
         _birthdayDate.day +
         '-' +
         _birthdayDate.year;
-        console.log('auth token is', authToken);
+    console.log('auth token is', authToken);
     fetch(urlupdateInfo, {
         method: 'PATCH',
         headers: {
@@ -43,7 +43,6 @@ const updateInfo = (
             } else {
                 console.log(data.message);
             }
-                        
         })
         .catch((error) => console.log(error));
 };

@@ -12,17 +12,17 @@ const ProfileBio = (props) => {
                 <div className="profileImage">
                     <Avatar
                         sx={{ width: 134, height: 134 }}
-                        src="https://www.istockphoto.com/photos/avatar-images-for-profile"
+                        src={props.ProfileImage}
                     />
                 </div>
                 <EditProfile authToken={props.token} />
             </div>
             <div className="profileBiography">
                 <span className="profileBiography-username">
-                    {props.username}
+                    {props.name}
                 </span>
                 <span className="profileBiography-email">
-                    @{props.userEmail}
+                    @{props.username}
                 </span>
                 <div className="profileBiography-dateMargin">
                     <span className="profileBiography-Bio">

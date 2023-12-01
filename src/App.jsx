@@ -18,7 +18,7 @@ function App() {
                         element={<ForgetPasswordStartPage />}
                     />
                     <Route
-                        path="/profile"
+                        path="/profile/:username"
                         element={<ProfilePage />}
                     />
                     <Route path="/home" element={<HomePage />} />
