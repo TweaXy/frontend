@@ -7,6 +7,8 @@ import {
     checkEmailVerification,
 } from '../../apis/EmailVerfication';
 import { Errors } from './SignUpPage';
+import SignUpSelectors from '../../shared/selectors/SignUp';
+
 const SignUpPage4 = ({
     verficationcode,
     setverficationcode,
@@ -48,6 +50,7 @@ const SignUpPage4 = ({
                     variant="outlined"
                     id="outlined-basic"
                     label="verification code"
+                    data-test={SignUpSelectors.VERIFICATION_CODE_FIELD}
                     value={verficationcode}
                     onChange={verficationcodehandler}
                     style={{ width: '438px' }}
@@ -63,6 +66,7 @@ const SignUpPage4 = ({
                 Didn't receive mail?
             </a>
             <button
+                data-test={SignUpSelectors.NEXT_BUTTON}
                 className="Hp-black-wide-button"
                 disabled={!iscompleteverficationcode}
                 style={{
