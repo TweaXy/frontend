@@ -4,6 +4,8 @@ import './SignUpHome.css';
 import { MenuItem, TextField } from '@mui/material';
 import { isUniqeEmail, isUniqueUsername } from '../../apis/Email';
 import { Errors } from './SignUpPage';
+import SignUpSelectors from '../../shared/selectors/SignUp';
+
 const date = 'Date of birth';
 const create = 'Create your account';
 const months = [
@@ -96,6 +98,7 @@ const SignUpPage1 = ({
                     id="outlined-basic"
                     name="username"
                     label="Name"
+                    data-test={SignUpSelectors.NAME_FIELD}
                     value={Data1.username}
                     onChange={Data1_Handler}
                 />
@@ -110,6 +113,7 @@ const SignUpPage1 = ({
                     id="outlined-basic"
                     name="usermail"
                     label="Email"
+                    data-test={SignUpSelectors.EMAIL_FIELD}
                     value={Data1.usermail}
                     onChange={Data1_Handler}
                 />
@@ -124,6 +128,7 @@ const SignUpPage1 = ({
                     label="Month"
                     defaultValue="Select Month"
                     name="month"
+                    data-test={SignUpSelectors.MONTH_FIELD}
                     value={Data2.month}
                     onChange={Data2_Handler}
                     sw={{
@@ -131,7 +136,11 @@ const SignUpPage1 = ({
                     }}
                 >
                     {months.map((month) => (
-                        <MenuItem key={month.value} value={month.value}>
+                        <MenuItem
+                            key={month.value}
+                            value={month.value}
+                            data-test={`${month.value}_${SignUpSelectors.MONTH_FIELD}`}
+                        >
                             {month.name}
                         </MenuItem>
                     ))}
@@ -143,6 +152,7 @@ const SignUpPage1 = ({
                     label="Day"
                     defaultValue="Select Day"
                     name="day"
+                    data-test={SignUpSelectors.DAY_FIELD}
                     value={Data2.day}
                     onChange={Data2_Handler}
                     sw={{
@@ -150,7 +160,11 @@ const SignUpPage1 = ({
                     }}
                 >
                     {Render_Days().map((day) => (
-                        <MenuItem key={day} value={day}>
+                        <MenuItem
+                            key={day}
+                            value={day}
+                            data-test={`${day}_${SignUpSelectors.DAY_FIELD}`}
+                        >
                             {day}
                         </MenuItem>
                     ))}
@@ -162,6 +176,7 @@ const SignUpPage1 = ({
                     label="Year"
                     name="year"
                     defaultValue="Select Year"
+                    data-test={SignUpSelectors.YEAR_FIELD}
                     value={Data2.year}
                     onChange={Data2_Handler}
                     sw={{
@@ -169,7 +184,11 @@ const SignUpPage1 = ({
                     }}
                 >
                     {years.map((year) => (
-                        <MenuItem key={year} value={year}>
+                        <MenuItem
+                            key={year}
+                            value={year}
+                            data-test={`${year}_${SignUpSelectors.YEAR_FIELD}`}
+                        >
                             {year}
                         </MenuItem>
                     ))}
@@ -179,6 +198,7 @@ const SignUpPage1 = ({
                 onClick={nextWindowHandler}
                 className="Hp-black-wide-button"
                 type="submit"
+                data-test={SignUpSelectors.NEXT_BUTTON}
                 disabled={!iscomplete}
                 style={{
                     background: iscomplete ? 'black' : 'gray',

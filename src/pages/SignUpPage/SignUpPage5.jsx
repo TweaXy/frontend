@@ -10,6 +10,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useState, useEffect } from 'react';
 import { isAcceptebalePass } from '../../apis/Email';
 import { Errors } from './SignUpPage';
+import SignUpSelectors from '../../shared/selectors/SignUp';
+
 const SignUpPage5 = ({
     canbeuser,
     password,
@@ -50,6 +52,7 @@ const SignUpPage5 = ({
                 <OutlinedInput
                     id="outlined-adornment-password"
                     type={showPassword ? 'text' : 'password'}
+                    data-test={SignUpSelectors.PASSWORD_FIELD}
                     value={password}
                     onChange={passwordhandler}
                     endAdornment={
@@ -78,6 +81,7 @@ const SignUpPage5 = ({
                 )}
             </FormControl>
             <button
+                data-test={SignUpSelectors.NEXT_BUTTON}
                 className="Hp-black-wide-button"
                 onClick={nextWindowHandler}
                 disabled={!isOKPass}
