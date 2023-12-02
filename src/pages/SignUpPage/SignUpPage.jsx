@@ -7,6 +7,8 @@ import SignUpPage5 from './SignUpPage5';
 import { sendEmailVerification } from '../../apis/EmailVerfication';
 import signup from '../../apis/Signup';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../redux/actions';
 const Errors = {
     Email: '',
     Username: '',
@@ -29,6 +31,7 @@ const SignUpPage = ({ onClose }) => {
     const [canbeuser, setcanbeuser] = useState(true);
     const [verficationcode, setverficationcode] = useState('');
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const nextWindowHandler = async () => {
         if (windowOpened === 1) {
@@ -47,7 +50,8 @@ const SignUpPage = ({ onClose }) => {
                     setwindowOpned,
                     windowOpened
                 );
-                navigate(`home`, { state: { userData: userData, firstTime: true } });
+                dispatch(setUser(userData));
+                navigate(`home`, { state: { firstTime: true } });
                 setwindowOpned(windowOpened + 1);
             } catch {
                 (err) => {

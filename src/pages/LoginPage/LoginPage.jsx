@@ -8,9 +8,12 @@ import checkUserUUID from '../../apis/checkUserUUID';
 import login from '../../apis/login';
 import SignInErrors from '../../shared/errors/SignInErrors';
 import signInWithGoogle from '../../apis/signInWithGoogle';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../redux/actions';
 
 const LoginPage = ({ onClose, openSignUpWindow }) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [curPage, setCurPage] = useState(0);
 
     const [formData, setFormData] = useState({
@@ -69,7 +72,8 @@ const LoginPage = ({ onClose, openSignUpWindow }) => {
 
                 if (userData) {
                     console.log('user data: ', userData);
-                    navigate('home', { state: { userData: userData, firstTime: false } });
+                    dispatch(setUser(userData));
+                    navigate('home', { state: { firstTime: false } });
                     console.log('logged in successfully!');
                 } else {
                     setLoginError('user is not found');
@@ -87,7 +91,8 @@ const LoginPage = ({ onClose, openSignUpWindow }) => {
 
             if (userData) {
                 console.log('user data: ', userData);
-                navigate('home', { state: { userData: userData, firstTime: false } });
+                dispatch(setUser(userData));
+                navigate('home', { state: { firstTime: false } });
                 console.log('logged in successfully!');
             } else {
                 setLoginWithGoogleError('user is not found');
