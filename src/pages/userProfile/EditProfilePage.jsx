@@ -5,19 +5,24 @@ import '../userProfile/EditProfilePage.css';
 import '../SignUpPage/SignUpPage.css';
 import { CameraEnhanceOutlined } from '@mui/icons-material';
 import { useState } from 'react';
-
+import deleteBannerApi from '../../apis/deleteProfileBanner';
+import deleteProfileApi from '../../apis/deleteProfileImage';
 import { updateInfo } from '../../apis/updateInfo';
 {
     /*}   src="https://www.istockphoto.com/photos/avatar-images-for-profile"*/
 }
 
-export default function EditProfilePage({ onClose, authToken }) {
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [ProfileImage, setProfileImage] = useState(
-        'https://www.istockphoto.com/photos/avatar-images-for-profile'
-    );
+export default function EditProfilePage({
+    onClose,
+    authToken,
+    name,
+    cover,
+    avatar,
+}) {
+    const [selectedImage, setSelectedImage] = useState(cover);
+    const [ProfileImage, setProfileImage] = useState(avatar);
     const [ProfileData, changeProfileData] = useState({
-        username: '',
+        name: name,
         userbio: '',
         location: '',
         website: '',
@@ -25,7 +30,7 @@ export default function EditProfilePage({ onClose, authToken }) {
     const [Data2, changeData2] = useState({ day: '', month: '', year: '' });
     const saveHandler = () => {
         updateInfo(
-            ProfileData.username,
+            ProfileData.name,
             Data2,
             ProfileData.userbio,
             '01285075379',
@@ -64,6 +69,7 @@ export default function EditProfilePage({ onClose, authToken }) {
         { name: 'November', value: '10' },
         { name: 'December', value: '11' },
     ];
+    console.log(authToken);
     const years = Array.from({ length: 121 }, (_, i) => 2023 - i);
     const Render_Days = () => {
         const days = Array.from({ length: 31 }, (_, i) => i + 1);
@@ -125,8 +131,11 @@ export default function EditProfilePage({ onClose, authToken }) {
                                 />
 
                                 <button
-                                    className="remove-button"
-                                    onClick={() => setSelectedImage(null)}
+                                    className="remove-cover-button"
+                                    onClick={() => {
+                                        setSelectedImage('');
+                                        deleteBannerApi(authToken);
+                                    }}
                                 >
                                     &times;
                                 </button>
@@ -142,6 +151,17 @@ export default function EditProfilePage({ onClose, authToken }) {
                                         className="profile-upload"
                                         onChange={handleProfileImage}
                                     />
+                                    <button
+                                        className="remove-profile-button"
+                                        onClick={() => {
+                                            setProfileImage(
+                                                'https://www.istockphoto.com/photos/avatar-images-for-profile'
+                                            );
+                                            deleteProfileApi(authToken);
+                                        }}
+                                    >
+                                        &times;
+                                    </button>
 
                                     {/*}     <AvatarEditor
                                         image={selectedImage}
@@ -160,8 +180,8 @@ export default function EditProfilePage({ onClose, authToken }) {
                                 variant="outlined"
                                 id="outlined-basic"
                                 label="Name"
-                                name="username"
-                                value={ProfileData.username}
+                                name="name"
+                                value={ProfileData.name}
                                 onChange={ProfileData_Handler}
                             />
                         </div>
@@ -197,6 +217,7 @@ export default function EditProfilePage({ onClose, authToken }) {
                                 label="website"
                                 value={ProfileData.website}
                                 onChange={ProfileData_Handler}
+                                /*helperText="Must be a valid Url"*/
                             />
                         </div>
                         <span className="date-birth-text">Date of Birth</span>

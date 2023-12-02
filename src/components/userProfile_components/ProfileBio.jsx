@@ -1,8 +1,16 @@
 import { BiCalendar } from 'react-icons/bi';
 import { Avatar } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import './ProfileBio.css';
 import EditProfile from './EditProfileButton';
+
 const ProfileBio = (props) => {
+ {/*}   const handleClickFollowing = () => {
+        const navigate = useNavigate("/profile/:username/:activePage");
+        navigate(`/profile/${userData.user.username}`, {
+            state: { userData: { userData } },
+        });
+    };*/}
     return (
         <div className="biocontainer">
             <div className="backgroundImage">
@@ -15,12 +23,10 @@ const ProfileBio = (props) => {
                         src={props.ProfileImage}
                     />
                 </div>
-                <EditProfile authToken={props.token} />
+                <EditProfile name={props.name} cover={props.coverImage} avatar={props.ProfileImage} authToken={props.token} />
             </div>
             <div className="profileBiography">
-                <span className="profileBiography-username">
-                    {props.name}
-                </span>
+                <span className="profileBiography-username">{props.name}</span>
                 <span className="profileBiography-email">
                     @{props.username}
                 </span>
@@ -29,7 +35,7 @@ const ProfileBio = (props) => {
                         {props.userBio}
                     </span>
                     <span className="profileBiography-joinDate">
-                        <BiCalendar /> Joined December 2011
+                        <BiCalendar /> Joined December 2023
                     </span>
                 </div>
             </div>
