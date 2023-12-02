@@ -41,7 +41,7 @@ const HomePage = connect(mapStateToProps)(({ userData }) => {
             <div className="home-page">
                 <Sidebar userData={userData} active={0} />
                 <Feed userData={userData} isTherePopUpWindow={false} />
-                <Widget />
+                <Widget token={userData.token} />
             </div>
         </>
     );

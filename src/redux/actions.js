@@ -1,6 +1,4 @@
-const SET_USER = 'SET_USER';
+import { createAction } from '@reduxjs/toolkit';
 
-export const setUser = (user) => ({
-    type: SET_USER,
-    payload: user,
-});
+export const setUser = createAction('user/setUser');
+export const setToken = createAction('user/setToken');

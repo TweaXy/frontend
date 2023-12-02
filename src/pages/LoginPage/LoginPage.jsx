@@ -1,19 +1,19 @@
 import './LoginPage.css';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import EnterUUIDPage from './EnterUUIDPage';
 import EnterPasswordPage from './EnterPasswordPage';
-import LoginWindowHeader from '../../components/LoginWindowHeader/LoginWindowHeader';
 import checkUserUUID from '../../apis/checkUserUUID';
-import login from '../../apis/login';
-import SignInErrors from '../../shared/errors/SignInErrors';
 import signInWithGoogle from '../../apis/signInWithGoogle';
+import SignInErrors from '../../shared/errors/SignInErrors';
+import LoginWindowHeader from '../../components/LoginWindowHeader/LoginWindowHeader';
+import login from '../../apis/login';
+import { setToken, setUser } from '../../redux/actions';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../redux/actions';
+import { useState } from 'react';
 
 const LoginPage = ({ onClose, openSignUpWindow }) => {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [curPage, setCurPage] = useState(0);
 
     const [formData, setFormData] = useState({
@@ -72,7 +72,8 @@ const LoginPage = ({ onClose, openSignUpWindow }) => {
 
                 if (userData) {
                     console.log('user data: ', userData);
-                    dispatch(setUser(userData));
+                    dispatch(setUser(userData.user));
+                    dispatch(setToken(userData.token));
                     navigate('home', { state: { firstTime: false } });
                     console.log('logged in successfully!');
                 } else {
@@ -91,7 +92,8 @@ const LoginPage = ({ onClose, openSignUpWindow }) => {
 
             if (userData) {
                 console.log('user data: ', userData);
-                dispatch(setUser(userData));
+                dispatch(setUser(userData.user));
+                dispatch(setToken(userData.token));
                 navigate('home', { state: { firstTime: false } });
                 console.log('logged in successfully!');
             } else {
