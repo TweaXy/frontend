@@ -3,7 +3,23 @@ import WidgetTrending from "./WidgetTrending";
 import SearchIcon from "@mui/icons-material/Search";
 import TextareaAutosize from "react-textarea-autosize";
 import Button from "@mui/material/Button";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { apiSearchForUsers } from "../../apis/SearchForUsersAPI";
 export default function Widget({token}) {
+  // console.log(token);
+
+  const navigate = useNavigate();
+
+  const [searchInput, setSearchInput] = useState('');
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      navigate('/search', {customProp: searchInput});
+    }
+  };
+
   return (
     <div className="widget">
       <div className="empty-container"></div>
@@ -19,6 +35,10 @@ export default function Widget({token}) {
             id="widget-search"
             className="search-bar"
             placeholder="Search"
+            onChange = {
+              (e) => setSearchInput(e.target.value)
+            }
+            onKeyDown={handleKeyPress}
           />
         </div>
         <WidgetTrending token={token}/>

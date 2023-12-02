@@ -30,6 +30,10 @@ function App() {
                         path="/:username/followers"
                         element={<FollowersPage />}
                     />
+                    <Route
+                        path="/search"
+                        element={<SearchForUsersOrTweetsPage />}
+                    />
                 </Routes>
             </Router>
         </>

@@ -10,7 +10,7 @@ import { token } from 'stylis';
 const FollowingFollowersPage = () => {
     const location = useLocation();
     const activePage = location.state?.activePage;
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlwiY2xwbXhieWZ4MDAwYmprN2VpcmR4anMwM1wiIiwiaWF0IjoxNzAxNDUzMjQ1LCJleHAiOjE3MDQwNDUyNDV9.CWa5uhd31bU16pprfEk44Cfq51C0eFtr9bZa37Gt8Ac";
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlwiY2xwb2puejV6MDAxNmV5a3RqY29qbGkzNlwiIiwiaWF0IjoxNzAxNTUxMjI0LCJleHAiOjE3MDQxNDMyMjR9.f0FOmr3hwUV3UgB6S72E_T7tbIHVTXdLeFR8LuuO7cs";
     // TODO:: modify it later
     // const token = location.state?.token;
     // console.log(activePage, token);
