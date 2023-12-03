@@ -6,7 +6,6 @@ import Button from "@mui/material/Button";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from 'react-redux';
 export default function Widget() {
 
   const navigate = useNavigate();

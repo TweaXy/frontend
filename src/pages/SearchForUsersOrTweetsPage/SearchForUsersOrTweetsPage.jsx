@@ -5,14 +5,14 @@ import UsersCells from '../../components/UsersCells/UsersCells';
 import Widget from '../../components/homePage_components/Widget';
 import Sidebar from '../../components/homePage_components/Sidebar';
 import { apiSearchForUsers } from '../../apis/SearchForUsersAPI';
-import SearchForTweetsOrUsersHeader from '../../components/SearchForTweetsOrUsersHeader';
+import SearchForTweetsOrUsersHeader from '../../components/SearchForTweetsOrUsersHeader/SearchForTweetsOrUsersHeader';
 import { useSelector } from 'react-redux';
 
 const SearchForUsersOrTweetsPage = () => {
     const location = useLocation();
     const searchInput = location.state?.search;
-    // const token = useSelector((state) => state.user.token);
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlwiY2xwcTJnMTB4MDAyMjIwYmxuaGQ5bHZ3eFwiIiwiaWF0IjoxNzAxNjQzMjMyLCJleHAiOjE3MDQyMzUyMzJ9.iDJhBcxBfwxCX9NKk2eYqyXAJwWNRvcXzR_w-IrdibE";
+    const token = useSelector((state) => state.user.token);
+    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlwiY2xwcTJnMTB4MDAyMjIwYmxuaGQ5bHZ3eFwiIiwiaWF0IjoxNzAxNjQzMjMyLCJleHAiOjE3MDQyMzUyMzJ9.iDJhBcxBfwxCX9NKk2eYqyXAJwWNRvcXzR_w-IrdibE";
 
     const [fetchedUsers, setFetchedUsers] = useState([]);
 
