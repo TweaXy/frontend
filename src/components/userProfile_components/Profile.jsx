@@ -3,11 +3,18 @@ import './Profile.css';
 import ProfileBio from './ProfileBio';
 import { useState } from 'react';
 import TabsProfile from './tabsProfile';
-
+import getUserDataApi from '../../apis/getProfileData';
+import { useEffect } from 'react';
 function Profile({ token, user }) {
-  const [isWindowOpen, setIsWindowOpen] = useState(location.state?.firstTime);
-  console.log(user);
-  console.log(token);
+    const [ndata, setData] = useState('');
+useEffect(()=>{
+    const fetchData = async () => {
+        const fetchedData = await getUserDataApi({ id: user.id, token: token });
+        setData(fetchedData);
+    };
+    fetchData();
+  },[])
+    console.log('data from getuserdataApi', ndata);
     return (
         <>
             <div className="profile">
@@ -15,13 +22,19 @@ function Profile({ token, user }) {
                 <ProfileBio
                     name={user.name}
                     username={user.username}
-                    followingNum={1}
-                    followersNum={1}
+                    followingNum={0}
+                    /*ndata.data.user._count.following*/
+                    followersNum={0}
+                    /*ndata.data.user._count.followedBy*/
                     bio={''}
                     ProfileImage={user.avatar}
-                   token={token}
+                    token={token}
+                    JoinedAt={'December 2023'}
+                    /* ndata.data.user.joinedDate*/
                 />
-              <TabsProfile userData={user}  />
+                {/*}  ndata.data.user.joinedDate
+                 */}
+                <TabsProfile userData={user} />
             </div>
         </>
     );

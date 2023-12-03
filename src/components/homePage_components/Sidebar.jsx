@@ -18,11 +18,11 @@ export default function Sidebar({ userData, active }) {
     const [activeHome, setActiveHome] = useState(active == 0);
     const [activeProfile, setActiveProfile] = useState(active == 1);
     const navigate = useNavigate();
-
     const toProfile = () => {
         setActiveProfile(1);
         setActiveHome(0);
-        getUserDataApi(userData.user.id,userData.token);
+    
+        getUserDataApi({id:userData.user.id,token: userData.token});
         navigate(`/profile/${userData.user.username}`, {
             state: { userData: { userData } },
         });

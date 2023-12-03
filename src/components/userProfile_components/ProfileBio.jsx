@@ -11,6 +11,7 @@ const ProfileBio = (props) => {
             state: { userData: { userData } },
         });
     };*/}
+    console.log("photo",props.ProfileImage);
     return (
         <div className="biocontainer">
             <div className="backgroundImage">
@@ -35,7 +36,7 @@ const ProfileBio = (props) => {
                         {props.userBio}
                     </span>
                     <span className="profileBiography-joinDate">
-                        <BiCalendar /> Joined December 2023
+                        <BiCalendar /> {props.JoinedAt}
                     </span>
                 </div>
             </div>

@@ -17,15 +17,14 @@ const getUserDataApi = async ({ id, token }) => {
         console.log('Response from the API:', data);
 
         if (response.ok) {
-            const responseData = JSON.parse(data);
-
-            if (responseData.status === 'success') {
+            if (data.status === 'success') {
                 console.log('data Profile get successfully');
+                return(data);
             } else {
-                throw new Error(`Error: ${responseData.status}`);
+                throw new Error(`Error: ${data.status}`);
             }
         } else {
-            throw new Error(`Error: ${response.status}`);
+            throw new Error(`Error: ${data.status}`);
         }
     } catch (err) {
         console.log(err);

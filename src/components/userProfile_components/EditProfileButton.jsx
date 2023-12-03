@@ -9,6 +9,7 @@ export default function EditProfile({name,authToken,cover,avatar}) {
     const closeWindow = () => {
         setIsWindowOpen(false);
     };
+    console.log("edit Profile Button",avatar);
     return (
         <>
             <div className="editProfile" onClick={openWindow}>
