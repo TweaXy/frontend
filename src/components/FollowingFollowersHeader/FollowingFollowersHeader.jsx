@@ -3,16 +3,16 @@ import './FollowingFollowersHeader.css';
 const FollowingFollowersHeader = ({
     name,
     username,
-    activePage,
-    setActivePage,
-    goBackToProfile,
+    curPage,
+    setCurPage,
+    navigateBack,
 }) => {
     return (
         <div className="following-followers-header-container">
             <div className="following-followers-header-user-info">
                 <button
                     className="following-followers-header-go-back-btn"
-                    onClick={goBackToProfile}
+                    onClick={navigateBack}
                 >
                     🡠
                 </button>
@@ -28,21 +28,17 @@ const FollowingFollowersHeader = ({
             <div className="following-followers-header-navigator">
                 <div
                     className="following-followers-header-nav-element-container"
-                    onClick={() => setActivePage(0)}
+                    onClick={() => setCurPage(0)}
                 >
-                    <span
-                        className={`${activePage == 0 && 'active-nav-element'}`}
-                    >
+                    <span className={`${curPage == 0 && 'active-nav-element'}`}>
                         Followers
                     </span>
                 </div>
                 <div
                     className="following-followers-header-nav-element-container"
-                    onClick={() => setActivePage(1)}
+                    onClick={() => setCurPage(1)}
                 >
-                    <span
-                        className={`${activePage == 1 && 'active-nav-element'}`}
-                    >
+                    <span className={`${curPage == 1 && 'active-nav-element'}`}>
                         Following
                     </span>
                 </div>

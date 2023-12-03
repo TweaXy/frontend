@@ -1,31 +1,50 @@
-import { useState } from 'react'
-import './HomePage.css'
-import Sidebar from '../../components/homePage_components/Sidebar'
-import Profile from '../../components/userProfile_components/Profile'
-import Widget from '../../components/homePage_components/Widget'
-import { useLocation } from 'react-router'
+import './HomePage.css';
+import Sidebar from '../../components/homePage_components/Sidebar';
+import Profile from '../../components/userProfile_components/Profile';
+import Widget from '../../components/homePage_components/Widget';
+import { connect } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { CircularProgress } from '@mui/material';
 
-function ProfilePage() {
-  const location = useLocation();
-  const userData = location.state?.userData;
-  console.log('user data from profile page:', userData);
+const mapStateToProps = (state) => ({
+    userData: state.user,
+});
 
-  return (
-    <>
+const ProfilePage = connect(mapStateToProps)(({ userData }) => {
+    const [isPageLoading, setIsPageLoading] = useState(true);
 
-      <div className="home-page">
-      {/**Side bar */}
-      <Sidebar/>
-      {/**News feed */}
-      
-      <Profile />
-     
-      {/**Widgets */}
+    useEffect(() => {
+        if (userData) {
+            setIsPageLoading(false);
+            console.log('user data from profile page', userData);
+        } else {
+            console.log('profile page is loading');
+        }
+    }, [userData]);
 
-      <Widget/>
-      </div>
-    </>
-  )
-}
- 
+    if (isPageLoading) {
+        return (
+            <div
+                style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: '100vh',
+                }}
+            >
+                <CircularProgress />
+            </div>
+        );
+    }
+
+    return (
+        <>
+            <div className="home-page">
+                <Sidebar />
+                <Profile />
+                <Widget />
+            </div>
+        </>
+    );
+});
+
 export default ProfilePage;

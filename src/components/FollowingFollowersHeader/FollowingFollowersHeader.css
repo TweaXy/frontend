@@ -1,12 +1,12 @@
 .following-followers-header-container {
     top: 0%;
     z-index: 3;
-    width: 598px;
+    min-width: 600px;
     display: block;
     position: sticky;
     background-color: rgba(255, 255, 255, 0.9725);
     border-bottom: 1px solid var(--twitter-background);
-    border-right: 1px solid var(--twitter-background);
+    /* border-right: 1px solid var(--twitter-background); */
 }
 
 .following-followers-header-container>.following-followers-header-user-info {
