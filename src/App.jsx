@@ -6,6 +6,7 @@ import './pages/HomePage/HomePage.css';
 import ProfilePage from './pages/userProfile/ProfilePage.jsx';
 import FollowingPage from './pages/FollowingPage/FollowingPage.jsx';
 import FollowersPage from './pages/FollowersPage/FollowersPage.jsx';
+import SearchForUsersOrTweetsPage from './pages/SearchForUsersOrTweetsPage/SearchForUsersOrTweetsPage.jsx';
 
 function App() {
     return (

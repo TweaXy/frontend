@@ -16,7 +16,7 @@ export default function Widget({token}) {
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      navigate('/search', {customProp: searchInput});
+      navigate('/search', {state: search});
     }
   };
 
