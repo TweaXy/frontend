@@ -2,6 +2,8 @@ import './WidgetTrending.css';
 import Trending from './Trending';
 import { useEffect, useState } from 'react';
 import { apiGetTrending } from '../../apis/TrendingAPIs/GetTrending';
+import HomePageSelectors from '../../shared/selectors/HomePage.js';
+
 export default function WidgetTrending({ token }) {
     const [trendings, setTrendings] = useState([]);
 
@@ -20,7 +22,7 @@ export default function WidgetTrending({ token }) {
 
     let id = 1;
     return (
-        <div className="widget-trending">
+        <div className="widget-trending"  data-test={`${HomePageSelectors.TRENDING_SECTION}`}>
             <div className="header">
                 <span className="header-text">What's happening</span>
             </div>
