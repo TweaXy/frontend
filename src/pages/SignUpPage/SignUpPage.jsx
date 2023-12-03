@@ -3,6 +3,7 @@ import '../../components/LoginWindowHeader/LoginWindowHeader.css';
 import SignUpPage1 from './SignUpPage1';
 import SignUpPage3 from './SignUpPage3';
 import SignUpPage4 from './SignUpPage4';
+import CaptchaPage from './CaptchaPage';
 import SignUpPage5 from './SignUpPage5';
 import { sendEmailVerification } from '../../apis/EmailVerfication';
 import signup from '../../apis/Signup';
@@ -102,6 +103,9 @@ const SignUpPage = ({ onClose }) => {
                 />
             )}
             {windowOpened === 2 && (
+                <CaptchaPage nextWindowHandler={nextWindowHandler} />
+            )}
+            {windowOpened === 3 && (
                 <SignUpPage4
                     verficationcode={verficationcode}
                     setverficationcode={setverficationcode}
@@ -109,7 +113,7 @@ const SignUpPage = ({ onClose }) => {
                     nextWindowHandler={nextWindowHandler}
                 />
             )}
-            {windowOpened === 3 && (
+            {windowOpened === 4 && (
                 <SignUpPage5
                     canbeuser={canbeuser}
                     password={password}
@@ -117,7 +121,7 @@ const SignUpPage = ({ onClose }) => {
                     nextWindowHandler={nextWindowHandler}
                 />
             )}
-            {windowOpened === 4 && nextWindowHandler()}
+            {windowOpened === 5 && nextWindowHandler()}
         </div>
     );
 };

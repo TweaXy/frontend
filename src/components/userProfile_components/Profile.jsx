@@ -11,7 +11,7 @@ function Profile({ token, username, name }) {
          userEmail="ebraamatef"
          followingNum={2}
          followersNum={1}
-         username={username}
+        
          name={name}
          token={token}
         />
