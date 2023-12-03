@@ -5,8 +5,6 @@ import { apiGetTrending } from '../../apis/TrendingAPIs/GetTrending';
 import { useSelector } from 'react-redux';
 import HomePageSelectors from '../../shared/selectors/HomePage.js';
 
-export default function WidgetTrending({ token }) {
-
 export default function WidgetTrending() {
 
      // const token = useSelector((state) => state.user.token);

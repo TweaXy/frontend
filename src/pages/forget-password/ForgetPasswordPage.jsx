@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import SignInErrors from "../../shared/errors/SignInErrors";
 import SignInSelectors from "../../shared/selectors/SignIn";
 
-const ForgetPasswordPage = ({ onClose }) => {
+const ForgetPasswordPage = () => {
   const [curWindow, setWindow] = useState(0);
   const [userUUID, setUserUUID] = useState("");
   const [userCode, setUserCode] = useState("");
@@ -16,6 +16,10 @@ const ForgetPasswordPage = ({ onClose }) => {
   const [isPending, setIsPending] = useState(false);
   
   const navigate = useNavigate();
+
+  const handleClose = (e) => {
+    navigate(-1);
+  };
 
   const handleUUIDChange = (e) => {
     setUserUUID(e.target.value);
@@ -251,12 +255,12 @@ const ForgetPasswordPage = ({ onClose }) => {
 
   return (
     <div className="login-window-wrapper-for-forget-password">
-      <div className="overlay-for-forget-password" onClick={onClose}></div>
+      <div className="overlay-for-forget-password" onClick={handleClose}></div>
       <div className="login-window-for-forget-password">
         <div className="login-window-header-for-forget-password">
           <button
             className="login-window-close-button-for-forget-password"
-            onClick={onClose}
+            onClick={handleClose}
           >
             &times;
           </button>
