@@ -9,6 +9,7 @@ import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Button from '@mui/material/Button';
+import getUserDataApi from '../../apis/getProfileData';
 import './Sidebar.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -21,7 +22,7 @@ export default function Sidebar({ userData, active }) {
     const toProfile = () => {
         setActiveProfile(1);
         setActiveHome(0);
-
+        getUserDataApi(userData.user.id,userData.token);
         navigate(`/profile/${userData.user.username}`, {
             state: { userData: { userData } },
         });
