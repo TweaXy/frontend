@@ -1,37 +1,37 @@
 import './SearchForUsersOrTweetsPage.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import UsersCells from '../../components/UsersCells/UsersCells';
-import UserCell from '../../components/UserCell/UserCell';
 import Widget from '../../components/homePage_components/Widget';
 import Sidebar from '../../components/homePage_components/Sidebar';
 import { apiSearchForUsers } from '../../apis/SearchForUsersAPI';
 import SearchForTweetsOrUsersHeader from '../../components/SearchForTweetsOrUsersHeader';
-import { token } from 'stylis';
+import { useSelector } from 'react-redux';
 
-const SearchForUsersOrTweetsPage = ({route}) => {
+const SearchForUsersOrTweetsPage = () => {
     const location = useLocation();
     const searchInput = location.state?.search;
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlwiY2xwb2puejV6MDAxNmV5a3RqY29qbGkzNlwiIiwiaWF0IjoxNzAxNTUxMjI0LCJleHAiOjE3MDQxNDMyMjR9.f0FOmr3hwUV3UgB6S72E_T7tbIHVTXdLeFR8LuuO7cs";
-    // TODO:: modify it later
-    // const token = location.state?.token;
-    // console.log(activePage, token);
+    // const token = useSelector((state) => state.user.token);
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlwiY2xwcTJnMTB4MDAyMjIwYmxuaGQ5bHZ3eFwiIiwiaWF0IjoxNzAxNjQzMjMyLCJleHAiOjE3MDQyMzUyMzJ9.iDJhBcxBfwxCX9NKk2eYqyXAJwWNRvcXzR_w-IrdibE";
 
     const [fetchedUsers, setFetchedUsers] = useState([]);
 
-    console.log("hey bitch ", searchInput);
+    console.log("the input for search is ", searchInput);
 
-    const fetchUsers = async () => {
-        try {
-            const tempFetchedUsers = await apiSearchForUsers(searchInput, token);
-            setFetchedUsers(tempFetchedUsers);
-            console.log('these are the fetched users from the search: ', fetchedUsers);
-        } catch (error) {
-            console.error('Error fetching searched users:', error);
-        }
-    };
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const tempFetchedUsers = await apiSearchForUsers(searchInput, token);
+                setFetchedUsers(tempFetchedUsers);
+                console.log('these are the fetched users from the search: ', fetchedUsers);
+            } catch (error) {
+                console.error('Error fetching searched users:', error);
+            }
+        };
+        fetchUsers();
+    }, [searchInput]);
     
-    const [curPage, setCurPage] = useState(searchInput == 'followers' ? 0 : 1);
+    const [curPage, setCurPage] = useState(2);
     const navigate = useNavigate();
 
     const goBack = () => {
@@ -47,36 +47,35 @@ const SearchForUsersOrTweetsPage = ({route}) => {
                     username="hamdysalem503_71627765"
                     activePage={curPage}
                     setActivePage={setCurPage}
-                    goBackToProfile={goBack}
+                    goBack={goBack}
                 />
-                {/*TODO:: Add the other searched taps*/}
-                {/* {users.map((user) => (
-                <UserCell
-                    key={user.id}
-                    name={user.name}
-                    username={user.username}
-                    avatar={user.avatar}
-                    bio={user.bio}
-                    followsMe={user.followsMe}
-                    followedByMe={user.followedByMe}
-                />
-            ))} */}
                 {curPage == 0 && (
                     <UsersCells
-                        curPage={curPage}
-                        username="hamdysalem503_71627765"
-                        token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlwiY2xwams0dDdxMDAwNDJ2aGgzY244cjB6NVwiIiwiaWF0IjoxNzAxMzAyOTMwLCJleHAiOjE3MDM4OTQ5MzB9.mQYsIGIrhDX_aJsFNRzjFKBi18MiQVtVGgaP-tAmkto"
+                        users={fetchedUsers}
                     />
                 )}
                 {curPage == 1 && (
                     <UsersCells
-                        curPage={curPage}
-                        username="hamdysalem503_71627765"
-                        token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlwiY2xwams0dDdxMDAwNDJ2aGgzY244cjB6NVwiIiwiaWF0IjoxNzAxMzAyOTMwLCJleHAiOjE3MDM4OTQ5MzB9.mQYsIGIrhDX_aJsFNRzjFKBi18MiQVtVGgaP-tAmkto"
+                        users={fetchedUsers}
+                    />
+                )}
+                {curPage == 2 && (
+                    <UsersCells
+                        users={fetchedUsers}
+                    />
+                )}
+                {curPage == 3 && (
+                    <UsersCells
+                        users={fetchedUsers}
+                    />
+                )}
+                {curPage == 4 && (
+                    <UsersCells
+                        users={fetchedUsers}
                     />
                 )}
             </div>
-            <Widget token={token}/>
+            <Widget />
         </div>
     );
 };

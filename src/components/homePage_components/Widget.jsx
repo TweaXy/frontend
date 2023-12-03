@@ -6,9 +6,8 @@ import Button from "@mui/material/Button";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { apiSearchForUsers } from "../../apis/SearchForUsersAPI";
-export default function Widget({token}) {
-  // console.log(token);
+import { useSelector } from 'react-redux';
+export default function Widget() {
 
   const navigate = useNavigate();
 
@@ -16,7 +15,7 @@ export default function Widget({token}) {
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      navigate('/search', {state: search});
+      navigate('/search', {state: {search: searchInput}});
     }
   };
 
@@ -41,7 +40,7 @@ export default function Widget({token}) {
             onKeyDown={handleKeyPress}
           />
         </div>
-        <WidgetTrending token={token}/>
+        <WidgetTrending />
       </div>
     </div>
   );
