@@ -1,4 +1,5 @@
 import "./LoginOrSpan.css";
+import React from "react";
 
 const LoginOrSpan = () => (
   <div className="login-or-span">

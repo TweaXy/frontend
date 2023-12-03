@@ -3,12 +3,13 @@ import '../../components/LoginWindowHeader/LoginWindowHeader.css';
 import SignUpPage1 from './SignUpPage1';
 import SignUpPage3 from './SignUpPage3';
 import SignUpPage4 from './SignUpPage4';
+import CaptchaPage from './CaptchaPage';
 import SignUpPage5 from './SignUpPage5';
 import { sendEmailVerification } from '../../apis/EmailVerfication';
 import signup from '../../apis/Signup';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../redux/actions';
+import { setToken, setUser } from '../../redux/actions';
 const Errors = {
     Email: '',
     Username: '',
@@ -32,12 +33,11 @@ const SignUpPage = ({ onClose }) => {
     const [verficationcode, setverficationcode] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
     const nextWindowHandler = async () => {
-        if (windowOpened === 1) {
+        if (windowOpened === 2) {
             sendEmailVerification(Data1.usermail);
         }
-        if (windowOpened === 3) {
+        if (windowOpened === 4) {
             try {
                 const userData = await signup(
                     Data1.usermail,
@@ -50,7 +50,8 @@ const SignUpPage = ({ onClose }) => {
                     setwindowOpned,
                     windowOpened
                 );
-                dispatch(setUser(userData));
+                dispatch(setUser(userData.user));
+                dispatch(setToken(userData.token));
                 navigate(`home`, { state: { firstTime: true } });
                 setwindowOpned(windowOpened + 1);
             } catch {
@@ -59,7 +60,7 @@ const SignUpPage = ({ onClose }) => {
                 };
             }
         }
-        if (windowOpened < 3) setwindowOpned(windowOpened + 1);
+        setwindowOpned(windowOpened + 1);
     };
     const passwordhandler = (ev) => {
         setpassword(ev.target.value);
@@ -102,6 +103,9 @@ const SignUpPage = ({ onClose }) => {
                 />
             )}
             {windowOpened === 2 && (
+                <CaptchaPage nextWindowHandler={nextWindowHandler} />
+            )}
+            {windowOpened === 3 && (
                 <SignUpPage4
                     verficationcode={verficationcode}
                     setverficationcode={setverficationcode}
@@ -109,7 +113,7 @@ const SignUpPage = ({ onClose }) => {
                     nextWindowHandler={nextWindowHandler}
                 />
             )}
-            {windowOpened === 3 && (
+            {windowOpened === 4 && (
                 <SignUpPage5
                     canbeuser={canbeuser}
                     password={password}
@@ -117,7 +121,6 @@ const SignUpPage = ({ onClose }) => {
                     nextWindowHandler={nextWindowHandler}
                 />
             )}
-            {windowOpened === 4 && nextWindowHandler()}
         </div>
     );
 };
