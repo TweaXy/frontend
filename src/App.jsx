@@ -1,4 +1,4 @@
-import ForgetPasswordStartPage from './pages/forget-password/ForgetPasswordStartPage.jsx';
+import ForgetPasswordStartPage from './pages/ForgetPasswordPage/ForgetPasswordStartPage.jsx';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import WelcomePage from './pages/WelcomePage/WelcomePage';
 import HomePage from './pages/HomePage/HomePage.jsx';
