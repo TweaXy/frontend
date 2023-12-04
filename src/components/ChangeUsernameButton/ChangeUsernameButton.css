@@ -9,6 +9,7 @@
 
 .change-username-btn-container:hover {
     background-color: rgb(100, 100, 100, 0.05);
+    cursor: pointer;
 }
 
 .change-username-btn-container>.text-container {
