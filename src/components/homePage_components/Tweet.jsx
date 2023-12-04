@@ -10,6 +10,7 @@ import CachedOutlinedIcon from '@mui/icons-material/CachedOutlined';
 import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
 import './Tweet.css';
 import MediaChecker from './MediaChecker';
+import { Padding } from '@mui/icons-material';
 export default function Tweet({
     avatar,
     username,
@@ -163,7 +164,9 @@ export default function Tweet({
                     </div>
                     <div className="tweet-media-container">
                         {/* {!tweetMedia &&  <img src="" alt="test" />} */}
-                        <MediaChecker media={tweetMedia} />
+                        { tweetMedia && [tweetMedia].length > 0 && <div style={{height : "10px"}}></div>}
+
+                        { tweetMedia && [tweetMedia].length > 0 && ( <MediaChecker media={[tweetMedia]} /> )}
                     </div>
 
                     <div className="tweet-activity">
