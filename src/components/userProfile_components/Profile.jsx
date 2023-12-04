@@ -8,7 +8,7 @@ import { CircularProgress } from '@mui/material';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-function Profile({ token, userID }) {
+function Profile({ token, userID , currUserId }) {
     const [ndata, setData] = useState('');
     const [isPageLoading, setIsPageLoading] = useState(true);
 
@@ -41,6 +41,8 @@ function Profile({ token, userID }) {
             <div className="profile">
                 <ProfileHeader username={ndata.data.user.name} noPosts={0} />
                 <ProfileBio
+                    currUserId={currUserId}
+                    IdProfile={ndata.data.user.id}  
                     name={ndata.data.user.name}
                     username={ndata.data.user.username}
                     followingNum={ndata.data.user._count.following}
