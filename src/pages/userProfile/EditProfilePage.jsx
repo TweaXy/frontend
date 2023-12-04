@@ -18,14 +18,17 @@ export default function EditProfilePage({
     name,
     cover,
     avatar,
+    bio,
+    location,
+    website,
 }) {
     const [selectedImage, setSelectedImage] = useState(cover);
     const [ProfileImage, setProfileImage] = useState(avatar);
     const [ProfileData, changeProfileData] = useState({
         name: name,
-        userbio: '',
-        location: '',
-        website: '',
+        userbio: bio,
+        location: location,
+        website: website,
     });
     const [Data2, changeData2] = useState({ day: '', month: '', year: '' });
     const saveHandler = () => {
@@ -50,7 +53,6 @@ export default function EditProfilePage({
     };
     const updatepicture = () => {
         Pictureupload(avatar, authToken);
-        
     };
     const handleAvatarChange = (event) => {
         const file = event.target.files[0];

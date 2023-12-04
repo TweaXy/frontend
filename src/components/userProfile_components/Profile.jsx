@@ -6,14 +6,17 @@ import TabsProfile from './tabsProfile';
 import getUserDataApi from '../../apis/getProfileData';
 import { CircularProgress } from '@mui/material';
 import { useEffect } from 'react';
-function Profile({ token, user }) {
+import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+function Profile({ token, userID }) {
     const [ndata, setData] = useState('');
     const [isPageLoading, setIsPageLoading] = useState(true);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const fetchedData = await getUserDataApi({
-                    id: user.id,
+                    id: userID,
                     token: token,
                 });
                 setData(fetchedData);
@@ -43,6 +46,8 @@ function Profile({ token, user }) {
                     followingNum={ndata.data.user._count.following}
                     followersNum={ndata.data.user._count.followedBy}
                     bio={ndata.data.user.bio}
+                    website={ndata.data.user.website}
+                    location={ndata.data.user.location}
                     ProfileImage={ndata.data.user.avatar}
                     token={token}
                     JoinedAt={ndata.data.user.joinedDate}

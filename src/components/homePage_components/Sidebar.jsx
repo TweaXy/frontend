@@ -13,18 +13,21 @@ import getUserDataApi from '../../apis/getProfileData';
 import './Sidebar.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+
 export default function Sidebar({ userData, active }) {
-    const path = '../assets/logo2.ico';
     const [activeHome, setActiveHome] = useState(active == 0);
     const [activeProfile, setActiveProfile] = useState(active == 1);
     const navigate = useNavigate();
+
+    console.log('sidebar user data:', userData);
+
     const toProfile = () => {
         setActiveProfile(1);
         setActiveHome(0);
-    
-        getUserDataApi({id:userData.user.id,token: userData.token});
+
         navigate(`/profile/${userData.user.username}`, {
-            state: { userData: { userData } },
+            state: { userID: userData.user.id },
         });
     };
 

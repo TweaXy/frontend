@@ -19,7 +19,7 @@ const TabsProfile = ({ isTherePopUpWindow }) => {
                 </span>
             </div>
             <div
-                style={{ flex: 0.2 }}
+                style={{ flex: 0.25 }}
                 className=" feed-haeder-element"
                 onClick={() => setActivePage(1)}
             >
@@ -31,8 +31,9 @@ const TabsProfile = ({ isTherePopUpWindow }) => {
                     Replies
                 </span>
             </div>
+
             <div
-                style={{ flex: 0.2 }}
+                style={{ flex: 0.25 }}
                 className=" feed-haeder-element"
                 onClick={() => setActivePage(2)}
             >
@@ -41,30 +42,17 @@ const TabsProfile = ({ isTherePopUpWindow }) => {
                         feedHeader_acitve == 2 && '--feed-header-active'
                     }`}
                 >
-                    Highlights
+                    Media
                 </span>
             </div>
             <div
-                style={{ flex: 0.2 }}
+                style={{ flex: 0.25 }}
                 className=" feed-haeder-element"
                 onClick={() => setActivePage(3)}
             >
                 <span
                     className={`${
                         feedHeader_acitve == 3 && '--feed-header-active'
-                    }`}
-                >
-                    Media
-                </span>
-            </div>
-            <div
-                style={{ flex: 0.2 }}
-                className=" feed-haeder-element"
-                onClick={() => setActivePage(4)}
-            >
-                <span
-                    className={`${
-                        feedHeader_acitve == 4 && '--feed-header-active'
                     }`}
                 >
                     Likes

@@ -2,14 +2,17 @@ import './HomePage.css';
 import Sidebar from '../../components/homePage_components/Sidebar';
 import Feed from '../../components/homePage_components/Feed';
 import Widget from '../../components/homePage_components/Widget';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { CircularProgress } from '@mui/material';
-const mapStateToProps = (state) => ({
-    userData: state.user,
-});
-const HomePage = connect(mapStateToProps)(({ userData }) => {
+
+const HomePage = () => {
     const [isPageLoading, setIsPageLoading] = useState(true);
+
+    const user = useSelector((state) => state.user.user);
+    const token = useSelector((state) => state.user.token);
+    const userData = { user, token };
+
     useEffect(() => {
         if (userData) {
             setIsPageLoading(false);
@@ -40,5 +43,5 @@ const HomePage = connect(mapStateToProps)(({ userData }) => {
             </div>
         </>
     );
-});
+};
 export default HomePage;
