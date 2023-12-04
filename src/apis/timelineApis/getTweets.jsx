@@ -26,7 +26,7 @@
 //       console.error("There was a problem with the fetch operation:", error);
 //     }
 //   };
-const getTweetURL =`http://16.171.65.142:3000/api/v1/home?limit=6&offset=0`;
+const getTweetURL =`http://16.171.65.142:3000/api/v1/home?limit=16&offset=0`;
   const apiGetTweet = async (token) => {
     console.log("this is a token" + token);
   
@@ -47,6 +47,7 @@ const getTweetURL =`http://16.171.65.142:3000/api/v1/home?limit=6&offset=0`;
   
               if (responseData.status === 'success') {
                   const tweets = responseData.data.items;
+                  console.log("this inside the api and the tweets are " + tweets);
                   return tweets;
               } else {
                   throw new Error(`Error: ${responseData.status}`);
