@@ -1,5 +1,55 @@
-let urlupdateInfo = 'http://16.171.65.142:3000/api/v1/users';
+// let urlupdateInfo = 'http://16.171.65.142:3000/api/v1/users';
 
+// const updateInfo = (
+//     _name,
+//     _birthdayDate,
+//     _bio,
+//     _phone,
+//     _website,
+//     _avatar,
+//     _cover,
+//     _location,
+//     authToken
+// ) => {
+//     const _nwbirthdayDate =
+//         _birthdayDate.month +
+//         '-' +
+//         _birthdayDate.day +
+//         '-' +
+//         _birthdayDate.year;
+//     console.log('auth token is', authToken);
+//     const formData = new FormData();
+//     formData.append('avatar', _avatar);
+//     // formData.append('birthdayDate', _nwbirthdayDate);
+//     // formData.append('bio', _bio);
+//     // formData.append('website', _website);
+//     // formData.append('cover', _cover);
+//     // formData.append('phone', _phone);
+//     // formData.append('location', _location);
+//     console.log(formData);
+//     fetch(urlupdateInfo, {
+//         method: 'PATCH',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             Authorization: `Bearer ${authToken}`,
+//         },
+//         body: formData,
+//     })
+//         .then((response) => response.json())
+//         .then((data) => {
+//             console.log('Response from the API:', data);
+//             if (data.status === 'success') {
+//                 console.log('data saved successfully');
+//             } else {
+//                 console.log(data.message);
+//             }
+//         })
+//         .catch((error) => console.log(error));
+// };
+
+// export { updateInfo };
+
+const PictureupdateUrl = 'http://16.171.65.142:3000/api/v1/users';
 const updateInfo = (
     _name,
     _birthdayDate,
@@ -18,33 +68,35 @@ const updateInfo = (
         '-' +
         _birthdayDate.year;
     console.log('auth token is', authToken);
-    fetch(urlupdateInfo, {
+    const formData = new FormData();
+    formData.append('avatar', _avatar);
+    formData.append('cover', _cover);
+    formData.append('birthdayDate', _nwbirthdayDate);
+    formData.append('bio', _bio);
+    formData.append('website', _website);
+    formData.append('phone', _phone);
+    formData.append('location', _location);
+    formData.append('name', _name);
+    
+    console.log('Data is ', formData.entries);
+    fetch(PictureupdateUrl, {
         method: 'PATCH',
         headers: {
-            'Content-Type': 'application/json',
             Authorization: `Bearer ${authToken}`,
         },
-        body: JSON.stringify({
-            name: _name,
-            birthdayDate: _nwbirthdayDate,
-            bio: _bio,
-            phone: _phone,
-            website: _website,
-            avatar: _avatar,
-            cover: _cover,
-            location: _location,
-        }),
+        body: formData,
     })
         .then((response) => response.json())
         .then((data) => {
             console.log('Response from the API:', data);
             if (data.status === 'success') {
-                console.log('data saved successfully');
+                console.log('picture updated successfully');
             } else {
                 console.log(data.message);
             }
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+            console.log('error from server');
+        });
 };
-
 export { updateInfo };

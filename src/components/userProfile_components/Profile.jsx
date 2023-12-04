@@ -36,21 +36,21 @@ function Profile({ token, user }) {
     return (
         <>
             <div className="profile">
-                <ProfileHeader username={user.name} noPosts={0} />
+                <ProfileHeader username={ndata.data.user.name} noPosts={0} />
                 <ProfileBio
-                    name={user.name}
-                    username={user.username}
+                    name={ndata.data.user.name}
+                    username={ndata.data.user.username}
                     followingNum={ndata.data.user._count.following}
                     followersNum={ndata.data.user._count.followedBy}
-                    bio={''}
-                    ProfileImage={user.avatar}
+                    bio={ndata.data.user.bio}
+                    ProfileImage={ndata.data.user.avatar}
                     token={token}
-                    JoinedAt={'December 2023'}
+                    JoinedAt={ndata.data.user.joinedDate}
                     /* ndata.data.user.joinedDate*/
                 />
                 {/*}  ndata.data.user.joinedDate
                  */}
-                <TabsProfile userData={user} />
+                <TabsProfile userData={ndata.data.user} />
             </div>
         </>
     );

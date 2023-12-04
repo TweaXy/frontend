@@ -33,7 +33,7 @@ const ProfileBio = (props) => {
                 </span>
                 <div className="profileBiography-dateMargin">
                     <span className="profileBiography-Bio">
-                        {props.userBio}
+                        {props.bio}
                     </span>
                     <span className="profileBiography-joinDate">
                         <BiCalendar /> {props.JoinedAt}

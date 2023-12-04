@@ -48,6 +48,28 @@ export default function EditProfilePage({
             setSelectedImage(URL.createObjectURL(e.target.files[0]));
         }
     };
+    const updatepicture = () => {
+        Pictureupload(avatar, authToken);
+        
+    };
+    const handleAvatarChange = (event) => {
+        const file = event.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+                setProfileImage(reader.result);
+                // onAvatarChange(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleRemoveAvatar = () => {
+        setProfileImage(null);
+    };
+
     const handleProfileImage = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -149,14 +171,12 @@ export default function EditProfilePage({
                                     <input
                                         type="file"
                                         className="profile-upload"
-                                        onChange={handleProfileImage}
+                                        onChange={handleAvatarChange}
                                     />
                                     <button
                                         className="remove-profile-button"
                                         onClick={() => {
-                                            setProfileImage(
-                                                'https://www.istockphoto.com/photos/avatar-images-for-profile'
-                                            );
+                                            setProfileImage(null);
                                             deleteProfileApi(authToken);
                                         }}
                                     >
