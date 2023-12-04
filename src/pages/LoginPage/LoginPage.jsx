@@ -1,9 +1,6 @@
 import './LoginPage.css';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import EnterUUIDPage from './EnterUUIDPage';
 import EnterPasswordPage from './EnterPasswordPage';
-import { useDispatch } from 'react-redux';
 import checkUserUUID from '../../apis/checkUserUUID';
 import signInWithGoogle from '../../apis/signInWithGoogle';
 import SignInErrors from '../../shared/errors/SignInErrors';
@@ -15,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 
 const LoginPage = ({ onClose, openSignUpWindow }) => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [curPage, setCurPage] = useState(0);
 
@@ -74,7 +72,9 @@ const LoginPage = ({ onClose, openSignUpWindow }) => {
 
                 if (userData) {
                     console.log('user data: ', userData);
-                    navigate('home', { state: { userData: userData, firstTime: false } });
+                    dispatch(setUser(userData.user));
+                    dispatch(setToken(userData.token));
+                    navigate('home', { state: { firstTime: false } });
                     console.log('logged in successfully!');
                 } else {
                     setLoginError('user is not found');
@@ -92,7 +92,9 @@ const LoginPage = ({ onClose, openSignUpWindow }) => {
 
             if (userData) {
                 console.log('user data: ', userData);
-                navigate('home', { state: { userData: userData, firstTime: false } });
+                dispatch(setUser(userData.user));
+                dispatch(setToken(userData.token));
+                navigate('home', { state: { firstTime: false } });
                 console.log('logged in successfully!');
             } else {
                 setLoginWithGoogleError('user is not found');
