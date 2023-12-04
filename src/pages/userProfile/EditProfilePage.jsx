@@ -3,44 +3,75 @@ import { Avatar } from '@mui/material';
 import { MenuItem, TextField } from '@mui/material';
 import '../userProfile/EditProfilePage.css';
 import '../SignUpPage/SignUpPage.css';
+import { CameraEnhanceOutlined } from '@mui/icons-material';
 import { useState } from 'react';
-{
-    /*import { updateInfo } from '../../apis/updateInfo';*/
-}
+import deleteBannerApi from '../../apis/deleteProfileBanner';
+import deleteProfileApi from '../../apis/deleteProfileImage';
+import { updateInfo } from '../../apis/updateInfo';
 {
     /*}   src="https://www.istockphoto.com/photos/avatar-images-for-profile"*/
 }
 
-export default function EditProfilePage({ onClose }) {
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [ProfileImage, setProfileImage] = useState(
-        'https://www.istockphoto.com/photos/avatar-images-for-profile'
-    );
+export default function EditProfilePage({
+    onClose,
+    authToken,
+    name,
+    cover,
+    avatar,
+    bio,
+    location,
+    website,
+}) {
+    const [selectedImage, setSelectedImage] = useState(cover);
+    const [ProfileImage, setProfileImage] = useState(avatar);
     const [ProfileData, changeProfileData] = useState({
-        username: '',
-        userbio: '',
-        location: '',
-        website: '',
+        name: name,
+        userbio: bio,
+        location: location,
+        website: website,
     });
     const [Data2, changeData2] = useState({ day: '', month: '', year: '' });
-    {
-        /*} updateInfo(
-        ProfileData.username,
-        Data2,
-        ProfileData.userbio,
-        null,
-        ProfileData.website,
-        ProfileImage,
-        selectedImage,
-        ProfileData.location
-   );*/
-    }
+    const saveHandler = () => {
+        updateInfo(
+            ProfileData.name,
+            Data2,
+            ProfileData.userbio,
+            '01285075379',
+            ProfileData.website,
+            ProfileImage,
+            selectedImage,
+            ProfileData.location,
+            authToken
+        );
+        onClose();
+    };
     const handleNewImage = (e) => {
         const file = e.target.files[0];
         if (file) {
             setSelectedImage(URL.createObjectURL(e.target.files[0]));
         }
     };
+    const updatepicture = () => {
+        Pictureupload(avatar, authToken);
+    };
+    const handleAvatarChange = (event) => {
+        const file = event.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+                setProfileImage(reader.result);
+                // onAvatarChange(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleRemoveAvatar = () => {
+        setProfileImage(null);
+    };
+
     const handleProfileImage = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -62,6 +93,7 @@ export default function EditProfilePage({ onClose }) {
         { name: 'November', value: '10' },
         { name: 'December', value: '11' },
     ];
+    console.log(authToken);
     const years = Array.from({ length: 121 }, (_, i) => 2023 - i);
     const Render_Days = () => {
         const days = Array.from({ length: 31 }, (_, i) => i + 1);
@@ -102,7 +134,10 @@ export default function EditProfilePage({ onClose }) {
             {' '}
             <div className="edit-profile-page-container">
                 <div className="temp">
-                    <EditProfileWindowHeader onClose={onClose} saveClick={onClose} />
+                    <EditProfileWindowHeader
+                        onClose={onClose}
+                        saveHandler={saveHandler}
+                    />
 
                     <div className="edit-profile-page-body">
                         <div>
@@ -112,7 +147,7 @@ export default function EditProfilePage({ onClose }) {
                                     className="image-position"
                                     src={selectedImage}
                                 />
-
+                                <CameraEnhanceOutlined className="image-upload-2" />
                                 <input
                                     type="file"
                                     className="image-upload"
@@ -120,8 +155,11 @@ export default function EditProfilePage({ onClose }) {
                                 />
 
                                 <button
-                                    className="remove-button"
-                                    onClick={() => setSelectedImage(null)}
+                                    className="remove-cover-button"
+                                    onClick={() => {
+                                        setSelectedImage('');
+                                        deleteBannerApi(authToken);
+                                    }}
                                 >
                                     &times;
                                 </button>
@@ -131,11 +169,21 @@ export default function EditProfilePage({ onClose }) {
                                         sx={{ width: 100, height: 100 }}
                                         src={ProfileImage}
                                     />
+                                    <CameraEnhanceOutlined className="profile-upload-2" />
                                     <input
                                         type="file"
-                                        className="image-upload"
-                                        onChange={handleProfileImage}
+                                        className="profile-upload"
+                                        onChange={handleAvatarChange}
                                     />
+                                    <button
+                                        className="remove-profile-button"
+                                        onClick={() => {
+                                            setProfileImage(null);
+                                            deleteProfileApi(authToken);
+                                        }}
+                                    >
+                                        &times;
+                                    </button>
 
                                     {/*}     <AvatarEditor
                                         image={selectedImage}
@@ -154,8 +202,8 @@ export default function EditProfilePage({ onClose }) {
                                 variant="outlined"
                                 id="outlined-basic"
                                 label="Name"
-                                name="username"
-                                value={ProfileData.username}
+                                name="name"
+                                value={ProfileData.name}
                                 onChange={ProfileData_Handler}
                             />
                         </div>
@@ -191,6 +239,7 @@ export default function EditProfilePage({ onClose }) {
                                 label="website"
                                 value={ProfileData.website}
                                 onChange={ProfileData_Handler}
+                                /*helperText="Must be a valid Url"*/
                             />
                         </div>
                         <span className="date-birth-text">Date of Birth</span>
