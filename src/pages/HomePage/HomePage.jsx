@@ -40,6 +40,9 @@ const HomePage = () => {
                 <Sidebar userData={userData} active={0} />
                 <Feed userData={userData} isTherePopUpWindow={false} />
                 <Widget token={userData.token} />
+                <Sidebar userData={userData} active={0} />
+                <Feed userData={userData} isTherePopUpWindow={false} />
+                <Widget token={userData.token} />
             </div>
         </>
     );

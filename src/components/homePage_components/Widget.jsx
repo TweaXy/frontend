@@ -3,7 +3,7 @@ import WidgetTrending from "./WidgetTrending";
 import SearchIcon from "@mui/icons-material/Search";
 import TextareaAutosize from "react-textarea-autosize";
 import Button from "@mui/material/Button";
-export default function Widget() {
+export default function Widget({token}) {
   return (
     <div className="widget">
       <div className="empty-container"></div>
@@ -21,7 +21,7 @@ export default function Widget() {
             placeholder="Search"
           />
         </div>
-        <WidgetTrending />
+        <WidgetTrending token={token}/>
       </div>
     </div>
   );

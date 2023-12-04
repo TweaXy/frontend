@@ -1,6 +1,8 @@
 import { TextField } from '@mui/material';
 import './SignUpPage.css';
 import './SignUpHome.css';
+import SignUpSelectors from '../../shared/selectors/SignUp';
+
 const create = 'Create your account';
 
 const months = [
@@ -30,6 +32,7 @@ const SignUpPage3 = ({ Data1, Data2, EditInformation, nextWindowHandler }) => {
                     id="outlined-basic"
                     name="username"
                     label="Name"
+                    data-test={SignUpSelectors.CONFIRM_NAME_FIELD}
                     value={Data1.username}
                     onClick={EditInformation}
                 />
@@ -41,6 +44,7 @@ const SignUpPage3 = ({ Data1, Data2, EditInformation, nextWindowHandler }) => {
                     id="outlined-basic"
                     name="usermail"
                     label="Email"
+                    data-test={SignUpSelectors.CONFIRM_EMAIL_FIELD}
                     value={Data1.usermail}
                     onClick={EditInformation}
                 />
@@ -51,11 +55,16 @@ const SignUpPage3 = ({ Data1, Data2, EditInformation, nextWindowHandler }) => {
                     variant="outlined"
                     id="outlined-basic"
                     label="Date"
+                    data-test={SignUpSelectors.CONFIRM_BIRTH_DATE_FIELD}
                     value={dateval}
                     onClick={EditInformation}
                 />
             </div>
-            <button  className="Hp-black-wide-button" onClick={nextWindowHandler}>
+            <button
+                className="Hp-black-wide-button"
+                onClick={nextWindowHandler}
+                data-test={SignUpSelectors.NEXT_BUTTON}
+            >
                 Next
             </button>
         </div>
