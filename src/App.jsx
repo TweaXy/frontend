@@ -35,7 +35,7 @@ function App() {
                         element={<FollowersPage />}
                     />
                     <Route
-                        path="/search"
+                        path="/search/:word"
                         element={<SearchForUsersOrTweetsPage />}
                     />
                     <Route path="/settings" element={<SettingsPage />} />
