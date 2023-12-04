@@ -13,11 +13,14 @@ import { ArrowBack } from '@mui/icons-material';
 import { useEffect, useRef, useState } from 'react';
 import changePassword from '../../apis/changePassword';
 import Sidebar from '../../components/homePage_components/Sidebar';
+import NotifyBox from '../../components/NotifyBox/NotifyBox';
 
 const ChangePasswordPage = () => {
     const token = useSelector((state) => state.user.token);
+    const user = useSelector((state) => state.user.user);
 
     const [isPageLoading, setIsPageLoading] = useState(true);
+    const [isPasswordUpdated, setIsPasswordUpdated] = useState(false);
 
     const [showCurPassword, setShowCurPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
@@ -37,13 +40,13 @@ const ChangePasswordPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (token) {
+        if (token && user) {
             console.log('token from settings/password page: ', token);
             setIsPageLoading(false);
         } else {
             console.log('Loading Settings page...');
         }
-    }, [token]);
+    }, [token, user]);
 
     if (isPageLoading) {
         return (
@@ -90,9 +93,14 @@ const ChangePasswordPage = () => {
             );
             if (response) {
                 console.log('Your password has been updated successfully.');
+                setIsPasswordUpdated(true);
                 curPasswordRef.current.value = '';
                 newPasswordRef.current.value = '';
                 conPasswordRef.current.value = '';
+                const timeoutID = setTimeout(() => {
+                    setIsPasswordUpdated(false);
+                }, 3000);
+                return () => clearTimeout(timeoutID);
             } else {
                 setChangePasswordError(
                     'Error changing your password, please try again later.'
@@ -105,7 +113,7 @@ const ChangePasswordPage = () => {
 
     return (
         <div className="change-password-page-container">
-            <Sidebar />
+            <Sidebar userData={{ user, token }} active={2} />
             <div className="change-password-widget">
                 <div className="change-password-header">
                     <div
@@ -270,6 +278,9 @@ const ChangePasswordPage = () => {
                     </div>
                 </div>
             </div>
+            {isPasswordUpdated && (
+                <NotifyBox text={'Password has been updated successfully.'} />
+            )}
         </div>
     );
 };

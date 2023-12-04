@@ -35,7 +35,7 @@ const SettingsPage = () => {
 
     return (
         <div className="settings-page-container">
-            <Sidebar />
+            <Sidebar userData={{ user, token }} active={2} />
             <div className="settings-widget">
                 <span className="header-span">Your Account</span>
                 <span>

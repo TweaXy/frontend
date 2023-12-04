@@ -65,7 +65,7 @@ export default function Sidebar({ userData, active }) {
                     navigate('/settings');
                 }}
             >
-                <SidebarOption text="Settings" Icon={SettingsIcon} />
+                <SidebarOption text="Settings" Icon={SettingsIcon} active={active == 2}/>
             </div>
             <Button variant="outlined" className="sidebar--tweet">
                 Post

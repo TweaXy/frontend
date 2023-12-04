@@ -15,12 +15,14 @@ import Sidebar from '../../components/homePage_components/Sidebar';
 import checkPassword from '../../apis/checkPassword';
 import updateUsername from '../../apis/updateUsername';
 import { setUser } from '../../redux/actions';
+import NotifyBox from '../../components/NotifyBox/NotifyBox';
 
 const ChangeUsernamePage = () => {
     const token = useSelector((state) => state.user.token);
     const user = useSelector((state) => state.user.user);
 
     const [isPageLoading, setIsPageLoading] = useState(true);
+    const [isUsernameUpdated, setIsUsernameUpdated] = useState(false);
 
     const [newUsername, setNewUsername] = useState('');
     const [newUsernameError, setNewUsernameError] = useState('');
@@ -69,6 +71,11 @@ const ChangeUsernamePage = () => {
             if (response) {
                 dispatch(setUser({ ...user, username: newUsername }));
                 console.log('username is changed successfully!');
+                setIsUsernameUpdated(true);
+                const timeoutID = setTimeout(() => {
+                    setIsUsernameUpdated(false);
+                }, 3000);
+                return () => clearTimeout(timeoutID);
             } else {
                 setNewUsernameError(
                     'Something went wrong, please try again later.'
@@ -98,7 +105,7 @@ const ChangeUsernamePage = () => {
 
     return (
         <div className="change-username-page-container">
-            <Sidebar />
+            <Sidebar userData={{ user, token }} active={2} />
             <div className="change-username-widget">
                 <div className="change-username-header">
                     <div
@@ -226,6 +233,9 @@ const ChangeUsernamePage = () => {
                     </div>
                 )}
             </div>
+            {isUsernameUpdated && (
+                <NotifyBox text={`username is changed successfully`} />
+            )}
         </div>
     );
 };
