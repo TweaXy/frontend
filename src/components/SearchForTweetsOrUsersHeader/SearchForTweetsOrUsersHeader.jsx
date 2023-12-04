@@ -1,8 +1,8 @@
+import SearchBar from '../SearchBar/SearchBar';
 import './SearchForTweetsOrUsersHeader.css';
 
 const SearchForTweetsOrUsersHeader = ({
-    name,
-    username,
+    searchedInput,
     activePage,
     setActivePage,
     goBack,
@@ -17,12 +17,7 @@ const SearchForTweetsOrUsersHeader = ({
                     🡠
                 </button>
                 <div className="search-for-tweets-or-users-header-name-username-container">
-                    <span className="search-for-tweets-or-users-header-name">
-                        {name}
-                    </span>
-                    <span className="search-for-tweets-or-users-header-username">
-                        {`@${username}`}
-                    </span>
+                    <SearchBar defaultText={searchedInput}/>
                 </div>
             </div>
             <div className="search-for-tweets-or-users-header-navigator">

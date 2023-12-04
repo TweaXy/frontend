@@ -21,7 +21,7 @@ export default function WidgetTrending() {
                 setTrendings(fetchedTrendings);
                 console.log('these are the trendings: ', trendings);
             } catch (error) {
-                console.error('Error fetching users:', error);
+                console.error('Error fetching trendings:', error);
             }
         };
         fetchTrending();

@@ -1794,16 +1794,16 @@
     "parse5" "^7.0.0"
 
 "@types/node@*", "@types/node@>= 14":
-  "integrity" "sha512-37MXfxkb0vuIlRKHNxwCkb60PNBpR94u4efQuN4JgIAm66zfCDXGSAFCef9XUWFovX2R1ok6Z7MHhtdVXXkkIw=="
-  "resolved" "https://registry.npmjs.org/@types/node/-/node-20.10.2.tgz"
-  "version" "20.10.2"
+  "integrity" "sha512-XJavIpZqiXID5Yxnxv3RUDKTN5b81ddNC3ecsA0SoFXz/QU8OGBwZGMomiq0zw+uuqbL/krztv/DINAQ/EV4gg=="
+  "resolved" "https://registry.npmjs.org/@types/node/-/node-20.10.3.tgz"
+  "version" "20.10.3"
   dependencies:
     "undici-types" "~5.26.4"
 
 "@types/node@^18.17.5":
-  "integrity" "sha512-mZJ9V11gG5Vp0Ox2oERpeFDl+JvCwK24PGy76vVY/UgBtjwJWc5rYBThFxmbnYOm9UPZNm6wEl/sxHt2SU7x9A=="
-  "resolved" "https://registry.npmjs.org/@types/node/-/node-18.19.1.tgz"
-  "version" "18.19.1"
+  "integrity" "sha512-6wzfBdbWpe8QykUkXBjtmO3zITA0A3FIjoy+in0Y2K4KrCiRhNYJIdwAPDffZ3G6GnaKaSLSEa9ZuORLfEoiwg=="
+  "resolved" "https://registry.npmjs.org/@types/node/-/node-18.19.2.tgz"
+  "version" "18.19.2"
   dependencies:
     "undici-types" "~5.26.4"
 
@@ -2314,13 +2314,13 @@
     "fill-range" "^7.0.1"
 
 "browserslist@^4.21.9", "browserslist@^4.22.1", "browserslist@>= 4.21.0":
-  "integrity" "sha512-FEVc202+2iuClEhZhrWy6ZiAcRLvNMyYcxZ8raemul1DYVOVdFsbqckWLdsixQZCpJlwe77Z3UTalE7jsjnKfQ=="
-  "resolved" "https://registry.npmjs.org/browserslist/-/browserslist-4.22.1.tgz"
-  "version" "4.22.1"
+  "integrity" "sha512-0UgcrvQmBDvZHFGdYUehrCNIazki7/lUP3kkoi/r3YB2amZbFM9J43ZRkJTXBUZK4gmx56+Sqk9+Vs9mwZx9+A=="
+  "resolved" "https://registry.npmjs.org/browserslist/-/browserslist-4.22.2.tgz"
+  "version" "4.22.2"
   dependencies:
-    "caniuse-lite" "^1.0.30001541"
-    "electron-to-chromium" "^1.4.535"
-    "node-releases" "^2.0.13"
+    "caniuse-lite" "^1.0.30001565"
+    "electron-to-chromium" "^1.4.601"
+    "node-releases" "^2.0.14"
     "update-browserslist-db" "^1.0.13"
 
 "bser@2.1.1":
@@ -2387,10 +2387,10 @@
   "resolved" "https://registry.npmjs.org/camelize/-/camelize-1.0.1.tgz"
   "version" "1.0.1"
 
-"caniuse-lite@^1.0.30001541":
-  "integrity" "sha512-xrE//a3O7TP0vaJ8ikzkD2c2NgcVUvsEe2IvFTntV4Yd1Z9FVzh+gW+enX96L0psrbaFMcVcH2l90xNuGDWc8w=="
-  "resolved" "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001565.tgz"
-  "version" "1.0.30001565"
+"caniuse-lite@^1.0.30001565":
+  "integrity" "sha512-ggIhCsTxmITBAMmK8yZjEhCO5/47jKXPu6Dha/wuCS4JePVL+3uiDEBuhu2aIoT+bqTOR8L76Ip1ARL9xYsEJA=="
+  "resolved" "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001566.tgz"
+  "version" "1.0.30001566"
 
 "caseless@~0.12.0":
   "integrity" "sha512-4tYFyifaFfGacoiObjJegolkwSU4xQNGbVgUiNYVUxbQ2x2lUsFvY4hVgVzGiIe6WLOPqycWXA40l+PWsxthUw=="
@@ -2888,7 +2888,7 @@
   dependencies:
     "safe-buffer" "^5.0.1"
 
-"electron-to-chromium@^1.4.535":
+"electron-to-chromium@^1.4.601":
   "integrity" "sha512-SpwUMDWe9tQu8JX5QCO1+p/hChAi9AE9UpoC3rcHVc+gdCGlbT3SGb5I1klgb952HRIyvt9wZhSz9bNBYz9swA=="
   "resolved" "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.601.tgz"
   "version" "1.4.601"
@@ -4884,7 +4884,7 @@
   "resolved" "https://registry.npmjs.org/node-int64/-/node-int64-0.4.0.tgz"
   "version" "0.4.0"
 
-"node-releases@^2.0.13":
+"node-releases@^2.0.14":
   "integrity" "sha512-y10wOWt8yZpqXmOgRo77WaHEmhYQYGNA6y421PKsKYWEK8aW+cqAphborZDhqfyKrbZEN92CN1X2KbafY2s7Yw=="
   "resolved" "https://registry.npmjs.org/node-releases/-/node-releases-2.0.14.tgz"
   "version" "2.0.14"
@@ -5321,7 +5321,7 @@
   "resolved" "https://registry.npmjs.org/react-refresh/-/react-refresh-0.14.0.tgz"
   "version" "0.14.0"
 
-"react-router-dom@^6.20.1":
+"react-router-dom@^6.18.0":
   "integrity" "sha512-npzfPWcxfQN35psS7rJgi/EW0Gx6EsNjfdJSAk73U/HqMEJZ2k/8puxfwHFgDQhBGmS3+sjnGbMdMSV45axPQw=="
   "resolved" "https://registry.npmjs.org/react-router-dom/-/react-router-dom-6.20.1.tgz"
   "version" "6.20.1"
@@ -6214,9 +6214,9 @@
     "extsprintf" "^1.2.0"
 
 "vite@^4.2.0 || ^5.0.0", "vite@^4.4.5":
-  "integrity" "sha512-ulr8rNLA6rkyFAlVWw2q5YJ91v098AFQ2R0PRFwPzREXOUJQPtFUG0t+/ZikhaOCDqFoDhN6/v8Sq0o4araFAw=="
-  "resolved" "https://registry.npmjs.org/vite/-/vite-4.5.0.tgz"
-  "version" "4.5.0"
+  "integrity" "sha512-AXXFaAJ8yebyqzoNB9fu2pHoo/nWX+xZlaRwoeYUxEqBO+Zj4msE5G+BhGBll9lYEKv9Hfks52PAF2X7qDYXQA=="
+  "resolved" "https://registry.npmjs.org/vite/-/vite-4.5.1.tgz"
+  "version" "4.5.1"
   dependencies:
     "esbuild" "^0.18.10"
     "postcss" "^8.4.27"
