@@ -14,11 +14,51 @@
     display: none;
 }
 
-.image-uploader > .MuiImageList-root > .MuiImageListItem-root > img{
-    /* width: 249.6 ; */
-    /* flex: 0.5; */
-    /* border: 5px solid red; */
-    border-radius: 20px;
-    width: 249.6px;
-    height: 137.78px;
+ .image-uploader > .MuiImageList-root > .MuiImageListItem-root{
+    position: relative;
+} 
+
+
+  .MuiImageList-root > .MuiImageListItem-root > .delete-icon-container{
+    /* z-index: 100; */
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 1;
+    cursor: pointer;
+    background-color: rgb(53, 53, 53);
+    width: 31px;
+    height: 31px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+
+.MuiImageList-root > .MuiImageListItem-root > .delete-icon-container:hover{
+    background-color: rgb(74, 74, 74);
+    transition: background-color 200ms ease-out;
+}
+
+
+.MuiImageList-root > .MuiImageListItem-root > .delete-icon-container > .MuiSvgIcon-root{
+    color: white;
+    font-weight:0 !important;
+    font-size: 19px;
+}
+
+.image-uploader > .MuiImageList-root > .MuiImageListItem-root > img{
+    border-radius: 18px;
+}
+ /* .image-uploader > .MuiImageList-root > .MuiImageListItem-root  {
+    width: 249.6px;
+    height: 137.88px;
+    }     */
+
+
+.image-uploader > .MuiImageList-root > .img-lay--01{
+    width: inherit;
+    /* height:164px ; */
+} 
+

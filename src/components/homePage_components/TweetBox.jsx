@@ -100,7 +100,7 @@ export default function TweetBox({userData}) {
     };
 
     const handlePostTweet = (e) => {
-
+        // console.log("this is a handler");
         apiAddTweet(text, tweetImages,userData.token);
         setTweetImages([]);
         setText('');
@@ -131,13 +131,13 @@ export default function TweetBox({userData}) {
                     />
                 </div>
                 <div className="media-container">
-                      {/* <span className='span-padd'></span> */}
+                      <div className='span-padd' style={{height : '5px'}}></div>
                       <ImageUploader tweetImages={tweetImages} setTweetImages={setTweetImages}/>
                       {/* {tweetImages.length > 0 && (<img src={tweetImages[0]} />)} */}
                     </div>
                 {privacylay && (
                     <div className="privacy-lay">
-                        <div className="container-privacy">
+                        <div className="container-privacy"> 
                             <PublicIcon />
                             <h3>Everyone can reply</h3>
                         </div>
