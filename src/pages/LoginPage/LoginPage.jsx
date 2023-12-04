@@ -94,7 +94,8 @@ const LoginPage = ({ onClose, openSignUpWindow }) => {
                 console.log('user data: ', userData);
                 dispatch(setUser(userData.user));
                 dispatch(setToken(userData.token));
-                navigate('home', { state: { firstTime: false } });
+                navigate('/settings');
+                // navigate('home', { state: { firstTime: false } });
                 console.log('logged in successfully!');
             } else {
                 setLoginWithGoogleError('user is not found');

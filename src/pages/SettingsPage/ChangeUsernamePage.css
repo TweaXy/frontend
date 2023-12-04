@@ -1,0 +1,65 @@
+.loading-page {
+    display: flex;
+    height: 100vh;
+    max-width: 1300px;
+    padding: 0 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.change-username-page-container {
+    display: flex;
+    height: 100vh;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    padding: 0 10px;
+    background-color: white;
+    color: black;
+}
+
+.change-username-page-container>.change-username-widget {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--twitter-background);
+}
+
+.change-username-page-container>.change-username-widget>.change-username-header {
+    height: 53px;
+    padding: 0px 16px;
+    display: flex;
+    flex-direction: row;
+}
+
+.change-username-page-container>.change-username-widget>.change-username-header>.arrow-back {
+    flex: 0.1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.change-username-page-container>.change-username-widget>.change-username-header>.arrow-back>.shadow:hover {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--twitter-background);
+    border-radius: 50%;
+}
+
+.change-username-page-container>.change-username-widget>.change-username-header>span {
+    flex: 0.9;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 700;
+}

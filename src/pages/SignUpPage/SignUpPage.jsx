@@ -8,7 +8,7 @@ import { sendEmailVerification } from '../../apis/EmailVerfication';
 import signup from '../../apis/Signup';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../redux/actions';
+import { setToken, setUser } from '../../redux/actions';
 const Errors = {
     Email: '',
     Username: '',
@@ -50,7 +50,8 @@ const SignUpPage = ({ onClose }) => {
                     setwindowOpned,
                     windowOpened
                 );
-                dispatch(setUser(userData));
+                dispatch(setUser(userData.user));
+                dispatch(setToken(userData.token));
                 navigate(`home`, { state: { firstTime: true } });
                 setwindowOpned(windowOpened + 1);
             } catch {

@@ -6,6 +6,9 @@ import './pages/HomePage/HomePage.css';
 import ProfilePage from './pages/userProfile/ProfilePage.jsx';
 import FollowingPage from './pages/FollowingPage/FollowingPage.jsx';
 import FollowersPage from './pages/FollowersPage/FollowersPage.jsx';
+import SettingsPage from './pages/SettingsPage/SettingsPage.jsx';
+import ChangePasswordPage from './pages/SettingsPage/ChangePasswordPage.jsx';
+import ChangeUsernamePage from './pages/SettingsPage/ChangeUsernamePage.jsx';
 
 function App() {
     return (
@@ -29,6 +32,15 @@ function App() {
                     <Route
                         path="/:username/followers"
                         element={<FollowersPage />}
+                    />
+                    <Route path="/settings" element={<SettingsPage />} />
+                    <Route
+                        path="/settings/password"
+                        element={<ChangePasswordPage />}
+                    />
+                    <Route
+                        path="/settings/username"
+                        element={<ChangeUsernamePage />}
                     />
                 </Routes>
             </Router>
