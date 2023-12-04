@@ -2,9 +2,16 @@ import './WidgetTrending.css';
 import Trending from './Trending';
 import { useEffect, useState } from 'react';
 import { apiGetTrending } from '../../apis/TrendingAPIs/GetTrending';
+import { useSelector } from 'react-redux';
 import HomePageSelectors from '../../shared/selectors/HomePage.js';
 
-export default function WidgetTrending({ token }) {
+export default function WidgetTrending() {
+
+     const token = useSelector((state) => state.user.token);
+     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlwiY2xwcTJnMTB4MDAyMjIwYmxuaGQ5bHZ3eFwiIiwiaWF0IjoxNzAxNjQzMjMyLCJleHAiOjE3MDQyMzUyMzJ9.iDJhBcxBfwxCX9NKk2eYqyXAJwWNRvcXzR_w-IrdibE";
+
+     console.log("the token sent to the widget Trending is ", token);
+
     const [trendings, setTrendings] = useState([]);
 
     useEffect(() => {

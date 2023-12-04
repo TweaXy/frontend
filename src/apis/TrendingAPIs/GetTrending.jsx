@@ -20,7 +20,7 @@ const apiGetTrending = async (token) => {
         return responseData.data.items;
       }
     } catch (error) {
-      console.error("There was a problem with the fetch operation: ", error);
+      console.error("There was a problem with the fetch operation in get trending api: ", error);
     }
   };
   

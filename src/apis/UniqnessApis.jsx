@@ -31,6 +31,7 @@ const apiCheckEmailUnique = async (email, setuniqueEmail) => {
 
 
 const apicheckUsernameUnique =async (username, setuniqueUsername) => {
+  console.log("From Api UNiqness",username)
   try {
     const response = await fetch(userUniquenessURL, {
       method: "POST",
