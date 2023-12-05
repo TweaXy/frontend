@@ -7,7 +7,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import SettingsIcon from '@mui/icons-material/Settings';
 import Button from '@mui/material/Button';
 import getUserDataApi from '../../apis/getProfileData';
 import './Sidebar.css';
@@ -60,7 +60,13 @@ export default function Sidebar({ userData, active }) {
                     Icon={PermIdentityIcon}
                 />
             </div>
-            <SidebarOption text="More" Icon={MoreHorizIcon} />
+            <div
+                onClick={() => {
+                    navigate('/settings');
+                }}
+            >
+                <SidebarOption text="Settings" Icon={SettingsIcon} active={active == 2}/>
+            </div>
             <Button variant="outlined" className="sidebar--tweet">
                 Post
             </Button>

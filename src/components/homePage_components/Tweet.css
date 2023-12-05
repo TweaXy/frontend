@@ -118,6 +118,7 @@ body {
   margin: -8px;
   justify-content: center;
 }
+
 .tweet-icon > .activity-icon > .MuiSvgIcon-root {
   font-size: 17.5px;
   color: var(--twitter-greyColor);
@@ -161,4 +162,10 @@ body {
 
 .tweet-user > .options-container:hover .MuiSvgIcon-root {
   color: var(--twitter-color);
+}
+
+
+.tweet-icon > .activity-icon > .like-active{
+  color: var(--twitter-redColor);
+  transition: color 200ms ease-out;
 }

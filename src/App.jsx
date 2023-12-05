@@ -7,6 +7,9 @@ import ProfilePage from './pages/userProfile/ProfilePage.jsx';
 import FollowingPage from './pages/FollowingPage/FollowingPage.jsx';
 import FollowersPage from './pages/FollowersPage/FollowersPage.jsx';
 import SearchForUsersOrTweetsPage from './pages/SearchForUsersOrTweetsPage/SearchForUsersOrTweetsPage.jsx';
+import SettingsPage from './pages/SettingsPage/SettingsPage.jsx';
+import ChangePasswordPage from './pages/SettingsPage/ChangePasswordPage.jsx';
+import ChangeUsernamePage from './pages/SettingsPage/ChangeUsernamePage.jsx';
 
 function App() {
     return (
@@ -32,8 +35,17 @@ function App() {
                         element={<FollowersPage />}
                     />
                     <Route
-                        path="/search"
+                        path="/search/:word"
                         element={<SearchForUsersOrTweetsPage />}
+                    />
+                    <Route path="/settings" element={<SettingsPage />} />
+                    <Route
+                        path="/settings/password"
+                        element={<ChangePasswordPage />}
+                    />
+                    <Route
+                        path="/settings/username"
+                        element={<ChangeUsernamePage />}
                     />
                 </Routes>
             </Router>

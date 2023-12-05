@@ -1,0 +1,30 @@
+.change-username-btn-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 16px;
+    height: 48px;
+    background-color: #fff;
+}
+
+.change-username-btn-container:hover {
+    background-color: rgb(100, 100, 100, 0.05);
+    cursor: pointer;
+}
+
+.change-username-btn-container>.text-container {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.change-username-btn-container>.text-container>.header {
+    font-size: large;
+    font-weight: 600;
+    color: var(--twitter-black)
+}
+
+.change-username-btn-container>.text-container>span {
+    color: var(--twitter-greyColor);
+}

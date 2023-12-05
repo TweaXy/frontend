@@ -14,7 +14,7 @@ import './TweetBox.css';
 import { apiAddTweet } from '../../apis/tweetApis/AddTweet';
 import MediaErrorMsg from './MediaErrorMsg';
 import ImageUploader from './ImageUploader';
-export default function TweetBox({userData}) {
+export default function TweetBox({userData,getTweets}) {
     const [text, setText] = useState('');
     const [privacylay, setPrivacylay] = useState(false);
     const [tweetImages, setTweetImages] = useState([]);
@@ -100,10 +100,12 @@ export default function TweetBox({userData}) {
     };
 
     const handlePostTweet = (e) => {
-
+        console.log("this is a handler");
+        console.log(tweetImages);
         apiAddTweet(text, tweetImages,userData.token);
         setTweetImages([]);
         setText('');
+        getTweets();
     };
 
     const handleDisplayPrivacy = (e) => {
@@ -131,13 +133,13 @@ export default function TweetBox({userData}) {
                     />
                 </div>
                 <div className="media-container">
-                      {/* <span className='span-padd'></span> */}
+                      <div className='span-padd' style={{height : '5px'}}></div>
                       <ImageUploader tweetImages={tweetImages} setTweetImages={setTweetImages}/>
                       {/* {tweetImages.length > 0 && (<img src={tweetImages[0]} />)} */}
                     </div>
                 {privacylay && (
                     <div className="privacy-lay">
-                        <div className="container-privacy">
+                        <div className="container-privacy"> 
                             <PublicIcon />
                             <h3>Everyone can reply</h3>
                         </div>
