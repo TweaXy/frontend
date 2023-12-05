@@ -14,6 +14,8 @@ const SearchForUsersOrTweetsPage = () => {
     const searchInput = location.state?.search;
     const isSearch = location.state?.isSearch; // if isSearch is false then it is trends call
     const token = useSelector((state) => state.user.token);
+    const user = useSelector((state) => state.user.user);
+    const userData = { user, token };
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlwiY2xwcTJnMTB4MDAyMjIwYmxuaGQ5bHZ3eFwiIiwiaWF0IjoxNzAxNjQzMjMyLCJleHAiOjE3MDQyMzUyMzJ9.iDJhBcxBfwxCX9NKk2eYqyXAJwWNRvcXzR_w-IrdibE";
 
     const [fetchedUsers, setFetchedUsers] = useState([]);
@@ -59,7 +61,7 @@ const SearchForUsersOrTweetsPage = () => {
 
     return (
         <div className="Search-for-users-or-tweets-page-container">
-            <Sidebar />
+            <Sidebar userData={userData} active={0}/>
             <div className="search-for-tweets-or-users-widget">
                 <SearchForTweetsOrUsersHeader
                     searchedInput={searchInput}
