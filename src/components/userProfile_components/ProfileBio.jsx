@@ -5,7 +5,7 @@ import './ProfileBio.css';
 import EditProfile from './EditProfileButton';
 import parseDate from '../../utils/parseDate';
 import { useState } from 'react';
-
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 const ProfileBio = (props) => {
     const navigate = useNavigate();
     const [isFollowing, setFollowing] = useState(false);
@@ -63,6 +63,15 @@ const ProfileBio = (props) => {
                 <div className="profileBiography-dateMargin">
                     <span className="profileBiography-Bio">
                         {props.bio === 'null' ? '' : props.bio}
+                    </span>
+                </div>
+                <div className="profileBiography-dateMargin">
+                    <span className="location">
+                        {props.location === 'null' ? '' : props.location}
+                    </span>
+                    <span className="profileBiography-Bio"> </span>
+                    <span className="pseudolink">
+                        {props.website === 'null' ? '' : props.website}
                     </span>
                     <span className="profileBiography-joinDate">
                         <BiCalendar /> Joined {parseDate(props.JoinedAt)}

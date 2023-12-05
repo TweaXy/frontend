@@ -36,7 +36,7 @@ export default function EditProfilePage({
             ProfileData.name,
             Data2,
             ProfileData.userbio,
-            '01285075379',
+            '01202430275',
             ProfileData.website,
             ProfileImage,
             selectedImage,
@@ -67,7 +67,19 @@ export default function EditProfilePage({
             reader.readAsDataURL(file);
         }
     };
+    const handleBackgroundchange = (event) => {
+        const file = event.target.files[0];
 
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+                setSelectedImage(reader.result);
+                // onAvatarChange(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
     const handleRemoveAvatar = () => {
         setProfileImage(null);
     };
@@ -151,7 +163,7 @@ export default function EditProfilePage({
                                 <input
                                     type="file"
                                     className="image-upload"
-                                    onChange={handleNewImage}
+                                    onChange={handleBackgroundchange}
                                 />
 
                                 <button
