@@ -1,8 +1,6 @@
 import { BiArrowBack } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
-
 import "./ProfileHeader.css"
-
 const ProfileHeader = (props) => {
   let navigate =useNavigate();
   const arrowBackRoute =() => navigate(-1)

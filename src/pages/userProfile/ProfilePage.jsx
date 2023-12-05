@@ -2,25 +2,33 @@ import './HomePage.css';
 import Sidebar from '../../components/homePage_components/Sidebar';
 import Profile from '../../components/userProfile_components/Profile';
 import Widget from '../../components/homePage_components/Widget';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { CircularProgress } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import getUserDataApi from '../../apis/getProfileData';
+import { useLocation } from 'react-router-dom';
 
-const mapStateToProps = (state) => ({
-    userData: state.user,
-});
-
-const ProfilePage = connect(mapStateToProps)(({ userData }) => {
+const ProfilePage = () => {
     const [isPageLoading, setIsPageLoading] = useState(true);
 
+    const location = useLocation();
+    const userID = location.state?.userID;
+
+    const token = useSelector((state) => state.user.token);
+
+    console.log('token from profile: ', token);
+    console.log('user id from profile:', userID);
+
     useEffect(() => {
-        if (userData) {
+        if (token && userID) {
             setIsPageLoading(false);
-            console.log('user data from profile page', userData);
+            console.log('user id from profile page', userID);
+            console.log('user token from profile page', token);
         } else {
             console.log('profile page is loading');
         }
-    }, [userData]);
+    }, [token, userID]);
 
     if (isPageLoading) {
         return (
@@ -39,12 +47,17 @@ const ProfilePage = connect(mapStateToProps)(({ userData }) => {
     return (
         <>
             <div className="home-page">
-                <Sidebar />
-                <Profile />
-                <Widget />
+                {/**Side bar */}
+                <Sidebar active={0} />
+                {/**News feed */}
+
+                <Profile token={token} userID={userID} />
+
+                {/**Widgets */}
+                <Widget token={token} />
             </div>
         </>
     );
-});
+};
 
 export default ProfilePage;

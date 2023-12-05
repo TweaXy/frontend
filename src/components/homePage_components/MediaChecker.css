@@ -2,9 +2,24 @@
     display: flex;
     align-items: end;
 }
+.media-checker > .MuiImageList-root{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    /* display: flex; */
+    margin: 0;
+    }
 
-.media-checker > .media-img {
-    padding-top: 5px;
-    flex: 1;
-    border-radius: 20px;
+.media-checker > .MuiImageList-root::-webkit-scrollbar{
+    display: none;
 }
+
+.media-checker > .MuiImageList-root > .MuiImageListItem-root > img{
+    border-radius: 18px;
+}
+
+
+.media-checker> .MuiImageList-root > .img-lay--01{
+    width: inherit;
+    /* height:164px ; */
+} 
+
