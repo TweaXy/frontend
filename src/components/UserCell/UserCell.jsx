@@ -1,19 +1,37 @@
 import './UserCell.css';
 import { useState } from 'react';
 import { Avatar } from '@mui/material';
+import unfollow from '../../apis/unfollow';
+import follow from '../../apis/follow';
+import { useNavigate } from 'react-router-dom';
 
-const UserCell = ({ name, username, avatar, bio, followsMe, followedByMe }) => {
+const UserCell = ({
+    id,
+    name,
+    username,
+    avatar,
+    bio,
+    followsMe,
+    followedByMe,
+    token,
+    myID,
+}) => {
+    const navigate = useNavigate();
+
     const [isFollowingButtonHovered, setIsFollowingButtonHovered] =
         useState(false);
+
+    const [followedByMeState, setFollowedByMeState] = useState(followedByMe);
 
     const handleFollowingButtonHover = () => {
         setIsFollowingButtonHovered(!isFollowingButtonHovered);
     };
 
     const goToUserProfile = () => {
-        // TODO
         console.log(`redirecting to @${username}...`);
+        navigate(`/profile/${username}`, { state: { userID: id } });
     };
+
     const onMouseEnterAvatarField = () => {
         // TODO
         console.log(`showing @${username} profile snippet at their avatar...`);
@@ -24,6 +42,7 @@ const UserCell = ({ name, username, avatar, bio, followsMe, followedByMe }) => {
             `stop showing @${username} profile snippet at their avatar`
         );
     };
+
     const onMouseEnterNameField = () => {
         // TODO
         console.log(`showing @${username} profile snippet at their name...`);
@@ -32,14 +51,20 @@ const UserCell = ({ name, username, avatar, bio, followsMe, followedByMe }) => {
         // TODO
         console.log(`stop showing @${username} profile snippet at their name`);
     };
-    const onButtonClick = (event) => {
-        // TODO
+
+    const onButtonClick = async (event) => {
         event.stopPropagation();
         console.log(`@${username} cell button is clicked..`);
-        if (followedByMe) {
+        if (followedByMeState) {
             console.log(`unfollow @${username}..`);
+            if (await unfollow(username, token)) {
+                setFollowedByMeState(false);
+            }
         } else {
             console.log(`follow @${username}..`);
+            if (await follow(username, token)) {
+                setFollowedByMeState(true);
+            }
         }
     };
 
@@ -72,10 +97,10 @@ const UserCell = ({ name, username, avatar, bio, followsMe, followedByMe }) => {
                         </div>
                     </div>
                     <div className="user-cell-upper-right">
-                        {(followedByMe || followsMe) && (
+                        {myID !== id && (
                             <button
                                 className={
-                                    followedByMe == false
+                                    followedByMeState === false
                                         ? 'black-small-button'
                                         : 'white-small-button'
                                 }
@@ -83,7 +108,7 @@ const UserCell = ({ name, username, avatar, bio, followsMe, followedByMe }) => {
                                 onMouseEnter={handleFollowingButtonHover}
                                 onMouseLeave={handleFollowingButtonHover}
                             >
-                                {followedByMe == false
+                                {followedByMeState === false
                                     ? 'Follow'
                                     : isFollowingButtonHovered
                                     ? 'Unfollow'

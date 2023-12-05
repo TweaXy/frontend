@@ -16,13 +16,21 @@ const ProfileBio = (props) => {
     };
     const navigateToFollowingPage = () => {
         navigate(`/${props.username}/following`, {
-            state: { name: props.name, username: props.username },
+            state: {
+                name: props.name,
+                username: props.username,
+                userID: props.IdProfile,
+            },
         });
     };
 
     const navigateToFollowersPage = () => {
         navigate(`/${props.username}/followers`, {
-            state: { name: props.name, username: props.username },
+            state: {
+                name: props.name,
+                username: props.username,
+                userID: props.IdProfile,
+            },
         });
     };
 
