@@ -14,6 +14,7 @@ import './Sidebar.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import HomePageSelectors from '../../shared/selectors/HomePage';
 
 export default function Sidebar({ userData, active }) {
     const [activeHome, setActiveHome] = useState(active == 0);
@@ -53,8 +54,8 @@ export default function Sidebar({ userData, active }) {
             <SidebarOption text="Messages" Icon={MailOutlineIcon} />
             <SidebarOption text="Lists" Icon={ListAltIcon} />
             <SidebarOption text="Communities" Icon={PeopleOutlineIcon} />
-            <div onClick={toProfile}>
-                <SidebarOption
+            <div data-test={HomePageSelectors.PROFILE_BUTTON} onClick={toProfile}>
+                <SidebarOption     
                     active={activeProfile}
                     text="Profile"
                     Icon={PermIdentityIcon}

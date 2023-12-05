@@ -5,6 +5,7 @@ const HomePageSelectors = {
     TRENDING_TOPIC_NUMBER: 'trending_topic_number_selector',
     TWEETBOX_FIELD: 'tweets_textfield',
     TWEETBOX_POST_BUTTON: 'tweets_post_button',
+    PROFILE_BUTTON: 'profile_button',
 };
 
 export default HomePageSelectors;
