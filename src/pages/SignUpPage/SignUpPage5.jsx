@@ -83,12 +83,10 @@ const SignUpPage5 = ({
                 data-test={SignUpSelectors.NEXT_BUTTON}
                 className="Hp-black-wide-button"
                 onClick={nextWindowHandler}
-                disabled={password.length === 0 || !isOKPass || showerror}
+                disabled={password.length === 0 || !isOKPass}
                 style={{
                     background:
-                        password.length === 0 || !isOKPass || showerror
-                            ? 'gray'
-                            : 'black',
+                        password.length === 0 || !isOKPass ? 'gray' : 'black',
                 }}
             >
                 Next

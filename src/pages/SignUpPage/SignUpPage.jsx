@@ -66,14 +66,13 @@ const SignUpPage = ({ onClose }) => {
                 dispatch(setUser(userData.user));
                 dispatch(setToken(userData.token));
                 navigate(`home`, { state: { firstTime: true } });
-                setwindowOpned(windowOpened + 1);
             } catch {
                 (err) => {
                     console.log('error signing up:', err.message);
                 };
             }
         }
-        setwindowOpned(windowOpened + 1);
+        if (windowOpened < 4) setwindowOpned(windowOpened + 1);
     };
     const passwordhandler = (ev) => {
         setpassword(ev.target.value);
@@ -138,4 +137,4 @@ const SignUpPage = ({ onClose }) => {
     );
 };
 
-export { SignUpPage as default, Errors,months };
+export { SignUpPage as default, Errors, months };
