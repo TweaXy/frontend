@@ -1,10 +1,17 @@
 import './Trending.css';
+import { useNavigate } from 'react-router-dom';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import HomePageSelectors from '../../shared/selectors/HomePage.js';
 
 export default function Trending({ trend, tweetsCount }) {
+
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate('/search', {state: {search: trend, isSearch: false}});
+      };
+
     return (
-        <div
+        <div onClick={handleClick}
             className="trending"
             data-test={`${HomePageSelectors.TRENDING_ITEM}`}
         >

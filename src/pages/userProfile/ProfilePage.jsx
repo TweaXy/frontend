@@ -16,9 +16,10 @@ const ProfilePage = () => {
     const userID = location.state?.userID;
 
     const token = useSelector((state) => state.user.token);
-
+    const currUserId= useSelector((state) => state.user.user.id);
     console.log('token from profile: ', token);
     console.log('user id from profile:', userID);
+    console.log('user id from profile:', currUserId);
 
     useEffect(() => {
         if (token && userID) {
@@ -51,7 +52,7 @@ const ProfilePage = () => {
                 <Sidebar active={1} />
                 {/**News feed */}
 
-                <Profile token={token} userID={userID} />
+                <Profile token={token} userID={userID} currUserId={currUserId} />
 
                 {/**Widgets */}
                 <Widget token={token} />

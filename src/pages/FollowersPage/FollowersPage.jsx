@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 const FollowersPage = () => {
     const location = useLocation();
     const name = location.state?.name;
+    const userID = location.state?.userID;
     const username = location.state?.username;
 
     const [users, setUsers] = useState([]);
@@ -52,14 +53,14 @@ const FollowersPage = () => {
     useEffect(() => {
         if (curPage === 1) {
             navigate(`/${username}/following`, {
-                state: { name: name, username: username },
+                state: { name: name, username: username, userID: userID },
             });
         }
-    }, [curPage, navigate, name, username]);
+    }, [curPage, navigate, name, username, userID]);
 
     const backToUserProfile = () => {
         console.log('navigating back to user profile');
-        // TODO navigate back to user profile
+        navigate(`/profile/${username}`, { state: { userID: userID } });
     };
 
     if (isPageLoading) {
@@ -85,9 +86,10 @@ const FollowersPage = () => {
                 {users.length === 0 && (
                     <div className="empty-users-cells-container">
                         <div className="span-container">
-                            <span className="header-span">{`@${username} isn't following anyone`}</span>
+                            <span className="header-span">{`@${username} has no followers`}</span>
                             <span className="body-span">
-                                Once they follow accounts, they'll show up here.
+                                Once the account has followers, they'll show up
+                                here.
                             </span>
                         </div>
                     </div>
