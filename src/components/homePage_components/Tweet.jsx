@@ -12,7 +12,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import './Tweet.css';
 import MediaChecker from './MediaChecker';
 import { Padding } from '@mui/icons-material';
-import { apiLikeTweet , apiDislikeTweet} from '../../apis/tweetApis/LikeTweet';
+import { apiLikeTweet, apiDislikeTweet } from '../../apis/tweetApis/LikeTweet';
 import e from 'cors';
 import { token } from 'stylis';
 export default function Tweet({
@@ -28,13 +28,13 @@ export default function Tweet({
     insights,
     tweetId,
     isUserLiked,
-    userData//temproray until we solve the token issue and then can be exported globally
+    userData, //temproray until we solve the token issue and then can be exported globally
 }) {
     const [tweetLikes, setTweetLikes] = useState(likes);
     const [tweetReplies, setTweetComments] = useState(replies);
     const [tweetReposts, setTweetReposts] = useState(reposts);
     const [tweetInsights, setTweet] = useState(insights);
-    const [isLikeActive,setLikeActive] =useState(isUserLiked);
+    const [isLikeActive, setLikeActive] = useState(isUserLiked);
     const activityIcon1 = useRef(null);
     const activityIcon2 = useRef(null);
     const activityIcon3 = useRef(null);
@@ -99,9 +99,9 @@ export default function Tweet({
                 // Reset styles when mouse leaves
                 activityIcon.style.backgroundColor = ''; // Set to the default or remove this line if not needed
                 activityIcon.style.borderRadius = '';
-                if(!(index==2&&isLikeActive)){
-                icons[index].style.color = 'var(--twitter-greyColor)';
-                iconInteractions[index].style.color = '';
+                if (!(index == 2 && isLikeActive)) {
+                    icons[index].style.color = 'var(--twitter-greyColor)';
+                    iconInteractions[index].style.color = '';
                 }
                 activityIcon.style.transition = '';
             });
@@ -138,26 +138,28 @@ export default function Tweet({
             iconInteraction.addEventListener('mouseleave', () => {
                 activityIcons[index].style.backgroundColor = '';
                 activityIcons[index].style.borderRadius = '';
-                if(!(index==2&&isLikeActive)){
-                iconInteraction.style.color = '';
-                icons[index].style.color = 'var(--twitter-greyColor)';
+                if (!(index == 2 && isLikeActive)) {
+                    iconInteraction.style.color = '';
+                    icons[index].style.color = 'var(--twitter-greyColor)';
                 }
                 activityIcons[index].style.transition = '';
             });
         });
     }, []);
 
-    const likeDislikeTweetHandler = (e) =>{
+    const likeDislikeTweetHandler = (e) => {
         //call api likeDislikeTweetHandler
-        if(isLikeActive){
-            //dislike it 
-            apiDislikeTweet(tweetId,userData.token);
+        if (isLikeActive) {
+            //dislike it
+            apiDislikeTweet(tweetId, userData.token);
+            setTweetLikes(likes => likes - 1);
         } else {
-            //like it 
-            apiLikeTweet(tweetId,userData.token);
+            //like it
+            apiLikeTweet(tweetId, userData.token);
+            setTweetLikes(likes => likes + 1);
         }
         setLikeActive(!isLikeActive);
-    }
+    };
 
     // we should have a function to handle the change on clicking any
     return (
@@ -230,9 +232,18 @@ export default function Tweet({
 
                         <div className="tweet-icon">
                             {/* icon */}
-                            <div className="activity-icon" ref={activityIcon3} onClick={likeDislikeTweetHandler}>
-                                {!isLikeActive && <FavoriteBorderOutlinedIcon/>}
-                                {isLikeActive && <FavoriteIcon className='like-active'/>}
+                            {/* <div ref={ctivityIcon3}></div> */}
+                            <div
+                                className="activity-icon"
+                                ref={activityIcon3}
+                                onClick={likeDislikeTweetHandler}
+                            >
+                                {!isLikeActive && (
+                                    <FavoriteBorderOutlinedIcon />
+                                )}
+                                {isLikeActive != false && (
+                                    <FavoriteIcon className="like-active" />
+                                )}
                             </div>
                             <span
                                 className="icon-interaction"
@@ -240,7 +251,7 @@ export default function Tweet({
                                 onClick={likeDislikeTweetHandler}
                             >
                                 <span className="interaction">
-                                    {tweetLikes != 0 && `${tweetLikes}`}
+                                    {tweetLikes > 0 && `${tweetLikes}`}
                                 </span>
                             </span>
                         </div>
