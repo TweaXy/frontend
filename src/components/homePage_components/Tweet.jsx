@@ -27,13 +27,14 @@ export default function Tweet({
     reposts,
     insights,
     tweetId,
+    isUserLiked,
     userData//temproray until we solve the token issue and then can be exported globally
 }) {
     const [tweetLikes, setTweetLikes] = useState(likes);
     const [tweetReplies, setTweetComments] = useState(replies);
     const [tweetReposts, setTweetReposts] = useState(reposts);
     const [tweetInsights, setTweet] = useState(insights);
-    const [isLikeActive,setLikeActive] =useState(false);
+    const [isLikeActive,setLikeActive] =useState(isUserLiked);
     const activityIcon1 = useRef(null);
     const activityIcon2 = useRef(null);
     const activityIcon3 = useRef(null);

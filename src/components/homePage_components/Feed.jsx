@@ -39,6 +39,7 @@ const Feed = ({ userData }) => {
                         likes={tweet.mainInteraction.likesCount}
                         insights={tweet.mainInteraction.viewsCount}
                         tweetId={tweet.mainInteraction.id}
+                        isUserLiked={tweet.mainInteraction.isUserInteract.isUserLiked}
                         userData={userData}
                     />
                 ))}
