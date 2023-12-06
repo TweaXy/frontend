@@ -9,21 +9,19 @@ import SignUpSelectors from '../../shared/selectors/SignUp';
 const date = 'Date of birth';
 const create = 'Create your account';
 const months = [
-    { name: 'January', value: '0' },
-    { name: 'February', value: '1' },
-    { name: 'March', value: '2' },
-    { name: 'April', value: '3' },
-    { name: 'May', value: '4' },
-    { name: 'June', value: '5' },
-    { name: 'July', value: '6' },
-    { name: 'August', value: '7' },
-    { name: 'September', value: '8' },
-    { name: 'October', value: '9' },
-    { name: 'November', value: '10' },
-    { name: 'December', value: '11' },
+    { name: 'January', value: '1' },
+    { name: 'February', value: '2' },
+    { name: 'March', value: '3' },
+    { name: 'April', value: '4' },
+    { name: 'May', value: '5' },
+    { name: 'June', value: '6' },
+    { name: 'July', value: '7' },
+    { name: 'August', value: '8' },
+    { name: 'September', value: '9' },
+    { name: 'October', value: '10' },
+    { name: 'November', value: '11' },
+    { name: 'December', value: '12' },
 ];
-const years = Array.from({ length: 121 }, (_, i) => 2023 - i);
-
 const SignUpPage1 = ({
     nextWindowHandler,
     Data1,
@@ -31,6 +29,7 @@ const SignUpPage1 = ({
     Data2,
     changeData2,
 }) => {
+    const years = Array.from({ length: 121 }, (_, i) => 2023 - i);
     const [iscomplete, setiscomplete] = useState(false);
     const [uniqueEmail, setuniqueEmail] = useState(true);
     useEffect(

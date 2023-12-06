@@ -11,7 +11,6 @@ import { useState, useEffect } from 'react';
 import { isAcceptebalePass } from '../../apis/Email';
 import { Errors } from './SignUpPage';
 import SignUpSelectors from '../../shared/selectors/SignUp';
-
 const SignUpPage5 = ({
     canbeuser,
     password,
@@ -28,7 +27,7 @@ const SignUpPage5 = ({
     };
     const [isOKPass, setisOKPass] = useState(true);
     useEffect(() => {
-        if (password.length > 3) isAcceptebalePass(password, setisOKPass);
+        if (password.length > 0) isAcceptebalePass(password, setisOKPass);
     }, [password]);
     useEffect(() => {
         if (!canbeuser) setshowerror(true);
@@ -84,9 +83,12 @@ const SignUpPage5 = ({
                 data-test={SignUpSelectors.NEXT_BUTTON}
                 className="Hp-black-wide-button"
                 onClick={nextWindowHandler}
-                disabled={!isOKPass}
+                disabled={password.length === 0 || !isOKPass || showerror}
                 style={{
-                    background: isOKPass ? 'black' : 'gray',
+                    background:
+                        password.length === 0 || !isOKPass || showerror
+                            ? 'gray'
+                            : 'black',
                 }}
             >
                 Next
@@ -94,5 +96,4 @@ const SignUpPage5 = ({
         </div>
     );
 };
-
 export default SignUpPage5;

@@ -4,7 +4,6 @@ import TweetBox from "./TweetBox";
 import Tweet from "./Tweet";
 import { apiGetTweet } from '../../apis/timelineApis/getTweets';
 import { useEffect, useState } from "react";
-
 export default function Feed({userData}) {
     const [tweets,setTweets]   =useState([])
     const media= ["https://th.bing.com/th?id=OIP.F7QWYr2AWdxfu-5zrFbhxQHaFj&w=288&h=216&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2" ];

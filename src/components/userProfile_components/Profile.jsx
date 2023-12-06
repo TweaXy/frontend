@@ -1,5 +1,6 @@
 import ProfileHeader from './ProfileHeader';
 import './Profile.css';
+import '../homePage_components/Feed.css';
 import ProfileBio from './ProfileBio';
 import { useState } from 'react';
 import TabsProfile from './tabsProfile';
@@ -38,24 +39,29 @@ function Profile({ token, userID }) {
     }
     return (
         <>
-            <div className="profile">
-                <ProfileHeader username={ndata.data.user.name} noPosts={0} />
-                <ProfileBio
-                    name={ndata.data.user.name}
-                    username={ndata.data.user.username}
-                    followingNum={ndata.data.user._count.following}
-                    followersNum={ndata.data.user._count.followedBy}
-                    bio={ndata.data.user.bio}
-                    website={ndata.data.user.website}
-                    location={ndata.data.user.location}
-                    ProfileImage={ndata.data.user.avatar}
-                    token={token}
-                    JoinedAt={ndata.data.user.joinedDate}
-                    /* ndata.data.user.joinedDate*/
-                />
-                {/*}  ndata.data.user.joinedDate
-                 */}
-                <TabsProfile userData={ndata.data.user} />
+            <div className="feed">
+                <div className="profile">
+                    <ProfileHeader
+                        username={ndata.data.user.name}
+                        noPosts={0}
+                    />
+                    <ProfileBio
+                        name={ndata.data.user.name}
+                        username={ndata.data.user.username}
+                        followingNum={ndata.data.user._count.following}
+                        followersNum={ndata.data.user._count.followedBy}
+                        bio={ndata.data.user.bio}
+                        website={ndata.data.user.website}
+                        location={ndata.data.user.location}
+                        ProfileImage={ndata.data.user.avatar}
+                        token={token}
+                        JoinedAt={ndata.data.user.joinedDate}
+                        /* ndata.data.user.joinedDate*/
+                    />
+                    {/*}  ndata.data.user.joinedDate
+                     */}
+                    <TabsProfile userData={ndata.data.user} />
+                </div>
             </div>
         </>
     );

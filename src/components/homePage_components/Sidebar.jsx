@@ -16,23 +16,15 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 export default function Sidebar({ userData, active }) {
-    const [activeHome, setActiveHome] = useState(active == 0);
-    const [activeProfile, setActiveProfile] = useState(active == 1);
     const navigate = useNavigate();
-
     console.log('sidebar user data:', userData);
-
     const toProfile = () => {
-        setActiveHome(false);
-        setActiveProfile(true);
         navigate(`/profile/${userData.user.username}`, {
             state: { userID: userData.user.id },
         });
     };
 
     const toHome = () => {
-        setActiveHome(true);
-        setActiveProfile(false);
         navigate('/home', {
             state: { userData: { userData }, firstTime: false },
         });
@@ -43,7 +35,7 @@ export default function Sidebar({ userData, active }) {
 
             <div onClick={toHome}>
                 <SidebarOption
-                    active={activeHome}
+                    active={active === 0}
                     text="Home"
                     Icon={HomeOutlinedIcon}
                 />
@@ -55,7 +47,7 @@ export default function Sidebar({ userData, active }) {
             <SidebarOption text="Communities" Icon={PeopleOutlineIcon} />
             <div onClick={toProfile}>
                 <SidebarOption
-                    active={activeProfile}
+                    active={active === 1}
                     text="Profile"
                     Icon={PermIdentityIcon}
                 />

@@ -48,7 +48,7 @@ const ProfilePage = () => {
         <>
             <div className="home-page">
                 {/**Side bar */}
-                <Sidebar active={0} />
+                <Sidebar active={1} />
                 {/**News feed */}
 
                 <Profile token={token} userID={userID} />
