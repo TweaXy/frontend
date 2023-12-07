@@ -5,7 +5,7 @@ import Tweet from './Tweet';
 import { apiGetTweet } from '../../apis/timelineApis/getTweets';
 import { useEffect, useState } from 'react';
 
-const Feed = ({ userData }) => {
+const Feed = ({ userData, isTherePopUpWindow }) => {
     const [tweets, setTweets] = useState([]);
     const media = [
         'https://th.bing.com/th?id=OIP.F7QWYr2AWdxfu-5zrFbhxQHaFj&w=288&h=216&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2',
@@ -22,7 +22,10 @@ const Feed = ({ userData }) => {
     }, []);
     return (
         <div className="feed">
-            <FeedHeader feedHeader_acitve={0} />
+            <FeedHeader
+                feedHeader_acitve={0}
+                isTherePopUpWindow={isTherePopUpWindow}
+            />
             <TweetBox userData={userData} getTweets={getTweets} />
 
             {tweets.length > 0 &&
@@ -39,7 +42,9 @@ const Feed = ({ userData }) => {
                         likes={tweet.mainInteraction.likesCount}
                         insights={tweet.mainInteraction.viewsCount}
                         tweetId={tweet.mainInteraction.id}
-                        isUserLiked={tweet.mainInteraction.isUserInteract.isUserLiked}
+                        isUserLiked={
+                            tweet.mainInteraction.isUserInteract.isUserLiked
+                        }
                         userData={userData}
                     />
                 ))}

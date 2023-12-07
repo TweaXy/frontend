@@ -1,6 +1,6 @@
 import './HomePage.css';
 import Sidebar from '../../components/homePage_components/Sidebar';
-import {Feed} from '../../components/homePage_components/Feed';
+import { Feed } from '../../components/homePage_components/Feed';
 import Widget from '../../components/homePage_components/Widget';
 import { useEffect, useState } from 'react';
 import { CircularProgress } from '@mui/material';
@@ -45,7 +45,7 @@ const HomePage = () => {
         <>
             <div className="home-page">
                 <Sidebar userData={userData} active={0} />
-                <Feed userData={userData} isTherePopUpWindow={false} />
+                <Feed userData={userData} isTherePopUpWindow={isWindowOpen} />
                 <Widget token={token} />
             </div>
             {isWindowOpen && (
