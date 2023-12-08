@@ -13,19 +13,20 @@ const HomePage = () => {
     const [isWindowOpen, setIsWindowOpen] = useState(Ft);
     const token = useSelector((state) => state.user.token);
     const user = useSelector((state) => state.user.user);
-    const userData = { user, token };
+    const [userData, setUserData] = useState({});
     const closeWindow = () => {
         setIsWindowOpen(false);
     };
     const [isPageLoading, setIsPageLoading] = useState(true);
     useEffect(() => {
-        if (userData) {
+        if (user && token) {
+            setUserData({ user, token });
             setIsPageLoading(false);
             console.log('user data from home page', userData);
         } else {
             console.log('Loading home page..');
         }
-    }, [userData]);
+    }, [user, token, userData]);
 
     if (isPageLoading) {
         return (
@@ -52,7 +53,8 @@ const HomePage = () => {
                 <SignUpHome
                     onClose={closeWindow}
                     UN={user.username}
-                    authToken={token}
+                    token={token}
+                    user={user}
                 />
             )}
         </>

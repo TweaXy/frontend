@@ -1,4 +1,4 @@
-let urlDeleteBanner = 'http://16.171.65.142:3000/api/v1/users/profileBanner';
+let urlDeleteBanner = 'https://tweaxybackend.mywire.org/api/v1/users/profileBanner';
 
 const deleteBannerApi = (authToken) => {
     fetch(urlDeleteBanner, {

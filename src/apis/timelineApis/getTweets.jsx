@@ -26,7 +26,7 @@
 //       console.error("There was a problem with the fetch operation:", error);
 //     }
 //   };
-const getTweetURL =`http://16.171.65.142:3000/api/v1/home?limit=16&offset=0`;
+const getTweetURL =`https://tweaxybackend.mywire.org/api/v1/home?limit=16&offset=0`;
   const apiGetTweet = async (token) => {
     console.log("this is a token" + token);
       try {

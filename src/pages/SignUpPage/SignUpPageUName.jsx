@@ -3,11 +3,13 @@ import './SignUpHome.css';
 import { isUniqueUsername } from '../../apis/Email';
 import { TextField } from '@mui/material';
 import { Errors } from './SignUpPage';
-const UN = 'What should we call you?';
 const uniq = 'Your @username is unique. You can always change it later.';
 import UsernameUpdate from '../../apis/Usernameupdate';
-const SignUpPageuserName = ({ next_Handler, UN, authToken }) => {
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../redux/actions';
+const SignUpPageuserName = ({ next_Handler, UN, token, user }) => {
     const [username, setusername] = useState('');
+    const dispatch = useDispatch();
     const usernameHandler = (ev) => {
         setusername(ev.target.value);
     };
@@ -21,7 +23,8 @@ const SignUpPageuserName = ({ next_Handler, UN, authToken }) => {
         [username]
     );
     const clickHandler = () => {
-        UsernameUpdate(username, authToken);
+        UsernameUpdate(username, token);
+        dispatch(setUser({ ...user, username: username }));
         next_Handler();
     };
     return (

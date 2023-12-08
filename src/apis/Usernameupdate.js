@@ -1,4 +1,4 @@
-let UsernameupdateUrl = 'http://16.171.65.142:3000/api/v1/users/updateUserName';
+let UsernameupdateUrl = 'https://tweaxybackend.mywire.org/api/v1/users/updateUserName';
 
 const UsernameUpdate = (_username, authToken) => {
     fetch(UsernameupdateUrl, {

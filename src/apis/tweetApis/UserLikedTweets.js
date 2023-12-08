@@ -1,4 +1,4 @@
-const UserLikedTweetsURL = `http://16.171.65.142:3000/api/v1/users`;
+const UserLikedTweetsURL = `https://tweaxybackend.mywire.org/api/v1/users`;
 const GetTweetsuserLikes = async (_userid, token, _limit, _offset) => {
     console.log('username from getLikedtweets is', _userid, 'token is', token);
     const urlWithQueryParam = `${UserLikedTweetsURL}/${encodeURIComponent(

@@ -1,5 +1,5 @@
 const follow = async (username, token) => {
-    const url = `http://16.171.65.142:3000/api/v1/users/follow/${username}`;
+    const url = `https://tweaxybackend.mywire.org/api/v1/users/follow/${username}`;
 
     try {
         const response = await fetch(url, {

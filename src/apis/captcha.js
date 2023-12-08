@@ -1,4 +1,4 @@
-let CaptchaUrl = 'http://16.171.65.142:3000/api/v1/auth/captcha';
+let CaptchaUrl = 'https://tweaxybackend.mywire.org/api/v1/auth/captcha';
 
 const captchaApi = (captcha) => {
     fetch(CaptchaUrl, {

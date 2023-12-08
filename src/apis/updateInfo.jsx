@@ -1,4 +1,4 @@
-// let urlupdateInfo = 'http://16.171.65.142:3000/api/v1/users';
+// let urlupdateInfo = 'https://tweaxybackend.mywire.org/api/v1/users';
 
 // const updateInfo = (
 //     _name,
@@ -49,7 +49,7 @@
 
 // export { updateInfo };
 
-const PictureupdateUrl = 'http://16.171.65.142:3000/api/v1/users';
+const PictureupdateUrl = 'https://tweaxybackend.mywire.org/api/v1/users';
 const updateInfo = (
     _name,
     _birthdayDate,

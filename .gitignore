@@ -32,3 +32,6 @@ yarn.lock
 
 # package lock
 package-lock.json
+
+# covearge test results
+coverage/

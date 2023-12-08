@@ -1,5 +1,5 @@
 const changePassword = async (curPassword, newPassword, conPassword, token) => {
-    const url = 'http://16.171.65.142:3000/api/v1/users/password';
+    const url = 'https://tweaxybackend.mywire.org/api/v1/users/password';
 
     console.log('changing user password...');
 

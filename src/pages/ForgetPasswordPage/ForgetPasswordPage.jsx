@@ -49,7 +49,7 @@ const ForgetPasswordPage = () => {
     forgetPasswordSchema
       .validate({ body: { UUID: userUUID } })
       .then(() => {
-        fetch("http://16.171.65.142:3000/api/v1/auth/forgetPassword", {
+        fetch("https://tweaxybackend.mywire.org/api/v1/auth/forgetPassword", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ UUID: userUUID }),
@@ -88,7 +88,7 @@ const ForgetPasswordPage = () => {
     }
     setIsPending(true);
 
-    const lnk = "http://16.171.65.142:3000/api/v1/auth/checkResetToken"+"/"+userUUID+"/"+userCode;
+    const lnk = "https://tweaxybackend.mywire.org/api/v1/auth/checkResetToken"+"/"+userUUID+"/"+userCode;
 
     console.log(lnk);
     fetch(lnk, {
@@ -125,7 +125,7 @@ const ForgetPasswordPage = () => {
       setUserUUIDError("The two entered passwords do not match!");
       return;
     }
-    const lnk = "http://16.171.65.142:3000/api/v1/auth/resetPassword"+"/"+userUUID+"/"+userCode;
+    const lnk = "https://tweaxybackend.mywire.org/api/v1/auth/resetPassword"+"/"+userUUID+"/"+userCode;
     fetch(lnk, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
