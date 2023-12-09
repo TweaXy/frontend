@@ -4,7 +4,7 @@ import UsersCells from '../../components/UsersCells/UsersCells';
 import Widget from '../../components/homePage_components/Widget';
 import Sidebar from '../../components/homePage_components/Sidebar';
 import FollowingFollowersHeader from '../../components/FollowingFollowersHeader/FollowingFollowersHeader';
-import { CircularProgress } from '@mui/material';
+import LoadingPage from '../../components/LoadingPage/LoadingPage';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
@@ -75,11 +75,7 @@ const FollowersPage = () => {
     };
 
     if (isPageLoading) {
-        return (
-            <div className="loading-page">
-                <CircularProgress />
-            </div>
-        );
+        return <LoadingPage />;
     }
 
     return (

@@ -2,11 +2,11 @@ import './SettingsPage.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CircularProgress } from '@mui/material';
 import Sidebar from '../../components/homePage_components/Sidebar';
 import ChangePasswordButton from '../../components/ChangePasswordButton/ChangePasswordButton';
 import ChangeUsernameButton from '../../components/ChangeUsernameButton/ChangeUsernameButton';
 import { clearUser } from '../../redux/actions';
+import LoadingPage from '../../components/LoadingPage/LoadingPage';
 
 const SettingsPage = () => {
     const [isPageLoading, setIsPageLoading] = useState(true);
@@ -35,11 +35,7 @@ const SettingsPage = () => {
     }, [user, token, navigate, dispatch]);
 
     if (isPageLoading) {
-        return (
-            <div className="loading-page">
-                <CircularProgress />
-            </div>
-        );
+        return <LoadingPage />;
     }
 
     return (
