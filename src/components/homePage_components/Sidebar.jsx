@@ -14,10 +14,11 @@ import './Sidebar.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import AccountButton from '../AccountButton/AccountButton';
 
-export default function Sidebar({ userData, active }) {
+export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
     const navigate = useNavigate();
-    console.log('sidebar user data:', userData);
+
     const toProfile = () => {
         navigate(`/profile/${userData.user.username}`, {
             state: { userID: userData.user.id },
@@ -29,6 +30,7 @@ export default function Sidebar({ userData, active }) {
             state: { userData: { userData }, firstTime: false },
         });
     };
+
     return (
         <div className="sidebar">
             <TwitterIcon className="twitter--icon" />
@@ -54,8 +56,6 @@ export default function Sidebar({ userData, active }) {
             </div>
             <div />
             <SidebarOption text="Messages" Icon={MailOutlineIcon} />
-            <SidebarOption text="Lists" Icon={ListAltIcon} />
-            <SidebarOption text="Communities" Icon={PeopleOutlineIcon} />
             <div onClick={toProfile}>
                 <SidebarOption
                     active={active === 1}
@@ -77,6 +77,16 @@ export default function Sidebar({ userData, active }) {
             <Button variant="outlined" className="sidebar--tweet">
                 Post
             </Button>
+
+            <div className="account-btn">
+                <AccountButton
+                    userAvatar={userData.user.avatar}
+                    name={userData.user.name}
+                    username={userData.user.username}
+                    token={userData.token}
+                    setIsTherePopUpWindow={setIsTherePopUpWindow}
+                />
+            </div>
         </div>
     );
 }

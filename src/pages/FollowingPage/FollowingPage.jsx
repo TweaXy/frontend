@@ -4,10 +4,11 @@ import UsersCells from '../../components/UsersCells/UsersCells';
 import Widget from '../../components/homePage_components/Widget';
 import Sidebar from '../../components/homePage_components/Sidebar';
 import FollowingFollowersHeader from '../../components/FollowingFollowersHeader/FollowingFollowersHeader';
-import { CircularProgress } from '@mui/material';
+import LoadingPage from '../../components/LoadingPage/LoadingPage';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearUser } from '../../redux/actions';
 
 const FollowingPage = () => {
     const location = useLocation();
@@ -20,16 +21,26 @@ const FollowingPage = () => {
     const [isPageLoading, setIsPageLoading] = useState(true);
 
     const token = useSelector((state) => state.user.token);
+    const user = useSelector((state) => state.user.user);
+
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        if (token) {
-            console.log('token from following page', token);
+        if (token && user) {
             setIsPageLoading(false);
-        } else {
-            console.log('Loading following page...');
         }
-    }, [token]);
+
+        const timeoutId = setTimeout(() => {
+            if (token && user) {
+                setIsPageLoading(false);
+            } else {
+                dispatch(clearUser());
+                navigate('/');
+            }
+        }, 2000);
+        return () => clearTimeout(timeoutId);
+    }, [token, user, dispatch, navigate]);
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -63,16 +74,12 @@ const FollowingPage = () => {
     };
 
     if (isPageLoading) {
-        return (
-            <div className="loading-page">
-                <CircularProgress />
-            </div>
-        );
+        return <LoadingPage />;
     }
 
     return (
         <div className="following-page-container">
-            <Sidebar />
+            <Sidebar userData={{ user: user, token: token }} />
             <div className="following-widget">
                 <FollowingFollowersHeader
                     name={name}

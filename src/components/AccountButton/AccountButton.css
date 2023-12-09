@@ -1,0 +1,50 @@
+.account-btn-container {
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-account-btn {
+    flex-grow: 1;
+    -webkit-justify-content: space-between !important;
+    justify-content: space-between;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.account-btn-container>.css-1e6y48t-MuiButtonBase-root-MuiButton-root:hover {
+    background-color: transparent;
+}
+
+.user-account-btn>.account-btn-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.user-account-btn>.account-btn-left>.account-btn-body-wrapper {
+    margin-left: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-transform: none;
+    line-height: 1.25;
+    flex-wrap: wrap;
+}
+
+.user-account-btn>.account-btn-left>.account-btn-body-wrapper>.name-span {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0F1419;
+}
+
+.user-account-btn>.account-btn-left>.account-btn-body-wrapper>.username-span {
+    font-size: 15px;
+    color: var(--twitter-greyColor);
+}
+
+.more-horiz {
+    color: #0F1419;
+}
