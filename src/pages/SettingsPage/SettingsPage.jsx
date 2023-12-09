@@ -18,6 +18,10 @@ const SettingsPage = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        if (token && user) {
+            setIsPageLoading(false);
+        }
+
         const timeoutId = setTimeout(() => {
             if (user && token) {
                 setIsPageLoading(false);
@@ -25,7 +29,7 @@ const SettingsPage = () => {
                 dispatch(clearUser());
                 navigate('/');
             }
-        }, 3000);
+        }, 2000);
 
         return () => clearTimeout(timeoutId);
     }, [user, token, navigate, dispatch]);

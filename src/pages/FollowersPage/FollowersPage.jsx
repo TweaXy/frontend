@@ -27,6 +27,10 @@ const FollowersPage = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        if (token && user) {
+            setIsPageLoading(false);
+        }
+
         const timeoutId = setTimeout(() => {
             if (token && user) {
                 setIsPageLoading(false);
@@ -34,7 +38,8 @@ const FollowersPage = () => {
                 dispatch(clearUser());
                 navigate('/');
             }
-        }, 3000);
+        }, 2000);
+
         return () => clearTimeout(timeoutId);
     }, [token, user, dispatch, navigate]);
 
