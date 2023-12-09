@@ -3,18 +3,39 @@ import Tweet from '../homePage_components/Tweet';
 import GetTweetsuserLikes from '../../apis/tweetApis/UserLikedTweets';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-const TweetsUSerLikes = () => {
+import { CircularProgress } from '@mui/material';
+const TweetsUSerLikes = ({ userID }) => {
     const [tweets, setTweets] = useState([]);
+    const [isPageLoading, setIsPageLoading] = useState(true);
     const token = useSelector((state) => state.user.token);
-    const user = useSelector((state) => state.user.user);
     const getTweets = async () => {
-        const tweetsResponse = await GetTweetsuserLikes(user.id, token, 10, 0);
+        const tweetsResponse = await GetTweetsuserLikes(userID, token, 10, 0);
         console.log('Tweets User Likes response', tweetsResponse);
         setTweets(tweetsResponse);
     };
     useEffect(() => {
+        if (token) {
+            setIsPageLoading(false);
+        } else {
+            console.log('profile page is loading');
+        }
+    }, [token]);
+    useEffect(() => {
         getTweets();
-    }, []);
+    }, [isPageLoading]);
+    if (isPageLoading) {
+        return (
+            <div
+                style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: '100vh',
+                }}
+            >
+                <CircularProgress />
+            </div>
+        );
+    }
     return (
         <>
             {tweets.length > 0 &&

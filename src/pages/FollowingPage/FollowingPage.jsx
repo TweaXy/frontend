@@ -20,7 +20,6 @@ const FollowingPage = () => {
     const [isPageLoading, setIsPageLoading] = useState(true);
 
     const token = useSelector((state) => state.user.token);
-
     const navigate = useNavigate();
 
     useEffect(() => {

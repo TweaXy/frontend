@@ -41,7 +41,18 @@ export default function Sidebar({ userData, active }) {
                 />
             </div>
             <SidebarOption text="Explore" Icon={SearchIcon} />
-            <SidebarOption text="Notifications" Icon={NotificationsNoneIcon} />
+            <div
+                onClick={() => {
+                    navigate('/notifactions');
+                }}
+            >
+                <SidebarOption
+                    active={active === 3}
+                    text="Notifications"
+                    Icon={NotificationsNoneIcon}
+                />
+            </div>
+            <div />
             <SidebarOption text="Messages" Icon={MailOutlineIcon} />
             <SidebarOption text="Lists" Icon={ListAltIcon} />
             <SidebarOption text="Communities" Icon={PeopleOutlineIcon} />
@@ -57,7 +68,11 @@ export default function Sidebar({ userData, active }) {
                     navigate('/settings');
                 }}
             >
-                <SidebarOption text="Settings" Icon={SettingsIcon} active={active == 2}/>
+                <SidebarOption
+                    text="Settings"
+                    Icon={SettingsIcon}
+                    active={active == 2}
+                />
             </div>
             <Button variant="outlined" className="sidebar--tweet">
                 Post

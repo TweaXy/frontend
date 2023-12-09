@@ -13,7 +13,6 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
 
     const getTweets = async () => {
         const tweetsResponse = await apiGetTweet(userData.token);
-
         console.log(tweetsResponse);
         setTweets(tweetsResponse);
     };
@@ -45,7 +44,8 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                         isUserLiked={
                             tweet.mainInteraction.isUserInteract.isUserLiked
                         }
-                        userData={userData}
+                        token={userData.token}
+                        userID={tweet.mainInteraction.user.id}
                     />
                 ))}
             {/* <Tweet
