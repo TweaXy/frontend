@@ -4,7 +4,7 @@ import './Avatar.css';
 import { deepOrange, deepPurple } from '@mui/material/colors';
 export default function AvatarBox({ img }) {
     if (!img || typeof img !== 'string' || !img) {
-        console.log('not image path');
+        // console.log('not image path');
     }
 
     return (

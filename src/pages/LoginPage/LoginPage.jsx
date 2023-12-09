@@ -74,7 +74,7 @@ const LoginPage = ({ onClose, openSignUpWindow }) => {
                     console.log('user data: ', userData);
                     dispatch(setUser(userData.user));
                     dispatch(setToken(userData.token));
-                    navigate('home', { state: { firstTime: false } });
+                    navigate('/home', { state: { firstTime: false } });
                     console.log('logged in successfully!');
                 } else {
                     setLoginError('user is not found');
@@ -94,7 +94,8 @@ const LoginPage = ({ onClose, openSignUpWindow }) => {
                 console.log('user data: ', userData);
                 dispatch(setUser(userData.user));
                 dispatch(setToken(userData.token));
-                navigate('home', { state: { firstTime: false } });
+                navigate('/home', { state: { firstTime: false } });
+                onClose();
                 console.log('logged in successfully!');
             } else {
                 setLoginWithGoogleError('user is not found');
