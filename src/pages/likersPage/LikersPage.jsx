@@ -1,16 +1,15 @@
-import './FollowersPage.css';
-import getUserFollowers from '../../apis/getUserFollowers';
+import './LikersPage.css';
 import UsersCells from '../../components/UsersCells/UsersCells';
 import Widget from '../../components/homePage_components/Widget';
 import Sidebar from '../../components/homePage_components/Sidebar';
 import FollowingFollowersHeader from '../../components/FollowingFollowersHeader/FollowingFollowersHeader';
-import LoadingPage from '../../components/LoadingPage/LoadingPage';
+import { CircularProgress } from '@mui/material';
+import LikersHeader from '../../components/likersHeader/LikersHeader';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
-import { clearUser } from '../../redux/actions';
+import { useSelector } from 'react-redux';
 
-const FollowersPage = () => {
+const LikersPage = () => {
     const location = useLocation();
     const name = location.state?.name;
     const userID = location.state?.userID;
@@ -21,29 +20,22 @@ const FollowersPage = () => {
     const [isPageLoading, setIsPageLoading] = useState(true);
 
     const token = useSelector((state) => state.user.token);
-    const user = useSelector((state) => state.user.user);
-
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    {
+        /*} 
+
+   
 
     useEffect(() => {
-        if (token && user) {
+        if (token) {
+            console.log('token from likers page', token);
             setIsPageLoading(false);
+        } else {
+            console.log('Loading likers page...');
         }
+    }, [token]);
 
-        const timeoutId = setTimeout(() => {
-            if (token && user) {
-                setIsPageLoading(false);
-            } else {
-                dispatch(clearUser());
-                navigate('/');
-            }
-        }, 2000);
-
-        return () => clearTimeout(timeoutId);
-    }, [token, user, dispatch, navigate]);
-
-    useEffect(() => {
+   {/*} useEffect(() => {
         const fetchUsers = async () => {
             try {
                 const fetchedUsers = await getUserFollowers({
@@ -55,48 +47,43 @@ const FollowersPage = () => {
                 console.log('Error fetching user followers: ', error.message);
             }
         };
-
+   
         if (!isPageLoading) {
             fetchUsers();
         }
     }, [username, token, isPageLoading]);
 
-    useEffect(() => {
-        if (curPage === 1) {
-            navigate(`/${username}/following`, {
-                state: { name: name, username: username, userID: userID },
-            });
-        }
-    }, [curPage, navigate, name, username, userID]);
-
-    const backToUserProfile = () => {
-        console.log('navigating back to user profile');
-        navigate(`/profile/${username}`, { state: { userID: userID } });
-    };
+   
+  
 
     if (isPageLoading) {
-        return <LoadingPage />;
+        return (
+            <div className="loading-page">
+                <CircularProgress />
+            </div>
+        );
+    }  */
     }
-
+    const arrowBackRoute = () => navigate(-1);
     return (
         <div className="following-page-container">
-            <Sidebar userData={{ user: user, token: token }} />
+            <Sidebar />
             <div className="following-widget">
-                <FollowingFollowersHeader
+                <LikersHeader
                     name={name}
                     username={username}
                     curPage={curPage}
                     setCurPage={setCurPage}
-                    navigateBack={backToUserProfile}
+                    navigateBack={arrowBackRoute}
                 />
                 <UsersCells users={users} />
                 {users.length === 0 && (
                     <div className="empty-users-cells-container">
                         <div className="span-container">
-                            <span className="header-span">{`@${username} has no followers`}</span>
+                            <span className="header-span">No Likes yet</span>
                             <span className="body-span">
-                                Once the account has followers, they'll show up
-                                here.
+                                When someone taps the heart to Like this post,
+                                it'll show up here.
                             </span>
                         </div>
                     </div>
@@ -107,4 +94,4 @@ const FollowersPage = () => {
     );
 };
 
-export default FollowersPage;
+export default LikersPage;

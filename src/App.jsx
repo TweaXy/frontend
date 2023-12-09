@@ -10,13 +10,18 @@ import SearchForUsersOrTweetsPage from './pages/SearchForUsersOrTweetsPage/Searc
 import SettingsPage from './pages/SettingsPage/SettingsPage.jsx';
 import ChangePasswordPage from './pages/SettingsPage/ChangePasswordPage.jsx';
 import ChangeUsernamePage from './pages/SettingsPage/ChangeUsernamePage.jsx';
+<<<<<<< HEAD
+import LikersPage from './pages/likersPage/LikersPage.jsx';
 
+=======
+import NotificationPage from './pages/NotificationPage/NotificationPage .jsx';
+>>>>>>> 7d8eca11d92dbfb78d1903a45a85231028896c74
 function App() {
     return (
         <>
             <Router>
                 <Routes>
-                    <Route index element={<WelcomePage />} />
+                  {/*}  <Route index element={<WelcomePage />} />*/}
                     <Route
                         path="/forget-password"
                         element={<ForgetPasswordStartPage />}
@@ -34,6 +39,7 @@ function App() {
                         path="/:username/followers"
                         element={<FollowersPage />}
                     />
+                    <Route index element={<LikersPage />} />
                     <Route
                         path="/search/:word"
                         element={<SearchForUsersOrTweetsPage />}
@@ -46,6 +52,10 @@ function App() {
                     <Route
                         path="/settings/username"
                         element={<ChangeUsernamePage />}
+                    />
+                    <Route
+                        path="/notifactions"
+                        element={<NotificationPage />}
                     />
                 </Routes>
             </Router>

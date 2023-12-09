@@ -6,11 +6,7 @@ import { useSelector } from 'react-redux';
 import HomePageSelectors from '../../shared/selectors/HomePage.js';
 
 export default function WidgetTrending() {
-
-     const token = useSelector((state) => state.user.token);
-     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlwiY2xwcTJnMTB4MDAyMjIwYmxuaGQ5bHZ3eFwiIiwiaWF0IjoxNzAxNjQzMjMyLCJleHAiOjE3MDQyMzUyMzJ9.iDJhBcxBfwxCX9NKk2eYqyXAJwWNRvcXzR_w-IrdibE";
-
-     console.log("the token sent to the widget Trending is ", token);
+    const token = useSelector((state) => state.user.token);
 
     const [trendings, setTrendings] = useState([]);
 
@@ -29,7 +25,10 @@ export default function WidgetTrending() {
 
     let id = 1;
     return (
-        <div className="widget-trending"  data-test={`${HomePageSelectors.TRENDING_SECTION}`}>
+        <div
+            className="widget-trending"
+            data-test={`${HomePageSelectors.TRENDING_SECTION}`}
+        >
             <div className="header">
                 <span className="header-text">What's happening</span>
             </div>
