@@ -1,8 +1,6 @@
 const login = async (userUUID, userPassword) => {
     const url = 'https://tweaxybackend.mywire.org/api/v1/auth/login';
 
-    console.log('signing in...');
-
     try {
         const response = await fetch(url, {
             method: 'POST',

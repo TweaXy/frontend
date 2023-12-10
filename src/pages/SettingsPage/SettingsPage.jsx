@@ -1,11 +1,12 @@
 import './SettingsPage.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CircularProgress } from '@mui/material';
 import Sidebar from '../../components/homePage_components/Sidebar';
 import ChangePasswordButton from '../../components/ChangePasswordButton/ChangePasswordButton';
 import ChangeUsernameButton from '../../components/ChangeUsernameButton/ChangeUsernameButton';
+import { clearUser } from '../../redux/actions';
+import LoadingPage from '../../components/LoadingPage/LoadingPage';
 
 const SettingsPage = () => {
     const [isPageLoading, setIsPageLoading] = useState(true);
@@ -14,23 +15,27 @@ const SettingsPage = () => {
     const token = useSelector((state) => state.user.token);
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        if (user && token) {
-            console.log('user from settings page: ', user);
-            console.log('token from settings page: ', token);
+        if (token && user) {
             setIsPageLoading(false);
-        } else {
-            console.log('Loading Settings page...');
         }
-    }, [user, token]);
+
+        const timeoutId = setTimeout(() => {
+            if (user && token) {
+                setIsPageLoading(false);
+            } else {
+                dispatch(clearUser());
+                navigate('/');
+            }
+        }, 2000);
+
+        return () => clearTimeout(timeoutId);
+    }, [user, token, navigate, dispatch]);
 
     if (isPageLoading) {
-        return (
-            <div className="loading-page">
-                <CircularProgress />
-            </div>
-        );
+        return <LoadingPage />;
     }
 
     return (

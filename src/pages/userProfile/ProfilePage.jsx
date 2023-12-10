@@ -11,25 +11,28 @@ import { useLocation } from 'react-router-dom';
 
 const ProfilePage = () => {
     const [isPageLoading, setIsPageLoading] = useState(true);
+    const [userData, setUserData] = useState({});
 
     const location = useLocation();
     const userID = location.state?.userID;
 
     const token = useSelector((state) => state.user.token);
+    const user = useSelector((state) => state.user.user);
     const currUserId= useSelector((state) => state.user.user.id);
     console.log('token from profile: ', token);
     console.log('user id from profile:', userID);
     console.log('user id from profile:', currUserId);
 
     useEffect(() => {
-        if (token && userID) {
+        if (token && userID && user) {
+            setUserData({user, token});
             setIsPageLoading(false);
             console.log('user id from profile page', userID);
             console.log('user token from profile page', token);
         } else {
             console.log('profile page is loading');
         }
-    }, [token, userID]);
+    }, [token, userID, user]);
 
     if (isPageLoading) {
         return (
@@ -49,7 +52,7 @@ const ProfilePage = () => {
         <>
             <div className="home-page">
                 {/**Side bar */}
-                <Sidebar active={1} />
+                <Sidebar userData={userData} active={1} />
                 {/**News feed */}
 
                 <Profile token={token} userID={userID} currUserId={currUserId} />

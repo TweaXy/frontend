@@ -3,7 +3,7 @@ import '../userProfile_components/tabsProfile.css';
 import UserTweets from './UserTweets';
 import { useState } from 'react';
 import TweetsUSerLikes from './UserLikedTweets';
-const TabsProfile = ({ isTherePopUpWindow }) => {
+const TabsProfile = ({ isTherePopUpWindow, userID }) => {
     const [feedHeader_acitve, setActivePage] = useState(0);
     return (
         <>
@@ -64,8 +64,8 @@ const TabsProfile = ({ isTherePopUpWindow }) => {
                     </span>
                 </div>
             </div>
-            {feedHeader_acitve === 0 && <UserTweets />}
-            {feedHeader_acitve === 3 && <TweetsUSerLikes />}
+            {feedHeader_acitve === 0 && <UserTweets userID={userID} />}
+            {feedHeader_acitve === 3 && <TweetsUSerLikes userID={userID} />}
         </>
     );
 };

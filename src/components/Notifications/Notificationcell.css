@@ -1,0 +1,63 @@
+.tweet {
+    padding: 0 16px;
+    border-bottom: 1px solid var(--twitter-background);
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI Emoji', 'Arial' !important;
+}
+body {
+    --twitter-color: #35a4f4;
+    --twitter-background: #e6ecf0;
+    --twitter-cianHover: #d8eaf8ed;
+    --twitter-greyColor: #536471;
+    --twitter-greyHover: #eae9e9;
+    --twitter-redColor: rgb(251, 64, 64);
+    --twitter-greenColor: rgb(5, 168, 5);
+    --twitter-greenHover: rgba(0, 128, 0, 0.125);
+    --twitter-redHover: rgba(245, 106, 106, 0.196);
+}
+
+.tweet:hover {
+    background-color: #f3f3f395;
+    transition: background-color 200ms ease-out;
+    cursor: pointer;
+}
+.tweet-container {
+    display: flex;
+    flex: 1;
+}
+.avatar-container {
+    display: flex;
+    align-items: flex-start;
+}
+.repost {
+    padding-top: 12px;
+}
+.tweet-main {
+    /* width: 200px; */
+    flex: 1;
+    padding-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+}
+.Notfication-user {
+    display: flex;
+}
+.Notfication-user > .InfoInteraction-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    color: var(--twitter-greyColor);
+}
+.Notfication-user > .InfoInteraction-container > .username {
+    font-weight: bolder;
+    color: black;
+    margin-right: 4px;
+}
+.username:hover {
+    text-decoration: underline;
+}
+.Notfication-user > .InfoInteraction-container > .Interaction {
+    color: black;
+}

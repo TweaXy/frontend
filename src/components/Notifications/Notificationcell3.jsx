@@ -1,29 +1,16 @@
-// import './app.css'
 import { useState, useEffect, useRef } from 'react';
-import { BiCalendar } from 'react-icons/bi';
-import AvatarBox from './AvatarBox';
+import AvatarBox from '../../components/homePage_components/AvatarBox';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
-import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import CachedOutlinedIcon from '@mui/icons-material/CachedOutlined';
 import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import './Tweet.css';
-import MediaChecker from './MediaChecker';
-import { Padding } from '@mui/icons-material';
+import '../../components/homePage_components/Tweet.css';
+import MediaChecker from '../../components/homePage_components//MediaChecker';
 import { apiLikeTweet, apiDislikeTweet } from '../../apis/tweetApis/LikeTweet';
-import Avatar from '@mui/material/Avatar';
-import './Avatar.css';
-import { useNavigate } from 'react-router-dom';
-import parseDate from '../../utils/parseDate';
 import TweetDate from '../../utils/TweetDate';
-import { TweetOptionsPopDown } from './TweetOptionsPopDown';
-import e from 'cors';
-import { token } from 'stylis';
-import { abort } from 'process';
-export default function Tweet({
+export default function Notificationcell3({
     avatar,
     username,
     handle,
@@ -36,9 +23,9 @@ export default function Tweet({
     insights,
     tweetId,
     isUserLiked,
-    token,
-    userID,
+    userData, //temproray until we solve the token issue and then can be exported globally
 }) {
+    const UN = 'manga';
     const [tweetLikes, setTweetLikes] = useState(likes);
     const [tweetReplies, setTweetComments] = useState(replies);
     const [tweetReposts, setTweetReposts] = useState(reposts);
@@ -52,12 +39,15 @@ export default function Tweet({
     const iconInteraction2 = useRef(null);
     const iconInteraction3 = useRef(null);
     const iconInteraction4 = useRef(null);
-    const navigate = useNavigate();
-    const profileRouting = () => {
-        console.log('Manga is saying', userID);
-        navigate(`/profile/${username}`, {
-            state: { userID: userID },
-        });
+    const tweetDate = '2023-12-08T12:00:00';
+    const routingHandlerProfile = (event) => {
+        event.stopPropagation();
+        console.log('routing to this user profile ');
+        //route to the user profile
+    };
+    const routingHandlerTweet = () => {
+        console.log('routing to the tweet ');
+        // route to the tweet
     };
     useEffect(() => {
         // adjust this to be useRef
@@ -80,7 +70,6 @@ export default function Tweet({
             activityIcon3.current.querySelector('.MuiSvgIcon-root'),
             activityIcon4.current.querySelector('.MuiSvgIcon-root'),
         ];
-
         activityIcons.forEach((activityIcon, index) => {
             activityIcon.addEventListener('mouseover', () => {
                 activityIcon.style.borderRadius = '50%';
@@ -177,54 +166,44 @@ export default function Tweet({
         setLikeActive(!isLikeActive);
     };
 
-    const [anchorEl, setAnchorEl] = useState(null);
-    const optionsClickHandler = (e) => {
-        setAnchorEl(e.currentTarget);
-    };
-    const optionsCloseHandler = () => {
-        setAnchorEl(null);
-    };
-
     // we should have a function to handle the change on clicking any
     return (
-        <div className="tweet">
+        <div className="tweet" onClick={routingHandlerTweet}>
             <div className="repost"></div>
             <div className="tweet-container">
-                <div className="avatar-container ">
-                    <div className="avatar-box" onClick={profileRouting}>
-                        <Avatar src={avatar}></Avatar>
-                    </div>
+                <div className="avatar-container">
+                    {/* avatar */}
+                    <AvatarBox img={avatar} />
                 </div>
+
                 <div className="tweet-main">
                     <div className="tweet-user">
                         <div className="info-container">
-                            <span className="username" onClick={profileRouting}>
-                                {username}
-                            </span>
+                            <span className="username">{username}</span>
                             <span className="handle">&nbsp;{`@${handle}`}</span>
                             <div className="dot-container">
                                 <span className="dot">.</span>
                             </div>
                             <span className="profileBiography-joinDate">
-                                {TweetDate(uploadTime)}
+                                {TweetDate(tweetDate)}
                             </span>
                         </div>
-                        <div
-                            className="options-container cian-hover"
-                            onClick={optionsClickHandler}
-                        >
+                        <div className="options-container cian-hover">
                             <MoreHorizIcon />
                         </div>
-                        <TweetOptionsPopDown
-                            isCurrentUserTweet={true}
-                            handleClose={optionsCloseHandler}
-                            anchorEl={anchorEl}
-                        />
                     </div>
                     <div className="tweet-text-container">
-                        <span className="tweet-text">{tweetText}</span>
+                        <span className="tweet-text">Hello</span>
                     </div>
-
+                    <div className="Notification-text-container">
+                        <span className="Notification-text">Replying to </span>
+                        <span
+                            className="username-text"
+                            onClick={routingHandlerProfile}
+                        >
+                            @{UN}
+                        </span>
+                    </div>
                     <div className="tweet-media-container">
                         {/* {!tweetMedia &&  <img src="" alt="test" />} */}
                         {tweetMedia && [tweetMedia].length > 0 && (
@@ -268,8 +247,6 @@ export default function Tweet({
                         </div>
 
                         <div className="tweet-icon">
-                            {/* icon */}
-                            {/* <div ref={ctivityIcon3}></div> */}
                             <div
                                 className="activity-icon"
                                 ref={activityIcon3}
@@ -306,12 +283,6 @@ export default function Tweet({
                                     {tweetInsights != 0 && `${tweetInsights}`}
                                 </span>
                             </span>
-                        </div>
-                        <div className="side-icon bookmark">
-                            <BookmarkBorderOutlinedIcon />
-                        </div>
-                        <div className="side-icon">
-                            <FileUploadOutlinedIcon />
                         </div>
                     </div>
                 </div>
