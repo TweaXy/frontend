@@ -1,5 +1,6 @@
 // import './app.css'
 import { useState, useEffect, useRef } from 'react';
+import { BiCalendar } from 'react-icons/bi';
 import AvatarBox from './AvatarBox';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
@@ -8,9 +9,16 @@ import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import CachedOutlinedIcon from '@mui/icons-material/CachedOutlined';
 import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import './Tweet.css';
 import MediaChecker from './MediaChecker';
 import { Padding } from '@mui/icons-material';
+import { apiLikeTweet, apiDislikeTweet } from '../../apis/tweetApis/LikeTweet';
+import Avatar from '@mui/material/Avatar';
+import './Avatar.css';
+import { useNavigate } from 'react-router-dom';
+import parseDate from '../../utils/parseDate';
+import TweetDate from '../../utils/TweetDate';
 export default function Tweet({
     avatar,
     username,
@@ -22,11 +30,16 @@ export default function Tweet({
     replies,
     reposts,
     insights,
+    tweetId,
+    isUserLiked,
+    token,
+    userID,
 }) {
     const [tweetLikes, setTweetLikes] = useState(likes);
     const [tweetReplies, setTweetComments] = useState(replies);
     const [tweetReposts, setTweetReposts] = useState(reposts);
     const [tweetInsights, setTweet] = useState(insights);
+    const [isLikeActive, setLikeActive] = useState(isUserLiked);
     const activityIcon1 = useRef(null);
     const activityIcon2 = useRef(null);
     const activityIcon3 = useRef(null);
@@ -35,6 +48,13 @@ export default function Tweet({
     const iconInteraction2 = useRef(null);
     const iconInteraction3 = useRef(null);
     const iconInteraction4 = useRef(null);
+    const navigate = useNavigate();
+    const profileRouting = () => {
+        console.log('Manga is saying', userID);
+        navigate(`/profile/${username}`, {
+            state: { userID: userID },
+        });
+    };
     useEffect(() => {
         // adjust this to be useRef
 
@@ -91,8 +111,10 @@ export default function Tweet({
                 // Reset styles when mouse leaves
                 activityIcon.style.backgroundColor = ''; // Set to the default or remove this line if not needed
                 activityIcon.style.borderRadius = '';
-                icons[index].style.color = 'var(--twitter-greyColor)';
-                iconInteractions[index].style.color = '';
+                if (!(index == 2 && isLikeActive)) {
+                    icons[index].style.color = 'var(--twitter-greyColor)';
+                    iconInteractions[index].style.color = '';
+                }
                 activityIcon.style.transition = '';
             });
         });
@@ -128,32 +150,52 @@ export default function Tweet({
             iconInteraction.addEventListener('mouseleave', () => {
                 activityIcons[index].style.backgroundColor = '';
                 activityIcons[index].style.borderRadius = '';
-                iconInteraction.style.color = '';
+                if (!(index == 2 && isLikeActive)) {
+                    iconInteraction.style.color = '';
+                    icons[index].style.color = 'var(--twitter-greyColor)';
+                }
                 activityIcons[index].style.transition = '';
-                icons[index].style.color = 'var(--twitter-greyColor)';
             });
         });
     }, []);
+
+    const likeDislikeTweetHandler = (e) => {
+        //call api likeDislikeTweetHandler
+        if (isLikeActive) {
+            //dislike it
+            apiDislikeTweet(tweetId, token);
+            setTweetLikes((likes) => likes - 1);
+        } else {
+            //like it
+            apiLikeTweet(tweetId, token);
+            setTweetLikes((likes) => likes + 1);
+        }
+        setLikeActive(!isLikeActive);
+    };
 
     // we should have a function to handle the change on clicking any
     return (
         <div className="tweet">
             <div className="repost"></div>
             <div className="tweet-container">
-                <div className="avatar-container">
-                    {/* avatar */}
-                    <AvatarBox img={avatar} />
+                <div className="avatar-container ">
+                    <div className="avatar-box" onClick={profileRouting}>
+                        <Avatar src={avatar}></Avatar>
+                    </div>
                 </div>
-
                 <div className="tweet-main">
                     <div className="tweet-user">
                         <div className="info-container">
-                            <span className="username">{username}</span>
+                            <span className="username" onClick={profileRouting}>
+                                {username}
+                            </span>
                             <span className="handle">&nbsp;{`@${handle}`}</span>
                             <div className="dot-container">
                                 <span className="dot">.</span>
                             </div>
-                            <span>{uploadTime}</span>
+                            <span className="profileBiography-joinDate">
+                                {TweetDate(uploadTime)}
+                            </span>
                         </div>
                         <div className="options-container cian-hover">
                             <MoreHorizIcon />
@@ -162,11 +204,16 @@ export default function Tweet({
                     <div className="tweet-text-container">
                         <span className="tweet-text">{tweetText}</span>
                     </div>
+
                     <div className="tweet-media-container">
                         {/* {!tweetMedia &&  <img src="" alt="test" />} */}
-                        { tweetMedia && [tweetMedia].length > 0 && <div style={{height : "10px"}}></div>}
+                        {tweetMedia && [tweetMedia].length > 0 && (
+                            <div style={{ height: '10px' }}></div>
+                        )}
 
-                        { tweetMedia && [tweetMedia].length > 0 && ( <MediaChecker media={[tweetMedia]} /> )}
+                        {tweetMedia && [tweetMedia].length > 0 && (
+                            <MediaChecker media={[tweetMedia]} />
+                        )}
                     </div>
 
                     <div className="tweet-activity">
@@ -202,15 +249,26 @@ export default function Tweet({
 
                         <div className="tweet-icon">
                             {/* icon */}
-                            <div className="activity-icon" ref={activityIcon3}>
-                                <FavoriteBorderOutlinedIcon />
+                            {/* <div ref={ctivityIcon3}></div> */}
+                            <div
+                                className="activity-icon"
+                                ref={activityIcon3}
+                                onClick={likeDislikeTweetHandler}
+                            >
+                                {!isLikeActive && (
+                                    <FavoriteBorderOutlinedIcon />
+                                )}
+                                {isLikeActive != false && (
+                                    <FavoriteIcon className="like-active" />
+                                )}
                             </div>
                             <span
                                 className="icon-interaction"
                                 ref={iconInteraction3}
+                                onClick={likeDislikeTweetHandler}
                             >
                                 <span className="interaction">
-                                    {tweetLikes != 0 && `${tweetLikes}`}
+                                    {tweetLikes > 0 && `${tweetLikes}`}
                                 </span>
                             </span>
                         </div>

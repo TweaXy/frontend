@@ -1,5 +1,5 @@
 const updateUsername = async (username, token) => {
-    const url = 'http://16.171.65.142:3000/api/v1/users/updateUserName';
+    const url = 'https://tweaxybackend.mywire.org/api/v1/users/updateUserName';
 
     console.log('updating user username...');
 

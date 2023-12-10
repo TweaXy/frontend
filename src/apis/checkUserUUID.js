@@ -1,5 +1,5 @@
 const checkUserUUID = async (userUUID) => {
-  const url = "http://16.171.65.142:3000/api/v1/users/checkUUIDExists";
+  const url = "https://tweaxybackend.mywire.org/api/v1/users/checkUUIDExists";
 
   console.log("fetching check user uuid for: ", userUUID);
 

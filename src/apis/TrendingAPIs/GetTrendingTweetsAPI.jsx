@@ -1,6 +1,6 @@
 
 const apiGetTrendingTweets = async (trend, token) => {
-    const lnk =`http://16.171.65.142:3000/api/v1/trends/${trend}?limit=10&offset=0`;
+    const lnk =`https://tweaxybackend.mywire.org/api/v1/trends/${trend}?limit=10&offset=0`;
     console.log("you are trying to get trending tweet about ", trend, "...");
     console.log("user token: " + token);
     try {

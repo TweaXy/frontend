@@ -1,8 +1,8 @@
 import { Errors } from "../pages/SignUpPage/SignUpPage";
 const emailUniquenessURL =
-  "http://16.171.65.142:3000/api/v1/users/checkEmailUniqueness";
+  "https://tweaxybackend.mywire.org/api/v1/users/checkEmailUniqueness";
   const userUniquenessURL =
-  "http://16.171.65.142:3000/api/v1/users/checkUsernameUniqueness";
+  "https://tweaxybackend.mywire.org/api/v1/users/checkUsernameUniqueness";
 
 const apiCheckEmailUnique = async (email, setuniqueEmail) => {
   try {

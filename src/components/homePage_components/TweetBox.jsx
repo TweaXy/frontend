@@ -14,8 +14,7 @@ import './TweetBox.css';
 import { apiAddTweet } from '../../apis/tweetApis/AddTweet';
 import MediaErrorMsg from './MediaErrorMsg';
 import ImageUploader from './ImageUploader';
-import HomePageSelectors from '../../shared/selectors/HomePage';
-export default function TweetBox({userData}) {
+export default function TweetBox({userData,getTweets}) {
     const [text, setText] = useState('');
     const [privacylay, setPrivacylay] = useState(false);
     const [tweetImages, setTweetImages] = useState([]);
@@ -101,10 +100,12 @@ export default function TweetBox({userData}) {
     };
 
     const handlePostTweet = (e) => {
-        // console.log("this is a handler");
+        console.log("this is a handler");
+        console.log(tweetImages);
         apiAddTweet(text, tweetImages,userData.token);
         setTweetImages([]);
         setText('');
+        getTweets();
     };
 
     const handleDisplayPrivacy = (e) => {

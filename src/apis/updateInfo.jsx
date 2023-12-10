@@ -1,4 +1,4 @@
-// let urlupdateInfo = 'http://16.171.65.142:3000/api/v1/users';
+// let urlupdateInfo = 'https://tweaxybackend.mywire.org/api/v1/users';
 
 // const updateInfo = (
 //     _name,
@@ -49,7 +49,7 @@
 
 // export { updateInfo };
 
-const PictureupdateUrl = 'http://16.171.65.142:3000/api/v1/users';
+const PictureupdateUrl = 'https://tweaxybackend.mywire.org/api/v1/users';
 const updateInfo = (
     _name,
     _birthdayDate,
@@ -69,15 +69,16 @@ const updateInfo = (
         _birthdayDate.year;
     console.log('auth token is', authToken);
     const formData = new FormData();
-    formData.append('avatar', _avatar);
-    formData.append('cover', _cover);
-    formData.append('birthdayDate', _nwbirthdayDate);
+    //  formData.append('avatar', _avatar);
+    // formData.append('cover', _cover);
+    if (_birthdayDate.month && _birthdayDate.year && _birthdayDate.day)
+        formData.append('birthdayDate', _nwbirthdayDate);
     formData.append('bio', _bio);
-    formData.append('website', _website);
+    if (_website) formData.append('website', _website);
     formData.append('phone', _phone);
     formData.append('location', _location);
     formData.append('name', _name);
-    
+
     console.log('Data is ', formData.entries);
     fetch(PictureupdateUrl, {
         method: 'PATCH',

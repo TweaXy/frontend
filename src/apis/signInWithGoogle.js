@@ -1,8 +1,5 @@
 const signInWithGoogle = async (response) => {
-    const url = 'http://16.171.65.142:3000/api/v1/auth/google';
-
-    console.log('signing in with google...');
-    console.log('Sign in with google token response: ', response);
+    const url = 'https://tweaxybackend.mywire.org/api/v1/auth/google';
 
     try {
         const fetchResponse = await fetch(url, {

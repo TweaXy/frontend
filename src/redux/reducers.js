@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { setUser, setToken } from './actions';
+import { setUser, setToken, clearUser } from './actions';
 
 const initialState = {
     user: {},
@@ -13,6 +13,11 @@ const userReducer = createReducer(initialState, (builder) => {
 
     builder.addCase(setToken, (state, action) => {
         state.token = action.payload;
+    });
+
+    builder.addCase(clearUser, (state) => {
+        state.user = {};
+        state.token = null;
     });
 });
 

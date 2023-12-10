@@ -1,4 +1,4 @@
-const PictureupdateUrl = 'http://16.171.65.142:3000/api/v1/users';
+const PictureupdateUrl = 'https://tweaxybackend.mywire.org/api/v1/users';
 
 const Pictureupload = (_avater, authToken) => {
     console.log('auth token is', authToken);

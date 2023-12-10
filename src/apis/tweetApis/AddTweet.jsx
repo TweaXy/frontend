@@ -1,5 +1,5 @@
 
-const addTweetURL ="http://16.171.65.142:3000/api/v1/tweets/";
+const addTweetURL ="https://tweaxybackend.mywire.org/api/v1/tweets/";
 const apiAddTweet =async (tweetText,tweetMedia,token) => {
     console.log("this is a token" + token);
     try {

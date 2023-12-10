@@ -1,7 +1,7 @@
 import { Errors } from '../pages/SignUpPage/SignUpPage';
 
-let urlsignup = 'http://16.171.65.142:3000/api/v1/auth/signup';
-
+let urlsignup = 'https://tweaxybackend.mywire.org/api/v1/auth/signup';
+import { months } from '../pages/SignUpPage/SignUpPage';
 const signup = async (
     _usermail,
     _name,
@@ -12,12 +12,12 @@ const signup = async (
     setwindowOpned
 ) => {
     const _nwbirthdayDate =
-        _birthdayDate.month +
+        months[_birthdayDate.month - 1] +
         '-' +
         _birthdayDate.day +
         '-' +
         _birthdayDate.year;
-
+    console.log(_birthdayDate);
     try {
         const response = await fetch(urlsignup, {
             method: 'POST',
