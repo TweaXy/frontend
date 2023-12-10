@@ -10,12 +10,8 @@ import SearchForUsersOrTweetsPage from './pages/SearchForUsersOrTweetsPage/Searc
 import SettingsPage from './pages/SettingsPage/SettingsPage.jsx';
 import ChangePasswordPage from './pages/SettingsPage/ChangePasswordPage.jsx';
 import ChangeUsernamePage from './pages/SettingsPage/ChangeUsernamePage.jsx';
-<<<<<<< HEAD
 import LikersPage from './pages/likersPage/LikersPage.jsx';
-
-=======
 import NotificationPage from './pages/NotificationPage/NotificationPage .jsx';
->>>>>>> 7d8eca11d92dbfb78d1903a45a85231028896c74
 function App() {
     return (
         <>
@@ -57,6 +53,7 @@ function App() {
                         path="/notifactions"
                         element={<NotificationPage />}
                     />
+                   
                 </Routes>
             </Router>
         </>

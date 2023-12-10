@@ -78,7 +78,7 @@ export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
                 Post
             </Button>
 
-            <div className="account-btn">
+            {/*<div className="account-btn">
                 <AccountButton
                     userAvatar={userData.user.avatar}
                     name={userData.user.name}
@@ -86,7 +86,7 @@ export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
                     token={userData.token}
                     setIsTherePopUpWindow={setIsTherePopUpWindow}
                 />
-            </div>
+            </div>*/}
         </div>
     );
 }

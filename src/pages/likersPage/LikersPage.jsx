@@ -21,11 +21,8 @@ const LikersPage = () => {
 
     const token = useSelector((state) => state.user.token);
     const navigate = useNavigate();
-    {
-        /*} 
-
-   
-
+    
+    {   /* 
     useEffect(() => {
         if (token) {
             console.log('token from likers page', token);
