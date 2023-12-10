@@ -13,8 +13,10 @@ import './Tweet.css';
 import MediaChecker from './MediaChecker';
 import { Padding } from '@mui/icons-material';
 import { apiLikeTweet, apiDislikeTweet } from '../../apis/tweetApis/LikeTweet';
+import { TweetOptionsPopDown } from './TweetOptionsPopDown';
 import e from 'cors';
 import { token } from 'stylis';
+import { abort } from 'process';
 export default function Tweet({
     avatar,
     username,
@@ -152,13 +154,21 @@ export default function Tweet({
         if (isLikeActive) {
             //dislike it
             apiDislikeTweet(tweetId, userData.token);
-            setTweetLikes(likes => likes - 1);
+            setTweetLikes((likes) => likes - 1);
         } else {
             //like it
             apiLikeTweet(tweetId, userData.token);
-            setTweetLikes(likes => likes + 1);
+            setTweetLikes((likes) => likes + 1);
         }
         setLikeActive(!isLikeActive);
+    };
+
+    const [anchorEl, setAnchorEl] = useState(null);
+    const optionsClickHandler = (e) => {
+        setAnchorEl(e.currentTarget);
+    };
+    const optionsCloseHandler = () => {
+        setAnchorEl(null);
     };
 
     // we should have a function to handle the change on clicking any
@@ -181,9 +191,17 @@ export default function Tweet({
                             </div>
                             <span>{uploadTime}</span>
                         </div>
-                        <div className="options-container cian-hover">
+                        <div
+                            className="options-container cian-hover"
+                            onClick={optionsClickHandler}
+                        >
                             <MoreHorizIcon />
                         </div>
+                        <TweetOptionsPopDown
+                            isCurrentUserTweet={true}
+                            handleClose={optionsCloseHandler}
+                            anchorEl={anchorEl}
+                        />
                     </div>
                     <div className="tweet-text-container">
                         <span className="tweet-text">{tweetText}</span>
