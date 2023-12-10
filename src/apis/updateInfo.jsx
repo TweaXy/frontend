@@ -74,8 +74,8 @@ const updateInfo = (
     if (_birthdayDate.month && _birthdayDate.year && _birthdayDate.day)
         formData.append('birthdayDate', _nwbirthdayDate);
     formData.append('bio', _bio);
-    if (_website) formData.append('website', _website);
-    formData.append('phone', _phone);
+    formData.append('website', _website);
+    //formData.append('phone', _phone);
     formData.append('location', _location);
     formData.append('name', _name);
 
