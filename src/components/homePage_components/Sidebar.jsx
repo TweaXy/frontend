@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import AccountButton from '../AccountButton/AccountButton';
+import HomePageSelectors from '../../shared/selectors/HomePage';
 
 export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
     const navigate = useNavigate();
@@ -63,7 +64,7 @@ export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
                     Icon={PermIdentityIcon}
                 />
             </div>
-            <div
+            <div data-test={HomePageSelectors.SETTINGS_BUTTON}
                 onClick={() => {
                     navigate('/settings');
                 }}

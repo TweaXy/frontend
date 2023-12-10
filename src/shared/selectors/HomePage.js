@@ -6,6 +6,9 @@ const HomePageSelectors = {
     TWEETBOX_FIELD: 'tweets_textfield',
     TWEETBOX_POST_BUTTON: 'tweets_post_button',
     PROFILE_BUTTON: 'profile_button',
+    ACCOUNT_BUTTON: 'account_button',
+    LOGOUT_BUTTON: 'log_out_button',
+    SETTINGS_BUTTON: 'settings_button',
 };
 
 export default HomePageSelectors;
