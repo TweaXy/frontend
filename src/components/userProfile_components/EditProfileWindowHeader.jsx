@@ -1,3 +1,4 @@
+import ProfilePageSelectors from '../../shared/selectors/ProfilePage';
 import './EditProfileWindowHeader.css';
 
 const EditProfileWindowHeader = ({ onClose, saveHandler }) => (
@@ -9,7 +10,7 @@ const EditProfileWindowHeader = ({ onClose, saveHandler }) => (
             &times;
         </button>
         <span className="edit-text">Edit profile</span>
-        <button className="save-button" onClick={saveHandler}>Save</button>
+        <button data-test={ProfilePageSelectors.SAVE_BUTTON} className="save-button" onClick={saveHandler}>Save</button>
 
 
     </div>
