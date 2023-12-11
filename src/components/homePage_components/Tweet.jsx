@@ -23,6 +23,8 @@ import { TweetOptionsPopDown } from './TweetOptionsPopDown';
 import e from 'cors';
 import { token } from 'stylis';
 import { abort } from 'process';
+import { hashText } from '../../shared/Utils';
+import TweetSelectors from '../../shared/selectors/Tweets';
 export default function Tweet({
     avatar,
     username,
@@ -214,6 +216,7 @@ export default function Tweet({
                             </span>
                         </div>
                         <div
+                            data-test={hashText(TweetSelectors.TWEET_OPTIONS+username+tweetText)}
                             className="options-container cian-hover"
                             onClick={optionsClickHandler}
                         >
