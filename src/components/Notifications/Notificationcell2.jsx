@@ -1,7 +1,7 @@
 import './Notificationcell.css';
 import './NotificationsAvaters.css';
-import MangaAvatar from '../../../assets/Manga.PNG';
-import followicon from '../../../assets/follow.PNG';
+import MangaAvatar from '../../../assets/Manga.png';
+import followicon from '../../../assets/follow.png';
 import Avatar from '@mui/material/Avatar';
 
 // this cell is customized when someone is adding you only

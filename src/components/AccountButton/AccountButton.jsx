@@ -8,6 +8,7 @@ import logout from '../../apis/logout';
 import { clearUser } from '../../redux/actions';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import HomePageSelectors from '../../shared/selectors/HomePage';
 
 const AccountButton = ({ userAvatar, name, username, token, setIsTherePopUpWindow }) => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -66,6 +67,7 @@ const AccountButton = ({ userAvatar, name, username, token, setIsTherePopUpWindo
         <>
             <div className="account-btn-container">
                 <Button
+                    data-test={HomePageSelectors.ACCOUNT_BUTTON}
                     className="user-account-btn"
                     aria-controls="user-account-menu"
                     aria-haspopup="true"
@@ -92,6 +94,7 @@ const AccountButton = ({ userAvatar, name, username, token, setIsTherePopUpWindo
                         Add an existing account
                     </MenuItem>
                     <MenuItem
+                        data-test={HomePageSelectors.LOGOUT_BUTTON}
                         onClick={handleLogout}
                     >{`Log out @${username}`}</MenuItem>
                 </Menu>

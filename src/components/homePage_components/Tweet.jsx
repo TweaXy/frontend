@@ -19,6 +19,10 @@ import './Avatar.css';
 import { useNavigate } from 'react-router-dom';
 import parseDate from '../../utils/parseDate';
 import TweetDate from '../../utils/TweetDate';
+import { TweetOptionsPopDown } from './TweetOptionsPopDown';
+import e from 'cors';
+import { token } from 'stylis';
+import { abort } from 'process';
 export default function Tweet({
     avatar,
     username,
@@ -34,6 +38,7 @@ export default function Tweet({
     isUserLiked,
     token,
     userID,
+    removeTweet
 }) {
     const [tweetLikes, setTweetLikes] = useState(likes);
     const [tweetReplies, setTweetComments] = useState(replies);
@@ -173,6 +178,17 @@ export default function Tweet({
         setLikeActive(!isLikeActive);
     };
 
+    const [anchorEl, setAnchorEl] = useState(null);
+    const optionsClickHandler = (e) => {
+        setAnchorEl(e.currentTarget);
+    };
+    const optionsCloseHandler = () => {
+        setAnchorEl(null);
+    };
+    const deleteTweetHandler =() =>{
+        removeTweet(tweetId);
+    }
+
     // we should have a function to handle the change on clicking any
     return (
         <div className="tweet">
@@ -197,9 +213,19 @@ export default function Tweet({
                                 {TweetDate(uploadTime)}
                             </span>
                         </div>
-                        <div className="options-container cian-hover">
+                        <div
+                            className="options-container cian-hover"
+                            onClick={optionsClickHandler}
+                        >
                             <MoreHorizIcon />
                         </div>
+                        <TweetOptionsPopDown
+                            isCurrentUserTweet={true}
+                            handleClose={optionsCloseHandler}
+                            anchorEl={anchorEl}
+                            deleteTweetHandler={deleteTweetHandler}
+
+                        />
                     </div>
                     <div className="tweet-text-container">
                         <span className="tweet-text">{tweetText}</span>
