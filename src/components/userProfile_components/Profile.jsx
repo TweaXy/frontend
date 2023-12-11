@@ -58,6 +58,8 @@ function Profile({ token, userID, currUserId }) {
                         ProfileImage={ndata.data.user.avatar}
                         token={token}
                         JoinedAt={ndata.data.user.joinedDate}
+                        followedByMe={ndata.data.user.followedByMe}
+
                         /* ndata.data.user.joinedDate*/
                     />
                     {/*}  ndata.data.user.joinedDate

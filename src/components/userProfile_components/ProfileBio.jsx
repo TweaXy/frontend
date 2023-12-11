@@ -7,7 +7,34 @@ import parseDate from '../../utils/parseDate';
 import { useState } from 'react';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import LinkIcon from '@mui/icons-material/Link';
+import unfollow from '../../apis/unfollow';
+import follow from '../../apis/follow';
 const ProfileBio = (props) => {
+    const [isFollowingButtonHovered, setIsFollowingButtonHovered] =
+        useState(false);
+
+    const [followedByMeState, setFollowedByMeState] = useState(
+        props.followedByMe
+    );
+
+    const handleFollowingButtonHover = () => {
+        setIsFollowingButtonHovered(!isFollowingButtonHovered);
+    };
+    const onButtonClick = async (event) => {
+        event.stopPropagation();
+        console.log(`@${props.username} cell button is clicked..`);
+        if (followedByMeState) {
+            console.log(`unfollow @${props.username}..`);
+            if (await unfollow(props.username, props.token)) {
+                setFollowedByMeState(false);
+            }
+        } else {
+            console.log(`follow @${props.username}..`);
+            if (await follow(props.username, props.token)) {
+                setFollowedByMeState(true);
+            }
+        }
+    };
     const navigate = useNavigate();
     const [isFollowing, setFollowing] = useState(false);
     console.log('idProfile', props.IdProfile);
@@ -59,8 +86,20 @@ const ProfileBio = (props) => {
                         authToken={props.token}
                     />
                 ) : (
-                    <div className="editProfile" onClick={toggleFollow}>
-                        <span>{isFollowing ? 'Unfollow' : 'Follow'}</span>
+                    <div
+                        className="editProfile"
+                        onClick={onButtonClick}
+                        onMouseEnter={handleFollowingButtonHover}
+                        onMouseLeave={handleFollowingButtonHover}
+                    >
+                        {/* {isFollowing ? 'Unfollow' : 'Follow'}</span>*/}
+                        <span>
+                            {followedByMeState === false
+                                ? 'Follow'
+                                : isFollowingButtonHovered
+                                ? 'Unfollow'
+                                : 'Following'}
+                        </span>
                     </div>
                 )}
             </div>
@@ -79,17 +118,21 @@ const ProfileBio = (props) => {
                         {props.location && (
                             <>
                                 <LocationOnOutlinedIcon />
-                                {props.location}
+                                {props.location === 'null'
+                                    ? ' '
+                                    : props.location}
                             </>
                         )}
                     </span>
-                    <span className="profileBiography-Bio"> </span>
-                 {" "}
+                    <span className="profileBiography-Bio"> </span>{' '}
                     <span className="pseudolink">
                         {props.website && (
                             <>
                                 <LinkIcon className="linkIcon" /> {'  '}
-                                <a className="linkIcon" href={props.website}> {props.website}</a>
+                                <a className="linkIcon" href={props.website}>
+                                    {' '}
+                                    {props.website}
+                                </a>
                             </>
                         )}
                     </span>
