@@ -9,9 +9,6 @@
     flex-grow: 1;
     -webkit-justify-content: space-between !important;
     justify-content: space-between;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
 }
 
 .account-btn-container>.css-1e6y48t-MuiButtonBase-root-MuiButton-root:hover {
@@ -43,6 +40,10 @@
 .user-account-btn>.account-btn-left>.account-btn-body-wrapper>.username-span {
     font-size: 15px;
     color: var(--twitter-greyColor);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 150px;
 }
 
 .more-horiz {

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState} from 'react';
+import React from 'react';
 import '../../components/LoginWindowHeader/LoginWindowHeader.css';
 import SignUpPage1 from './SignUpPage1';
 import SignUpPage3 from './SignUpPage3';
