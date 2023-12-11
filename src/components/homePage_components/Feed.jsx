@@ -34,7 +34,7 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                 feedHeader_acitve={0}
                 isTherePopUpWindow={isTherePopUpWindow}
             />
-            <TweetBox userData={userData} getTweets={getTweets} />
+            <TweetBox userData={userData} getTweets={getTweets}  />
 
             {tweets.length > 0 &&
                 tweets.map((tweet, index) => (

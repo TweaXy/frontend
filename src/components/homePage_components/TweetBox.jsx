@@ -100,12 +100,12 @@ export default function TweetBox({userData,getTweets}) {
         }
     };
 
-    const handlePostTweet = (e) => {
+    const handlePostTweet =async (e) => {
         console.log("this is a handler");
         console.log(tweetImages);
-        apiAddTweet(text, tweetImages,userData.token);
         setTweetImages([]);
         setText('');
+        await apiAddTweet(text, tweetImages,userData.token);
         getTweets();
     };
 
