@@ -8,6 +8,7 @@ import { apiSearchForUsers } from '../../apis/SearchAPIs/SearchForUsersAPI';
 import SearchForTweetsOrUsersHeader from '../../components/SearchForTweetsOrUsersHeader/SearchForTweetsOrUsersHeader';
 import { useSelector } from 'react-redux';
 import { apiGetTrendingTweets } from '../../apis/TrendingAPIs/GetTrendingTweetsAPI';
+import Tweet from '../../components/homePage_components/Tweet.jsx';
 
 const SearchForUsersOrTweetsPage = () => {
     const location = useLocation();
@@ -21,13 +22,11 @@ const SearchForUsersOrTweetsPage = () => {
     const [fetchedUsers, setFetchedUsers] = useState([]);
     const [fetchedtweets, setFetchedTweets] = useState([]);
 
-    console.log("the input for search is ", searchInput);
-
     const [curPage, setCurPage] = useState(isSearch ? 2 : 0);
 
     useEffect(() => {
         const fetchUsers = async () => {
-            if (isSearch) {
+            if (isSearch) { // TODO: add the tweets fetch here whenever the api is ready.
                 try {
                     const tempFetchedUsers = await apiSearchForUsers(searchInput, token);
                     setFetchedUsers(tempFetchedUsers);
@@ -64,16 +63,31 @@ const SearchForUsersOrTweetsPage = () => {
             <Sidebar userData={userData} active={0}/>
             <div className="search-for-tweets-or-users-widget">
                 <SearchForTweetsOrUsersHeader
-                    searchedInput={searchInput}
+                    searchedInput={isSearch ? searchInput : '"'+searchInput+'"'}
                     activePage={curPage}
                     setActivePage={setCurPage}
                     goBack={goBack}
                 />
-                {/* {curPage == 0 && ( TODO:: handle it later when the api for get trending tweets about some tweet is ready.
-                    <UsersCells
-                        users={fetchedUsers}
-                    />
-                )} */}
+                {curPage == 0 && ( 
+                    fetchedtweets.map((tweet) => (
+                            <Tweet
+                                avatar={tweet.mainInteraction.avatar}
+                                username={tweet.mainInteraction.user.name}
+                                handle={tweet.mainInteraction.user.username}
+                                uploadTime={tweet.mainInteraction.createdDate}
+                                tweetText={tweet.mainInteraction.text}
+                                tweetMedia={tweet.mainInteraction.media}
+                                replies={tweet.mainInteraction.commentsCount}
+                                reposts={tweet.mainInteraction.retweetsCount}
+                                likes={tweet.mainInteraction.likesCount}
+                                insights={tweet.mainInteraction.viewsCount}
+                                tweetId={tweet.mainInteraction.id}
+                                isUserLiked={tweet.mainInteraction.isUserInteract.isUserLiked}
+                                token={userData.token}
+                                userID={tweet.mainInteraction.user.id}
+                            />
+                        ))
+                )}
                 {/* {curPage == 1 && (
                     <UsersCells
                         users={fetchedUsers}

@@ -7,7 +7,11 @@ import { CircularProgress } from '@mui/material';
 import { useLocation } from 'react-router';
 import { useSelector } from 'react-redux';
 import SignUpHome from '../SignUpPage/SignUpPageHome';
+import { clearUser } from '../../redux/actions';
+import { useDispatch } from 'react-redux';
 const HomePage = ({ isTherePopUpWindow }) => {
+    // const dispatch = useDispatch();
+    // dispatch(clearUser());
     const Location = useLocation();
     const Ft = Location.state?.firstTime;
 

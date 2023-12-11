@@ -1,4 +1,4 @@
-import './SearchBar.css';
+import './SearchBarDropList.css';
 import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -9,16 +9,12 @@ export default function SearchBar({defaultText}) {
 
     const [searchInput, setSearchInput] = useState(defaultText);
     const [isInputChanging, setIsInputChanging] = useState(false);
-    console.log("inside the search bar: ", defaultText);
-    console.log("inside the search bar2: ", searchInput);
+    // console.log("inside the search bar: ", defaultText);
+    // console.log("inside the search bar2: ", searchInput);
     console.log("IS INPUT CHANGING? ",   isInputChanging);
 
-    const handleOnFocus = () => {
-      if (!isInputChanging) setIsInputChanging(true);
-    };
-
-    const handleOnBlur = () => {
-      if (isInputChanging) setIsInputChanging(false);
+    const test = () => {
+        console.log("YAAAAY");
     };
   
     const handleKeyPress = (event) => {
@@ -30,7 +26,6 @@ export default function SearchBar({defaultText}) {
 
 
     return (
-      <>
         <div className="search-bar-container">
           <div className="search-icon-container">
             <SearchIcon />
@@ -42,17 +37,13 @@ export default function SearchBar({defaultText}) {
             className="search-bar"
             placeholder="Search"
             value={searchInput}
+            onFocus={test}
+            onBlur={setIsInputChanging(false)}
             onChange = {
               (e) => setSearchInput(e.target.value)
             }
-            onFocus={handleOnFocus}
-            onBlur={handleOnBlur}
             onKeyDown={handleKeyPress}
           />
-          </div>
-          {isInputChanging && <div>
-            teeest
-          </div>}
-        </>
+        </div>
     );
 }
