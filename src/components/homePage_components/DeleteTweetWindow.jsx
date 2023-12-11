@@ -5,10 +5,11 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import './DeleteTweetWindow.css'
-export default function DeleteTweetWindow({ open, closeHandler }) {
+export default function DeleteTweetWindow({ open, closeHandler,deleteTweet }) {
     const deleteTweetHandler =(e) =>{
         // handle the api deletion
-
+        // apiDeleteTweet()
+        deleteTweet();
         closeHandler();
     }
     const cancelDeleteTweetHandler =(e) =>{
@@ -53,7 +54,7 @@ export default function DeleteTweetWindow({ open, closeHandler }) {
                 
                    {/* buttons */}
                    <div className="delete-option-container">
-                   <Button variant="outlined" className="delete-btn" onClick={closeHandler} >
+                   <Button variant="outlined" className="delete-btn" onClick={deleteTweetHandler} >
                 Delete
             </Button>
                    <Button variant="outlined" className="cancel-btn" onClick={cancelDeleteTweetHandler}>

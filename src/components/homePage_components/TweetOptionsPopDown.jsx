@@ -10,7 +10,7 @@ import PushPinOutlinedIcon from '@mui/icons-material/PushPinOutlined';
 import DeleteTweetWindow from './DeleteTweetWindow'
 import { useState } from 'react';
 
-function TweetOptionsPopDown({ isCurrentUserTweet, handleClose, anchorEl }) {
+function TweetOptionsPopDown({ isCurrentUserTweet, handleClose, anchorEl,deleteTweetHandler }) {
     const [isDeleteWindow,setIsDeleteWindow]=useState(false);
     const handleDelete = () => {
         // Implement delete functionality here
@@ -59,7 +59,7 @@ function TweetOptionsPopDown({ isCurrentUserTweet, handleClose, anchorEl }) {
                     View post analytics
                 </MenuItem>
             </Menu>
-            <DeleteTweetWindow open={isDeleteWindow} closeHandler={closeDeleteWindowHandler} />
+            <DeleteTweetWindow open={isDeleteWindow} closeHandler={closeDeleteWindowHandler} deleteTweet={deleteTweetHandler} />
         </div>
     );
 }

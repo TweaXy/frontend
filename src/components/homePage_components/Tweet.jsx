@@ -38,6 +38,7 @@ export default function Tweet({
     isUserLiked,
     token,
     userID,
+    removeTweet
 }) {
     const [tweetLikes, setTweetLikes] = useState(likes);
     const [tweetReplies, setTweetComments] = useState(replies);
@@ -167,11 +168,11 @@ export default function Tweet({
         //call api likeDislikeTweetHandler
         if (isLikeActive) {
             //dislike it
-            apiDislikeTweet(tweetId, userData.token);
+            apiDislikeTweet(tweetId, token);
             setTweetLikes((likes) => likes - 1);
         } else {
             //like it
-            apiLikeTweet(tweetId, userData.token);
+            apiLikeTweet(tweetId, token);
             setTweetLikes((likes) => likes + 1);
         }
         setLikeActive(!isLikeActive);
@@ -184,6 +185,9 @@ export default function Tweet({
     const optionsCloseHandler = () => {
         setAnchorEl(null);
     };
+    const deleteTweetHandler =() =>{
+        removeTweet(tweetId);
+    }
 
     // we should have a function to handle the change on clicking any
     return (
@@ -219,6 +223,8 @@ export default function Tweet({
                             isCurrentUserTweet={true}
                             handleClose={optionsCloseHandler}
                             anchorEl={anchorEl}
+                            deleteTweetHandler={deleteTweetHandler}
+
                         />
                     </div>
                     <div className="tweet-text-container">
