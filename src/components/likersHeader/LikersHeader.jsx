@@ -30,6 +30,25 @@ const LikersHeader = ({
                     <span className={`${curPage == 0 && 'active-nav-element'}`}>
                         Likes
                     </span>
+                    
+                </div>
+                <div
+                    className="following-followers-header-nav-element-container"
+                    onClick={() => setCurPage(1)}
+                >
+                    <span className={`${curPage == 1 && 'active-nav-element'}`}>
+                        Reposts
+                    </span>
+                    
+                </div>
+                <div
+                    className="following-followers-header-nav-element-container"
+                    onClick={() => setCurPage(2)}
+                >
+                    <span className={`${curPage == 2 && 'active-nav-element'}`}>
+                        Quotes
+                    </span>
+                    
                 </div>
             </div>
         </div>
