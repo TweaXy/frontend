@@ -24,6 +24,8 @@ export default function EditProfilePage({
 }) {
     const [selectedImage, setSelectedImage] = useState(cover);
     const [ProfileImage, setProfileImage] = useState(avatar);
+    const [TempProfileImage, setTempProfileImage] = useState('');
+    const [TempselectedImage, setTempselectedImage] = useState('');
     const [ProfileData, changeProfileData] = useState({
         name: name,
         userbio: bio,
@@ -38,8 +40,8 @@ export default function EditProfilePage({
             ProfileData.userbio,
             '01202430275',
             ProfileData.website,
-            ProfileImage,
-            selectedImage,
+            TempProfileImage,
+            TempselectedImage,
             ProfileData.location,
             authToken
         );
@@ -56,7 +58,7 @@ export default function EditProfilePage({
     };
     const handleAvatarChange = (event) => {
         const file = event.target.files[0];
-
+        setTempProfileImage(file);
         if (file) {
             const reader = new FileReader();
 
@@ -69,7 +71,7 @@ export default function EditProfilePage({
     };
     const handleBackgroundchange = (event) => {
         const file = event.target.files[0];
-
+        setTempselectedImage(file);
         if (file) {
             const reader = new FileReader();
 
@@ -251,7 +253,7 @@ export default function EditProfilePage({
                                 label="website"
                                 value={ProfileData.website}
                                 onChange={ProfileData_Handler}
-                                /*helperText="Must be a valid Url"*/
+                                helperText="Must be a valid Url"
                             />
                         </div>
                         <span className="date-birth-text">Date of Birth</span>

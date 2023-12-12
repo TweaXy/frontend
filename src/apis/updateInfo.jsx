@@ -69,8 +69,8 @@ const updateInfo = (
         _birthdayDate.year;
     console.log('auth token is', authToken);
     const formData = new FormData();
-  //  if(_avatar) formData.append('avatar', _avatar);
-    if(_cover) formData.append('cover', _cover);
+    if (_avatar) formData.append('avatar', _avatar);
+    if (_cover) formData.append('cover', _cover);
     if (_birthdayDate.month && _birthdayDate.year && _birthdayDate.day)
         formData.append('birthdayDate', _nwbirthdayDate);
     formData.append('bio', _bio);
