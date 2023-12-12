@@ -64,7 +64,7 @@ function Profile({ token, userID, currUserId }) {
                     />
                     {/*}  ndata.data.user.joinedDate
                      */}
-                    <TabsProfile userData={ndata.data.user} />
+                    <TabsProfile userData={ndata.data.user} userID={userID}  />
                 </div>
             </div>
         </>

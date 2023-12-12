@@ -3,21 +3,29 @@ import FeedHeader from './FeedHeader';
 import TweetBox from './TweetBox';
 import Tweet from './Tweet';
 import { apiGetTweet } from '../../apis/timelineApis/getTweets';
+import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const Feed = ({ userData, isTherePopUpWindow }) => {
+    // console.log('get tweets user data', userData);
     const [tweets, setTweets] = useState([]);
+    const token = useSelector((state) => state.user.token);
     const media = [
         'https://th.bing.com/th?id=OIP.F7QWYr2AWdxfu-5zrFbhxQHaFj&w=288&h=216&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2',
     ];
 
     const getTweets = async () => {
         const tweetsResponse = await apiGetTweet(userData.token);
-
         console.log(tweetsResponse);
         setTweets(tweetsResponse);
     };
-    useEffect(() => {
+    const removeTweet = (tweetId)=>{
+         apiDeleteTweet(tweetId,token);
+        setTweets((prevTweets) =>prevTweets.filter((tweet)=>tweet.mainInteraction.id!==tweetId));
+       
+    }
+    useEffect(() => {   
         getTweets();
     }, []);
     return (
@@ -26,7 +34,7 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                 feedHeader_acitve={0}
                 isTherePopUpWindow={isTherePopUpWindow}
             />
-            <TweetBox userData={userData} getTweets={getTweets} />
+            <TweetBox userData={userData} getTweets={getTweets}  />
 
             {tweets.length > 0 &&
                 tweets.map((tweet, index) => (
@@ -45,7 +53,9 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                         isUserLiked={
                             tweet.mainInteraction.isUserInteract.isUserLiked
                         }
-                        userData={userData}
+                        token={userData.token}
+                        userID={tweet.mainInteraction.user.id}
+                        removeTweet={removeTweet}
                     />
                 ))}
             {/* <Tweet

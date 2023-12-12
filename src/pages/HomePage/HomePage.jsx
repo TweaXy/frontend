@@ -4,29 +4,34 @@ import { Feed } from '../../components/homePage_components/Feed';
 import Widget from '../../components/homePage_components/Widget';
 import { useEffect, useState } from 'react';
 import { CircularProgress } from '@mui/material';
-import { useLocation, useNavigate } from 'react-router';
+import { useLocation } from 'react-router';
 import { useSelector } from 'react-redux';
 import SignUpHome from '../SignUpPage/SignUpPageHome';
-const HomePage = () => {
+const HomePage = ({ isTherePopUpWindow }) => {
     const Location = useLocation();
     const Ft = Location.state?.firstTime;
-    const [isWindowOpen, setIsWindowOpen] = useState(Ft);
+
+    const [isWindowOpen, setIsWindowOpen] = useState(Ft || isTherePopUpWindow);
+
     const token = useSelector((state) => state.user.token);
     const user = useSelector((state) => state.user.user);
+
     const [userData, setUserData] = useState({});
+
+    const [isPageLoading, setIsPageLoading] = useState(true);
+
     const closeWindow = () => {
         setIsWindowOpen(false);
     };
-    const [isPageLoading, setIsPageLoading] = useState(true);
+
     useEffect(() => {
         if (user && token) {
-            setUserData({ user, token });
+            setUserData({ user: user, token: token });
             setIsPageLoading(false);
-            console.log('user data from home page', userData);
         } else {
             console.log('Loading home page..');
         }
-    }, [user, token, userData]);
+    }, [user, token]);
 
     if (isPageLoading) {
         return (
@@ -45,7 +50,11 @@ const HomePage = () => {
     return (
         <>
             <div className="home-page">
-                <Sidebar userData={userData} active={0} />
+                <Sidebar
+                    userData={userData}
+                    active={0}
+                    setIsTherePopUpWindow={setIsWindowOpen}
+                />
                 <Feed userData={userData} isTherePopUpWindow={isWindowOpen} />
                 <Widget token={token} />
             </div>

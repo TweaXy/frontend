@@ -4,10 +4,12 @@ import UsersCells from '../../components/UsersCells/UsersCells';
 import Widget from '../../components/homePage_components/Widget';
 import Sidebar from '../../components/homePage_components/Sidebar';
 import FollowingFollowersHeader from '../../components/FollowingFollowersHeader/FollowingFollowersHeader';
-import { CircularProgress } from '@mui/material';
+import LoadingPage from '../../components/LoadingPage/LoadingPage';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearUser } from '../../redux/actions';
+import UsersCellsSelectors from '../../shared/selectors/UsersCells';
 
 const FollowersPage = () => {
     const location = useLocation();
@@ -20,17 +22,27 @@ const FollowersPage = () => {
     const [isPageLoading, setIsPageLoading] = useState(true);
 
     const token = useSelector((state) => state.user.token);
+    const user = useSelector((state) => state.user.user);
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        if (token) {
-            console.log('token from followers page', token);
+        if (token && user) {
             setIsPageLoading(false);
-        } else {
-            console.log('Loading followers page...');
         }
-    }, [token]);
+
+        const timeoutId = setTimeout(() => {
+            if (token && user) {
+                setIsPageLoading(false);
+            } else {
+                dispatch(clearUser());
+                navigate('/');
+            }
+        }, 2000);
+
+        return () => clearTimeout(timeoutId);
+    }, [token, user, dispatch, navigate]);
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -64,16 +76,12 @@ const FollowersPage = () => {
     };
 
     if (isPageLoading) {
-        return (
-            <div className="loading-page">
-                <CircularProgress />
-            </div>
-        );
+        return <LoadingPage />;
     }
 
     return (
         <div className="following-page-container">
-            <Sidebar />
+            <Sidebar userData={{ user: user, token: token }} />
             <div className="following-widget">
                 <FollowingFollowersHeader
                     name={name}
@@ -86,7 +94,7 @@ const FollowersPage = () => {
                 {users.length === 0 && (
                     <div className="empty-users-cells-container">
                         <div className="span-container">
-                            <span className="header-span">{`@${username} has no followers`}</span>
+                            <span className="header-span" data-test={UsersCellsSelectors.MESSAGE_HEADER}>{`@${username} has no followers`}</span>
                             <span className="body-span">
                                 Once the account has followers, they'll show up
                                 here.

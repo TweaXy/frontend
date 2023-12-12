@@ -8,6 +8,7 @@ import { useState } from 'react';
 import deleteBannerApi from '../../apis/deleteProfileBanner';
 import deleteProfileApi from '../../apis/deleteProfileImage';
 import { updateInfo } from '../../apis/updateInfo';
+import ProfilePageSelectors from '../../shared/selectors/ProfilePage';
 {
     /*}   src="https://www.istockphoto.com/photos/avatar-images-for-profile"*/
 }
@@ -212,6 +213,7 @@ export default function EditProfilePage({
                         </div>
                         <div className="edit-profile-uuid-field">
                             <TextField
+                                data-test={ProfilePageSelectors.NAME_FIELD}
                                 className="edit-profile-uuid-field"
                                 variant="outlined"
                                 id="outlined-basic"
@@ -223,6 +225,7 @@ export default function EditProfilePage({
                         </div>
                         <div className="edit-profile-uuid-field">
                             <TextField
+                                data-test={ProfilePageSelectors.BIO_FIELD}
                                 className="edit-profile-uuid-field"
                                 id="outlined-multiline-flexible"
                                 multiline
@@ -236,6 +239,7 @@ export default function EditProfilePage({
 
                         <div className="edit-profile-uuid-field">
                             <TextField
+                                data-test={ProfilePageSelectors.LOCATION_FIELD}
                                 className="edit-profile-uuid-field"
                                 variant="outlined"
                                 id="outlined-basic"
@@ -247,6 +251,7 @@ export default function EditProfilePage({
                         </div>
                         <div className="edit-profile-uuid-field">
                             <TextField
+                                data-test={ProfilePageSelectors.WEBSITE_FIELD}
                                 className="edit-profile-uuid-field"
                                 variant="outlined"
                                 name="website"

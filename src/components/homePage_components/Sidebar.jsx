@@ -14,10 +14,12 @@ import './Sidebar.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import AccountButton from '../AccountButton/AccountButton';
+import HomePageSelectors from '../../shared/selectors/HomePage';
 
-export default function Sidebar({ userData, active }) {
+export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
     const navigate = useNavigate();
-    console.log('sidebar user data:', userData);
+
     const toProfile = () => {
         navigate(`/profile/${userData.user.username}`, {
             state: { userID: userData.user.id },
@@ -29,6 +31,7 @@ export default function Sidebar({ userData, active }) {
             state: { userData: { userData }, firstTime: false },
         });
     };
+
     return (
         <div className="sidebar">
             <TwitterIcon className="twitter--icon" />
@@ -41,27 +44,50 @@ export default function Sidebar({ userData, active }) {
                 />
             </div>
             <SidebarOption text="Explore" Icon={SearchIcon} />
-            <SidebarOption text="Notifications" Icon={NotificationsNoneIcon} />
-            <SidebarOption text="Messages" Icon={MailOutlineIcon} />
-            <SidebarOption text="Lists" Icon={ListAltIcon} />
-            <SidebarOption text="Communities" Icon={PeopleOutlineIcon} />
-            <div onClick={toProfile}>
+            <div
+                onClick={() => {
+                    navigate('/notifactions');
+                }}
+            >
                 <SidebarOption
+                    active={active === 3}
+                    text="Notifications"
+                    Icon={NotificationsNoneIcon}
+                />
+            </div>
+            <div />
+            <SidebarOption text="Messages" Icon={MailOutlineIcon} />
+            <div data-test={HomePageSelectors.PROFILE_BUTTON} onClick={toProfile}>
+                <SidebarOption     
                     active={active === 1}
                     text="Profile"
                     Icon={PermIdentityIcon}
                 />
             </div>
-            <div
+            <div data-test={HomePageSelectors.SETTINGS_BUTTON}
                 onClick={() => {
                     navigate('/settings');
                 }}
             >
-                <SidebarOption text="Settings" Icon={SettingsIcon} active={active == 2}/>
+                <SidebarOption
+                    text="Settings"
+                    Icon={SettingsIcon}
+                    active={active == 2}
+                />
             </div>
             <Button variant="outlined" className="sidebar--tweet">
                 Post
             </Button>
+
+            <div className="account-btn">
+                <AccountButton
+                    userAvatar={userData.user.avatar}
+                    name={userData.user.name}
+                    username={userData.user.username}
+                    token={userData.token}
+                    setIsTherePopUpWindow={setIsTherePopUpWindow}
+                />
+            </div>
         </div>
     );
 }

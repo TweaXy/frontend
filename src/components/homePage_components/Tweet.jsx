@@ -1,5 +1,6 @@
 // import './app.css'
 import { useState, useEffect, useRef } from 'react';
+import { BiCalendar } from 'react-icons/bi';
 import AvatarBox from './AvatarBox';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
@@ -13,8 +14,17 @@ import './Tweet.css';
 import MediaChecker from './MediaChecker';
 import { Padding } from '@mui/icons-material';
 import { apiLikeTweet, apiDislikeTweet } from '../../apis/tweetApis/LikeTweet';
+import Avatar from '@mui/material/Avatar';
+import './Avatar.css';
+import { useNavigate } from 'react-router-dom';
+import parseDate from '../../utils/parseDate';
+import TweetDate from '../../utils/TweetDate';
+import { TweetOptionsPopDown } from './TweetOptionsPopDown';
 import e from 'cors';
 import { token } from 'stylis';
+import { abort } from 'process';
+import { hashText } from '../../shared/Utils';
+import TweetSelectors from '../../shared/selectors/Tweets';
 export default function Tweet({
     avatar,
     username,
@@ -28,7 +38,9 @@ export default function Tweet({
     insights,
     tweetId,
     isUserLiked,
-    userData, //temproray until we solve the token issue and then can be exported globally
+    token,
+    userID,
+    removeTweet
 }) {
     const [tweetLikes, setTweetLikes] = useState(likes);
     const [tweetReplies, setTweetComments] = useState(replies);
@@ -43,6 +55,13 @@ export default function Tweet({
     const iconInteraction2 = useRef(null);
     const iconInteraction3 = useRef(null);
     const iconInteraction4 = useRef(null);
+    const navigate = useNavigate();
+    const profileRouting = () => {
+        console.log('Manga is saying', userID);
+        navigate(`/profile/${username}`, {
+            state: { userID: userID },
+        });
+    };
     useEffect(() => {
         // adjust this to be useRef
 
@@ -151,43 +170,70 @@ export default function Tweet({
         //call api likeDislikeTweetHandler
         if (isLikeActive) {
             //dislike it
-            apiDislikeTweet(tweetId, userData.token);
-            setTweetLikes(likes => likes - 1);
+            apiDislikeTweet(tweetId, token);
+            setTweetLikes((likes) => likes - 1);
         } else {
             //like it
-            apiLikeTweet(tweetId, userData.token);
-            setTweetLikes(likes => likes + 1);
+            apiLikeTweet(tweetId, token);
+            setTweetLikes((likes) => likes + 1);
         }
         setLikeActive(!isLikeActive);
     };
+
+    const [anchorEl, setAnchorEl] = useState(null);
+    const optionsClickHandler = (e) => {
+        setAnchorEl(e.currentTarget);
+    };
+    const optionsCloseHandler = () => {
+        setAnchorEl(null);
+    };
+    const deleteTweetHandler =() =>{
+        removeTweet(tweetId);
+    }
 
     // we should have a function to handle the change on clicking any
     return (
         <div className="tweet">
             <div className="repost"></div>
             <div className="tweet-container">
-                <div className="avatar-container">
-                    {/* avatar */}
-                    <AvatarBox img={avatar} />
+                <div className="avatar-container ">
+                    <div className="avatar-box" onClick={profileRouting}>
+                        <Avatar src={avatar}></Avatar>
+                    </div>
                 </div>
-
                 <div className="tweet-main">
                     <div className="tweet-user">
                         <div className="info-container">
-                            <span className="username">{username}</span>
+                            <span className="username" onClick={profileRouting}>
+                                {username}
+                            </span>
                             <span className="handle">&nbsp;{`@${handle}`}</span>
                             <div className="dot-container">
                                 <span className="dot">.</span>
                             </div>
-                            <span>{uploadTime}</span>
+                            <span className="profileBiography-joinDate">
+                                {TweetDate(uploadTime)}
+                            </span>
                         </div>
-                        <div className="options-container cian-hover">
+                        <div
+                            data-test={hashText(TweetSelectors.TWEET_OPTIONS+username+tweetText)}
+                            className="options-container cian-hover"
+                            onClick={optionsClickHandler}
+                        >
                             <MoreHorizIcon />
                         </div>
+                        <TweetOptionsPopDown
+                            isCurrentUserTweet={true}
+                            handleClose={optionsCloseHandler}
+                            anchorEl={anchorEl}
+                            deleteTweetHandler={deleteTweetHandler}
+
+                        />
                     </div>
                     <div className="tweet-text-container">
                         <span className="tweet-text">{tweetText}</span>
                     </div>
+
                     <div className="tweet-media-container">
                         {/* {!tweetMedia &&  <img src="" alt="test" />} */}
                         {tweetMedia && [tweetMedia].length > 0 && (

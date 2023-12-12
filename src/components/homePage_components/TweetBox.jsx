@@ -14,6 +14,7 @@ import './TweetBox.css';
 import { apiAddTweet } from '../../apis/tweetApis/AddTweet';
 import MediaErrorMsg from './MediaErrorMsg';
 import ImageUploader from './ImageUploader';
+import HomePageSelectors from '../../shared/selectors/HomePage';
 export default function TweetBox({userData,getTweets}) {
     const [text, setText] = useState('');
     const [privacylay, setPrivacylay] = useState(false);
@@ -99,12 +100,12 @@ export default function TweetBox({userData,getTweets}) {
         }
     };
 
-    const handlePostTweet = (e) => {
+    const handlePostTweet =async (e) => {
         console.log("this is a handler");
         console.log(tweetImages);
-        apiAddTweet(text, tweetImages,userData.token);
         setTweetImages([]);
         setText('');
+        await apiAddTweet(text, tweetImages,userData.token);
         getTweets();
     };
 
@@ -125,6 +126,7 @@ export default function TweetBox({userData,getTweets}) {
             <form action="" className="tweetbox-form">
                 <div className="tweetbox-input">
                     <TextareaAutosize
+                        data-test={HomePageSelectors.TWEETBOX_FIELD}
                         placeholder="What is hapenning?!"
                         value={text}
                         onChange={handleChange}
@@ -176,6 +178,7 @@ export default function TweetBox({userData,getTweets}) {
                         </div>
                     </div>
                     <Button
+                        data-test={HomePageSelectors.TWEETBOX_POST_BUTTON}
                         className="tweetbox-button"
                         onClick={handlePostTweet}
                     >

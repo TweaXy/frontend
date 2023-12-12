@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Privacyclasses from './WelcomePageStyle/PrivacyAndPolicy.module.css';
 import Headerclasses from './WelcomePageStyle/Header.module.css';
 import Posterclasses from './WelcomePageStyle/PosterImage.module.css';
 import backgroundImage from '../../../assets/logo.svg';
@@ -6,10 +7,17 @@ import welcomePage from './WelcomePageStyle/WelcomePage.module.css';
 import XLogo from '../../../assets/logo.ico';
 import SignUpButton from '../../components/Buttons/SignUpButton';
 import SignInButton from '../../components/Buttons/SignInButton';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export default function WelcomePage() {
     const [isSignUpWindowOpen, setIsSignUpWindowOpen] = useState(false);
     const [isSignInWindowOpen, setIsSignInWindowOpen] = useState(false);
+
+    const user = useSelector((state) => state.user.user);
+    const token = useSelector((state) => state.user.token);
+
+    const navigate = useNavigate();
 
     const openSignUpWindow = () => {
         setIsSignUpWindowOpen(true);
@@ -26,6 +34,12 @@ export default function WelcomePage() {
     const closeSignInWindow = () => {
         setIsSignInWindowOpen(false);
     };
+
+    useEffect(() => {
+        if (user && token) {
+            navigate('/home');
+        }
+    }, [user, token, navigate]);
 
     return (
         <React.Fragment>

@@ -9,6 +9,7 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import LinkIcon from '@mui/icons-material/Link';
 import unfollow from '../../apis/unfollow';
 import follow from '../../apis/follow';
+import ProfilePageSelectors from '../../shared/selectors/ProfilePage';
 const ProfileBio = (props) => {
     const [isFollowingButtonHovered, setIsFollowingButtonHovered] =
         useState(false);
@@ -91,6 +92,7 @@ const ProfileBio = (props) => {
                         onClick={onButtonClick}
                         onMouseEnter={handleFollowingButtonHover}
                         onMouseLeave={handleFollowingButtonHover}
+                        data-test={ProfilePageSelectors.FOLLOW_UNFOLLOW_BUTTON}
                     >
                         {/* {isFollowing ? 'Unfollow' : 'Follow'}</span>*/}
                         <span>
@@ -144,20 +146,32 @@ const ProfileBio = (props) => {
             <div className="profile-div-followers">
                 <span className="follow-link" onClick={navigateToFollowingPage}>
                     <span className="profile-distance-between">
-                        <span className="profile-followers-following-number">
+                        <span
+                            className="profile-followers-following-number"
+                            data-test={ProfilePageSelectors.FOLLOWING_COUNT}
+                        >
                             {props.followingNum}
                         </span>
-                        <span className="profile-followers-following-text">
+                        <span
+                            className="profile-followers-following-text"
+                            data-test={ProfilePageSelectors.FOLLOWING_LINK}
+                        >
                             Following
                         </span>
                     </span>
                 </span>
                 <span className="follow-link" onClick={navigateToFollowersPage}>
-                    <span className="profile-followers-following-number">
+                    <span
+                        className="profile-followers-following-number"
+                        data-test={ProfilePageSelectors.FOLLOWERS_COUNT}
+                    >
                         {' '}
                         {props.followersNum}
                     </span>
-                    <span className="profile-followers-following-text">
+                    <span
+                        className="profile-followers-following-text"
+                        data-test={ProfilePageSelectors.FOLLOWERS_LINK}
+                    >
                         Followers
                     </span>
                 </span>

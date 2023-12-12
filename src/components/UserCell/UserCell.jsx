@@ -4,6 +4,7 @@ import { Avatar } from '@mui/material';
 import unfollow from '../../apis/unfollow';
 import follow from '../../apis/follow';
 import { useNavigate } from 'react-router-dom';
+import UsersCellsSelectors from '../../shared/selectors/UsersCells';
 
 const UserCell = ({
     id,
@@ -81,6 +82,7 @@ const UserCell = ({
                 <div className="user-cell-upper-half">
                     <div className="user-cell-upper-left">
                         <span
+                            data-test={UsersCellsSelectors.NAME}
                             className="user-cell-upper-left-top"
                             onMouseEnter={onMouseEnterNameField}
                             onMouseLeave={onMouseLeaveNameField}
@@ -88,7 +90,7 @@ const UserCell = ({
                             {name}
                         </span>
                         <div className="user-cell-upper-left-down">
-                            <span className="user-cell-username">{`@${username}`}</span>
+                            <span className="user-cell-username" data-test={UsersCellsSelectors.USERNAME}>{`@${username}`}</span>
                             {followsMe && (
                                 <span className="user-cell-follows-me">
                                     Follows you
@@ -99,6 +101,7 @@ const UserCell = ({
                     <div className="user-cell-upper-right">
                         {myID !== id && (
                             <button
+                                data-test={UsersCellsSelectors.FOLLOW_UNFOLLOW_BUTTON}
                                 className={
                                     followedByMeState === false
                                         ? 'black-small-button'
