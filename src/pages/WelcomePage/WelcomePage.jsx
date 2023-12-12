@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Privacyclasses from './WelcomePageStyle/PrivacyAndPolicy.module.css';
 import Headerclasses from './WelcomePageStyle/Header.module.css';
 import Posterclasses from './WelcomePageStyle/PosterImage.module.css';
 import backgroundImage from '../../../assets/logo.svg';
