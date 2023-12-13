@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUser } from '../../redux/actions';
+import UsersCellsSelectors from '../../shared/selectors/UsersCells';
 
 const FollowersPage = () => {
     const location = useLocation();
@@ -93,7 +94,7 @@ const FollowersPage = () => {
                 {users.length === 0 && (
                     <div className="empty-users-cells-container">
                         <div className="span-container">
-                            <span className="header-span">{`@${username} has no followers`}</span>
+                            <span className="header-span" data-test={UsersCellsSelectors.MESSAGE_HEADER}>{`@${username} has no followers`}</span>
                             <span className="body-span">
                                 Once the account has followers, they'll show up
                                 here.

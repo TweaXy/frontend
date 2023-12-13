@@ -9,6 +9,7 @@ import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutline
 import PushPinOutlinedIcon from '@mui/icons-material/PushPinOutlined';
 import DeleteTweetWindow from './DeleteTweetWindow';
 import { useState } from 'react';
+import TweetSelectors from '../../shared/selectors/Tweets';
 
 function TweetOptionsPopDown({
     isCurrentUserTweet,
@@ -52,7 +53,7 @@ function TweetOptionsPopDown({
             >
                 {isCurrentUserTweet && (
                     <MenuItem
-                        onClick={handleDelete}
+                        data-test={TweetSelectors.DELETE_TWEET} onClick={handleDelete}
                         className="delete-option"
                         sx={{
                             color: 'red',

@@ -5,6 +5,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import './DeleteTweetWindow.css'
+import TweetSelectors from '../../shared/selectors/Tweets';
 export default function DeleteTweetWindow({ open, closeHandler,deleteTweet }) {
     const deleteTweetHandler =(e) =>{
         // handle the api deletion
@@ -57,7 +58,7 @@ export default function DeleteTweetWindow({ open, closeHandler,deleteTweet }) {
                 
                    {/* buttons */}
                    <div className="delete-option-container">
-                   <Button variant="outlined" className="delete-btn" onClick={deleteTweetHandler} >
+                   <Button data-test={TweetSelectors.CONFIRM_DELETE_TWEET} variant="outlined" className="delete-btn" onClick={deleteTweetHandler} >
                 Delete
             </Button>
                    <Button variant="outlined" className="cancel-btn" onClick={cancelDeleteTweetHandler}>
