@@ -14,6 +14,5 @@ EXPOSE 443
 COPY ./default.conf /etc/nginx/conf.d/default.conf
 COPY --from=base /app/frontend/dist /usr/share/nginx/html 
 WORKDIR /etc/nginx/dhparam
-RUN chmod +x frontend.sh
 RUN openssl dhparam -out dhparam-2048.pem 2048
  
