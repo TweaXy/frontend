@@ -10,9 +10,7 @@ import SignUpHome from '../SignUpPage/SignUpPageHome';
 const HomePage = ({ isTherePopUpWindow }) => {
     const Location = useLocation();
     const Ft = Location.state?.firstTime;
-
     const [isWindowOpen, setIsWindowOpen] = useState(Ft || isTherePopUpWindow);
-
     const token = useSelector((state) => state.user.token);
     const user = useSelector((state) => state.user.user);
 
