@@ -1,12 +1,13 @@
 import './SettingsPage.css';
-import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Sidebar from '../../components/homePage_components/Sidebar';
+import { clearUser } from '../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
 import ChangePasswordButton from '../../components/ChangePasswordButton/ChangePasswordButton';
 import ChangeUsernameButton from '../../components/ChangeUsernameButton/ChangeUsernameButton';
-import { clearUser } from '../../redux/actions';
 import LoadingPage from '../../components/LoadingPage/LoadingPage';
+import Sidebar from '../../components/homePage_components/Sidebar';
+import React from 'react';
 
 const SettingsPage = () => {
     const [isPageLoading, setIsPageLoading] = useState(true);

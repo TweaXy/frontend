@@ -1,5 +1,6 @@
 import { LockResetOutlined, NavigateNextOutlined } from '@mui/icons-material';
 import './ChangePasswordButton.css';
+import React from 'react';
 
 const ChangePasswordButton = ({ onClickHandler }) => {
     return (

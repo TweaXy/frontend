@@ -1,5 +1,6 @@
 import { NavigateNextOutlined, PersonOutlined } from '@mui/icons-material';
 import './ChangeUsernameButton.css'
+import React from 'react';
 
 const ChangeUsernameButton = ({ onClickHandler }) => {
     return (
