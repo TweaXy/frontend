@@ -20,9 +20,11 @@ import { useNavigate } from 'react-router-dom';
 import parseDate from '../../utils/parseDate';
 import TweetDate from '../../utils/TweetDate';
 import { TweetOptionsPopDown } from './TweetOptionsPopDown';
+import { apiAddReply } from '../../apis/tweetApis/AddReply';
 import e from 'cors';
 import { token } from 'stylis';
 import { abort } from 'process';
+import AddReplyWindow from './AddReplyWindow';
 export default function Tweet({
     avatar,
     username,
@@ -38,12 +40,13 @@ export default function Tweet({
     isUserLiked,
     token,
     userID,
-    removeTweet
+    removeTweet,
+    isCurrentUserTweet
 }) {
     const [tweetLikes, setTweetLikes] = useState(likes);
-    const [tweetReplies, setTweetComments] = useState(replies);
+    const [tweetReplies, setTweetReplies] = useState(replies);
     const [tweetReposts, setTweetReposts] = useState(reposts);
-    const [tweetInsights, setTweet] = useState(insights);
+    const [tweetInsights, setTweetInsights] = useState(insights);
     const [isLikeActive, setLikeActive] = useState(isUserLiked);
     const activityIcon1 = useRef(null);
     const activityIcon2 = useRef(null);
@@ -189,6 +192,21 @@ export default function Tweet({
         removeTweet(tweetId);
     }
 
+    //reply state
+    const [isReplyWindow,setIsReplyWindow]=useState(false);
+    const replyWindowClose = ()=>{
+        setIsReplyWindow(false);
+    }
+    const replyWindowOpen = () =>{
+        setIsReplyWindow(true);
+    }
+    const addReplyHandler=async (text,images) =>{
+        // call the api
+       if(await apiAddReply(tweetId,text,images,token)){
+       setTweetReplies((prevReplies)=> prevReplies +1);
+       }
+       //take any other action
+    }
     // we should have a function to handle the change on clicking any
     return (
         <div className="tweet">
@@ -220,7 +238,7 @@ export default function Tweet({
                             <MoreHorizIcon />
                         </div>
                         <TweetOptionsPopDown
-                            isCurrentUserTweet={true}
+                            isCurrentUserTweet={isCurrentUserTweet}
                             handleClose={optionsCloseHandler}
                             anchorEl={anchorEl}
                             deleteTweetHandler={deleteTweetHandler}
@@ -245,7 +263,7 @@ export default function Tweet({
                     <div className="tweet-activity">
                         <div className="tweet-icon">
                             {/* icon */}
-                            <div className="activity-icon" ref={activityIcon1}>
+                            <div className="activity-icon" ref={activityIcon1}  onClick={replyWindowOpen}>
                                 <ChatBubbleOutlineOutlinedIcon className="" />
                             </div>
                             <span
@@ -322,6 +340,7 @@ export default function Tweet({
                     </div>
                 </div>
             </div>
+        {isReplyWindow && <AddReplyWindow open={isReplyWindow} closeHandler={replyWindowClose} avatar={avatar} username={username} handle={handle} uploadTime={uploadTime} tweetText={tweetText} addReplyHandler={addReplyHandler}/>}
         </div>
     );
 }

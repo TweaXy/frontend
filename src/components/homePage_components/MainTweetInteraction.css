@@ -1,0 +1,33 @@
+.main-tweet-interaction {
+    padding: 0 16px;
+    /* border-bottom: 1px solid var(--twitter-background); */
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI Emoji', 'Arial' !important; /* Use a fallback font */
+}
+
+.main-tweet-interaction > .tweet-container > .avatar-container{
+    margin-right: 12px;
+}
+
+.main-tweet-interaction > .tweet-container > .avatar-container > .avatar-box{
+    margin: 0;
+}
+
+.main-tweet-interaction > .tweet-container > .avatar-container {
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+}
+
+.main-tweet-interaction > .tweet-container > .avatar-container > .avatar-line{
+    flex: 1;
+    border-left:2px solid var(--twitter-background) ;
+    align-self: center;
+}
+
+.main-tweet-interaction > .tweet-container > .tweet-main > .tweet-user > .info-container > .username:hover{
+    text-decoration: none !important;
+}
+
+
