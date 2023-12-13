@@ -4,7 +4,7 @@ import { MenuItem, TextField } from '@mui/material';
 import '../userProfile/EditProfilePage.css';
 import '../SignUpPage/SignUpPage.css';
 import { CameraEnhanceOutlined } from '@mui/icons-material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import deleteBannerApi from '../../apis/deleteProfileBanner';
 import deleteProfileApi from '../../apis/deleteProfileImage';
 import { updateInfo } from '../../apis/updateInfo';
@@ -33,6 +33,27 @@ export default function EditProfilePage({
         location: location,
         website: website,
     });
+    const [url, setUrl] = useState(website);
+    const [isValid, setIsValid] = useState(true);
+    const handleChangeURL = (event) => {
+        setUrl(event.target.value);
+    };
+    const validateUrl = (url) => {
+        // Regular expression pattern to validate URL
+        const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+        return urlPattern.test(url);
+    };
+    useEffect(() => {
+        if (validateUrl(url)) {
+            // URL is valid, perform further actions
+            setIsValid(true);
+            // Additional logic here...
+        } else {
+            // URL is not valid
+            setIsValid(false);
+        }
+    }, [url]);
+
     const [Data2, changeData2] = useState({ day: '', month: '', year: '' });
     const saveHandler = () => {
         updateInfo(
@@ -54,9 +75,7 @@ export default function EditProfilePage({
             setSelectedImage(URL.createObjectURL(e.target.files[0]));
         }
     };
-    const updatepicture = () => {
-        Pictureupload(avatar, authToken);
-    };
+
     const handleAvatarChange = (event) => {
         const file = event.target.files[0];
         setTempProfileImage(file);
@@ -135,6 +154,11 @@ export default function EditProfilePage({
             cur[changedelement] = newvalue;
             return { ...cur };
         });
+    };
+    const OnchangeHandlerUrl = (evt) => {
+        handleChangeURL(evt);
+        ProfileData_Handler(evt);
+       
     };
     const Data2_Handler = (evt) => {
         const changedelement = evt.target.name;
@@ -257,9 +281,11 @@ export default function EditProfilePage({
                                 name="website"
                                 label="website"
                                 value={ProfileData.website}
-                                onChange={ProfileData_Handler}
-                                helperText="Must be a valid Url"
+                                onChange={OnchangeHandlerUrl}
+                                // optional pattern attribute for more specific validation
+                               
                             />
+                            {!isValid && <p>Please enter a valid URL.</p>}
                         </div>
                         <span className="date-birth-text">Date of Birth</span>
                         <div className="sign-up-birth-date">

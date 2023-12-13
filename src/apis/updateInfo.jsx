@@ -73,10 +73,10 @@ const updateInfo = (
     if (_cover) formData.append('cover', _cover);
     if (_birthdayDate.month && _birthdayDate.year && _birthdayDate.day)
         formData.append('birthdayDate', _nwbirthdayDate);
-    formData.append('bio', _bio);
-    formData.append('website', _website);
+    if (_bio != 'null') formData.append('bio', _bio);
+    if (_website != 'null') formData.append('website', _website);
     //formData.append('phone', _phone);
-    formData.append('location', _location);
+    if (_location != 'null') formData.append('location', _location);
     formData.append('name', _name);
 
     console.log('Data is ', formData.entries);
