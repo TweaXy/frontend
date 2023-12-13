@@ -6,6 +6,7 @@ COPY . .
 #EXPOSE 5173
 RUN npm update
 RUN npm install
+RUN npm test
 #CMD npm run dev
 RUN npm run build
 FROM nginx
