@@ -80,6 +80,7 @@ pipeline
             {
                 sh '''
                 echo 'Deploying...'
+                chmod +x frontend.sh
                 chmod +x deploy.sh
                 ./deploy.sh
                 '''
