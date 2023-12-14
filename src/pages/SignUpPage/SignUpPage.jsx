@@ -65,7 +65,7 @@ const SignUpPage = ({ onClose }) => {
                 );
                 dispatch(setUser(userData.user));
                 dispatch(setToken(userData.token));
-                navigate(`home`, { state: { firstTime: true } });
+                navigate(`/home`, { state: { firstTime: true } });
             } catch {
                 (err) => {
                     console.log('error signing up:', err.message);
