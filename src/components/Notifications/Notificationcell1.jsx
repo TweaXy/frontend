@@ -5,10 +5,13 @@ import reposticon from '../../../assets/repost.PNG';
 import MangaAvatar from '../../../assets/Manga.PNG';
 import followicon from '../../../assets/follow.PNG';
 import Avatar from '@mui/material/Avatar';
+import { Navigate, useNavigate } from 'react-router';
 const Notificationcell1 = ({
-    interactionType = 'Liked',
-    PostType = 'Tweet',
+    fromuser,
+    interaction
+    
 }) => {
+    const naviagate=useNavigate();
     const routingHandlerTweet = () => {
         console.log('routing to the tweet ');
         // route to the tweet
@@ -17,13 +20,9 @@ const Notificationcell1 = ({
         event.stopPropagation();
         console.log('routing to this user profile ');
         //route to the user profile
+        naviagate(`/profile/${fromuser.username}`, { state: {userID:fromuser.id}})
     };
-    const icon =
-        interactionType === 'liked'
-            ? loveicon
-            : interactionType === 'reposted'
-            ? reposticon
-            : followicon;
+    const icon = loveicon
     return (
         <>
             <div className="tweet" on onClick={routingHandlerTweet}>
@@ -53,15 +52,15 @@ const Notificationcell1 = ({
                                     className="username"
                                     onClick={routingHandlerProfile}
                                 >
-                                    Manga{' '}
+                                    {fromuser.name}{' '}
                                 </span>
                                 <span className="Interaction">
-                                    {interactionType} your {PostType}
+                                    Liked your {interaction.type}
                                 </span>
                             </div>
                         </div>
                         <div className="tweet-text-container">
-                            This is a Notification Test
+                            {interaction.text}
                         </div>
                     </div>
                 </div>
