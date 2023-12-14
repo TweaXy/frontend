@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import React from 'react';
 import './SignUpPage.css';
 import './SignUpHome.css';
 import { MenuItem, TextField } from '@mui/material';
@@ -121,13 +122,15 @@ const SignUpPage1 = ({
             <span className="sign-up-span">{date}</span>
             <div className="sign-up-birth-date">
                 <TextField
+                    aria-label="Month"
+                    inputProps={{ "data-testid": "month-testid" }}
                     className="sign-up-birth-date-selection"
                     id="outlined-select-currency"
                     select
                     label="Month"
                     defaultValue="Select Month"
                     name="month"
-                    data-test={SignUpSelectors.MONTH_FIELD}
+                    data-testid="month-select"
                     value={Data2.month}
                     onChange={Data2_Handler}
                     sw={{
@@ -145,6 +148,9 @@ const SignUpPage1 = ({
                     ))}
                 </TextField>
                 <TextField
+                    aria-label="Day"
+                    inputProps={{ "data-testid": "day-testid" }}
+
                     className="sign-up-birth-date-selection"
                     id="outlined-select-currency"
                     select
@@ -169,6 +175,9 @@ const SignUpPage1 = ({
                     ))}
                 </TextField>
                 <TextField
+                    aria-label="Year"
+                    inputProps={{ "data-testid": "year-testid" }}
+
                     className="sign-up-birth-date-selection"
                     id="outlined-select-currency"
                     select
