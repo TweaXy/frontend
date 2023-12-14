@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Badge from '@mui/material/Badge';
 import { useNavigate } from 'react-router';
 import { NotificationsActive, NotificationsNone } from '@mui/icons-material';
-import getUnseenNotificationsCount from '../../apis/getUnseenNotificationsCount';
+import getUnseenNotificationsCount from '../../apis/NotificationsApis/getUnseenNotificationsCount';
 
 const NotificationsButton = ({ active, token }) => {
     const [notificationsCount, setNotificationCount] = useState(0);
