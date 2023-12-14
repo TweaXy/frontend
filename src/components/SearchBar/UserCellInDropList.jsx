@@ -1,4 +1,4 @@
-import './UserCell.css';
+import './UserCellInDropList.css';
 import { useState } from 'react';
 import { Avatar } from '@mui/material';
 import unfollow from '../../apis/unfollow';
@@ -18,58 +18,38 @@ const UserCell = ({
 }) => {
     const navigate = useNavigate();
 
-    const [isFollowingButtonHovered, setIsFollowingButtonHovered] =
-        useState(false);
-
-    const [followedByMeState, setFollowedByMeState] = useState(followedByMe);
-
-    const handleFollowingButtonHover = () => {
-        setIsFollowingButtonHovered(!isFollowingButtonHovered);
-    };
-
     const goToUserProfile = () => {
         console.log(`redirecting to @${username}...`);
         navigate(`/profile/${username}`, { state: { userID: id } });
     };
 
-    const onMouseEnterAvatarField = () => {
+    const onMouseEnterAvatarField = (e) => {
+        // e.stopPropagation();
         // TODO
         console.log(`showing @${username} profile snippet at their avatar...`);
     };
-    const onMouseLeaveAvatarField = () => {
+    const onMouseLeaveAvatarField = (e) => {
+        // e.stopPropagation();
         // TODO
         console.log(
             `stop showing @${username} profile snippet at their avatar`
         );
     };
 
-    const onMouseEnterNameField = () => {
+    const onMouseEnterNameField = (e) => {
+        // e.stopPropagation();
         // TODO
         console.log(`showing @${username} profile snippet at their name...`);
     };
-    const onMouseLeaveNameField = () => {
+    const onMouseLeaveNameField = (e) => {
+        // e.stopPropagation();
         // TODO
         console.log(`stop showing @${username} profile snippet at their name`);
     };
 
-    const onButtonClick = async (event) => {
-        event.stopPropagation();
-        console.log(`@${username} cell button is clicked..`);
-        if (followedByMeState) {
-            console.log(`unfollow @${username}..`);
-            if (await unfollow(username, token)) {
-                setFollowedByMeState(false);
-            }
-        } else {
-            console.log(`follow @${username}..`);
-            if (await follow(username, token)) {
-                setFollowedByMeState(true);
-            }
-        }
-    };
-
     return (
-        <div className="user-cell-in-drop-list-container" onClick={goToUserProfile}>
+        <div className="user-cell-in-drop-list-container" onClick={goToUserProfile}
+        >
             <div
                 className="user-cell-in-drop-list-avatar-container"
                 onMouseEnter={onMouseEnterAvatarField}
@@ -96,26 +76,6 @@ const UserCell = ({
                             )}
                         </div>
                     </div>
-                    {/* <div className="user-cell-in-drop-list-upper-right">
-                        {myID !== id && (
-                            <button
-                                className={
-                                    followedByMeState === false
-                                        ? 'black-small-button'
-                                        : 'white-small-button'
-                                }
-                                onClick={onButtonClick}
-                                onMouseEnter={handleFollowingButtonHover}
-                                onMouseLeave={handleFollowingButtonHover}
-                            >
-                                {followedByMeState === false
-                                    ? 'Follow'
-                                    : isFollowingButtonHovered
-                                    ? 'Unfollow'
-                                    : 'Following'}
-                            </button>
-                        )}
-                    </div> */}
                 </div>
                 <div className="user-cell-in-drop-list-lower-half">
                     <span>{bio}</span>

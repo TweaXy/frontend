@@ -9,6 +9,7 @@ import SearchForTweetsOrUsersHeader from '../../components/SearchForTweetsOrUser
 import { useSelector } from 'react-redux';
 import { apiGetTrendingTweets } from '../../apis/TrendingAPIs/GetTrendingTweetsAPI';
 import Tweet from '../../components/homePage_components/Tweet.jsx';
+import { apiSearchForTweets } from '../../apis/SearchAPIs/SearchForTweetsAPI.jsx';
 
 const SearchForUsersOrTweetsPage = () => {
     const location = useLocation();
@@ -22,7 +23,7 @@ const SearchForUsersOrTweetsPage = () => {
     const [fetchedUsers, setFetchedUsers] = useState([]);
     const [fetchedtweets, setFetchedTweets] = useState([]);
 
-    const [curPage, setCurPage] = useState(isSearch ? 2 : 0);
+    const [curPage, setCurPage] = useState(0);
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -33,6 +34,14 @@ const SearchForUsersOrTweetsPage = () => {
                     console.log('these are the fetched users from the search: ', fetchedUsers);
                 } catch (error) {
                     console.error('Error fetching searched users:', error);
+                }
+
+                try {
+                    const tempFetchedTweets = await apiSearchForTweets(searchInput, token, user.username);
+                    setFetchedUsers(tempFetchedTweets);
+                    console.log('these are the fetched Tweets from the search: ', fetchedtweets);
+                } catch (error) {
+                    console.error('Error fetching searched Tweets:', error);
                 }
             }
             else {
@@ -47,10 +56,6 @@ const SearchForUsersOrTweetsPage = () => {
         };
         fetchUsers();
     }, [searchInput, isSearch]);
-
-    useEffect(() => {
-        setCurPage(isSearch ? 2 : 0);
-    }, [searchInput]);
     
     const navigate = useNavigate();
 
