@@ -1,8 +1,8 @@
-const ForgetPasswordErrors = {
-    UNREGISTERED_EMAIL: "Sorry, we couldn't find your account.",
-    WRONG_VERIFICATION_CODE: 'The code is wrong or expired please try again',
-    UNMATCHING_PASSWORD_AND_CONFIRMATION_PASSWORD:
-        'The two entered passwords do not match!',
+const UpdatePasswordErrors = {
+    WRONG_PASSWORD: 'wrong password!',
+    NEW_PASSWORD_MATCHED_OLD_PASSWORD:
+        'new password must be different from old password',
+    UNMATCHING_PASSWORD_AND_CONFIRMATION_PASSWORD: 'Passwords do not match',
     PASSWORD_LENGTH_ERROR:
         'password must contain 8 or more characters with at least one of each: uppercase, lowercase, number and special',
     PASSWORD_SMALL_LETTER_ERROR:
@@ -14,4 +14,4 @@ const ForgetPasswordErrors = {
         'password must contain at least 1 special character',
 };
 
-export default ForgetPasswordErrors;
+export default UpdatePasswordErrors;

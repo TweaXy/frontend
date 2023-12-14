@@ -1,9 +1,9 @@
 import './Notificationcell.css';
 import './NotificationsAvaters.css';
-import loveicon from '../../../assets/love.JPEG';
-import reposticon from '../../../assets/repost.PNG';
-import MangaAvatar from '../../../assets/Manga.PNG';
-import followicon from '../../../assets/follow.PNG';
+import loveicon from '../../../assets/love.jpeg';
+import reposticon from '../../../assets/repost.png';
+import MangaAvatar from '../../../assets/Manga.png';
+import followicon from '../../../assets/follow.png';
 import Avatar from '@mui/material/Avatar';
 import { Navigate, useNavigate } from 'react-router';
 const Notificationcell1 = ({

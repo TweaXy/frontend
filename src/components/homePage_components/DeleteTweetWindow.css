@@ -1,0 +1,66 @@
+
+.MuiDialog-paper{
+    width: 320px;
+    height: 304px;
+    border-radius: 15px !important;
+}
+
+.MuiTypography-root{
+    padding: 0 !important;
+    
+}
+.MuiDialogContent-root{
+    padding: 0 !important;
+}
+.dialog-container{
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+    /* align-self: center; */
+    align-items: start;
+}
+ .MuiDialog-paper >.dialog-container >  .delete-option-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 24px -12px -12px 0;
+}
+
+.MuiDialog-paper >.dialog-container> .delete-option-container >.delete-btn{
+    outline: none !important;
+    background-color: red !important;
+    color: white !important;
+    font-weight: 550 !important;
+    font-size: 15px !important;
+    height: 43px !important;
+    border-radius: 30px !important;
+    border: none !important;
+    text-transform: inherit !important;
+    width: 256px;
+    margin-bottom: 12px;
+    /* margin-top: 5px !important; */
+}
+
+.dialog-container> .delete-option-container >.delete-btn:hover{
+    background-color:rgb(229, 5, 5) !important;
+    transition: background-color 200ms ease-out;
+}
+
+.MuiDialog-paper >.dialog-container> .delete-option-container >.cancel-btn{
+    outline: none !important;
+    background-color: white !important;
+    color: black !important;
+    font-weight: 550 !important;
+    font-size: 15px !important;
+    height: 43px !important;
+    border-radius: 30px !important;
+    border-color: #c8cbcd;
+    text-transform: inherit !important;
+    width: 256px;
+    margin-bottom: 12px;
+}
+
+.dialog-container> .delete-option-container >.cancel-btn:hover{
+    background-color:var(--twitter-greyHover) !important;
+    transition: background-color 200ms ease-out;
+}

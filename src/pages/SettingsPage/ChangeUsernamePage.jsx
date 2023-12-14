@@ -16,6 +16,7 @@ import checkPassword from '../../apis/checkPassword';
 import updateUsername from '../../apis/updateUsername';
 import { setUser } from '../../redux/actions';
 import NotifyBox from '../../components/NotifyBox/NotifyBox';
+import SettingsPageSelectors from '../../shared/selectors/SettingsPage';
 
 const ChangeUsernamePage = () => {
     const token = useSelector((state) => state.user.token);
@@ -144,6 +145,7 @@ const ChangeUsernamePage = () => {
                                     Password
                                 </InputLabel>
                                 <OutlinedInput
+                                    data-test={SettingsPageSelectors.PASSWORD_FIELD}
                                     id="outlined-adornment-password"
                                     type={showPassword ? 'text' : 'password'}
                                     value={password}
@@ -180,6 +182,7 @@ const ChangeUsernamePage = () => {
                                 </span>
                             )}
                             <button
+                                data-test={SettingsPageSelectors.CONFIRM_PASSWORD_BUTTON}
                                 className="blue-btn"
                                 disabled={password === ''}
                                 onClick={checkUserPassword}
@@ -205,6 +208,7 @@ const ChangeUsernamePage = () => {
                                     Username
                                 </InputLabel>
                                 <OutlinedInput
+                                    data-test={SettingsPageSelectors.USERNAME_FIELD}
                                     id="outlined-adornment-password"
                                     type={'text'}
                                     value={newUsername}
@@ -223,6 +227,7 @@ const ChangeUsernamePage = () => {
                                 </span>
                             )}
                             <button
+                                data-test={SettingsPageSelectors.CONFIRM_USERNAME_BUTTON}
                                 className="blue-btn"
                                 disabled={newUsername === ''}
                                 onClick={updateUsernameHandler}
