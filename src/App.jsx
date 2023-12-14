@@ -48,7 +48,7 @@ function App() {
                         element={<ChangeUsernamePage />}
                     />
                     <Route
-                        path="/notifactions"
+                        path="/Notifications"
                         element={<NotificationPage />}
                     />
                 </Routes>
