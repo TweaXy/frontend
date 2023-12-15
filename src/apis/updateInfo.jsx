@@ -69,14 +69,14 @@ const updateInfo = (
         _birthdayDate.year;
     console.log('auth token is', authToken);
     const formData = new FormData();
-    //  formData.append('avatar', _avatar);
-    // formData.append('cover', _cover);
+    if (_avatar) formData.append('avatar', _avatar);
+    if (_cover) formData.append('cover', _cover);
     if (_birthdayDate.month && _birthdayDate.year && _birthdayDate.day)
         formData.append('birthdayDate', _nwbirthdayDate);
-    formData.append('bio', _bio);
-    if (_website) formData.append('website', _website);
-    formData.append('phone', _phone);
-    formData.append('location', _location);
+    if (_bio != 'null') formData.append('bio', _bio);
+    if (_website != 'null') formData.append('website', _website);
+    //formData.append('phone', _phone);
+    if (_location != 'null') formData.append('location', _location);
     formData.append('name', _name);
 
     console.log('Data is ', formData.entries);
