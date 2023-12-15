@@ -12,12 +12,13 @@ const NotificationsButton = ({ active, token }) => {
     const handleNotificationsButtonClick = () => {
         navigate('/Notifications');
     };
-
+    1;
     useEffect(() => {
         const getCurUnseenNotificationCount = async () => {
             try {
                 const curUnseenNotificationsCount =
                     await getUnseenNotificationsCount(token);
+                console.log("notifications count is: ", curUnseenNotificationsCount);
                 setNotificationCount(curUnseenNotificationsCount);
             } catch (error) {
                 console.error(error.message);

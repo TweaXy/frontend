@@ -45,16 +45,20 @@ export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
                 />
             </div>
             <SidebarOption text="Explore" Icon={SearchIcon} />
-            <NotificationsButton active={active === 3} tokn={userData.token} />
+            <NotificationsButton active={active === 3} token={userData.token} />
             <SidebarOption text="Messages" Icon={MailOutlineIcon} />
-            <div data-test={HomePageSelectors.PROFILE_BUTTON} onClick={toProfile}>
-                <SidebarOption     
+            <div
+                data-test={HomePageSelectors.PROFILE_BUTTON}
+                onClick={toProfile}
+            >
+                <SidebarOption
                     active={active === 1}
                     text="Profile"
                     Icon={PermIdentityIcon}
                 />
             </div>
-            <div data-test={HomePageSelectors.SETTINGS_BUTTON}
+            <div
+                data-test={HomePageSelectors.SETTINGS_BUTTON}
                 onClick={() => {
                     navigate('/settings');
                 }}
