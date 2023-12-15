@@ -1,0 +1,38 @@
+
+
+.add-reply-dialog >.MuiDialog-container > .MuiDialog-paper {
+    width: 600px;
+    height: fit-content;
+    border-radius: 15px !important;
+    /* border: 5px solid red; */
+  }
+
+
+  .reply-to-container{
+    display: flex;
+    padding: 0 16px;
+  }
+  .reply-to-container > .reply-to-line{
+    width: 40px;
+    height: 40px;
+    margin-right: 12px;
+    display: flex;
+  }
+
+  .reply-to-container > .reply-to-line > .half-container{
+    flex: 0.5;
+    border-right: 2px solid var(--twitter-background);
+  }
+
+  .reply-to-container > .reply-to-text{
+    color: var(--twitter-greyColor);
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .reply-to-container > .reply-to-text > .mention-text{
+    color: var(--twitter-color);
+    font-weight: lighter;
+  }
+
+  

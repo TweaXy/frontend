@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Privacyclasses from './WelcomePageStyle/PrivacyAndPolicy.module.css';
 import Headerclasses from './WelcomePageStyle/Header.module.css';
 import Posterclasses from './WelcomePageStyle/PosterImage.module.css';
 import backgroundImage from '../../../assets/logo.svg';
@@ -63,20 +62,7 @@ export default function WelcomePage() {
                                 openWindow={openSignUpWindow}
                                 onClose={closeSignUpWindow}
                             />
-                            <p className={Privacyclasses.privacyPolicy}>
-                                By signing up, you agree to the{' '}
-                                <a href="https://twitter.com/en/tos">
-                                    Terms of Service
-                                </a>{' '}
-                                and{' '}
-                                <a href="https://twitter.com/en/privacy">
-                                    Privacy Policy
-                                </a>
-                                , including{' '}
-                                <a href="https://help.twitter.com/en/rules-and-policies/twitter-cookies">
-                                    Cookie Use
-                                </a>
-                            </p>
+                            
                             <SignInButton
                                 isWindowOpen={isSignInWindowOpen}
                                 openWindow={openSignInWindow}

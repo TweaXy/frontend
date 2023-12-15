@@ -17,7 +17,7 @@ export default function DeleteTweetWindow({ open, closeHandler,deleteTweet }) {
         closeHandler();
     }
     return (
-        <div className="delete-tweet-window">
+        <div className="delete-tweet-window" >
             <Dialog
                 open={open}
                 onClose={closeHandler}
@@ -29,15 +29,18 @@ export default function DeleteTweetWindow({ open, closeHandler,deleteTweet }) {
                         
                     }
                 }
+                className='delete-dialog'
             >   
-                <div className="dialog-container">
+                <div className="delete-dialog-content">
                 <DialogTitle id="alert-dialog-title"  sx={
                     {
                         fontWeight:"bolder",
                         marginBottom:1.3,
                         lineHeight:1
                     }
-                }>
+                }
+                className='delete-dialog-title'
+                >
                     {'Delete Post?'}
                 </DialogTitle>
                 <DialogContent>
