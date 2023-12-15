@@ -1,6 +1,8 @@
 const getUnseenNotificationsCount = async (token) => {
     const url = `https://tweaxybackend.mywire.org/api/v1/notification/unseenNotification`;
 
+    console.log('get notifications count token: ', token);
+
     try {
         const response = await fetch(url, {
             method: 'GET',
@@ -11,8 +13,6 @@ const getUnseenNotificationsCount = async (token) => {
         });
 
         const responseBody = await response.json();
-
-        console.log('get unseen notifications count response:', responseBody);
 
         if (response.ok) {
             const data = responseBody.data;
