@@ -7,7 +7,7 @@ import NotificationHeader from '../../components/Notifications/NotificationsHead
 import Notificationcell1 from '../../components/Notifications/Notificationcell1';
 import Notificationcell2 from '../../components/Notifications/Notificationcell2';
 import Notificationcell3 from '../../components/Notifications/Notificationcell3';
-import getAllNotifications from '../../apis/NotificationsApis/getAllNotifications';
+import getAllNotifications from'../../apis/NotificationsApis/getAllNotifications';
 import { CircularProgress } from '@mui/material';
 import { useEffect } from 'react';
 const NotificationPage = () => {
