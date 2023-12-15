@@ -7,7 +7,7 @@ import NotificationHeader from '../../components/Notifications/NotificationsHead
 import Notificationcell1 from '../../components/Notifications/Notificationcell1';
 import Notificationcell2 from '../../components/Notifications/Notificationcell2';
 import Notificationcell3 from '../../components/Notifications/Notificationcell3';
-import GetAllNotifications from '../../apis/NotificationsApis/getAllNotifications';
+import getAllNotifications from '../../apis/NotificationsApis/getAllNotifications';
 import { CircularProgress } from '@mui/material';
 import { useEffect } from 'react';
 const NotificationPage = () => {
@@ -21,7 +21,7 @@ const NotificationPage = () => {
               console.log('User data from Notifications:', user);
               console.log('Token from Notifications:', token);   
               try {
-                const fetchedNotifications = await GetAllNotifications(token, 10, 0);
+                const fetchedNotifications = await getAllNotifications(token, 10, 0);
                 setNotifications(fetchedNotifications);     
                 console.log('Notifications:', fetchedNotifications);
                 setIsPageLoading(false);

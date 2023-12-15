@@ -1,5 +1,5 @@
 const getnotifactions = `https://tweaxybackend.mywire.org/api/v1/notification`;
-const  GetAllNotifications= async ( token, _limit, _offset) => {
+const  getAllNotifications= async ( token, _limit, _offset) => {
     console.log( 'from AllNotications token is', token);
     const urlWithQueryParam = `${getnotifactions}?limit=${_limit}?offset=${_offset}`;
     try {
@@ -24,4 +24,4 @@ const  GetAllNotifications= async ( token, _limit, _offset) => {
         throw err;
     }
 };
-export default GetAllNotifications;
+export default getAllNotifications;
