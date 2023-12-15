@@ -15,15 +15,13 @@ import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 
 
-export default function SearchBar({defaultText = ""}) {
+export default function SearchBar({defaultText}) {
 
     const navigate = useNavigate();
 
     const [searchInput, setSearchInput] = useState(defaultText);
     const [open, setOpen] = React.useState(false);
     const prevOpen = React.useRef(open);
-
-    console.log("HERE: ", searchInput, defaultText);
 
     const handleOnFocus = () => {
       console.log("I'm on focus..", prevOpen.current, open);
@@ -68,7 +66,7 @@ export default function SearchBar({defaultText = ""}) {
       anchorRef.current.focus();
     }
 
-    prevOpen.current = open;  
+    prevOpen.current = open;
   }, [open]);
 
 

@@ -21,41 +21,52 @@ const SearchForUsersOrTweetsPage = () => {
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlwiY2xwcTJnMTB4MDAyMjIwYmxuaGQ5bHZ3eFwiIiwiaWF0IjoxNzAxNjQzMjMyLCJleHAiOjE3MDQyMzUyMzJ9.iDJhBcxBfwxCX9NKk2eYqyXAJwWNRvcXzR_w-IrdibE";
 
     const [fetchedUsers, setFetchedUsers] = useState([]);
-    const [fetchedtweets, setFetchedTweets] = useState([]);
+    const [fetchedTweets, setFetchedTweets] = useState([]);
 
     const [curPage, setCurPage] = useState(0);
 
     useEffect(() => {
         const fetchUsers = async () => {
-            if (isSearch) { // TODO: add the tweets fetch here whenever the api is ready.
-                try {
-                    const tempFetchedUsers = await apiSearchForUsers(searchInput, token);
-                    setFetchedUsers(tempFetchedUsers);
-                    console.log('these are the fetched users from the search: ', fetchedUsers);
-                } catch (error) {
-                    console.error('Error fetching searched users:', error);
-                }
-
-                try {
-                    const tempFetchedTweets = await apiSearchForTweets(searchInput, token, user.username);
-                    setFetchedUsers(tempFetchedTweets);
-                    console.log('these are the fetched Tweets from the search: ', fetchedtweets);
-                } catch (error) {
-                    console.error('Error fetching searched Tweets:', error);
-                }
-            }
-            else {
-                try {
-                    const tempFetchedTweets = await apiGetTrendingTweets(searchInput, token);
-                    setFetchedTweets(tempFetchedTweets);
-                    console.log('these are the fetched Tweets from the trend: ', fetchedtweets);
-                } catch (error) {
-                    console.error('Error fetching trending tweets: ', error);
+            if (curPage == 2) {
+                if (isSearch) {
+                    try {
+                        const tempFetchedUsers = await apiSearchForUsers(searchInput, token);
+                        setFetchedUsers(tempFetchedUsers);
+                        console.log('these are the fetched users from the search: ', fetchedUsers);
+                    } catch (error) {
+                        console.error('Error fetching searched users:', error);
+                    }
                 }
             }
         };
         fetchUsers();
-    }, [searchInput, isSearch]);
+    }, [searchInput, isSearch, curPage]);
+
+    useEffect(() => {
+        const fetchTweets = async () => {
+            if (curPage == 0) {
+                if (isSearch) {
+                    try {
+                        const tempFetchedTweets = await apiSearchForTweets(searchInput, token, user.username);
+                        setFetchedTweets(tempFetchedTweets);
+                        console.log('these are the fetched Tweets from the search: ', fetchedTweets);
+                    } catch (error) {
+                        console.error('Error fetching searched Tweets:', error);
+                    }
+                }
+                else {
+                    try {
+                        const tempFetchedTweets = await apiGetTrendingTweets(searchInput, token);
+                        setFetchedTweets(tempFetchedTweets);
+                        console.log('these are the fetched Tweets from the trend: ', fetchedTweets);
+                    } catch (error) {
+                        console.error('Error fetching trending tweets: ', error);
+                    }
+                }
+            }
+        };
+        fetchTweets();
+    }, [searchInput, isSearch, curPage]);
     
     const navigate = useNavigate();
 
@@ -73,8 +84,8 @@ const SearchForUsersOrTweetsPage = () => {
                     setActivePage={setCurPage}
                     goBack={goBack}
                 />
-                {curPage == 0 && ( 
-                    fetchedtweets.map((tweet) => (
+                {curPage == 0 && (
+                    fetchedTweets.map((tweet) => (
                             <Tweet
                                 avatar={tweet.mainInteraction.avatar}
                                 username={tweet.mainInteraction.user.name}
