@@ -1,32 +1,32 @@
 
-.MuiDialog-paper{
+.delete-dialog >.MuiDialog-container > .MuiDialog-paper {
     width: 320px;
     height: 304px;
     border-radius: 15px !important;
-}
+  }
 
-.MuiTypography-root{
-    padding: 0 !important;
+  .delete-dialog-content > .MuiTypography-root{
+    padding: 0  !important;
     
 }
-.MuiDialogContent-root{
+.delete-dialog-content > .MuiDialogContent-root{
     padding: 0 !important;
 }
-.dialog-container{
+.delete-dialog-content{
     display: flex;
     flex-direction: column;
     padding: 32px;
     /* align-self: center; */
     align-items: start;
 }
- .MuiDialog-paper >.dialog-container >  .delete-option-container{
+ .MuiDialog-paper >.delete-dialog-content>  .delete-option-container{
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 24px -12px -12px 0;
 }
 
-.MuiDialog-paper >.dialog-container> .delete-option-container >.delete-btn{
+.MuiDialog-paper >.delete-dialog-content> .delete-option-container >.delete-btn{
     outline: none !important;
     background-color: red !important;
     color: white !important;
@@ -41,12 +41,12 @@
     /* margin-top: 5px !important; */
 }
 
-.dialog-container> .delete-option-container >.delete-btn:hover{
+.delete-dialog-content> .delete-option-container >.delete-btn:hover{
     background-color:rgb(229, 5, 5) !important;
     transition: background-color 200ms ease-out;
 }
 
-.MuiDialog-paper >.dialog-container> .delete-option-container >.cancel-btn{
+.MuiDialog-paper >.delete-dialog-content> .delete-option-container >.cancel-btn{
     outline: none !important;
     background-color: white !important;
     color: black !important;
@@ -60,7 +60,7 @@
     margin-bottom: 12px;
 }
 
-.dialog-container> .delete-option-container >.cancel-btn:hover{
+.delete-dialog-content> .delete-option-container >.cancel-btn:hover{
     background-color:var(--twitter-greyHover) !important;
     transition: background-color 200ms ease-out;
 }
