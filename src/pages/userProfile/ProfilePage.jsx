@@ -19,9 +19,9 @@ const ProfilePage = () => {
     const token = useSelector((state) => state.user.token);
     const user = useSelector((state) => state.user.user);
     const currUserId= useSelector((state) => state.user.user.id);
-    console.log('token from profile: ', token);
-    console.log('user id from profile:', userID);
-    console.log('user id from profile:', currUserId);
+    // console.log('token from profile: ', token);
+    // console.log('user id from profile:', userID);
+    // console.log('user id from profile:', currUserId);
 
     useEffect(() => {
         if (token && userID && user) {
@@ -58,7 +58,7 @@ const ProfilePage = () => {
                 <Profile token={token} userID={userID} currUserId={currUserId} />
 
                 {/**Widgets */}
-                <Widget token={token} />
+                <Widget />
             </div>
         </>
     );
