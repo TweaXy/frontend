@@ -22,8 +22,8 @@ const updateUsername = async (username, token) => {
 
         return true;
     } catch (error) {
-        console.log('Error changing user password', error.message);
-        throw error;
+        console.log('Error changing username', error.message);
+        throw new Error(errorResponse.message);
     }
 };
 

@@ -83,7 +83,7 @@ const ChangeUsernamePage = () => {
                 );
             }
         } catch (error) {
-            setNewUsernameError(error.message);
+            setNewUsernameError(error);
         }
     };
 
@@ -145,7 +145,9 @@ const ChangeUsernamePage = () => {
                                     Password
                                 </InputLabel>
                                 <OutlinedInput
-                                    data-test={SettingsPageSelectors.PASSWORD_FIELD}
+                                    data-test={
+                                        SettingsPageSelectors.PASSWORD_FIELD
+                                    }
                                     id="outlined-adornment-password"
                                     type={showPassword ? 'text' : 'password'}
                                     value={password}
@@ -182,7 +184,9 @@ const ChangeUsernamePage = () => {
                                 </span>
                             )}
                             <button
-                                data-test={SettingsPageSelectors.CONFIRM_PASSWORD_BUTTON}
+                                data-test={
+                                    SettingsPageSelectors.CONFIRM_PASSWORD_BUTTON
+                                }
                                 className="blue-btn"
                                 disabled={password === ''}
                                 onClick={checkUserPassword}
@@ -208,7 +212,9 @@ const ChangeUsernamePage = () => {
                                     Username
                                 </InputLabel>
                                 <OutlinedInput
-                                    data-test={SettingsPageSelectors.USERNAME_FIELD}
+                                    data-test={
+                                        SettingsPageSelectors.USERNAME_FIELD
+                                    }
                                     id="outlined-adornment-password"
                                     type={'text'}
                                     value={newUsername}
@@ -227,7 +233,9 @@ const ChangeUsernamePage = () => {
                                 </span>
                             )}
                             <button
-                                data-test={SettingsPageSelectors.CONFIRM_USERNAME_BUTTON}
+                                data-test={
+                                    SettingsPageSelectors.CONFIRM_USERNAME_BUTTON
+                                }
                                 className="blue-btn"
                                 disabled={newUsername === ''}
                                 onClick={updateUsernameHandler}
