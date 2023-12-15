@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import AccountButton from '../AccountButton/AccountButton';
+import NotificationsButton from '../NotificationsButton/NotificationsButton';
 import HomePageSelectors from '../../shared/selectors/HomePage';
 
 export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
@@ -44,18 +45,7 @@ export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
                 />
             </div>
             <SidebarOption text="Explore" Icon={SearchIcon} />
-            <div
-                onClick={() => {
-                    navigate('/notifactions');
-                }}
-            >
-                <SidebarOption
-                    active={active === 3}
-                    text="Notifications"
-                    Icon={NotificationsNoneIcon}
-                />
-            </div>
-            <div />
+            <NotificationsButton active={active === 3} tokn={userData.token} />
             <SidebarOption text="Messages" Icon={MailOutlineIcon} />
             <div data-test={HomePageSelectors.PROFILE_BUTTON} onClick={toProfile}>
                 <SidebarOption     

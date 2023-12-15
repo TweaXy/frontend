@@ -1,5 +1,6 @@
 import './SignUpPage.css';
 import './SignUpHome.css';
+import React from 'react';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';

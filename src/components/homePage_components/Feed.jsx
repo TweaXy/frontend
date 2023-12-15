@@ -14,8 +14,13 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
 
     const getTweets = async () => {
         const tweetsResponse = await apiGetTweet(userData.token);
-        console.log(tweetsResponse);
-         setTweets(tweetsResponse);
+// <<<<<<< test_dev
+        // console.log(tweetsResponse);
+        setTweets(tweetsResponse);
+// =======
+//         console.log(tweetsResponse);
+//          setTweets(tweetsResponse);
+// >>>>>>> dev
     };
     const removeTweet = (tweetId)=>{
          apiDeleteTweet(tweetId,token);
