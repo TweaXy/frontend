@@ -83,7 +83,7 @@ const ChangeUsernamePage = () => {
                 );
             }
         } catch (error) {
-            setNewUsernameError(error);
+            setNewUsernameError(error.message);
         }
     };
 
@@ -229,7 +229,7 @@ const ChangeUsernamePage = () => {
                         <div className="btn-wrapper">
                             {newUsernameError && (
                                 <span className="error-message">
-                                    newUsernameError
+                                    {newUsernameError}
                                 </span>
                             )}
                             <button

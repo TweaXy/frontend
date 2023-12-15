@@ -22,8 +22,7 @@ const updateUsername = async (username, token) => {
 
         return true;
     } catch (error) {
-        console.log('Error changing username', error.message);
-        throw new Error(errorResponse.message);
+        throw new Error(error.message);
     }
 };
 
