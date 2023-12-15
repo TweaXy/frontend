@@ -18,7 +18,6 @@ const NotificationsButton = ({ active, token }) => {
             try {
                 const curUnseenNotificationsCount =
                     await getUnseenNotificationsCount(token);
-                console.log("notifications count is: ", curUnseenNotificationsCount);
                 setNotificationCount(curUnseenNotificationsCount);
             } catch (error) {
                 console.error(error.message);
