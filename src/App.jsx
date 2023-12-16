@@ -11,6 +11,7 @@ import SettingsPage from './pages/SettingsPage/SettingsPage.jsx';
 import ChangePasswordPage from './pages/SettingsPage/ChangePasswordPage.jsx';
 import ChangeUsernamePage from './pages/SettingsPage/ChangeUsernamePage.jsx';
 import NotificationPage from './pages/NotificationPage/NotificationPage.jsx';
+import MuteSettingsPage from './pages/SettingsPage/MuteSettingsPage.jsx';
 function App() {
     return (
         <>
@@ -46,6 +47,10 @@ function App() {
                     <Route
                         path="/settings/username"
                         element={<ChangeUsernamePage />}
+                    />
+                    <Route
+                        path="/settings/mute"
+                        element={<MuteSettingsPage />}
                     />
                     <Route
                         path="/Notifications"

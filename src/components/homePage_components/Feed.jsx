@@ -63,6 +63,7 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                         userID={tweet.mainInteraction.user.id}
                         removeTweet={removeTweet}
                         isCurrentUserTweet={userData.user.id==tweet.mainInteraction.user.id}
+                        isUserMuted={false}
                     />
                 ))} 
             {/* <Tweet
