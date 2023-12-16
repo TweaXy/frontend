@@ -40,9 +40,7 @@ const ProfileBio = (props) => {
     const [isFollowing, setFollowing] = useState(false);
     console.log('idProfile', props.IdProfile);
     console.log('idUser', props.currUserId);
-    const toggleFollow = () => {
-        setFollowing(!isFollowing);
-    };
+   
     const navigateToFollowingPage = () => {
         navigate(`/${props.username}/following`, {
             state: {

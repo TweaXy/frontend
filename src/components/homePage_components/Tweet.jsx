@@ -22,7 +22,6 @@ import TweetDate from '../../utils/TweetDate';
 import { TweetOptionsPopDown } from './TweetOptionsPopDown';
 import { apiAddReply } from '../../apis/tweetApis/AddReply';
 import e from 'cors';
-import { token } from 'stylis';
 import { abort } from 'process';
 import AddReplyWindow from './AddReplyWindow';
 import { hashText } from '../../shared/Utils';
@@ -245,6 +244,8 @@ export default function Tweet({
                             handleClose={optionsCloseHandler}
                             anchorEl={anchorEl}
                             deleteTweetHandler={deleteTweetHandler}
+                            tweetid={tweetId}
+                            token={token}
 
                         />
                     </div>

@@ -10,13 +10,19 @@ import PushPinOutlinedIcon from '@mui/icons-material/PushPinOutlined';
 import DeleteTweetWindow from './DeleteTweetWindow';
 import { useState } from 'react';
 import TweetSelectors from '../../shared/selectors/Tweets';
+import getLikers from '../../apis/getLikers';
+import { useNavigate } from 'react-router';
 
 function TweetOptionsPopDown({
     isCurrentUserTweet,
     handleClose,
     anchorEl,
     deleteTweetHandler,
+    tweetid,
+    token,
 }) {
+   
+    const navigate=useNavigate();
     const [isDeleteWindow, setIsDeleteWindow] = useState(false);
     const handleDelete = () => {
         // Implement delete functionality here
@@ -38,8 +44,13 @@ function TweetOptionsPopDown({
     };
 
     const handleAnalytics = (e) => {
-        console.log('Analytics');
-        handleClose();
+        getLikers({ tweetId: tweetid, token: token });
+      navigate(`/likers`, {
+           state: {
+               tweetid: tweetid,
+                token: token,
+            },
+        });
     };
     return (
         <div className="tweet-options">
@@ -49,11 +60,12 @@ function TweetOptionsPopDown({
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
-                className='tweet-options-menu'
+                className="tweet-options-menu"
             >
                 {isCurrentUserTweet && (
                     <MenuItem
-                        data-test={TweetSelectors.DELETE_TWEET} onClick={handleDelete}
+                        data-test={TweetSelectors.DELETE_TWEET}
+                        onClick={handleDelete}
                         className="delete-option"
                         sx={{
                             color: 'red',
