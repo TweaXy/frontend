@@ -1,6 +1,7 @@
 import { TextField } from '@mui/material';
 import './SignUpPage.css';
 import './SignUpHome.css';
+import React from 'react';
 import { useState, useEffect } from 'react';
 import {
     sendEmailVerification,
@@ -57,7 +58,7 @@ const SignUpPage4 = ({
                 />
             </div>
             {!isokverficationcode && (
-                <p className="error-message">{Errors['Verficationcode']}</p>
+                <p className="error-message" > {Errors['Verficationcode']}</p>
             )}
             <a
                 onClick={resendHandler}
@@ -81,3 +82,4 @@ const SignUpPage4 = ({
 };
 
 export default SignUpPage4;
+

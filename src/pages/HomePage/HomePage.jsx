@@ -7,12 +7,15 @@ import { CircularProgress } from '@mui/material';
 import { useLocation } from 'react-router';
 import { useSelector } from 'react-redux';
 import SignUpHome from '../SignUpPage/SignUpPageHome';
+import { clearUser } from '../../redux/actions';
+import { useDispatch } from 'react-redux';
+import InitNotifications from '../../apis/NotificationsApis/InitNotifications';
 const HomePage = ({ isTherePopUpWindow }) => {
+    // const dispatch = useDispatch();
+    // dispatch(clearUser());
     const Location = useLocation();
     const Ft = Location.state?.firstTime;
-
     const [isWindowOpen, setIsWindowOpen] = useState(Ft || isTherePopUpWindow);
-
     const token = useSelector((state) => state.user.token);
     const user = useSelector((state) => state.user.user);
 
@@ -27,6 +30,7 @@ const HomePage = ({ isTherePopUpWindow }) => {
     useEffect(() => {
         if (user && token) {
             setUserData({ user: user, token: token });
+            InitNotifications(token)
             setIsPageLoading(false);
         } else {
             console.log('Loading home page..');

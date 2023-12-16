@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUser } from '../../redux/actions';
+import UsersCellsSelectors from '../../shared/selectors/UsersCells';
 
 const FollowingPage = () => {
     const location = useLocation();
@@ -92,7 +93,7 @@ const FollowingPage = () => {
                 {users.length === 0 && (
                     <div className="empty-users-cells-container">
                         <div className="span-container">
-                            <span className="header-span">
+                            <span className="header-span" data-test={UsersCellsSelectors.MESSAGE_HEADER}>
                                 {`@${username} isn't following anyone`}
                             </span>
                             <span className="body-span">

@@ -6,7 +6,36 @@ import EditProfile from './EditProfileButton';
 import parseDate from '../../utils/parseDate';
 import { useState } from 'react';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import LinkIcon from '@mui/icons-material/Link';
+import unfollow from '../../apis/unfollow';
+import follow from '../../apis/follow';
+import ProfilePageSelectors from '../../shared/selectors/ProfilePage';
 const ProfileBio = (props) => {
+    const [isFollowingButtonHovered, setIsFollowingButtonHovered] =
+        useState(false);
+
+    const [followedByMeState, setFollowedByMeState] = useState(
+        props.followedByMe
+    );
+
+    const handleFollowingButtonHover = () => {
+        setIsFollowingButtonHovered(!isFollowingButtonHovered);
+    };
+    const onButtonClick = async (event) => {
+        event.stopPropagation();
+        console.log(`@${props.username} cell button is clicked..`);
+        if (followedByMeState) {
+            console.log(`unfollow @${props.username}..`);
+            if (await unfollow(props.username, props.token)) {
+                setFollowedByMeState(false);
+            }
+        } else {
+            console.log(`follow @${props.username}..`);
+            if (await follow(props.username, props.token)) {
+                setFollowedByMeState(true);
+            }
+        }
+    };
     const navigate = useNavigate();
     const [isFollowing, setFollowing] = useState(false);
     console.log('idProfile', props.IdProfile);
@@ -58,8 +87,21 @@ const ProfileBio = (props) => {
                         authToken={props.token}
                     />
                 ) : (
-                    <div className="editProfile" onClick={toggleFollow}>
-                        <span>{isFollowing ? 'Unfollow' : 'Follow'}</span>
+                    <div
+                        className="editProfile"
+                        onClick={onButtonClick}
+                        onMouseEnter={handleFollowingButtonHover}
+                        onMouseLeave={handleFollowingButtonHover}
+                        data-test={ProfilePageSelectors.FOLLOW_UNFOLLOW_BUTTON}
+                    >
+                        {/* {isFollowing ? 'Unfollow' : 'Follow'}</span>*/}
+                        <span>
+                            {followedByMeState === false
+                                ? 'Follow'
+                                : isFollowingButtonHovered
+                                ? 'Unfollow'
+                                : 'Following'}
+                        </span>
                     </div>
                 )}
             </div>
@@ -75,11 +117,26 @@ const ProfileBio = (props) => {
                 </div>
                 <div className="profileBiography-dateMargin">
                     <span className="location">
-                        {props.location === 'null' ? '' : props.location}
+                        {props.location && (
+                            <>
+                                <LocationOnOutlinedIcon />
+                                {props.location === 'null'
+                                    ? ' '
+                                    : props.location}
+                            </>
+                        )}
                     </span>
-                    <span className="profileBiography-Bio"> </span>
+                    <span className="profileBiography-Bio"> </span>{' '}
                     <span className="pseudolink">
-                        {props.website === 'null' ? '' : props.website}
+                        {props.website && (
+                            <>
+                                <LinkIcon className="linkIcon" /> {'  '}
+                                <a className="linkIcon" href={props.website}>
+                                    {' '}
+                                    {props.website}
+                                </a>
+                            </>
+                        )}
                     </span>
                     <span className="profileBiography-joinDate">
                         <BiCalendar /> Joined {parseDate(props.JoinedAt)}
@@ -89,20 +146,32 @@ const ProfileBio = (props) => {
             <div className="profile-div-followers">
                 <span className="follow-link" onClick={navigateToFollowingPage}>
                     <span className="profile-distance-between">
-                        <span className="profile-followers-following-number">
+                        <span
+                            className="profile-followers-following-number"
+                            data-test={ProfilePageSelectors.FOLLOWING_COUNT}
+                        >
                             {props.followingNum}
                         </span>
-                        <span className="profile-followers-following-text">
+                        <span
+                            className="profile-followers-following-text"
+                            data-test={ProfilePageSelectors.FOLLOWING_LINK}
+                        >
                             Following
                         </span>
                     </span>
                 </span>
                 <span className="follow-link" onClick={navigateToFollowersPage}>
-                    <span className="profile-followers-following-number">
+                    <span
+                        className="profile-followers-following-number"
+                        data-test={ProfilePageSelectors.FOLLOWERS_COUNT}
+                    >
                         {' '}
                         {props.followersNum}
                     </span>
-                    <span className="profile-followers-following-text">
+                    <span
+                        className="profile-followers-following-text"
+                        data-test={ProfilePageSelectors.FOLLOWERS_LINK}
+                    >
                         Followers
                     </span>
                 </span>

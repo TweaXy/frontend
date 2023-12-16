@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import React from 'react';
 import LoginWindowHeader from '../../components/LoginWindowHeader/LoginWindowHeader';
 import SignUpPageuserName from './SignUpPageUName';
 import SignUpPageAvater from './SignUpPageAvater';

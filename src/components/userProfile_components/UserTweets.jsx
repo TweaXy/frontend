@@ -4,6 +4,8 @@ import GetuserTweets from '../../apis/tweetApis/UserTweet';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { CircularProgress } from '@mui/material';
+import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
+import React from 'react';
 const UserTweets = ({ userID }) => {
     const [tweets, setTweets] = useState([]);
     const [isPageLoading, setIsPageLoading] = useState(true);
@@ -13,6 +15,10 @@ const UserTweets = ({ userID }) => {
         console.log('user tweet response', tweetsResponse);
         setTweets(tweetsResponse);
     };
+    const removeTweet = (tweetId)=>{
+        apiDeleteTweet(tweetId,token);
+       setTweets((prevTweets) =>prevTweets.filter((tweet)=>tweet.mainInteraction.id!==tweetId));
+   }
     useEffect(() => {
         if (token) {
             setIsPageLoading(false);
@@ -26,6 +32,7 @@ const UserTweets = ({ userID }) => {
     if (isPageLoading) {
         return (
             <div
+            data-testid='loading-element'
                 style={{
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -38,19 +45,27 @@ const UserTweets = ({ userID }) => {
     }
     return (
         <>
-            {tweets.length > 0 &&
+            {tweets&&tweets.length > 0 &&
                 tweets.map((tweet, index) => (
                     <Tweet
-                        avatar={tweet.mainInteraction.avatar}
-                        username={tweet.mainInteraction.user.name}
-                        handle={tweet.mainInteraction.user.username}
-                        uploadTime={tweet.mainInteraction.createdDate}
-                        tweetText={tweet.mainInteraction.text}
-                        tweetMedia={tweet.mainInteraction.media}
-                        replies={tweet.mainInteraction.commentsCount}
-                        reposts={tweet.mainInteraction.retweetsCount}
-                        likes={tweet.mainInteraction.likesCount}
-                        insights={tweet.mainInteraction.viewsCount}
+                    avatar={tweet.mainInteraction.avatar}
+                    username={tweet.mainInteraction.user.name}
+                    handle={tweet.mainInteraction.user.username}
+                    uploadTime={tweet.mainInteraction.createdDate}
+                    tweetText={tweet.mainInteraction.text}
+                    tweetMedia={tweet.mainInteraction.media}
+                    replies={tweet.mainInteraction.commentsCount}
+                    reposts={tweet.mainInteraction.retweetsCount}
+                    likes={tweet.mainInteraction.likesCount}
+                    insights={tweet.mainInteraction.viewsCount}
+                    tweetId={tweet.mainInteraction.id}
+                    isUserLiked={
+                        tweet.mainInteraction.isUserInteract.isUserLiked
+                    }
+                    token={token}
+                    userID={tweet.mainInteraction.user.id}
+                    removeTweet={removeTweet}
+                    isCurrentUserTweet={true}
                     />
                 ))}
         </>

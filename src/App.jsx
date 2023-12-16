@@ -11,7 +11,7 @@ import SettingsPage from './pages/SettingsPage/SettingsPage.jsx';
 import ChangePasswordPage from './pages/SettingsPage/ChangePasswordPage.jsx';
 import ChangeUsernamePage from './pages/SettingsPage/ChangeUsernamePage.jsx';
 import LikersPage from './pages/likersPage/LikersPage.jsx';
-import NotificationPage from './pages/NotificationPage/NotificationPage .jsx';
+import NotificationPage from './pages/NotificationPage/NotificationPage.jsx';
 function App() {
     return (
         <>
@@ -50,10 +50,9 @@ function App() {
                         element={<ChangeUsernamePage />}
                     />
                     <Route
-                        path="/notifactions"
+                        path="/Notifications"
                         element={<NotificationPage />}
                     />
-                   
                 </Routes>
             </Router>
         </>
