@@ -8,6 +8,8 @@ import { apiSearchForUsers } from '../../apis/SearchAPIs/SearchForUsersAPI';
 import SearchForTweetsOrUsersHeader from '../../components/SearchForTweetsOrUsersHeader/SearchForTweetsOrUsersHeader';
 import { useSelector } from 'react-redux';
 import { apiGetTrendingTweets } from '../../apis/TrendingAPIs/GetTrendingTweetsAPI';
+import Tweet from '../../components/homePage_components/Tweet.jsx';
+import { apiSearchForTweets } from '../../apis/SearchAPIs/SearchForTweetsAPI.jsx';
 
 const SearchForUsersOrTweetsPage = () => {
     const location = useLocation();
@@ -19,39 +21,52 @@ const SearchForUsersOrTweetsPage = () => {
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlwiY2xwcTJnMTB4MDAyMjIwYmxuaGQ5bHZ3eFwiIiwiaWF0IjoxNzAxNjQzMjMyLCJleHAiOjE3MDQyMzUyMzJ9.iDJhBcxBfwxCX9NKk2eYqyXAJwWNRvcXzR_w-IrdibE";
 
     const [fetchedUsers, setFetchedUsers] = useState([]);
-    const [fetchedtweets, setFetchedTweets] = useState([]);
+    const [fetchedTweets, setFetchedTweets] = useState([]);
 
-    console.log("the input for search is ", searchInput);
-
-    const [curPage, setCurPage] = useState(isSearch ? 2 : 0);
+    const [curPage, setCurPage] = useState(0);
 
     useEffect(() => {
         const fetchUsers = async () => {
-            if (isSearch) {
-                try {
-                    const tempFetchedUsers = await apiSearchForUsers(searchInput, token);
-                    setFetchedUsers(tempFetchedUsers);
-                    console.log('these are the fetched users from the search: ', fetchedUsers);
-                } catch (error) {
-                    console.error('Error fetching searched users:', error);
-                }
-            }
-            else {
-                try {
-                    const tempFetchedTweets = await apiGetTrendingTweets(searchInput, token);
-                    setFetchedTweets(tempFetchedTweets);
-                    console.log('these are the fetched Tweets from the trend: ', fetchedtweets);
-                } catch (error) {
-                    console.error('Error fetching trending tweets: ', error);
+            if (curPage == 2) {
+                if (isSearch) {
+                    try {
+                        const tempFetchedUsers = await apiSearchForUsers(searchInput, token);
+                        setFetchedUsers(tempFetchedUsers);
+                        console.log('these are the fetched users from the search: ', fetchedUsers);
+                    } catch (error) {
+                        console.error('Error fetching searched users:', error);
+                    }
                 }
             }
         };
         fetchUsers();
-    }, [searchInput, isSearch]);
+    }, [searchInput, isSearch, curPage]);
 
     useEffect(() => {
-        setCurPage(isSearch ? 2 : 0);
-    }, [searchInput]);
+        const fetchTweets = async () => {
+            if (curPage == 0) {
+                if (isSearch) {
+                    try {
+                        const tempFetchedTweets = await apiSearchForTweets(searchInput, token, user.username);
+                        setFetchedTweets(tempFetchedTweets);
+                        console.log('these are the fetched Tweets from the search: ', fetchedTweets);
+                    } catch (error) {
+                        console.error('Error fetching searched Tweets:', error);
+                    }
+                }
+                else {
+                    try {
+                        const tempFetchedTweets = await apiGetTrendingTweets(searchInput, token);
+                        setFetchedTweets(tempFetchedTweets);
+                        console.log('these are the fetched Tweets from the trend: ', fetchedTweets);
+                    } catch (error) {
+                        console.error('Error fetching trending tweets: ', error);
+                    }
+                }
+            }
+        };
+        fetchTweets();
+    }, [searchInput, isSearch, curPage]);
     
     const navigate = useNavigate();
 
@@ -64,16 +79,31 @@ const SearchForUsersOrTweetsPage = () => {
             <Sidebar userData={userData} active={0}/>
             <div className="search-for-tweets-or-users-widget">
                 <SearchForTweetsOrUsersHeader
-                    searchedInput={searchInput}
+                    searchedInput={isSearch ? searchInput : '"'+searchInput+'"'}
                     activePage={curPage}
                     setActivePage={setCurPage}
                     goBack={goBack}
                 />
-                {/* {curPage == 0 && ( TODO:: handle it later when the api for get trending tweets about some tweet is ready.
-                    <UsersCells
-                        users={fetchedUsers}
-                    />
-                )} */}
+                {curPage == 0 && (
+                    fetchedTweets.map((tweet) => (
+                            <Tweet
+                                avatar={tweet.mainInteraction.avatar}
+                                username={tweet.mainInteraction.user.name}
+                                handle={tweet.mainInteraction.user.username}
+                                uploadTime={tweet.mainInteraction.createdDate}
+                                tweetText={tweet.mainInteraction.text}
+                                tweetMedia={tweet.mainInteraction.media}
+                                replies={tweet.mainInteraction.commentsCount}
+                                reposts={tweet.mainInteraction.retweetsCount}
+                                likes={tweet.mainInteraction.likesCount}
+                                insights={tweet.mainInteraction.viewsCount}
+                                tweetId={tweet.mainInteraction.id}
+                                isUserLiked={tweet.mainInteraction.isUserInteract.isUserLiked}
+                                token={userData.token}
+                                userID={tweet.mainInteraction.user.id}
+                            />
+                        ))
+                )}
                 {/* {curPage == 1 && (
                     <UsersCells
                         users={fetchedUsers}

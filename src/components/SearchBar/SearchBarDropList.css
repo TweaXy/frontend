@@ -1,0 +1,13 @@
+.users-cells-container-in-droplist-container {
+    width: 100%;
+    max-height: 350px;
+    overflow-y: scroll;
+    display: block;
+}
+
+.circular-progress-spinner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

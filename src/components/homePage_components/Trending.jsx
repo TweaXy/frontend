@@ -7,7 +7,8 @@ export default function Trending({ trend, tweetsCount }) {
 
     const navigate = useNavigate();
     const handleClick = () => {
-        navigate('/search', {state: {search: trend, isSearch: false}});
+        console.log("trend is clicked");
+        navigate(`/search/"${trend}"`, {state: {search: trend, isSearch: false}});
       };
 
     return (
