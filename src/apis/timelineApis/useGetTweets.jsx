@@ -11,7 +11,6 @@ export default function useGetTweets(token, offset) {
         setError(false);
         const fetchData = async () => {
             const lnk = `https://tweaxybackend.mywire.org/api/v1/home?limit=10&offset=${offset}`;
-            console.log('HERE222');
             try {
                 const response = await fetch(lnk, {
                     method: 'GET',
