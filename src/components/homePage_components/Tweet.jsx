@@ -229,7 +229,7 @@ export default function Tweet({
                             <div className="dot-container">
                                 <span className="dot">.</span>
                             </div>
-                            <span className="profileBiography-joinDate">
+                            <span className="profileBiography-joinDate" style={{paddingBottom:'5px'}}>
                                 {TweetDate(uploadTime)}
                             </span>
                         </div>

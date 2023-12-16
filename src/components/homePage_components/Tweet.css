@@ -95,6 +95,7 @@ body {
 .Notification-text-container {
     flex: 1;
     display: flex;
+    
 }
 .Notification-text-container > .Notification-text {
     line-height: 20px;

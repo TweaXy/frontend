@@ -9,6 +9,7 @@ import Notificationcell2 from '../../components/Notifications/Notificationcell2'
 import Notificationcell3 from '../../components/Notifications/Notificationcell3';
 import GetAllNotifications from '../../apis/NotificationsApis/getAllNotifications';
 import { CircularProgress } from '@mui/material';
+import Widget from '../../components/homePage_components/Widget';
 import { useEffect } from 'react';
 const NotificationPage = () => {
     const token = useSelector((state) => state.user.token);
@@ -50,6 +51,7 @@ const NotificationPage = () => {
         <>
             <div className="home-page">
                 <Sidebar userData={{user,token}} active={3} />
+           
                 <div className="feed">
                     <NotificationHeader />
                     {
@@ -67,37 +69,24 @@ const NotificationPage = () => {
                  />
                );
              } else {
-            //   <Notificationcell3
-            //   key={index}
-            //   avatar={cur.fromUser.avatar}
-            //   username={cur.fromUser.name}
-            //   handle={cur.fromUser.username}
-            //   uploadTime={cur.createdDate}
-            //   tweetText={interaction}
-            //   tweetMedia={''}
-            //   replies={0}
-            
-            // />
+              return (
+              <Notificationcell3
+              fromUser={cur.fromUser}
+              interaction={cur.interaction}
+              uploadTime={cur.createdDate}
+              token={token}  
+              curusername={user.username}
+              userID={user.id}
+              key={index}
+            />
+              )
              }
            })
-        }         
-{/*                     
-                    <Notificationcell1
-                        PostType="reply"
-                        interactionType="liked"
-                    />
-                    <Notificationcell1
-                        PostType="repost"
-                        interactionType="liked"
-                    />
-                    <Notificationcell1
-                        PostType="tweet"
-                        interactionType="reposted"
-                    />
-                    <Notificationcell2 />
-                    <Notificationcell3 /> */}
+        }
                 </div>
+                <Widget  />         
             </div>
+            
         </>
     );
 };
