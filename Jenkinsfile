@@ -11,7 +11,7 @@ pipeline
      environment {
         USER_CREDENTIALS = credentials('registry_cred') 
         STATE='PROCEED'
-        FRONTEND_IMG_VERSION="v1"
+        FRONTEND_IMG_VERSION="v2"
     }
   
     stages
@@ -80,7 +80,6 @@ pipeline
             {
                 sh '''
                 echo 'Deploying...'
-                chmod +x frontend.sh
                 chmod +x deploy.sh
                 ./deploy.sh
                 '''

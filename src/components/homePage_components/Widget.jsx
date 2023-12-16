@@ -1,7 +1,7 @@
 import "./Widget.css";
 import WidgetTrending from "./WidgetTrending";
 import SearchBar from "../SearchBar/SearchBar";
-export default function Widget({hideSearchBar}) {
+export default function Widget({hideSearchBar = false}) {
   return (
     <div className="widget">
       <div className="empty-container"></div>

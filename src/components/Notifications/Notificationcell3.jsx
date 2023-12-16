@@ -23,7 +23,7 @@ export default function Notificationcell3({
     insights,
     tweetId,
     isUserLiked,
-    userData, //temproray until we solve the token issue and then can be exported globally
+    token, 
 }) {
     const UN = 'manga';
     const [tweetLikes, setTweetLikes] = useState(likes);
@@ -156,11 +156,11 @@ export default function Notificationcell3({
         //call api likeDislikeTweetHandler
         if (isLikeActive) {
             //dislike it
-            apiDislikeTweet(tweetId, userData.token);
+            apiDislikeTweet(tweetId, token);
             setTweetLikes((likes) => likes - 1);
         } else {
             //like it
-            apiLikeTweet(tweetId, userData.token);
+            apiLikeTweet(tweetId, token);
             setTweetLikes((likes) => likes + 1);
         }
         setLikeActive(!isLikeActive);

@@ -1,18 +1,15 @@
-
-
 .loginSection {
   font-family: "Montserrat", sans-serif;
   width: 40%;
   height: 85%;
   float: right;
-  padding: 1.5%;
+  padding: 2%;
   font-size: 105%;
 }
 .PosterSection {
   width: 50%;
   height: 85%;
   padding: 1.5%;
-  font-size: 105%;
 }
 .buttonSection {
   margin-right: 10%;
@@ -39,8 +36,8 @@
 @media only screen and (min-width: 700px) and (max-width: 1000px) {
   .loginSection {
     width: 60%;
-    margin-right: 16%;
-    margin-left: 16%;
+    margin-right: 20%;
+    margin-left: 20%;
     float: left;
     padding-top: 3%;
     margin-bottom: 3%;
@@ -48,7 +45,7 @@
 }
 @media only screen and (min-width: 1000px) and (max-width: 1200px) {
   .loginSection {
-    width: 57%;
+    width: 60%;
     padding: 3%;
   }
 }

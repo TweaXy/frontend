@@ -6,6 +6,7 @@
     width: 100%;
 }
 
+
 .backgroundImage {
     height: 200px;
     width: 100%;
@@ -73,15 +74,18 @@
 .location {
     color: #707070;
     font-size: 18px;
+    margin-right: 7px;
 }
 .profileBiography-dateMargin {
     padding-top: 15px;
+    
 }
 .profileBiography-joinDate {
     display: flex;
     align-items: center;
     color: #707070;
     font-size: 16px;
+    margin-top: 5px;
 }
 .profile-followers-following-number {
     color: #000000;
@@ -110,4 +114,7 @@
 .profile-followers-following-text {
     color: #707070;
     font-size: 15px;
+}
+.linkIcon{
+    margin-bottom: -1%;      
 }

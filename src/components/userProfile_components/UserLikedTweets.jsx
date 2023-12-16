@@ -4,6 +4,7 @@ import GetTweetsuserLikes from '../../apis/tweetApis/UserLikedTweets';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { CircularProgress } from '@mui/material';
+import React from 'react';
 const TweetsUSerLikes = ({ userID }) => {
     const [tweets, setTweets] = useState([]);
     const [isPageLoading, setIsPageLoading] = useState(true);
@@ -26,6 +27,7 @@ const TweetsUSerLikes = ({ userID }) => {
     if (isPageLoading) {
         return (
             <div
+            data-testid='loading-element'
                 style={{
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -38,7 +40,7 @@ const TweetsUSerLikes = ({ userID }) => {
     }
     return (
         <>
-            {tweets.length > 0 &&
+            {tweets&&tweets.length > 0 &&
                 tweets.map((tweet, index) => (
                     <Tweet
                         avatar={tweet.mainInteraction.avatar}

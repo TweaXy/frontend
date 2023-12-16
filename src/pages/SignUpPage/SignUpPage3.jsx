@@ -1,6 +1,7 @@
 import { TextField } from '@mui/material';
 import './SignUpPage.css';
 import './SignUpHome.css';
+import React from 'react';
 import SignUpSelectors from '../../shared/selectors/SignUp';
 import { months } from './SignUpPage';
 const create = 'Create your account';

@@ -1,9 +1,9 @@
 const UserLikedTweetsURL = `https://tweaxybackend.mywire.org/api/v1/users`;
 const GetTweetsuserLikes = async (_userid, token, _limit, _offset) => {
     console.log('username from getLikedtweets is', _userid, 'token is', token);
-    const urlWithQueryParam = `${UserLikedTweetsURL}/${encodeURIComponent(
+    const urlWithQueryParam = `${UserLikedTweetsURL}/tweets/liked/${encodeURIComponent(
         _userid
-    )}/tweets/liked?limit=${_limit}?offset=${_offset}`;
+    )}?limit=${_limit}?offset=${_offset}`;
     try {
         const response = await fetch(urlWithQueryParam, {
             method: 'GET',
@@ -17,7 +17,7 @@ const GetTweetsuserLikes = async (_userid, token, _limit, _offset) => {
         if (response.ok) {
             const responseData = JSON.parse(responseBody);
             if (responseData.status === 'success') {
-                const tweets = responseData.data.items.data;
+                const tweets = responseData.data.items;
                 console.log('Ok ' + tweets);
                 return tweets;
             } else {
