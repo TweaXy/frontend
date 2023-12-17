@@ -4,32 +4,39 @@ import TweetBox from './TweetBox';
 import Tweet from './Tweet';
 import { apiGetTweet } from '../../apis/timelineApis/getTweets';
 import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useSelector } from 'react-redux';
+import useGetTweets from '../../apis/timelineApis/useGetTweets';
+import LoadingPage from '../LoadingPage/LoadingPage';
 
 const Feed = ({ userData, isTherePopUpWindow }) => {
-    const [tweets, setTweets] = useState([]);
+    const [tweets, setTweets] = useState([]);  
+    const [offset, setOffset] = useState(0);
     const token = useSelector((state) => state.user.token);
-
+  
     const getTweets = async () => {
         const tweetsResponse = await apiGetTweet(userData.token);
         setTweets(tweetsResponse);
     };
+
     const removeTweet = (tweetId) => {
         apiDeleteTweet(tweetId, token);
         setTweets((prevTweets) =>
             prevTweets.filter((tweet) => tweet.mainInteraction.id !== tweetId)
         );
     };
+  
     useEffect(() => {
         getTweets();
     }, []);
+
     return (
         <div className="feed">
             <FeedHeader
                 feedHeader_acitve={0}
                 isTherePopUpWindow={isTherePopUpWindow}
             />
+                  
             <TweetBox userData={userData} getTweets={getTweets} />
 
             {tweets.length > 0 &&
@@ -58,6 +65,7 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                         }
                     />
                 ))}
+
         </div>
     );
 };
