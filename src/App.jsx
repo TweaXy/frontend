@@ -12,6 +12,7 @@ import ChangePasswordPage from './pages/SettingsPage/ChangePasswordPage.jsx';
 import ChangeUsernamePage from './pages/SettingsPage/ChangeUsernamePage.jsx';
 import NotificationPage from './pages/NotificationPage/NotificationPage.jsx';
 import ChangeEmailPage from './pages/SettingsPage/ChangeEmailPage.jsx';
+import BlockSettingsPage from './pages/SettingsPage/BlockSettingsPage.jsx';
 function App() {
     return (
         <>
@@ -51,6 +52,10 @@ function App() {
                     <Route
                         path="/settings/email"
                         element={<ChangeEmailPage />}
+                    />
+                    <Route
+                        path="/settings/blocked"
+                        element={<BlockSettingsPage />}
                     />
                     <Route
                         path="/Notifications"
