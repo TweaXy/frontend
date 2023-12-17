@@ -5,19 +5,32 @@ import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
 import BlockIcon from '@mui/icons-material/Block';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import VolumeMuteIcon from '@mui/icons-material/VolumeMute';
+import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import PushPinOutlinedIcon from '@mui/icons-material/PushPinOutlined';
 import DeleteTweetWindow from './DeleteTweetWindow';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TweetSelectors from '../../shared/selectors/Tweets';
+import mute from '../../apis/mute';
+import unmute from '../../apis/unmute';
+import NotifyBox from '../NotifyBox/NotifyBox';
+import isUserMuted from '../../apis/isMuted';
 
 function TweetOptionsPopDown({
     isCurrentUserTweet,
     handleClose,
     anchorEl,
     deleteTweetHandler,
+    username,
+    userID,
+    token,
 }) {
     const [isDeleteWindow, setIsDeleteWindow] = useState(false);
+
+    const [isMuted, setIsMuted] = useState(false);
+    const [muteActionOccurred, setMuteActionOccurred] = useState(false);
+
     const handleDelete = () => {
         // Implement delete functionality here
         setIsDeleteWindow(true);
@@ -32,6 +45,30 @@ function TweetOptionsPopDown({
         handleClose();
     };
 
+    const handleUserMute = async () => {
+        if (isMuted) {
+            if (await unmute(username, token)) {
+                setIsMuted(false);
+                setMuteActionOccurred(true);
+                const timeoutID = setTimeout(() => {
+                    setMuteActionOccurred(false);
+                }, 3000);
+                handleClose();
+                return () => clearTimeout(timeoutID);
+            }
+        } else {
+            if (await mute(username, token)) {
+                setIsMuted(true);
+                setMuteActionOccurred(true);
+                const timeoutID = setTimeout(() => {
+                    setMuteActionOccurred(false);
+                }, 3000);
+                handleClose();
+                return () => clearTimeout(timeoutID);
+            }
+        }
+    };
+
     const handleBlock = (e) => {
         console.log('Blocked');
         handleClose();
@@ -41,6 +78,15 @@ function TweetOptionsPopDown({
         console.log('Analytics');
         handleClose();
     };
+
+    useEffect(() => {
+        const handleIfUserMuted = async () => {
+            setIsMuted(await isUserMuted(userID, token));
+        };
+
+        handleIfUserMuted();
+    }, [anchorEl, userID, token]);
+
     return (
         <div className="tweet-options">
             {' '}
@@ -49,11 +95,12 @@ function TweetOptionsPopDown({
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
-                className='tweet-options-menu'
+                className="tweet-options-menu"
             >
                 {isCurrentUserTweet && (
                     <MenuItem
-                        data-test={TweetSelectors.DELETE_TWEET} onClick={handleDelete}
+                        data-test={TweetSelectors.DELETE_TWEET}
+                        onClick={handleDelete}
                         className="delete-option"
                         sx={{
                             color: 'red',
@@ -73,14 +120,19 @@ function TweetOptionsPopDown({
                 {!isCurrentUserTweet && (
                     <MenuItem onClick={handleUnFollow}>
                         <PersonRemoveIcon />
-                        Unfollow
+                        {`Unfollow @${username}`}
                     </MenuItem>
                 )}
-
+                {!isCurrentUserTweet && (
+                    <MenuItem onClick={handleUserMute}>
+                        {isMuted ? <VolumeMuteIcon /> : <VolumeOffIcon />}
+                        {`${isMuted ? 'Unmute' : 'Mute'} @${username}`}
+                    </MenuItem>
+                )}
                 {!isCurrentUserTweet && (
                     <MenuItem onClick={handleBlock}>
                         <BlockIcon />
-                        Block
+                        {`Block @${username}`}
                     </MenuItem>
                 )}
             </Menu>
@@ -89,6 +141,13 @@ function TweetOptionsPopDown({
                 closeHandler={closeDeleteWindowHandler}
                 deleteTweet={deleteTweetHandler}
             />
+            {muteActionOccurred && (
+                <NotifyBox
+                    text={`@${username} has been ${
+                        isMuted ? 'muted' : 'unmuted'
+                    }`}
+                />
+            )}
         </div>
     );
 }
