@@ -12,6 +12,7 @@ import ChangePasswordPage from './pages/SettingsPage/ChangePasswordPage.jsx';
 import ChangeUsernamePage from './pages/SettingsPage/ChangeUsernamePage.jsx';
 import NotificationPage from './pages/NotificationPage/NotificationPage.jsx';
 import LikersPage from './pages/PostEngagementPage/LikersPage.jsx';
+import RetweetersPage from './pages/PostEngagementPage/retweetersPage.jsx';
 function App() {
     return (
         <>
@@ -23,6 +24,7 @@ function App() {
                         path="/forget-password"
                         element={<ForgetPasswordStartPage />}
                     />
+                    <Route path="/retweets" element={<RetweetersPage />}   />
                     <Route
                         path="/profile/:username"
                         element={<ProfilePage />}

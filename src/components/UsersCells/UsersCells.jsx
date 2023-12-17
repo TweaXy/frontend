@@ -37,7 +37,7 @@ const UsersCells = ({ users }) => {
                     name={user.name}
                     username={user.username}
                     avatar={user.avatar}
-                    bio={user.bio}
+                    bio={user.bio === 'null' ? '' : user.bio }
                     followsMe={user.followsMe}
                     followedByMe={user.followedByMe}
                     token={token}

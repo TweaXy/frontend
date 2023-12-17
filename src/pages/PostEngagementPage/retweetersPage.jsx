@@ -2,26 +2,30 @@ import './LikersPage.css';
 import UsersCells from '../../components/UsersCells/UsersCells';
 import Widget from '../../components/homePage_components/Widget';
 import Sidebar from '../../components/homePage_components/Sidebar';
-import FollowingFollowersHeader from '../../components/FollowingFollowersHeader/FollowingFollowersHeader';
-import { CircularProgress } from '@mui/material';
+
 import LikersHeader from '../../components/LikersHeader/LikersHeader';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
 
-const   RetweetersPage = () => {
+const RetweetersPage = () => {
     const location = useLocation();
     const tweetId = location.state?.tweetid;
     const token = location.state?.token;
-    const username = location.state?.username;
-    
+
     const [users, setUsers] = useState([]);
-    const [curPage, setCurPage] = useState(0);
+    const [curPage, setCurPage] = useState(1);
     const [isPageLoading, setIsPageLoading] = useState(true);
 
-    
     const user = useSelector((state) => state.user.user);
     const navigate = useNavigate();
+    useEffect(() => {
+        if (curPage === 0) {
+            navigate('/likers', {
+                state: { tweetid: tweetId, token: token },
+            });
+        }
+    }, [curPage, navigate]);
     {
         /*} 
    
@@ -62,26 +66,26 @@ const   RetweetersPage = () => {
     }
     const arrowBackRoute = () => navigate(-1);
     return (
-        <div className="following-page-container">
+        <div className="analytics-page-container">
             <Sidebar userData={{ user: user, token: token }} />
-            <div className="following-widget">
+            <div className="analytics-widget">
                 <LikersHeader
                     curPage={curPage}
                     setCurPage={setCurPage}
                     navigateBack={arrowBackRoute}
                 />
-                <UsersCells users={users} />
-                {users.length === 0 && (
-                    <div className="empty-users-cells-container">
+                <div className="empty-users-cells-container">
+                    <UsersCells users={users} />
+                    {users.length === 0 && (
                         <div className="span-container">
                             <span className="header-span">No retweets yet</span>
                             <span className="body-span">
-                                When someone retweet this post,
-                                it'll show up here.
+                                When someone retweet this post, it'll show up
+                                here.
                             </span>
                         </div>
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
             <Widget />
         </div>

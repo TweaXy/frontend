@@ -40,7 +40,7 @@ const ProfileBio = (props) => {
     const [isFollowing, setFollowing] = useState(false);
     console.log('idProfile', props.IdProfile);
     console.log('idUser', props.currUserId);
-   
+
     const navigateToFollowingPage = () => {
         navigate(`/${props.username}/following`, {
             state: {
@@ -115,7 +115,7 @@ const ProfileBio = (props) => {
                 </div>
                 <div className="profileBiography-dateMargin">
                     <span className="location">
-                        {props.location && (
+                        {props.location && props.location === 'null' && (
                             <>
                                 <LocationOnOutlinedIcon />
                                 {props.location === 'null'
