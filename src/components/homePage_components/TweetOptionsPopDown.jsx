@@ -10,24 +10,25 @@ import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import PushPinOutlinedIcon from '@mui/icons-material/PushPinOutlined';
 import DeleteTweetWindow from './DeleteTweetWindow';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TweetSelectors from '../../shared/selectors/Tweets';
 import mute from '../../apis/mute';
 import unmute from '../../apis/unmute';
 import NotifyBox from '../NotifyBox/NotifyBox';
+import isUserMuted from '../../apis/isMuted';
 
 function TweetOptionsPopDown({
     isCurrentUserTweet,
     handleClose,
     anchorEl,
     deleteTweetHandler,
-    isUserMuted,
     username,
+    userID,
     token,
 }) {
     const [isDeleteWindow, setIsDeleteWindow] = useState(false);
 
-    const [isMuted, setIsMuted] = useState(isUserMuted);
+    const [isMuted, setIsMuted] = useState(false);
     const [muteActionOccurred, setMuteActionOccurred] = useState(false);
 
     const handleDelete = () => {
@@ -77,6 +78,15 @@ function TweetOptionsPopDown({
         console.log('Analytics');
         handleClose();
     };
+
+    useEffect(() => {
+        const handleIfUserMuted = async () => {
+            setIsMuted(await isUserMuted(userID, token));
+        };
+
+        handleIfUserMuted();
+    }, [anchorEl, userID, token]);
+
     return (
         <div className="tweet-options">
             {' '}

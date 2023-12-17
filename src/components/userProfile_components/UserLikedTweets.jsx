@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { CircularProgress } from '@mui/material';
 import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
 import React from 'react';
-const TweetsUSerLikes = ({ userID }) => {
+const TweetsUSerLikes = ({ userID, curUserID }) => {
     const [tweets, setTweets] = useState([]);
     const [isPageLoading, setIsPageLoading] = useState(true);
     const token = useSelector((state) => state.user.token);
@@ -71,9 +71,8 @@ const TweetsUSerLikes = ({ userID }) => {
                         userID={tweet.mainInteraction.user.id}
                         removeTweet={removeTweet}
                         isCurrentUserTweet={
-                            userdata.id === tweet.mainInteraction.user.id
+                            curUserID === tweet.mainInteraction.user.id
                         }
-                        isUserMuted={true}
                     />
                 ))}
         </>
