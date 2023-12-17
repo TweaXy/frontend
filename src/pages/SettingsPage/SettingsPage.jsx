@@ -7,6 +7,7 @@ import ChangePasswordButton from '../../components/ChangePasswordButton/ChangePa
 import ChangeUsernameButton from '../../components/ChangeUsernameButton/ChangeUsernameButton';
 import { clearUser } from '../../redux/actions';
 import LoadingPage from '../../components/LoadingPage/LoadingPage';
+import ChangeEmailButton from '../../components/ChangeEmailButton/ChangeEmailButton';
 import MuteSettingsButton from '../../components/MuteSettingsButton/MuteSettingsButton';
 
 const SettingsPage = () => {
@@ -51,6 +52,11 @@ const SettingsPage = () => {
                 <ChangeUsernameButton
                     onClickHandler={() => {
                         navigate('/settings/username');
+                    }}
+                />
+                <ChangeEmailButton
+                    onClickHandler={() => {
+                        navigate('/settings/email');
                     }}
                 />
                 <ChangePasswordButton
