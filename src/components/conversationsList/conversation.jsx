@@ -2,9 +2,11 @@ import React from "react";
 import ConversationWindowHeader from "./conversationHeader";
 import "./conversation.css"
 import Button from '@mui/material/Button';
+import SettingsConversationHeader from "./settingsConversationHeader";
 const ListConversation = () => {
  
   return (
+    <>
     <div className="conversation-body">
     
     <ConversationWindowHeader />
@@ -24,7 +26,12 @@ const ListConversation = () => {
 
       </div>
     </div>
-   
+    <div className="settings-converation-style">
+
+    <SettingsConversationHeader />
+    </div>
+
+    </>
   );
 };
 
