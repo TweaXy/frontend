@@ -18,16 +18,22 @@ import NotifyBox from '../NotifyBox/NotifyBox';
 import isUserMuted from '../../apis/isMuted';
 import BlockUserWindow from '../BlockUserWindow/BlockUserWindow';
 import block from '../../apis/block';
+import getLikers from '../../apis/getLikers';
+import { useNavigate } from 'react-router';
 
 function TweetOptionsPopDown({
     isCurrentUserTweet,
     handleClose,
     anchorEl,
     deleteTweetHandler,
+    tweetid,
+    token,
     username,
     userID,
-    token,
+    
 }) {
+   
+    const navigate=useNavigate();
     const [isDeleteWindow, setIsDeleteWindow] = useState(false);
 
     const [isMuted, setIsMuted] = useState(false);
@@ -99,8 +105,13 @@ function TweetOptionsPopDown({
     };
 
     const handleAnalytics = (e) => {
-        console.log('Analytics');
-        handleClose();
+        getLikers({ tweetId: tweetid, token: token });
+      navigate(`/likers`, {
+           state: {
+               tweetid: tweetid,
+                token: token,
+            },
+        });
     };
 
     useEffect(() => {
@@ -135,7 +146,7 @@ function TweetOptionsPopDown({
                         Delete
                     </MenuItem>
                 )}
-                {isCurrentUserTweet && (
+                { (
                     <MenuItem onClick={handleAnalytics}>
                         <BarChartOutlinedIcon />
                         View post analytics
