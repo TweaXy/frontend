@@ -248,7 +248,7 @@ export default function Tweet({
                             token={token}
                             username={handle}
                             userID={userID}
-                            token={token}
+                           
                         />
                     </div>
                     <div className="tweet-text-container">
