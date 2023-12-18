@@ -43,7 +43,7 @@ export default function Tweet({
     token,
     userID,
     removeTweet,
-    isCurrentUserTweet
+    isCurrentUserTweet,
 }) {
     const [tweetLikes, setTweetLikes] = useState(likes);
     const [tweetReplies, setTweetReplies] = useState(replies);
@@ -245,7 +245,9 @@ export default function Tweet({
                             handleClose={optionsCloseHandler}
                             anchorEl={anchorEl}
                             deleteTweetHandler={deleteTweetHandler}
-
+                            username={handle}
+                            userID={userID}
+                            token={token}
                         />
                     </div>
                     <div className="tweet-text-container">

@@ -1,0 +1,25 @@
+.more-menu> {
+    width: auto;
+}
+
+.more-options-menu>.MuiMenu-paper {
+    border-radius: 12px !important;
+    left: 43% !important;
+}
+
+.more-options-menu>.MuiMenu-paper>.MuiMenu-list {
+    width: auto;
+    padding: 0;
+
+}
+
+.more-options-menu>.MuiMenu-paper>.MuiMenu-list>.MuiMenuItem-root {
+    font-size: 15px !important;
+    font-family: 'Segoe UI Emoji', 'Arial' !important;
+    padding: 12px 16px;
+}
+
+.more-options-menu>.MuiMenu-paper>.MuiMenu-list>.MuiMenuItem-root>.MuiSvgIcon-root {
+    font-size: 18.75px !important;
+    margin-right: 7px !important;
+}
