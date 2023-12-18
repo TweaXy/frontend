@@ -7,6 +7,9 @@ import ChangePasswordButton from '../../components/ChangePasswordButton/ChangePa
 import ChangeUsernameButton from '../../components/ChangeUsernameButton/ChangeUsernameButton';
 import { clearUser } from '../../redux/actions';
 import LoadingPage from '../../components/LoadingPage/LoadingPage';
+import ChangeEmailButton from '../../components/ChangeEmailButton/ChangeEmailButton';
+import MuteSettingsButton from '../../components/MuteSettingsButton/MuteSettingsButton';
+import BlockSettingsButton from '../../components/BlockSettingsButton/BlockSettingsButton';
 
 const SettingsPage = () => {
     const [isPageLoading, setIsPageLoading] = useState(true);
@@ -52,9 +55,24 @@ const SettingsPage = () => {
                         navigate('/settings/username');
                     }}
                 />
+                <ChangeEmailButton
+                    onClickHandler={() => {
+                        navigate('/settings/email');
+                    }}
+                />
                 <ChangePasswordButton
                     onClickHandler={() => {
                         navigate('/settings/password');
+                    }}
+                />
+                <MuteSettingsButton
+                    onClickHandler={() => {
+                        navigate('/settings/mute');
+                    }}
+                />
+                <BlockSettingsButton
+                    onClickHandler={() => {
+                        navigate('/settings/blocked');
                     }}
                 />
             </div>

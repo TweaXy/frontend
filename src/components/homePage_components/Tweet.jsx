@@ -22,7 +22,6 @@ import TweetDate from '../../utils/TweetDate';
 import { TweetOptionsPopDown } from './TweetOptionsPopDown';
 import { apiAddReply } from '../../apis/tweetApis/AddReply';
 import e from 'cors';
-import { token } from 'stylis';
 import { abort } from 'process';
 import AddReplyWindow from './AddReplyWindow';
 import { hashText } from '../../shared/Utils';
@@ -43,7 +42,7 @@ export default function Tweet({
     token,
     userID,
     removeTweet,
-    isCurrentUserTweet
+    isCurrentUserTweet,
 }) {
     const [tweetLikes, setTweetLikes] = useState(likes);
     const [tweetReplies, setTweetReplies] = useState(replies);
@@ -247,7 +246,7 @@ export default function Tweet({
                             <div className="dot-container">
                                 <span className="dot">.</span>
                             </div>
-                            <span className="profileBiography-joinDate">
+                            <span className="profileBiography-joinDate" style={{paddingBottom:'5px'}}>
                                 {TweetDate(uploadTime)}
                             </span>
                         </div>
@@ -263,7 +262,11 @@ export default function Tweet({
                             handleClose={optionsCloseHandler}
                             anchorEl={optionsAnchor}
                             deleteTweetHandler={deleteTweetHandler}
-
+                            tweetid={tweetId}
+                            token={token}
+                            username={handle}
+                            userID={userID}
+                           
                         />
                     </div>
                     <div className="tweet-text-container">

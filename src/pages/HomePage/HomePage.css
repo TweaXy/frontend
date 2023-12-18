@@ -6,6 +6,7 @@ body{
     --twitter-greyHover:#eae9e9;
     --widget-background:rgba(38, 90, 101, 0.059);
     --button-background:rgb(29, 155, 240);
+    --twitter-redColor:rgb(244,33,46);
   }
   .home-page{
      display: flex;

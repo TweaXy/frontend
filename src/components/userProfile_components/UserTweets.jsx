@@ -5,8 +5,9 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { CircularProgress } from '@mui/material';
 import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
+import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
 import React from 'react';
-const UserTweets = ({ userID }) => {
+const UserTweets = ({ userID, curUserID }) => {
     const [tweets, setTweets] = useState([]);
     const [isPageLoading, setIsPageLoading] = useState(true);
     const token = useSelector((state) => state.user.token);
@@ -14,6 +15,12 @@ const UserTweets = ({ userID }) => {
         const tweetsResponse = await GetuserTweets(userID, token, 10, 0);
         console.log('user tweet response', tweetsResponse);
         setTweets(tweetsResponse);
+    };
+    const removeTweet = (tweetId) => {
+        apiDeleteTweet(tweetId, token);
+        setTweets((prevTweets) =>
+            prevTweets.filter((tweet) => tweet.mainInteraction.id !== tweetId)
+        );
     };
     useEffect(() => {
         if (token) {
@@ -28,7 +35,7 @@ const UserTweets = ({ userID }) => {
     if (isPageLoading) {
         return (
             <div
-            data-testid='loading-element'
+                data-testid="loading-element"
                 style={{
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -47,9 +54,11 @@ const UserTweets = ({ userID }) => {
    }
     return (
         <>
-            {tweets&&tweets.length > 0 &&
-                tweets.map((tweet, index) => (
+            {tweets &&
+                tweets.length > 0 &&
+                tweets.map((tweet) => (
                     <Tweet
+                        key={tweet.mainInteraction.user.id}
                         avatar={tweet.mainInteraction.avatar}
                         username={tweet.mainInteraction.user.name}
                         handle={tweet.mainInteraction.user.username}

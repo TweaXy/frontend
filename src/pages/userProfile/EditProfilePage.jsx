@@ -256,7 +256,7 @@ export default function EditProfilePage({
                                 rows={3}
                                 label="Bio"
                                 name="userbio"
-                                value={ProfileData.userbio}
+                                value={ProfileData.bio === 'null' ? '' : ProfileData.bio}
                                 onChange={ProfileData_Handler}
                             />
                         </div>
@@ -269,7 +269,7 @@ export default function EditProfilePage({
                                 id="outlined-basic"
                                 label="Location"
                                 name="location"
-                                value={ProfileData.location}
+                                value={ProfileData.location === 'null' ? '' : ProfileData.location}
                                 onChange={ProfileData_Handler}
                             />
                         </div>
