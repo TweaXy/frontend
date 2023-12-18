@@ -59,6 +59,8 @@ function Profile({ token, userID, currUserId }) {
                         token={token}
                         JoinedAt={ndata.data.user.joinedDate}
                         followedByMe={ndata.data.user.followedByMe}
+                        blockedByMe={ndata.data.blockedByMe}
+                        mutedByMe={ndata.data.mutedByMe}
                     />
                     <TabsProfile
                         userData={ndata.data.user}

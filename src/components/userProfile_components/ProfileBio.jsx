@@ -11,6 +11,7 @@ import unfollow from '../../apis/unfollow';
 import follow from '../../apis/follow';
 import ProfilePageSelectors from '../../shared/selectors/ProfilePage';
 import { MoreHoriz } from '@mui/icons-material';
+import ProfileMoreOptionsPopDown from '../ProfileMoreOptionsPopDown/ProfileMoreOptionsPopDown';
 const ProfileBio = (props) => {
     const [isFollowingButtonHovered, setIsFollowingButtonHovered] =
         useState(false);
@@ -22,6 +23,7 @@ const ProfileBio = (props) => {
     const handleFollowingButtonHover = () => {
         setIsFollowingButtonHovered(!isFollowingButtonHovered);
     };
+
     const onButtonClick = async (event) => {
         event.stopPropagation();
         console.log(`@${props.username} cell button is clicked..`);
@@ -37,13 +39,14 @@ const ProfileBio = (props) => {
             }
         }
     };
+
     const navigate = useNavigate();
     const [isFollowing, setFollowing] = useState(false);
-    console.log('idProfile', props.IdProfile);
-    console.log('idUser', props.currUserId);
+
     const toggleFollow = () => {
         setFollowing(!isFollowing);
     };
+
     const navigateToFollowingPage = () => {
         navigate(`/${props.username}/following`, {
             state: {
@@ -64,8 +67,14 @@ const ProfileBio = (props) => {
         });
     };
 
-    const handleMoreButtonClick = () => {
-        console.log('more pop down menu...');
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    const handleMoreButtonClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const closeMoreOptionsMenu = () => {
+        setAnchorEl(null);
     };
 
     return (
@@ -104,6 +113,15 @@ const ProfileBio = (props) => {
                                 <MoreHoriz style={{ color: 'black' }} />
                             </IconButton>
                         </div>
+                        <ProfileMoreOptionsPopDown
+                            handleClose={closeMoreOptionsMenu}
+                            anchorEl={anchorEl}
+                            username={props.username}
+                            userID={props.IdProfile}
+                            token={props.token}
+                            MutedByMe={props.MutedByMe}
+                            BlockedByMe={props.BlockedByMe}
+                        />
                         <div
                             className="editProfile"
                             onClick={onButtonClick}

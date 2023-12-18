@@ -1,0 +1,84 @@
+.block-dialog>.MuiDialog-container>.MuiDialog-paper {
+    width: 320px;
+    height: auto;
+    border-radius: 15px !important;
+}
+
+.block-dialog-content>.MuiTypography-root {
+    padding: 0 !important;
+}
+
+.block-dialog-content>.MuiDialogContent-root {
+    padding: 0 !important;
+}
+
+.block-dialog-content {
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+    align-items: start;
+}
+
+.MuiDialog-paper>.block-dialog-content>.block-options-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 24px -12px -12px 0;
+}
+
+.MuiDialog-paper>.block-dialog-content>.block-options-container>.unblock-btn {
+    outline: none !important;
+    background-color: black !important;
+    color: white !important;
+    font-weight: 550 !important;
+    font-size: 15px !important;
+    height: 43px !important;
+    border-radius: 30px !important;
+    border: none !important;
+    text-transform: inherit !important;
+    width: 256px;
+    margin-bottom: 12px;
+}
+
+.block-dialog-content>.block-options-container>.unblock-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    transition: background-color 200ms ease-out;
+}
+
+.MuiDialog-paper>.block-dialog-content>.block-options-container>.block-btn {
+    outline: none !important;
+    background-color: red !important;
+    color: white !important;
+    font-weight: 550 !important;
+    font-size: 15px !important;
+    height: 43px !important;
+    border-radius: 30px !important;
+    border: none !important;
+    text-transform: inherit !important;
+    width: 256px;
+    margin-bottom: 12px;
+}
+
+.block-dialog-content>.block-options-container>.block-btn:hover {
+    background-color: rgb(229, 5, 5) !important;
+    transition: background-color 200ms ease-out;
+}
+
+.MuiDialog-paper>.block-dialog-content>.block-options-container>.cancel-btn {
+    outline: none !important;
+    background-color: white !important;
+    color: black !important;
+    font-weight: 550 !important;
+    font-size: 15px !important;
+    height: 43px !important;
+    border-radius: 30px !important;
+    border-color: #c8cbcd;
+    text-transform: inherit !important;
+    width: 256px;
+    margin-bottom: 12px;
+}
+
+.block-dialog-content>.block-options-container>.cancel-btn:hover {
+    background-color: var(--twitter-greyHover) !important;
+    transition: background-color 200ms ease-out;
+}
