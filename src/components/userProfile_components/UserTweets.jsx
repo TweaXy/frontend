@@ -4,6 +4,7 @@ import GetuserTweets from '../../apis/tweetApis/UserTweet';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { CircularProgress } from '@mui/material';
+import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
 import React from 'react';
 const UserTweets = ({ userID }) => {
     const [tweets, setTweets] = useState([]);
@@ -38,6 +39,12 @@ const UserTweets = ({ userID }) => {
             </div>
         );
     }
+
+    const removeTweet = (tweetId)=>{
+        apiDeleteTweet(tweetId,token);
+       setTweets((prevTweets) =>prevTweets.filter((tweet)=>tweet.mainInteraction.id!==tweetId));
+      
+   }
     return (
         <>
             {tweets&&tweets.length > 0 &&
@@ -53,6 +60,14 @@ const UserTweets = ({ userID }) => {
                         reposts={tweet.mainInteraction.retweetsCount}
                         likes={tweet.mainInteraction.likesCount}
                         insights={tweet.mainInteraction.viewsCount}
+                        tweetId={tweet.mainInteraction.id}
+                        isUserLiked={
+                            tweet.mainInteraction.isUserInteract.isUserLiked
+                        }
+                        token={token}
+                        userID={tweet.mainInteraction.user.id}
+                        removeTweet={removeTweet}
+                        isCurrentUserTweet={userID==tweet.mainInteraction.user.id}
                     />
                 ))}
         </>

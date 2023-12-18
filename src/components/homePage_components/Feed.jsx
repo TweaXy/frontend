@@ -14,13 +14,9 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
 
     const getTweets = async () => {
         const tweetsResponse = await apiGetTweet(userData.token);
-// <<<<<<< test_dev
-        // console.log(tweetsResponse);
+
         setTweets(tweetsResponse);
-// =======
-//         console.log(tweetsResponse);
-//          setTweets(tweetsResponse);
-// >>>>>>> dev
+
     };
     const removeTweet = (tweetId)=>{
          apiDeleteTweet(tweetId,token);
@@ -29,9 +25,7 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
     }
     useEffect( () => {   
          getTweets();
-         console.log("inside the Feed");
-        //  console.log(userData.user.id);
-        //  console.log(tweets[0]);
+  
 
     }, []);
     return (

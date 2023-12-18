@@ -183,12 +183,12 @@ export default function Tweet({
         setLikeActive(!isLikeActive);
     };
 
-    const [anchorEl, setAnchorEl] = useState(null);
+    const [optionsAnchor, setoptionsAnchor] = useState(null);
     const optionsClickHandler = (e) => {
-        setAnchorEl(e.currentTarget);
+        setoptionsAnchor(e.currentTarget);
     };
     const optionsCloseHandler = () => {
-        setAnchorEl(null);
+        setoptionsAnchor(null);
     };
     const deleteTweetHandler =() =>{
         removeTweet(tweetId);
@@ -209,7 +209,25 @@ export default function Tweet({
        }
        //take any other action
     }
-    // we should have a function to handle the change on clicking any
+    
+    //Repost Logic
+     //need to modify the api calls
+ 
+    const [isQuoteWindow,setIsQuoteWindow]=useState(false);
+    const quoteWindowClose = ()=>{
+        setIsReplyWindow(false);
+    }
+    const quoteWindowOpen = () =>{
+        setIsReplyWindow(true);
+    }
+    const addQuoteHandler=async (text,images) =>{
+        // call the api
+    //    if(await apiAddReply(tweetId,text,images,token)){
+    //    setTweetReplies((prevReplies)=> prevReplies +1);
+    //    }
+    
+    }
+    
     return (
         <div className="tweet">
             <div className="repost"></div>
@@ -243,7 +261,7 @@ export default function Tweet({
                         <TweetOptionsPopDown
                             isCurrentUserTweet={isCurrentUserTweet}
                             handleClose={optionsCloseHandler}
-                            anchorEl={anchorEl}
+                            anchorEl={optionsAnchor}
                             deleteTweetHandler={deleteTweetHandler}
 
                         />
