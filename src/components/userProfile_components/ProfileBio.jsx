@@ -1,5 +1,5 @@
 import { BiCalendar } from 'react-icons/bi';
-import { Avatar } from '@mui/material';
+import { Avatar, IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import './ProfileBio.css';
 import EditProfile from './EditProfileButton';
@@ -10,6 +10,7 @@ import LinkIcon from '@mui/icons-material/Link';
 import unfollow from '../../apis/unfollow';
 import follow from '../../apis/follow';
 import ProfilePageSelectors from '../../shared/selectors/ProfilePage';
+import { MoreHoriz } from '@mui/icons-material';
 const ProfileBio = (props) => {
     const [isFollowingButtonHovered, setIsFollowingButtonHovered] =
         useState(false);
@@ -63,6 +64,10 @@ const ProfileBio = (props) => {
         });
     };
 
+    const handleMoreButtonClick = () => {
+        console.log('more pop down menu...');
+    };
+
     return (
         <div className="biocontainer">
             <div className="backgroundImage">
@@ -87,21 +92,35 @@ const ProfileBio = (props) => {
                         authToken={props.token}
                     />
                 ) : (
-                    <div
-                        className="editProfile"
-                        onClick={onButtonClick}
-                        onMouseEnter={handleFollowingButtonHover}
-                        onMouseLeave={handleFollowingButtonHover}
-                        data-test={ProfilePageSelectors.FOLLOW_UNFOLLOW_BUTTON}
-                    >
-                        {/* {isFollowing ? 'Unfollow' : 'Follow'}</span>*/}
-                        <span>
-                            {followedByMeState === false
-                                ? 'Follow'
-                                : isFollowingButtonHovered
-                                ? 'Unfollow'
-                                : 'Following'}
-                        </span>
+                    <div className="profile-buttons-container">
+                        <div className="icon-btn-wrapper">
+                            <IconButton
+                                onClick={handleMoreButtonClick}
+                                aria-label="more"
+                                style={{
+                                    border: '1px solid var(--twitter-background)',
+                                }}
+                            >
+                                <MoreHoriz style={{ color: 'black' }} />
+                            </IconButton>
+                        </div>
+                        <div
+                            className="editProfile"
+                            onClick={onButtonClick}
+                            onMouseEnter={handleFollowingButtonHover}
+                            onMouseLeave={handleFollowingButtonHover}
+                            data-test={
+                                ProfilePageSelectors.FOLLOW_UNFOLLOW_BUTTON
+                            }
+                        >
+                            <span>
+                                {followedByMeState === false
+                                    ? 'Follow'
+                                    : isFollowingButtonHovered
+                                    ? 'Unfollow'
+                                    : 'Following'}
+                            </span>
+                        </div>
                     </div>
                 )}
             </div>

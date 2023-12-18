@@ -12,12 +12,14 @@
     width: 100%;
     background-color: rgb(169, 168, 168);
 }
+
 .profileTitle {
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 0px 15px;
 }
+
 .profileImage {
     width: 134px;
     height: 134px;
@@ -29,10 +31,26 @@
     align-items: center;
     justify-content: center;
 }
+
 .pseudolink {
     color: rgb(0, 139, 195);
     text-decoration: underline;
     cursor: pointer;
+}
+
+.profile-buttons-container {
+    height: auto;
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon-btn-wrapper {
+    margin: auto 8px;
+    width: auto;
+    height: auto;
 }
 
 .editProfile {
@@ -41,16 +59,18 @@
     margin-left: auto;
     padding: 7px 20px;
     font-weight: 800;
-    border: 1px gray solid;
+    border: 1px solid var(--twitter-background);
     border-radius: 9999px;
     font-size: 15px;
 
     width: auto;
     word-wrap: break-word;
 }
+
 .editProfile:hover {
     background-color: rgb(234, 234, 234);
 }
+
 .profileBiography {
     max-width: 590px;
     width: 100%;
@@ -58,28 +78,34 @@
     flex-direction: column;
     padding: 0px 15px;
 }
+
 .profileBiography-username {
     color: black;
     font-size: 20px;
     font-weight: 800;
 }
+
 .profileBiography-email {
     color: #707070;
     font-size: 15px;
 }
+
 .profileBiography-Bio {
     color: #535353;
     font-size: 18px;
 }
+
 .location {
     color: #707070;
     font-size: 18px;
     margin-right: 7px;
 }
+
 .profileBiography-dateMargin {
     padding-top: 15px;
-    
+
 }
+
 .profileBiography-joinDate {
     display: flex;
     align-items: center;
@@ -87,15 +113,18 @@
     font-size: 16px;
     margin-top: 5px;
 }
+
 .profile-followers-following-number {
     color: #000000;
     font-weight: 700;
     font-size: 15px;
     margin-right: 5px;
 }
+
 .profile-distance-between {
     margin-right: 15px;
 }
+
 .follow-link {
     color: #000000;
     text-decoration: none;
@@ -111,10 +140,12 @@
     margin-left: 17px;
     margin-top: 10px;
 }
+
 .profile-followers-following-text {
     color: #707070;
     font-size: 15px;
 }
-.linkIcon{
-    margin-bottom: -1%;      
+
+.linkIcon {
+    margin-bottom: -1%;
 }
