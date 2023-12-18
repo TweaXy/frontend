@@ -1,5 +1,5 @@
 import { BiCalendar } from 'react-icons/bi';
-import { Avatar } from '@mui/material';
+import { Avatar, IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import './ProfileBio.css';
 import EditProfile from './EditProfileButton';
@@ -10,6 +10,8 @@ import LinkIcon from '@mui/icons-material/Link';
 import unfollow from '../../apis/unfollow';
 import follow from '../../apis/follow';
 import ProfilePageSelectors from '../../shared/selectors/ProfilePage';
+import { MoreHoriz } from '@mui/icons-material';
+import ProfileMoreOptionsPopDown from '../ProfileMoreOptionsPopDown/ProfileMoreOptionsPopDown';
 const ProfileBio = (props) => {
     const [isFollowingButtonHovered, setIsFollowingButtonHovered] =
         useState(false);
@@ -21,6 +23,7 @@ const ProfileBio = (props) => {
     const handleFollowingButtonHover = () => {
         setIsFollowingButtonHovered(!isFollowingButtonHovered);
     };
+
     const onButtonClick = async (event) => {
         event.stopPropagation();
         console.log(`@${props.username} cell button is clicked..`);
@@ -36,11 +39,14 @@ const ProfileBio = (props) => {
             }
         }
     };
+
     const navigate = useNavigate();
     const [isFollowing, setFollowing] = useState(false);
     console.log('idProfile', props.IdProfile);
     console.log('idUser', props.currUserId);
 
+
+  
     const navigateToFollowingPage = () => {
         navigate(`/${props.username}/following`, {
             state: {
@@ -59,6 +65,16 @@ const ProfileBio = (props) => {
                 userID: props.IdProfile,
             },
         });
+    };
+
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    const handleMoreButtonClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const closeMoreOptionsMenu = () => {
+        setAnchorEl(null);
     };
 
     return (
@@ -85,21 +101,44 @@ const ProfileBio = (props) => {
                         authToken={props.token}
                     />
                 ) : (
-                    <div
-                        className="editProfile"
-                        onClick={onButtonClick}
-                        onMouseEnter={handleFollowingButtonHover}
-                        onMouseLeave={handleFollowingButtonHover}
-                        data-test={ProfilePageSelectors.FOLLOW_UNFOLLOW_BUTTON}
-                    >
-                        {/* {isFollowing ? 'Unfollow' : 'Follow'}</span>*/}
-                        <span>
-                            {followedByMeState === false
-                                ? 'Follow'
-                                : isFollowingButtonHovered
-                                ? 'Unfollow'
-                                : 'Following'}
-                        </span>
+                    <div className="profile-buttons-container">
+                        <div className="icon-btn-wrapper">
+                            <IconButton
+                                onClick={handleMoreButtonClick}
+                                aria-label="more"
+                                style={{
+                                    border: '1px solid var(--twitter-background)',
+                                }}
+                            >
+                                <MoreHoriz style={{ color: 'black' }} />
+                            </IconButton>
+                        </div>
+                        <ProfileMoreOptionsPopDown
+                            handleClose={closeMoreOptionsMenu}
+                            anchorEl={anchorEl}
+                            username={props.username}
+                            userID={props.IdProfile}
+                            token={props.token}
+                            MutedByMe={props.MutedByMe}
+                            BlockedByMe={props.BlockedByMe}
+                        />
+                        <div
+                            className="editProfile"
+                            onClick={onButtonClick}
+                            onMouseEnter={handleFollowingButtonHover}
+                            onMouseLeave={handleFollowingButtonHover}
+                            data-test={
+                                ProfilePageSelectors.FOLLOW_UNFOLLOW_BUTTON
+                            }
+                        >
+                            <span>
+                                {followedByMeState === false
+                                    ? 'Follow'
+                                    : isFollowingButtonHovered
+                                    ? 'Unfollow'
+                                    : 'Following'}
+                            </span>
+                        </div>
                     </div>
                 )}
             </div>

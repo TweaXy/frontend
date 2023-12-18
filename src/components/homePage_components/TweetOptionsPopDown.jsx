@@ -122,7 +122,7 @@ function TweetOptionsPopDown({
                         Delete
                     </MenuItem>
                 )}
-                {isCurrentUserTweet && (
+                { (
                     <MenuItem onClick={handleAnalytics}>
                         <BarChartOutlinedIcon />
                         View post analytics
