@@ -23,6 +23,7 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
 // >>>>>>> dev
     };
     const removeTweet = (tweetId)=>{
+        console.log("from deleting")
          apiDeleteTweet(tweetId,token);
         setTweets((prevTweets) =>prevTweets.filter((tweet)=>tweet.mainInteraction.id!==tweetId));
        
@@ -63,6 +64,7 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                         userID={tweet.mainInteraction.user.id}
                         removeTweet={removeTweet}
                         isCurrentUserTweet={userData.user.id==tweet.mainInteraction.user.id}
+                        tweet={tweet}
                     />
                 ))} 
             {/* <Tweet

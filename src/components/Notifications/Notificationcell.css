@@ -1,4 +1,4 @@
-.tweet {
+.tweet-Notifications {
     padding: 0 16px;
     border-bottom: 1px solid var(--twitter-background);
     display: flex;
@@ -17,45 +17,45 @@ body {
     --twitter-redHover: rgba(245, 106, 106, 0.196);
 }
 
-.tweet:hover {
+.tweet-Notifications:hover {
     background-color: #f3f3f395;
     transition: background-color 200ms ease-out;
     cursor: pointer;
 }
-.tweet-container {
+.tweet-container-Notifications {
     display: flex;
     flex: 1;
 }
-.avatar-container {
+.avatar-container-Notifications {
     display: flex;
     align-items: flex-start;
 }
-.repost {
+.repost-Notifications {
     padding-top: 12px;
 }
-.tweet-main {
+.tweet-main-Notifications {
     /* width: 200px; */
     flex: 1;
     padding-bottom: 12px;
     display: flex;
     flex-direction: column;
 }
-.Notfication-user {
+.Notfication-user-Notifications {
     display: flex;
 }
-.Notfication-user > .InfoInteraction-container {
+.Notfication-user-Notifications > .InfoInteraction-container {
     flex: 1;
     display: flex;
     align-items: center;
     font-size: 15px;
     color: var(--twitter-greyColor);
 }
-.Notfication-user > .InfoInteraction-container > .username {
+.Notfication-user-Notifications > .InfoInteraction-container > .username-Notifications {
     font-weight: bolder;
     color: black;
     margin-right: 4px;
 }
-.username:hover {
+.username-Notifications:hover {
     text-decoration: underline;
 }
 .Notfication-user > .InfoInteraction-container > .Interaction {

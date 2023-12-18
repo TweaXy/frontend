@@ -11,6 +11,7 @@ import SettingsPage from './pages/SettingsPage/SettingsPage.jsx';
 import ChangePasswordPage from './pages/SettingsPage/ChangePasswordPage.jsx';
 import ChangeUsernamePage from './pages/SettingsPage/ChangeUsernamePage.jsx';
 import NotificationPage from './pages/NotificationPage/NotificationPage.jsx';
+import RepliesPage from './pages/RepliesPage/ReplyPage.jsx';
 function App() {
     return (
         <>
@@ -50,6 +51,10 @@ function App() {
                     <Route
                         path="/Notifications"
                         element={<NotificationPage />}
+                    />
+                    <Route
+                    path="/:username/:tweetid"
+                    element={<RepliesPage/>}
                     />
                 </Routes>
             </Router>

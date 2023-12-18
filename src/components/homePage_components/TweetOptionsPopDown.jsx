@@ -18,28 +18,32 @@ function TweetOptionsPopDown({
     deleteTweetHandler,
 }) {
     const [isDeleteWindow, setIsDeleteWindow] = useState(false);
-    const handleDelete = () => {
+    const handleDelete = (event) => {
+        event.stopPropagation();
         // Implement delete functionality here
         setIsDeleteWindow(true);
         console.log('Deleting tweet...');
-        handleClose();
+        handleClose(event);
     };
     const closeDeleteWindowHandler = () => {
         setIsDeleteWindow(false);
     };
-    const handleUnFollow = (e) => {
+    const handleUnFollow = (event) => {
+        event.stopPropagation();
         console.log('unfollowed');
-        handleClose();
+        handleClose(event);
     };
 
-    const handleBlock = (e) => {
+    const handleBlock = (event) => {
+        event.stopPropagation();
         console.log('Blocked');
-        handleClose();
+        handleClose(event);
     };
 
-    const handleAnalytics = (e) => {
+    const handleAnalytics = (event) => {
+        event.stopPropagation();
         console.log('Analytics');
-        handleClose();
+        handleClose(event);
     };
     return (
         <div className="tweet-options">
