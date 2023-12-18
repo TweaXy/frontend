@@ -16,6 +16,8 @@ import mute from '../../apis/mute';
 import unmute from '../../apis/unmute';
 import NotifyBox from '../NotifyBox/NotifyBox';
 import isUserMuted from '../../apis/isMuted';
+import BlockUserWindow from '../BlockUserWindow/BlockUserWindow';
+import block from '../../apis/block';
 
 function TweetOptionsPopDown({
     isCurrentUserTweet,
@@ -30,6 +32,12 @@ function TweetOptionsPopDown({
 
     const [isMuted, setIsMuted] = useState(false);
     const [muteActionOccurred, setMuteActionOccurred] = useState(false);
+
+    const [isBlocked, setIsBlocked] = useState(false);
+    const [blockActionOccurred, setBlockActionOccurred] = useState(false);
+
+    const [isBlockUserWindowOpened, setIsBlockUserWindowOpened] =
+        useState(false);
 
     const handleDelete = () => {
         // Implement delete functionality here
@@ -69,8 +77,24 @@ function TweetOptionsPopDown({
         }
     };
 
-    const handleBlock = (e) => {
-        console.log('Blocked');
+    const handleBlockUserWindowClose = () => {
+        setIsBlockUserWindowOpened(false);
+    };
+
+    const handleBlockButtonClick = () => {
+        setIsBlockUserWindowOpened(true);
+    };
+
+    const handleUserBlock = async () => {
+        if (await block(username, token)) {
+            setIsBlocked(true);
+            setBlockActionOccurred(true);
+            const timeoutID = setTimeout(() => {
+                setBlockActionOccurred(false);
+            }, 3000);
+            handleClose();
+            return () => clearTimeout(timeoutID);
+        }
         handleClose();
     };
 
@@ -130,7 +154,7 @@ function TweetOptionsPopDown({
                     </MenuItem>
                 )}
                 {!isCurrentUserTweet && (
-                    <MenuItem onClick={handleBlock}>
+                    <MenuItem onClick={handleBlockButtonClick}>
                         <BlockIcon />
                         {`Block @${username}`}
                     </MenuItem>
@@ -148,6 +172,20 @@ function TweetOptionsPopDown({
                     }`}
                 />
             )}
+            {blockActionOccurred && (
+                <NotifyBox
+                    text={`@${username} has been ${
+                        isBlocked ? 'blocked' : 'unblock'
+                    }`}
+                />
+            )}
+            <BlockUserWindow
+                openWindow={isBlockUserWindowOpened}
+                closeWindow={handleBlockUserWindowClose}
+                blockUser={handleUserBlock}
+                username={username}
+                isUserBlocked={false}
+            />
         </div>
     );
 }
