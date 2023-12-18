@@ -98,6 +98,7 @@ const ProfileBio = (props) => {
     const handleBlockUser = async () => {
         if (await unblock(props.username, props.token)) {
             console.log('user is unblocked successfully');
+            window.location.reload();
         }
     };
 

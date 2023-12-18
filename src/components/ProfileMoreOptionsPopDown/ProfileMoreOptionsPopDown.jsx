@@ -26,7 +26,6 @@ const ProfileMoreOptionsPopDown = ({
     const [muteActionOccurred, setMuteActionOccurred] = useState(false);
 
     const [isBlocked, setIsBlocked] = useState(blockedByMe);
-    const [blockActionOccurred, setBlockActionOccurred] = useState(false);
 
     const [isBlockWindow, setIsBlockWindow] = useState(false);
 
@@ -67,22 +66,12 @@ const ProfileMoreOptionsPopDown = ({
         if (isBlocked) {
             if (await unblock(username, token)) {
                 setIsBlocked(false);
-                setBlockActionOccurred(true);
-                const timeoutID = setTimeout(() => {
-                    setBlockActionOccurred(false);
-                }, 3000);
-                handleClose();
-                return () => clearTimeout(timeoutID);
+                window.location.reload();
             }
         } else {
             if (await block(username, token)) {
                 setIsBlocked(true);
-                setBlockActionOccurred(true);
-                const timeoutID = setTimeout(() => {
-                    setBlockActionOccurred(false);
-                }, 3000);
-                handleClose();
-                return () => clearTimeout(timeoutID);
+                window.location.reload();
             }
         }
     };
@@ -124,13 +113,6 @@ const ProfileMoreOptionsPopDown = ({
                 <NotifyBox
                     text={`@${username} has been ${
                         isMuted ? 'muted' : 'unmuted'
-                    }`}
-                />
-            )}
-            {blockActionOccurred && (
-                <NotifyBox
-                    text={`@${username} has been ${
-                        isBlocked ? 'blocked' : 'unblock'
                     }`}
                 />
             )}
