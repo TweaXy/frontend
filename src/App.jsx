@@ -11,6 +11,8 @@ import SettingsPage from './pages/SettingsPage/SettingsPage.jsx';
 import ChangePasswordPage from './pages/SettingsPage/ChangePasswordPage.jsx';
 import ChangeUsernamePage from './pages/SettingsPage/ChangeUsernamePage.jsx';
 import NotificationPage from './pages/NotificationPage/NotificationPage.jsx';
+import ChangeEmailPage from './pages/SettingsPage/ChangeEmailPage.jsx';
+import MuteSettingsPage from './pages/SettingsPage/MuteSettingsPage.jsx';
 import LikersPage from './pages/PostEngagementPage/LikersPage.jsx';
 import RetweetersPage from './pages/PostEngagementPage/retweetersPage.jsx';
 import MessagePage from './pages/MessagesPage/MessagePage.jsx';
@@ -53,6 +55,14 @@ function App() {
                     <Route
                         path="/settings/username"
                         element={<ChangeUsernamePage />}
+                    />
+                    <Route
+                        path="/settings/email"
+                        element={<ChangeEmailPage />}
+                    />
+                    <Route
+                        path="/settings/mute"
+                        element={<MuteSettingsPage />}
                     />
                     <Route
                         path="/Notifications"

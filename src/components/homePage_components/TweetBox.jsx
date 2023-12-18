@@ -15,7 +15,7 @@ import { apiAddTweet } from '../../apis/tweetApis/AddTweet';
 import MediaErrorMsg from './MediaErrorMsg';
 import ImageUploader from './ImageUploader';
 import HomePageSelectors from '../../shared/selectors/HomePage';
-export default function TweetBox({userData,getTweets}) {
+export default function TweetBox({userData,updateOffset}) {
     const [text, setText] = useState('');
     const [privacylay, setPrivacylay] = useState(false);
     const [tweetImages, setTweetImages] = useState([]);
@@ -106,7 +106,7 @@ export default function TweetBox({userData,getTweets}) {
         setTweetImages([]);
         setText('');
         await apiAddTweet(text, tweetImages,userData.token);
-        getTweets();
+        // updateOffset(0);
     };
 
     const handleDisplayPrivacy = (e) => {
