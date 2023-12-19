@@ -11,6 +11,16 @@ const ListConversation = () => {
     const myID = useSelector((state) => state.user.user).id;
     const user = useSelector((state) => state.user.user);
     const [isSettingOpened, setIsSettingOpened] = useState(1);
+    const leaveConversationHandler = () => {
+        console.log(' leave conversation');
+    };
+    const muteUserHandler = () => {
+        console.log(' mute user');
+    };
+
+    const blockUserHandler = () => {
+        console.log(' block user');
+    };
 
     return (
         <>
@@ -32,7 +42,7 @@ const ListConversation = () => {
                     </Button>
                 </div>
             </div>
-            {isSettingOpened == 0 && (
+            {isSettingOpened == 1 && (
                 <div className="settings-converation-style">
                     <SettingsConversationHeader />
                     <UserCell
@@ -57,13 +67,22 @@ const ListConversation = () => {
                     </span>
 
                     <div>
-                        <div className="text-settings-conversation-page">
+                        <div
+                            className="interaction-text-settings-conversation"
+                            onClick={blockUserHandler}
+                        >
                             block @{user.username}
                         </div>
-                        <div className="text-settings-conversation-page">
+                        <div
+                            className="interaction-text-settings-conversation"
+                            onClick={muteUserHandler}
+                        >
                             mute @{user.username}
                         </div>
-                        <div className="text-settings-conversation-page">
+                        <div
+                            className="interaction-leave-text-settings-conversation"
+                            onClick={leaveConversationHandler}
+                        >
                             Leave Conversation
                         </div>
                     </div>
