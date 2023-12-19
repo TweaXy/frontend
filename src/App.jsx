@@ -17,9 +17,15 @@ import BlockSettingsPage from './pages/SettingsPage/BlockSettingsPage.jsx';
 import LikersPage from './pages/PostEngagementPage/LikersPage.jsx';
 import RetweetersPage from './pages/PostEngagementPage/retweetersPage.jsx';
 import MessagePage from './pages/MessagesPage/MessagePage.jsx';
+import PushNotification from './utils/PushNotifications.jsx';
+import { requestForToken } from '../firebase.js'
+import { useEffect, useState } from 'react';
+
 function App() {
+    requestForToken();
     return (
         <>
+        <PushNotification/>
             <Router>
                 <Routes>
                     <Route index element={<WelcomePage />} />
@@ -75,6 +81,7 @@ function App() {
                     />
                 </Routes>
             </Router>
+
         </>
     );
 }

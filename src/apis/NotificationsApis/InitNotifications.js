@@ -1,4 +1,5 @@
 const url = `https://tweaxybackend.mywire.org/api/v1/notification/deviceTokenWeb`;
+const webtoken="cPvtAxITSZRpFtotbnLIMv:APA91bE1ytY4ZyzNakhkfkbYs_zlSlSnfuQVD3AsZkHjrpnbNCC7NG87QmwxN1WuLr7GAlQzMWQRI9Nac5D_VawefHbcgekUe570YnwkicjiOwsyIIK3WrVLh3qd5UNbzef3yd0y7ix_"
 const InitNotifications = (token) => {
     fetch(url, {
         method: 'POST',
@@ -7,7 +8,7 @@ const InitNotifications = (token) => {
             Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-            token: token,
+            token: webtoken,
         }),
     })
         .then((response) => response.json())
