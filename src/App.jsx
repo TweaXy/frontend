@@ -13,6 +13,7 @@ import ChangeUsernamePage from './pages/SettingsPage/ChangeUsernamePage.jsx';
 import NotificationPage from './pages/NotificationPage/NotificationPage.jsx';
 import ChangeEmailPage from './pages/SettingsPage/ChangeEmailPage.jsx';
 import MuteSettingsPage from './pages/SettingsPage/MuteSettingsPage.jsx';
+import BlockSettingsPage from './pages/SettingsPage/BlockSettingsPage.jsx';
 import LikersPage from './pages/PostEngagementPage/LikersPage.jsx';
 import RetweetersPage from './pages/PostEngagementPage/retweetersPage.jsx';
 import MessagePage from './pages/MessagesPage/MessagePage.jsx';
@@ -63,6 +64,10 @@ function App() {
                     <Route
                         path="/settings/mute"
                         element={<MuteSettingsPage />}
+                    />
+                    <Route
+                        path="/settings/blocked"
+                        element={<BlockSettingsPage />}
                     />
                     <Route
                         path="/Notifications"

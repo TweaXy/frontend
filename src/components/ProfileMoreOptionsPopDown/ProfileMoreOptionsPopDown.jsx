@@ -7,7 +7,9 @@ import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import BlockIcon from '@mui/icons-material/Block';
 import NotifyBox from '../NotifyBox/NotifyBox';
 import isUserMuted from '../../apis/isMuted';
+import unblock from '../../apis/unblock';
 import unmute from '../../apis/unmute';
+import block from '../../apis/block';
 import mute from '../../apis/mute';
 import BlockUserWindow from '../BlockUserWindow/BlockUserWindow';
 
@@ -18,13 +20,12 @@ const ProfileMoreOptionsPopDown = ({
     userID,
     token,
     MutedByMe,
-    BlockedByMe,
+    blockedByMe,
 }) => {
     const [isMuted, setIsMuted] = useState(MutedByMe);
     const [muteActionOccurred, setMuteActionOccurred] = useState(false);
 
-    const [isBlocked, setIsBlocked] = useState(BlockedByMe);
-    const [blockActionOccurred, setBlockActionOccurred] = useState(false);
+    const [isBlocked, setIsBlocked] = useState(blockedByMe);
 
     const [isBlockWindow, setIsBlockWindow] = useState(false);
 
@@ -63,25 +64,15 @@ const ProfileMoreOptionsPopDown = ({
 
     const handleUserBlock = async () => {
         if (isBlocked) {
-            // if (await unblock(username, token)) {
-            setIsBlocked(false);
-            setBlockActionOccurred(true);
-            const timeoutID = setTimeout(() => {
-                setBlockActionOccurred(false);
-            }, 3000);
-            handleClose();
-            return () => clearTimeout(timeoutID);
-            // }
+            if (await unblock(username, token)) {
+                setIsBlocked(false);
+                window.location.reload();
+            }
         } else {
-            // if (await block(username, token)) {
-            setIsBlocked(true);
-            setBlockActionOccurred(true);
-            const timeoutID = setTimeout(() => {
-                setBlockActionOccurred(false);
-            }, 3000);
-            handleClose();
-            return () => clearTimeout(timeoutID);
-            // }
+            if (await block(username, token)) {
+                setIsBlocked(true);
+                window.location.reload();
+            }
         }
     };
 
@@ -122,13 +113,6 @@ const ProfileMoreOptionsPopDown = ({
                 <NotifyBox
                     text={`@${username} has been ${
                         isMuted ? 'muted' : 'unmuted'
-                    }`}
-                />
-            )}
-            {blockActionOccurred && (
-                <NotifyBox
-                    text={`@${username} has been ${
-                        isBlocked ? 'blocked' : 'unblock'
                     }`}
                 />
             )}
