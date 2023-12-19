@@ -1,4 +1,4 @@
-import './conversationsCells.css';
+import './conversationCells.css';
 
 import { CircularProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
