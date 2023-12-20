@@ -22,7 +22,6 @@ import TweetDate from '../../utils/TweetDate';
 import { TweetOptionsPopDown } from './TweetOptionsPopDown';
 import { apiAddReply } from '../../apis/tweetApis/AddReply';
 import e from 'cors';
-import { token } from 'stylis';
 import { abort } from 'process';
 import AddReplyWindow from './AddReplyWindow';
 import { hashText } from '../../shared/Utils';
@@ -43,7 +42,7 @@ export default function Tweet({
     token,
     userID,
     removeTweet,
-    isCurrentUserTweet,
+    isCurrentUserTweet,,
     tweet,
 }) {
     console.log('tweet form Tweet is', tweet);
@@ -266,6 +265,11 @@ export default function Tweet({
                             handleClose={optionsCloseHandler}
                             anchorEl={anchorEl}
                             deleteTweetHandler={deleteTweetHandler}
+                            tweetid={tweetId}
+                            token={token}
+                            username={handle}
+                            userID={userID}
+                           
                         />
                     </div>
                     <div className="tweet-text-container">

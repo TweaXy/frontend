@@ -1,0 +1,32 @@
+.muted-users-cells-container {
+    display: block;
+}
+
+.no-muted-users-container {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+
+.no-muted-users-container>.span-container {
+    width: 400px;
+    height: 128px;
+    margin: 64px 128px;
+    padding: 0 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.no-muted-users-container>.span-container>span.header-span {
+    font-size: 31px;
+    font-weight: 600;
+    color: #0F1419;
+    text-align: left;
+}
+
+.no-muted-users-container>.span-container>span.body-span {
+    text-align: left;
+    font-size: 15px;
+    color: #536471;
+}
