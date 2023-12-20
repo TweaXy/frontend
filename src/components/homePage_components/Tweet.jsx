@@ -216,8 +216,7 @@ export default function Tweet({
         event.stopPropagation();
         setIsReplyWindow(true);
     };
-    const addReplyHandler = async (event, text, images) => {
-        event.stopPropagation();
+    const addReplyHandler = async ( text, images) => {
         if (await apiAddReply(tweetId, text, images, token)) {
             setTweetReplies((prevReplies) => prevReplies + 1);
         }
@@ -225,6 +224,7 @@ export default function Tweet({
     };
     // we should have a function to handle the change on clicking any
     return (
+        <>
         <div className="tweet" onClick={getreplieshandler}>
             <div className="repost"></div>
             <div className="tweet-container">
@@ -367,18 +367,20 @@ export default function Tweet({
                     </div>
                 </div>
             </div>
-            {isReplyWindow && (
-                <AddReplyWindow
-                    open={isReplyWindow}
-                    closeHandler={replyWindowClose}
-                    avatar={avatar}
-                    username={username}
-                    handle={handle}
-                    uploadTime={uploadTime}
-                    tweetText={tweetText}
-                    addReplyHandler={addReplyHandler}
-                />
-            )}
+           
         </div>
+         {isReplyWindow && (
+            <AddReplyWindow
+                open={isReplyWindow}
+                closeHandler={replyWindowClose}
+                avatar={avatar}
+                username={username}
+                handle={handle}
+                uploadTime={uploadTime}
+                tweetText={tweetText}
+                addReplyHandler={addReplyHandler}
+            />
+        )}
+        </>
     );
 }

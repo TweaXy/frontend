@@ -13,8 +13,11 @@
     import { useNavigate } from 'react-router-dom';
     import { TweetOptionsPopDown } from '../homePage_components/TweetOptionsPopDown';   
     import { format } from 'date-fns';
+    import { apiAddReply } from '../../apis/tweetApis/AddReply';
+import AddReplyWindow from '../homePage_components/AddReplyWindow';
     export default function TweetReply({
-        tweet
+        tweet,
+        token
     }) {
         const navigate=useNavigate();
         const avatar=tweet.mainInteraction.user.avatar
@@ -42,6 +45,7 @@
         const iconInteraction2 = useRef(null);
         const iconInteraction3 = useRef(null);
         const iconInteraction4 = useRef(null);
+        const [isReplyWindow, setIsReplyWindow] = useState(false);
         const routingHandlerProfile1 = (event) => {
             event.stopPropagation();
             console.log('routing to this user profile ');
@@ -58,7 +62,17 @@
             //tweet-compontent
             // route to the tweet
         };
-        
+        const replyWindowClose = (event) => {
+            event.stopPropagation();
+            setIsReplyWindow(false);
+        };
+        const addReplyHandler = async ( text, images) => {
+             apiAddReply(tweet.mainInteraction.id, text, images, token)
+        };
+        const replyWindowOpen = (event) => {
+            event.stopPropagation();
+            setIsReplyWindow(true);
+        };
         useEffect(() => {
             // adjust this to be useRef
 
@@ -166,17 +180,18 @@
        
             if (isLikeActive) {
           
-                apiDislikeTweet(tweetId, token);
+                apiDislikeTweet(tweet.mainInteraction.id, token);
                 setTweetLikes((likes) => likes - 1);
             } else {
         
-                apiLikeTweet(tweetId, token);
+                apiLikeTweet(tweet.mainInteraction.id, token);
                 setTweetLikes((likes) => likes + 1);
             }
             setLikeActive(!isLikeActive);
         };
 
         return (
+            <>
             <div className="reply" onClick={routingHandlerTweet}>
                 <div className="repost"></div>
                 <div className="reply-container">
@@ -226,7 +241,7 @@
                         <div className="reply-activity">
                             <div className="reply-icon">
                                 {/* icon */}
-                                <div className="activity-icon" ref={activityIcon1}>
+                                <div className="activity-icon" ref={activityIcon1}    onClick={replyWindowOpen}>
                                     <ChatBubbleOutlineOutlinedIcon className="" />
                                 </div>
                                 <span
@@ -296,5 +311,18 @@
                     </div>
                     </div>
                     </div>
+                    {isReplyWindow && (
+                        <AddReplyWindow
+                            open={isReplyWindow}
+                            closeHandler={replyWindowClose}
+                            avatar={avatar}
+                            username={name}
+                            handle={username}
+                            uploadTime={UploadTime}
+                            tweetText={replaytext}
+                            addReplyHandler={addReplyHandler}
+                        />
+                    )}
+                    </>
         );
     }

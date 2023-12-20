@@ -17,7 +17,6 @@ import TweetReplyBox from '../../components/Reply/TweetReplyBox';
 import Tweet from '../../components/homePage_components/Tweet';
 import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
 const RepliesPage = () => {
-
     const navigate=useNavigate();
     const location = useLocation();
     const token = useSelector((state) => state.user.token);
@@ -33,6 +32,12 @@ const RepliesPage = () => {
             prevTweets.filter((tweet) => tweet.mainInteraction.id !== tweetId)
         );
     };
+    // const addReplyHandler = async ( text, images) => {
+    //     if (await apiAddReply(tweetId, text, images, token)) {
+    //         setTweetReplies((prevReplies) => prevReplies + 1);
+    //     }
+    //     //take any other action
+    // };
     const previouspage = () => {
         console.log("error")
         navigate(-1);
@@ -82,8 +87,8 @@ const RepliesPage = () => {
                 />
                 <div className="feed">
                     <ReplyHeader previouspage={previouspage}/>
-                    <TweetReply tweet={curtweet} />
-                    <TweetReplyBox  />
+                    <TweetReply tweet={curtweet} token={token} />
+                    <TweetReplyBox tweetId={tweetid} token={token} />
                     {replies.length > 0 &&
                         replies.map((curreply, index) => (
                             <Tweet

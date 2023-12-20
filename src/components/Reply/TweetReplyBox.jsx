@@ -14,10 +14,11 @@ import '../homePage_components/ReplyBox.css';
 import MediaErrorMsg from '../homePage_components/MediaErrorMsg'
 import ImageUploader from '../homePage_components/ImageUploader';
 import HomePageSelectors from '../../shared/selectors/HomePage';
-export default function TweetReplyBox({closeHandler,addReplyHandler}) {
+import { apiAddReply } from '../../apis/tweetApis/AddReply';
+export default function TweetReplyBox({tweetId,token}) {
     const [ok,setok]=useState(true);
     const [text, setText] = useState('');
-    const [tweetImages, setTweetImages] = useState([]);
+    const [Images, setTweetImages] = useState([]);
     const [isMediaerrorVisable, setMediaerrorVisable] = useState(false);
     const fileInputRef = useRef(null);
     const textareaRef = useRef(null);
@@ -29,9 +30,6 @@ export default function TweetReplyBox({closeHandler,addReplyHandler}) {
     const handleChange = (e) => {
         setText(e.target.value);
     };
-    const hendlesetok=()=>{
-        setok(false)
-    }
     const handleResize = (e) => {
         // updateRows(e.target);
         e.target.style.height = `${e.target.scrollHeight}px`;
@@ -41,15 +39,10 @@ export default function TweetReplyBox({closeHandler,addReplyHandler}) {
         console.log('new img');
         fileInputRef.current.click();
     };
-
-    useEffect(() => {
-        console.log(tweetImages);
-    }, [tweetImages]);
-
     const handleImageChange = async (e) => {
         const selectedMedia = [...Array.from(e.target.files)];
 
-        if (selectedMedia.length + tweetImages.length > 4) {
+        if (selectedMedia.length + Images.length > 4) {
             setMediaerrorVisable(true);
 
             const timeoutId = setTimeout(() => {
@@ -100,17 +93,10 @@ export default function TweetReplyBox({closeHandler,addReplyHandler}) {
             }, 100);
         }
     };
-
     const replyTweetHandler =async (e) => {
-        console.log("this is a handler");
-        // console.log(tweetImages);
         setTweetImages([]);
         setText('');
-        // add the reply
-        // close the window
-        addReplyHandler(text,tweetImages);
-        // getTweets();
-        closeHandler();
+        apiAddReply(tweetId, text, Images, token)
     };
 if(ok)
 {
@@ -172,7 +158,7 @@ if(ok)
             </div>
             <div className="media-container">
                   <div className='span-padd' style={{height : '5px'}}></div>
-                  <ImageUploader tweetImages={tweetImages} setTweetImages={setTweetImages}/>
+                  <ImageUploader tweetImages={Images} setTweetImages={setTweetImages}/>
                 </div>
             <div className="reply-box-post">
                 <div className="post-attach">
@@ -215,7 +201,6 @@ if(ok)
                  {text.length>0&&  <Button
                     className="reply-box-button"
                     onClick={replyTweetHandler}
-                    disabled={true}
                 >
                     Reply
                 </Button>}
