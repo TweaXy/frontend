@@ -42,7 +42,7 @@ export default function Tweet({
     token,
     userID,
     removeTweet,
-    isCurrentUserTweet,,
+    isCurrentUserTweet,
     tweet,
 }) {
     console.log('tweet form Tweet is', tweet);
