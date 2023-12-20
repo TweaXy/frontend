@@ -17,17 +17,23 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
     const getTweets = async () => {
         const tweetsResponse = await apiGetTweet(userData.token);
         setTweets(tweetsResponse);
+// =======
+//         console.log(tweetsResponse);
+//          setTweets(tweetsResponse);
+// >>>>>>> dev
     };
+    const removeTweet = (tweetId)=>{
+        console.log("from deleting")
+         apiDeleteTweet(tweetId,token);
+        setTweets((prevTweets) =>prevTweets.filter((tweet)=>tweet.mainInteraction.id!==tweetId));
+       
+    }
+    useEffect( () => {   
+         getTweets();
+         console.log("inside the Feed");
+        //  console.log(userData.user.id);
+        //  console.log(tweets[0]);
 
-    const removeTweet = (tweetId) => {
-        apiDeleteTweet(tweetId, token);
-        setTweets((prevTweets) =>
-            prevTweets.filter((tweet) => tweet.mainInteraction.id !== tweetId)
-        );
-    };
-  
-    useEffect(() => {
-        getTweets();
     }, []);
 
     return (
@@ -63,6 +69,7 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                         isCurrentUserTweet={
                             userData.user.id == tweet.mainInteraction.user.id
                         }
+                        tweet={tweet}
                     />
                 ))}
 

@@ -1,5 +1,5 @@
 .reply-box {
-    border-bottom: 2px solid var(--twitter-background);
+    border-bottom: 1px solid var(--twitter-background);
     padding: 0 16px;
     /* width :598px; */
     /* padding-bottom: 10px; */
@@ -130,3 +130,21 @@
     background-color: #1a89ce !important;
   }
   
+  .reply2-box-button {
+    outline: none !important;
+    background-color: var(--twitter-cianHover) !important;
+    color: white !important;
+    font-weight: 550 !important;
+    font-size: 15px !important;
+    /* height: 40px !important; */
+    border-radius: 30px !important;
+    border: none !important;
+    text-transform: inherit !important;
+    padding: 4px !important;
+    width: 68px !important;
+    margin-left: auto !important;
+    margin-top: 10px !important;
+  }
+  .reply2-box-button:hover {
+    background-color: #1a89ce !important;
+  }

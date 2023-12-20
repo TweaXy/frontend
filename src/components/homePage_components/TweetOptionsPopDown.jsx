@@ -45,18 +45,20 @@ function TweetOptionsPopDown({
     const [isBlockUserWindowOpened, setIsBlockUserWindowOpened] =
         useState(false);
 
-    const handleDelete = () => {
+    const handleDelete = (event) => {
+        event.stopPropagation();
         // Implement delete functionality here
         setIsDeleteWindow(true);
         console.log('Deleting tweet...');
-        handleClose();
+        handleClose(event);
     };
     const closeDeleteWindowHandler = () => {
         setIsDeleteWindow(false);
     };
-    const handleUnFollow = (e) => {
+    const handleUnFollow = (event) => {
+        event.stopPropagation();
         console.log('unfollowed');
-        handleClose();
+        handleClose(event);
     };
 
     const handleUserMute = async () => {
