@@ -17,6 +17,7 @@ import NotifyBox from '../../components/NotifyBox/NotifyBox';
 import checkPassword from '../../apis/checkPassword';
 import updateEmail from '../../apis/updateEmail';
 import { sendEmailVerification } from '../../apis/EmailVerfication';
+import SettingsPageSelectors from '../../shared/selectors/SettingsPage';
 
 const ChangeEmailPage = () => {
     const token = useSelector((state) => state.user.token);
@@ -158,6 +159,9 @@ const ChangeEmailPage = () => {
                                     Password
                                 </InputLabel>
                                 <OutlinedInput
+                                    data-test={
+                                        SettingsPageSelectors.CURRENT_PASSWORD_FIELD
+                                    }
                                     id="outlined-adornment-password"
                                     type={showPassword ? 'text' : 'password'}
                                     value={password}
@@ -194,6 +198,7 @@ const ChangeEmailPage = () => {
                                 </span>
                             )}
                             <button
+                                data-test={SettingsPageSelectors.NEXT_BUTTON}
                                 className="blue-btn"
                                 disabled={password === ''}
                                 onClick={checkUserPassword}
@@ -219,6 +224,9 @@ const ChangeEmailPage = () => {
                                     Email
                                 </InputLabel>
                                 <OutlinedInput
+                                    data-test={
+                                        SettingsPageSelectors.NEW_EMAIL_FIELD
+                                    }
                                     id="outlined-adornment-password"
                                     type={'text'}
                                     value={newEmail}
@@ -237,6 +245,7 @@ const ChangeEmailPage = () => {
                                 </span>
                             )}
                             <button
+                                data-test={SettingsPageSelectors.NEXT_BUTTON}
                                 className="blue-btn"
                                 disabled={newEmail === ''}
                                 onClick={verifyEmailHandler}
@@ -262,6 +271,9 @@ const ChangeEmailPage = () => {
                                     Verification code
                                 </InputLabel>
                                 <OutlinedInput
+                                    data-test={
+                                        SettingsPageSelectors.VERIFICATION_CODE_FIELD
+                                    }
                                     id="outlined-adornment-password"
                                     type={'text'}
                                     value={emailVerificationToken}
@@ -281,6 +293,7 @@ const ChangeEmailPage = () => {
                                 </span>
                             )}
                             <button
+                                data-test={SettingsPageSelectors.NEXT_BUTTON}
                                 className="blue-btn"
                                 disabled={emailVerificationToken.length !== 8}
                                 onClick={updateEmailHandler}
