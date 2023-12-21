@@ -49,7 +49,6 @@ function TweetOptionsPopDown({
 
     const handleDelete = (event) => {
         event.stopPropagation();
-        // Implement delete functionality here
         setIsDeleteWindow(true);
         handleClose();
     };
@@ -107,6 +106,7 @@ function TweetOptionsPopDown({
                 }
             }
         }
+        handleClose();
     };
 
     const handleUserBlock = async () => {
@@ -125,6 +125,7 @@ function TweetOptionsPopDown({
                 }
             }
         }
+        handleClose();
     };
 
     const handleAnalytics = () => {

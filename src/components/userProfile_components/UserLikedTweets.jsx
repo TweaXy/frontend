@@ -25,6 +25,7 @@ const TweetsUSerLikes = ({ userID, curUserID }) => {
     useEffect(() => {
         if (token && userdata) {
             setIsPageLoading(false);
+            getTweets();
         } else {
             console.log('profile page is loading');
         }
@@ -47,7 +48,12 @@ const TweetsUSerLikes = ({ userID, curUserID }) => {
     };
 
     useEffect(() => {
-        getTweets();
+        const renderTweets = async () => {
+            await getTweets();
+        };
+        if (!isPageLoading) {
+            renderTweets();
+        }
     }, [isPageLoading]);
 
     if (isPageLoading) {

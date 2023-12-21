@@ -17,7 +17,7 @@ const TabsProfile = ({
                 className={isTherePopUpWindow ? 'weak-feed-tabs' : 'feed-tabs'}
             >
                 <div
-                    style={{ flex: 0.2 }}
+                    style={{ flex: 0.5 }}
                     className="feed-haeder-element"
                     onClick={() => setActivePage(0)}
                 >
@@ -30,40 +30,13 @@ const TabsProfile = ({
                     </span>
                 </div>
                 <div
-                    style={{ flex: 0.25 }}
+                    style={{ flex: 0.5 }}
                     className=" feed-haeder-element"
                     onClick={() => setActivePage(1)}
                 >
                     <span
                         className={`${
                             feedHeader_acitve == 1 && '--feed-header-active'
-                        }`}
-                    >
-                        Replies
-                    </span>
-                </div>
-
-                <div
-                    style={{ flex: 0.25 }}
-                    className=" feed-haeder-element"
-                    onClick={() => setActivePage(2)}
-                >
-                    <span
-                        className={`${
-                            feedHeader_acitve == 2 && '--feed-header-active'
-                        }`}
-                    >
-                        Media
-                    </span>
-                </div>
-                <div
-                    style={{ flex: 0.25 }}
-                    className=" feed-haeder-element"
-                    onClick={() => setActivePage(3)}
-                >
-                    <span
-                        className={`${
-                            feedHeader_acitve == 3 && '--feed-header-active'
                         }`}
                     >
                         Likes
@@ -78,11 +51,8 @@ const TabsProfile = ({
                     actionOccurredHandler={actionOccurredHandler}
                 />
             )}
-            {feedHeader_acitve === 3 && (
-                <TweetsUSerLikes
-                    userID={userID}
-                    curUserID={curUserID}
-                />
+            {feedHeader_acitve === 1 && (
+                <TweetsUSerLikes userID={userID} curUserID={curUserID} />
             )}
         </>
     );

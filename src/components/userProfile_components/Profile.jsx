@@ -120,6 +120,7 @@ function Profile({ token, userID, currUserId }) {
                         <TabsProfile
                             userData={ndata.data.user}
                             userID={userID}
+                            curUserID={currUserId}
                             followedByMe={ndata.data.user.followedByMe}
                             actionOccurredHandler={actionOccurredHandler}
                         />

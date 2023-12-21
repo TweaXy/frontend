@@ -47,6 +47,7 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
             setActionMessage('');
         }, 3000);
         updateOffset(0);
+        // useGetTweets(token, offset);
         return () => clearTimeout(timeoutId);
     };
 
