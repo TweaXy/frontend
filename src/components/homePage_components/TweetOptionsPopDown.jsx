@@ -15,6 +15,7 @@ import unmute from '../../apis/unmute';
 import isUserMuted from '../../apis/isMuted';
 import BlockUserWindow from '../BlockUserWindow/BlockUserWindow';
 import block from '../../apis/block';
+import unblock from '../../apis/unblock';
 import getLikers from '../../apis/getLikers';
 import { useNavigate } from 'react-router';
 import unfollow from '../../apis/unfollow';
@@ -31,13 +32,15 @@ function TweetOptionsPopDown({
     username,
     userID,
     handleTweetsFiltering,
-    isUserFollowed,
+    followedByMe,
 }) {
     const navigate = useNavigate();
 
+    const [isFollowed, setIsFollowed] = useState(followedByMe);
+
     const [isMuted, setIsMuted] = useState(false);
 
-    const [isFollowed, setIsFollowed] = useState(isUserFollowed);
+    const [isBlocked, setIsBlocked] = useState(false);
 
     const [isDeleteWindow, setIsDeleteWindow] = useState(false);
 
@@ -53,12 +56,22 @@ function TweetOptionsPopDown({
         setIsDeleteWindow(false);
     };
 
+    const handleBlockUserWindowClose = () => {
+        setIsBlockUserWindowOpened(false);
+    };
+
+    const handleBlockButtonClick = () => {
+        setIsBlockUserWindowOpened(true);
+    };
+
     const handleUserFollow = async () => {
         if (isFollowed) {
             try {
                 await unfollow(username, token);
                 setIsFollowed(false);
-                handleTweetsFiltering(userID, `You unfollowed @${username}`);
+                if (handleTweetsFiltering) {
+                    handleTweetsFiltering(`You unfollowed @${username}`);
+                }
             } catch (error) {
                 console.error(error.message);
             }
@@ -66,7 +79,9 @@ function TweetOptionsPopDown({
             try {
                 await follow(username, token);
                 setIsFollowed(true);
-                handleTweetsFiltering(userID, `You followed @${username}`);
+                if (handleTweetsFiltering) {
+                    handleTweetsFiltering(`You followed @${username}`);
+                }
             } catch (error) {
                 console.error(error.message);
             }
@@ -78,27 +93,35 @@ function TweetOptionsPopDown({
         if (isMuted) {
             if (await unmute(username, token)) {
                 setIsMuted(false);
-                handleTweetsFiltering(userID, `You unmuted @${username}`);
+                if (handleTweetsFiltering) {
+                    handleTweetsFiltering(`You unmuted @${username}`);
+                }
             }
         } else {
             if (await mute(username, token)) {
                 setIsMuted(true);
-                handleTweetsFiltering(userID, `You muted @${username}`);
+                if (handleTweetsFiltering) {
+                    handleTweetsFiltering(`You muted @${username}`);
+                }
             }
         }
     };
 
-    const handleBlockUserWindowClose = () => {
-        setIsBlockUserWindowOpened(false);
-    };
-
-    const handleBlockButtonClick = () => {
-        setIsBlockUserWindowOpened(true);
-    };
-
     const handleUserBlock = async () => {
-        if (await block(username, token)) {
-            handleTweetsFiltering(userID, `You blocked @${username}`);
+        if (isBlocked) {
+            if (await unblock(username, token)) {
+                setIsBlocked(false);
+                if (handleTweetsFiltering(username, token)) {
+                    handleTweetsFiltering(`You unblocked @${username}`);
+                }
+            }
+        } else {
+            if (await block(username, token)) {
+                setIsBlocked(true);
+                if (handleTweetsFiltering) {
+                    handleTweetsFiltering(`You blocked @${username}`);
+                }
+            }
         }
     };
 

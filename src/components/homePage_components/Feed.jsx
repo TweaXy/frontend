@@ -27,16 +27,12 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
         );
     };
 
-    const handleTweetsFiltering = (userId, message) => {
-        setTweets((prevTweets) =>
-            prevTweets.filter(
-                (tweet) => tweet.mainInteraction.user.id !== userId
-            )
-        );
+    const handleTweetsFiltering = (message) => {
         setActionMessage(message);
         const timeoutId = setTimeout(() => {
             setActionMessage('');
         }, 3000);
+        getTweets();
         return () => clearTimeout(timeoutId);
     };
 
@@ -78,7 +74,7 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                             userData.user.id == tweet.mainInteraction.user.id
                         }
                         handleTweetsFiltering={handleTweetsFiltering}
-                        isUserFollow={true}
+                        followedByMe={true}
                     />
                 ))}
             {actionMessage.length !== 0 && <NotifyBox text={actionMessage} />}
