@@ -4,7 +4,9 @@ import GetuserTweets from '../../apis/tweetApis/UserTweet';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { CircularProgress } from '@mui/material';
-const UserTweets = ({ userID }) => {
+import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
+import React from 'react';
+const UserTweets = ({ userID, curUserID }) => {
     const [tweets, setTweets] = useState([]);
     const [isPageLoading, setIsPageLoading] = useState(true);
     const token = useSelector((state) => state.user.token);
@@ -12,6 +14,12 @@ const UserTweets = ({ userID }) => {
         const tweetsResponse = await GetuserTweets(userID, token, 10, 0);
         console.log('user tweet response', tweetsResponse);
         setTweets(tweetsResponse);
+    };
+    const removeTweet = (tweetId) => {
+        apiDeleteTweet(tweetId, token);
+        setTweets((prevTweets) =>
+            prevTweets.filter((tweet) => tweet.mainInteraction.id !== tweetId)
+        );
     };
     useEffect(() => {
         if (token) {
@@ -26,6 +34,7 @@ const UserTweets = ({ userID }) => {
     if (isPageLoading) {
         return (
             <div
+                data-testid="loading-element"
                 style={{
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -38,9 +47,11 @@ const UserTweets = ({ userID }) => {
     }
     return (
         <>
-            {tweets.length > 0 &&
-                tweets.map((tweet, index) => (
+            {tweets &&
+                tweets.length > 0 &&
+                tweets.map((tweet) => (
                     <Tweet
+                        key={tweet.mainInteraction.user.id}
                         avatar={tweet.mainInteraction.avatar}
                         username={tweet.mainInteraction.user.name}
                         handle={tweet.mainInteraction.user.username}
@@ -51,6 +62,16 @@ const UserTweets = ({ userID }) => {
                         reposts={tweet.mainInteraction.retweetsCount}
                         likes={tweet.mainInteraction.likesCount}
                         insights={tweet.mainInteraction.viewsCount}
+                        tweetId={tweet.mainInteraction.id}
+                        isUserLiked={
+                            tweet.mainInteraction.isUserInteract.isUserLiked
+                        }
+                        token={token}
+                        userID={tweet.mainInteraction.user.id}
+                        removeTweet={removeTweet}
+                        isCurrentUserTweet={
+                            curUserID === tweet.mainInteraction.user.id
+                        }
                     />
                 ))}
         </>

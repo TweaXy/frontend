@@ -1,0 +1,30 @@
+.mute-settings-btn-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 16px;
+    height: 48px;
+    background-color: #fff;
+}
+
+.mute-settings-btn-container:hover {
+    background-color: rgb(100, 100, 100, 0.05);
+    cursor: pointer;
+}
+
+.mute-settings-btn-container>.text-container {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mute-settings-btn-container>.text-container>.header {
+    font-size: large;
+    font-weight: 600;
+    color: var(--twitter-black)
+}
+
+.mute-settings-btn-container>.text-container>span {
+    color: var(--twitter-greyColor);
+}

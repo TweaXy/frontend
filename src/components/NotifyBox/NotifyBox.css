@@ -1,6 +1,6 @@
 .notify-box-msg {
-    width: 300px;
-    height: 18px;
+    width: auto;
+    height: auto;
     border-radius: 8px;
     left: 45%;
     top: 90%;

@@ -15,11 +15,12 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import AccountButton from '../AccountButton/AccountButton';
+import NotificationsButton from '../NotificationsButton/NotificationsButton';
 import HomePageSelectors from '../../shared/selectors/HomePage';
 
 export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
     const navigate = useNavigate();
-
+    console.log("from sidebar ",userData)
     const toProfile = () => {
         navigate(`/profile/${userData.user.username}`, {
             state: { userID: userData.user.id },
@@ -44,27 +45,30 @@ export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
                 />
             </div>
             <SidebarOption text="Explore" Icon={SearchIcon} />
+            <NotificationsButton active={active === 3} token={userData.token} />
             <div
                 onClick={() => {
-                    navigate('/notifactions');
+                    navigate('/conversations');
                 }}
             >
                 <SidebarOption
-                    active={active === 3}
-                    text="Notifications"
-                    Icon={NotificationsNoneIcon}
+                    text="Messages"
+                    Icon={MailOutlineIcon}
+                    active={active == 4}
                 />
             </div>
-            <div />
-            <SidebarOption text="Messages" Icon={MailOutlineIcon} />
-            <div data-test={HomePageSelectors.PROFILE_BUTTON} onClick={toProfile}>
-                <SidebarOption     
+            <div
+                data-test={HomePageSelectors.PROFILE_BUTTON}
+                onClick={toProfile}
+            >
+                <SidebarOption
                     active={active === 1}
                     text="Profile"
                     Icon={PermIdentityIcon}
                 />
             </div>
-            <div data-test={HomePageSelectors.SETTINGS_BUTTON}
+            <div
+                data-test={HomePageSelectors.SETTINGS_BUTTON}
                 onClick={() => {
                     navigate('/settings');
                 }}

@@ -4,7 +4,7 @@ import { MenuItem, TextField } from '@mui/material';
 import '../userProfile/EditProfilePage.css';
 import '../SignUpPage/SignUpPage.css';
 import { CameraEnhanceOutlined } from '@mui/icons-material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import deleteBannerApi from '../../apis/deleteProfileBanner';
 import deleteProfileApi from '../../apis/deleteProfileImage';
 import { updateInfo } from '../../apis/updateInfo';
@@ -25,12 +25,35 @@ export default function EditProfilePage({
 }) {
     const [selectedImage, setSelectedImage] = useState(cover);
     const [ProfileImage, setProfileImage] = useState(avatar);
+    const [TempProfileImage, setTempProfileImage] = useState('');
+    const [TempselectedImage, setTempselectedImage] = useState('');
     const [ProfileData, changeProfileData] = useState({
         name: name,
         userbio: bio,
         location: location,
         website: website,
     });
+    const [url, setUrl] = useState(website);
+    const [isValid, setIsValid] = useState(true);
+    const handleChangeURL = (event) => {
+        setUrl(event.target.value);
+    };
+    const validateUrl = (url) => {
+        // Regular expression pattern to validate URL
+        const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+        return urlPattern.test(url);
+    };
+    useEffect(() => {
+        if (validateUrl(url)) {
+            // URL is valid, perform further actions
+            setIsValid(true);
+            // Additional logic here...
+        } else {
+            // URL is not valid
+            setIsValid(false);
+        }
+    }, [url]);
+
     const [Data2, changeData2] = useState({ day: '', month: '', year: '' });
     const saveHandler = () => {
         updateInfo(
@@ -39,8 +62,8 @@ export default function EditProfilePage({
             ProfileData.userbio,
             '01202430275',
             ProfileData.website,
-            ProfileImage,
-            selectedImage,
+            TempProfileImage,
+            TempselectedImage,
             ProfileData.location,
             authToken
         );
@@ -52,12 +75,10 @@ export default function EditProfilePage({
             setSelectedImage(URL.createObjectURL(e.target.files[0]));
         }
     };
-    const updatepicture = () => {
-        Pictureupload(avatar, authToken);
-    };
+
     const handleAvatarChange = (event) => {
         const file = event.target.files[0];
-
+        setTempProfileImage(file);
         if (file) {
             const reader = new FileReader();
 
@@ -70,7 +91,7 @@ export default function EditProfilePage({
     };
     const handleBackgroundchange = (event) => {
         const file = event.target.files[0];
-
+        setTempselectedImage(file);
         if (file) {
             const reader = new FileReader();
 
@@ -93,18 +114,18 @@ export default function EditProfilePage({
     };
 
     const months = [
-        { name: 'January', value: '0' },
-        { name: 'February', value: '1' },
-        { name: 'March', value: '2' },
-        { name: 'April', value: '3' },
-        { name: 'May', value: '4' },
-        { name: 'June', value: '5' },
-        { name: 'July', value: '6' },
-        { name: 'August', value: '7' },
-        { name: 'September', value: '8' },
-        { name: 'October', value: '9' },
-        { name: 'November', value: '10' },
-        { name: 'December', value: '11' },
+        { name: 'January', value: '1' },
+        { name: 'February', value: '2' },
+        { name: 'March', value: '3' },
+        { name: 'April', value: '4' },
+        { name: 'May', value: '5' },
+        { name: 'June', value: '6' },
+        { name: 'July', value: '7' },
+        { name: 'August', value: '8' },
+        { name: 'September', value: '9' },
+        { name: 'October', value: '10' },
+        { name: 'November', value: '11' },
+        { name: 'December', value: '12' },
     ];
     console.log(authToken);
     const years = Array.from({ length: 121 }, (_, i) => 2023 - i);
@@ -133,6 +154,11 @@ export default function EditProfilePage({
             cur[changedelement] = newvalue;
             return { ...cur };
         });
+    };
+    const OnchangeHandlerUrl = (evt) => {
+        handleChangeURL(evt);
+        ProfileData_Handler(evt);
+       
     };
     const Data2_Handler = (evt) => {
         const changedelement = evt.target.name;
@@ -230,7 +256,7 @@ export default function EditProfilePage({
                                 rows={3}
                                 label="Bio"
                                 name="userbio"
-                                value={ProfileData.userbio}
+                                value={ProfileData.bio === 'null' ? '' : ProfileData.bio}
                                 onChange={ProfileData_Handler}
                             />
                         </div>
@@ -243,7 +269,7 @@ export default function EditProfilePage({
                                 id="outlined-basic"
                                 label="Location"
                                 name="location"
-                                value={ProfileData.location}
+                                value={ProfileData.location === 'null' ? '' : ProfileData.location}
                                 onChange={ProfileData_Handler}
                             />
                         </div>
@@ -255,9 +281,11 @@ export default function EditProfilePage({
                                 name="website"
                                 label="website"
                                 value={ProfileData.website}
-                                onChange={ProfileData_Handler}
-                                /*helperText="Must be a valid Url"*/
+                                onChange={OnchangeHandlerUrl}
+                                // optional pattern attribute for more specific validation
+                               
                             />
+                            {!isValid && <p>Please enter a valid URL.</p>}
                         </div>
                         <span className="date-birth-text">Date of Birth</span>
                         <div className="sign-up-birth-date">

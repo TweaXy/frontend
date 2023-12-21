@@ -4,24 +4,25 @@
     font-family: 'Segoe UI Emoji', 'Arial' !important; /* Use a fallback font */
 }
 
-.MuiMenu-paper {
+.tweet-options-menu > .MuiMenu-paper {
     border-radius: 12px !important;
     left: 43% !important;
 }
 
-.MuiMenu-paper > .MuiMenu-list {
+.tweet-options-menu > .MuiMenu-paper > .MuiMenu-list {
     width: 316.61px !important;
     padding: 0;
+   
 }
 
-.MuiMenu-paper > .MuiMenu-list > .MuiMenuItem-root {
+.tweet-options-menu > .MuiMenu-paper > .MuiMenu-list > .MuiMenuItem-root {
     font-size: 15px !important;
     /* font-weight: 100 !important; */
     font-family: 'Segoe UI Emoji', 'Arial' !important; /* Use a fallback font */
     padding: 12px 16px;
 }
 
-.MuiMenu-paper > .MuiMenu-list > .MuiMenuItem-root > .MuiSvgIcon-root {
+.tweet-options-menu > .MuiMenu-paper > .MuiMenu-list > .MuiMenuItem-root > .MuiSvgIcon-root {
     font-size: 18.75px !important;
     margin-right: 7px !important;
 }

@@ -14,6 +14,7 @@ import { useEffect, useRef, useState } from 'react';
 import changePassword from '../../apis/changePassword';
 import Sidebar from '../../components/homePage_components/Sidebar';
 import NotifyBox from '../../components/NotifyBox/NotifyBox';
+import SettingsPageSelectors from '../../shared/selectors/SettingsPage';
 
 const ChangePasswordPage = () => {
     const token = useSelector((state) => state.user.token);
@@ -139,10 +140,11 @@ const ChangePasswordPage = () => {
                             }}
                             variant="outlined"
                         >
-                            <InputLabel htmlFor="outlined-adornment-password">
+                            <InputLabel  htmlFor="outlined-adornment-password">
                                 Current password
                             </InputLabel>
                             <OutlinedInput
+                                data-test={SettingsPageSelectors.CURRENT_PASSWORD_FIELD}
                                 id="outlined-adornment-password"
                                 type={showCurPassword ? 'text' : 'password'}
                                 value={curPassword}
@@ -183,10 +185,11 @@ const ChangePasswordPage = () => {
                             }}
                             variant="outlined"
                         >
-                            <InputLabel htmlFor="outlined-adornment-password">
+                            <InputLabel  htmlFor="outlined-adornment-password">
                                 New password
                             </InputLabel>
                             <OutlinedInput
+                                data-test={SettingsPageSelectors.NEW_PASSWORD_FIELD}
                                 id="outlined-adornment-password"
                                 type={showCurPassword ? 'text' : 'password'}
                                 value={newPassword}
@@ -222,10 +225,11 @@ const ChangePasswordPage = () => {
                             }}
                             variant="outlined"
                         >
-                            <InputLabel htmlFor="outlined-adornment-password">
+                            <InputLabel  htmlFor="outlined-adornment-password">
                                 Confirm password
                             </InputLabel>
                             <OutlinedInput
+                                data-test={SettingsPageSelectors.CONFIRM_NEW_PASSWORD_FIELD}
                                 id="outlined-adornment-password"
                                 type={showConPassword ? 'text' : 'password'}
                                 value={conPassword}
@@ -265,6 +269,7 @@ const ChangePasswordPage = () => {
                             </span>
                         )}
                         <button
+                            data-test={SettingsPageSelectors.SAVE_BUTTON}
                             className="blue-btn"
                             disabled={
                                 curPassword === '' ||

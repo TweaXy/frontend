@@ -1,4 +1,4 @@
-.weak-feed-header {
+ .weak-feed-header {
     z-index: 0;
     top: 0%;
     border-bottom: 1px solid var(--twitter-background);
@@ -44,4 +44,4 @@
     color: black;
     border-bottom: 4px solid var(--twitter-color);
     padding-bottom: 13px;
-}
+} 
