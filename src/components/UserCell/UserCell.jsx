@@ -5,6 +5,8 @@ import unfollow from '../../apis/unfollow';
 import follow from '../../apis/follow';
 import { useNavigate } from 'react-router-dom';
 import UsersCellsSelectors from '../../shared/selectors/UsersCells';
+import unblock from '../../apis/unblock';
+import NotifyBox from '../NotifyBox/NotifyBox';
 
 const UserCell = ({
     id,
@@ -14,6 +16,8 @@ const UserCell = ({
     bio,
     followsMe,
     followedByMe,
+    blocksMe,
+    blockedByMe,
     token,
     myID,
 }) => {
@@ -24,6 +28,10 @@ const UserCell = ({
 
     const [followedByMeState, setFollowedByMeState] = useState(followedByMe);
 
+    const [isBlockedByMe, setIsBlockedByMe] = useState(blockedByMe);
+
+    const [notificationMessage, setNotificationMessage] = useState('');
+
     const handleFollowingButtonHover = () => {
         setIsFollowingButtonHovered(!isFollowingButtonHovered);
     };
@@ -33,29 +41,8 @@ const UserCell = ({
         navigate(`/profile/${username}`, { state: { userID: id } });
     };
 
-    const onMouseEnterAvatarField = () => {
-        // TODO
-        console.log(`showing @${username} profile snippet at their avatar...`);
-    };
-    const onMouseLeaveAvatarField = () => {
-        // TODO
-        console.log(
-            `stop showing @${username} profile snippet at their avatar`
-        );
-    };
-
-    const onMouseEnterNameField = () => {
-        // TODO
-        console.log(`showing @${username} profile snippet at their name...`);
-    };
-    const onMouseLeaveNameField = () => {
-        // TODO
-        console.log(`stop showing @${username} profile snippet at their name`);
-    };
-
     const onButtonClick = async (event) => {
         event.stopPropagation();
-        console.log(`@${username} cell button is clicked..`);
         if (followedByMeState) {
             console.log(`unfollow @${username}..`);
             if (await unfollow(username, token)) {
@@ -69,13 +56,33 @@ const UserCell = ({
         }
     };
 
+    const handleBlockButtonClick = async (event) => {
+        event.stopPropagation();
+        if (await unblock(username, token)) {
+            setIsBlockedByMe(false);
+            setNotificationMessage(
+                `@${username} has been unblocked successfully`
+            );
+            const timeoutId = setTimeout(
+                () => setNotificationMessage(''),
+                3000
+            );
+            return () => clearTimeout(timeoutId);
+        } else {
+            setNotificationMessage(
+                `something went wrong. please try again later.`
+            );
+            const timeoutId = setTimeout(
+                () => setNotificationMessage(''),
+                3000
+            );
+            return () => clearTimeout(timeoutId);
+        }
+    };
+
     return (
         <div className="user-cell-container" onClick={goToUserProfile}>
-            <div
-                className="user-cell-avatar-container"
-                onMouseEnter={onMouseEnterAvatarField}
-                onMouseLeave={onMouseLeaveAvatarField}
-            >
+            <div className="user-cell-avatar-container">
                 <Avatar className="user-cell-avatar" src={avatar} alt={name} />
             </div>
             <div className="user-cell-info-container">
@@ -84,24 +91,38 @@ const UserCell = ({
                         <span
                             data-test={UsersCellsSelectors.NAME}
                             className="user-cell-upper-left-top"
-                            onMouseEnter={onMouseEnterNameField}
-                            onMouseLeave={onMouseLeaveNameField}
                         >
                             {name}
                         </span>
                         <div className="user-cell-upper-left-down">
-                            <span className="user-cell-username" data-test={UsersCellsSelectors.USERNAME}>{`@${username}`}</span>
-                            {followsMe && (
+                            <span
+                                className="user-cell-username"
+                                data-test={UsersCellsSelectors.USERNAME}
+                            >{`@${username}`}</span>
+                            {blocksMe ? (
+                                <span className="user-cell-blocks-me">
+                                    Blocks you
+                                </span>
+                            ) : followsMe ? (
                                 <span className="user-cell-follows-me">
                                     Follows you
                                 </span>
+                            ) : (
+                                <></>
                             )}
                         </div>
                     </div>
                     <div className="user-cell-upper-right">
-                        {myID !== id && (
+                        {myID !== id && isBlockedByMe ? (
                             <button
-                                data-test={UsersCellsSelectors.FOLLOW_UNFOLLOW_BUTTON}
+                                className="red-button"
+                                onClick={handleBlockButtonClick}
+                            ></button>
+                        ) : (
+                            <button
+                                data-test={
+                                    UsersCellsSelectors.FOLLOW_UNFOLLOW_BUTTON
+                                }
                                 className={
                                     followedByMeState === false
                                         ? 'black-small-button'
@@ -124,6 +145,9 @@ const UserCell = ({
                     <span>{bio}</span>
                 </div>
             </div>
+            {notificationMessage.length !== 0 && (
+                <NotifyBox text={notificationMessage} />
+            )}
         </div>
     );
 };
