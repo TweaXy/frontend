@@ -23,6 +23,8 @@ const UserCell = ({
 }) => {
     const navigate = useNavigate();
 
+    console.log('user cell: ', username, followedByMe, followsMe);
+
     const [isFollowingButtonHovered, setIsFollowingButtonHovered] =
         useState(false);
 
@@ -113,11 +115,13 @@ const UserCell = ({
                         </div>
                     </div>
                     <div className="user-cell-upper-right">
-                        {myID !== id && isBlockedByMe ? (
+                        {myID === id || blocksMe ? (
+                            <></>
+                        ) : isBlockedByMe ? (
                             <button
                                 className="red-button"
                                 onClick={handleBlockButtonClick}
-                            ></button>
+                            >Block</button>
                         ) : (
                             <button
                                 data-test={

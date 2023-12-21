@@ -6,13 +6,14 @@ import { apiGetTweet } from '../../apis/timelineApis/getTweets';
 import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import useGetTweets from '../../apis/timelineApis/useGetTweets';
-import LoadingPage from '../LoadingPage/LoadingPage';
+import NotifyBox from '../../components/NotifyBox/NotifyBox';
 
 const Feed = ({ userData, isTherePopUpWindow }) => {
     const [tweets, setTweets] = useState([]);
     const [offset, setOffset] = useState(0);
     const token = useSelector((state) => state.user.token);
+
+    const [actionMessage, setActionMessage] = useState('');
 
     const getTweets = async () => {
         const tweetsResponse = await apiGetTweet(userData.token);
@@ -26,12 +27,17 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
         );
     };
 
-    const handleTimelineAfterMuteOrBlock = (userId) => {
+    const handleTweetsFiltering = (userId, message) => {
         setTweets((prevTweets) =>
             prevTweets.filter(
                 (tweet) => tweet.mainInteraction.user.id !== userId
             )
         );
+        setActionMessage(message);
+        const timeoutId = setTimeout(() => {
+            setActionMessage('');
+        }, 3000);
+        return () => clearTimeout(timeoutId);
     };
 
     useEffect(() => {
@@ -71,11 +77,11 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                         isCurrentUserTweet={
                             userData.user.id == tweet.mainInteraction.user.id
                         }
-                        handleTimelineAfterMuteOrBlock={
-                            handleTimelineAfterMuteOrBlock
-                        }
+                        handleTweetsFiltering={handleTweetsFiltering}
+                        isUserFollow={true}
                     />
                 ))}
+            {actionMessage.length !== 0 && <NotifyBox text={actionMessage} />}
         </div>
     );
 };

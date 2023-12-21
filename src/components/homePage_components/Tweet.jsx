@@ -43,7 +43,8 @@ export default function Tweet({
     userID,
     removeTweet,
     isCurrentUserTweet,
-    handleTimelineAfterMuteOrBlock,
+    handleTweetsFiltering,
+    isUserFollowed,
 }) {
     const [tweetLikes, setTweetLikes] = useState(likes);
     const [tweetReplies, setTweetReplies] = useState(replies);
@@ -256,9 +257,8 @@ export default function Tweet({
                             token={token}
                             username={handle}
                             userID={userID}
-                            handleTimelineAfterMuteOrBlock={
-                                handleTimelineAfterMuteOrBlock
-                            }
+                            handleTweetsFiltering={handleTweetsFiltering}
+                            isUserFollowed={isUserFollowed}
                         />
                     </div>
                     <div className="tweet-text-container">
