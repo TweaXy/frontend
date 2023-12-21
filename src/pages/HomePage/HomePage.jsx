@@ -11,6 +11,9 @@ import { clearUser } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
 import InitNotifications from '../../apis/NotificationsApis/InitNotifications';
 const HomePage = ({ isTherePopUpWindow }) => {
+    // const dispatch = useDispatch();
+    // dispatch(clearUser());
+
     const Location = useLocation();
     const Ft = Location.state?.firstTime;
 
