@@ -5,17 +5,23 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { CircularProgress } from '@mui/material';
 import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
+import NotifyBox from '../../components/NotifyBox/NotifyBox';
 import React from 'react';
+
 const TweetsUSerLikes = ({ userID, curUserID }) => {
     const [tweets, setTweets] = useState([]);
     const [isPageLoading, setIsPageLoading] = useState(true);
     const token = useSelector((state) => state.user.token);
     const userdata = useSelector((state) => state.user.user);
+
+    const [actionMessage, setActionMessage] = useState('');
+
     const getTweets = async () => {
         const tweetsResponse = await GetTweetsuserLikes(userID, token, 10, 0);
         console.log('Tweets User Likes response', tweetsResponse);
         setTweets(tweetsResponse);
     };
+
     useEffect(() => {
         if (token && userdata) {
             setIsPageLoading(false);
@@ -23,15 +29,27 @@ const TweetsUSerLikes = ({ userID, curUserID }) => {
             console.log('profile page is loading');
         }
     }, [token, userdata]);
+
     const removeTweet = (tweetId) => {
         apiDeleteTweet(tweetId, token);
         setTweets((prevTweets) =>
             prevTweets.filter((tweet) => tweet.mainInteraction.id !== tweetId)
         );
     };
+
+    const handleTweetsFiltering = (message) => {
+        setActionMessage(message);
+        const timeoutId = setTimeout(() => {
+            setActionMessage('');
+        }, 3000);
+        getTweets();
+        return () => clearTimeout(timeoutId);
+    };
+
     useEffect(() => {
         getTweets();
     }, [isPageLoading]);
+
     if (isPageLoading) {
         return (
             <div
@@ -73,8 +91,11 @@ const TweetsUSerLikes = ({ userID, curUserID }) => {
                         isCurrentUserTweet={
                             curUserID === tweet.mainInteraction.user.id
                         }
+                        handleTweetsFiltering={handleTweetsFiltering}
+                        // followedByMe={tweet.user.followedByMe}
                     />
                 ))}
+            {actionMessage.length !== 0 && <NotifyBox text={actionMessage} />}
         </>
     );
 };

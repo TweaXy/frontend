@@ -7,19 +7,20 @@ import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import VolumeMuteIcon from '@mui/icons-material/VolumeMute';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
-import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
-import PushPinOutlinedIcon from '@mui/icons-material/PushPinOutlined';
 import DeleteTweetWindow from './DeleteTweetWindow';
 import { useEffect, useState } from 'react';
 import TweetSelectors from '../../shared/selectors/Tweets';
 import mute from '../../apis/mute';
 import unmute from '../../apis/unmute';
-import NotifyBox from '../NotifyBox/NotifyBox';
 import isUserMuted from '../../apis/isMuted';
 import BlockUserWindow from '../BlockUserWindow/BlockUserWindow';
 import block from '../../apis/block';
+import unblock from '../../apis/unblock';
 import getLikers from '../../apis/getLikers';
 import { useNavigate } from 'react-router';
+import unfollow from '../../apis/unfollow';
+import { PersonAddOutlined } from '@mui/icons-material';
+import follow from '../../apis/follow';
 
 function TweetOptionsPopDown({
     isCurrentUserTweet,
@@ -30,17 +31,18 @@ function TweetOptionsPopDown({
     token,
     username,
     userID,
-    
+    handleTweetsFiltering,
+    followedByMe,
 }) {
-   
-    const navigate=useNavigate();
-    const [isDeleteWindow, setIsDeleteWindow] = useState(false);
+    const navigate = useNavigate();
+
+    const [isFollowed, setIsFollowed] = useState(followedByMe);
 
     const [isMuted, setIsMuted] = useState(false);
-    const [muteActionOccurred, setMuteActionOccurred] = useState(false);
 
     const [isBlocked, setIsBlocked] = useState(false);
-    const [blockActionOccurred, setBlockActionOccurred] = useState(false);
+
+    const [isDeleteWindow, setIsDeleteWindow] = useState(false);
 
     const [isBlockUserWindowOpened, setIsBlockUserWindowOpened] =
         useState(false);
@@ -49,40 +51,11 @@ function TweetOptionsPopDown({
         event.stopPropagation();
         // Implement delete functionality here
         setIsDeleteWindow(true);
-        console.log('Deleting tweet...');
-        handleClose(event);
-    };
-    const closeDeleteWindowHandler = () => {
-        setIsDeleteWindow(false);
-    };
-    const handleUnFollow = (event) => {
-        event.stopPropagation();
-        console.log('unfollowed');
-        handleClose(event);
+        handleClose();
     };
 
-    const handleUserMute = async () => {
-        if (isMuted) {
-            if (await unmute(username, token)) {
-                setIsMuted(false);
-                setMuteActionOccurred(true);
-                const timeoutID = setTimeout(() => {
-                    setMuteActionOccurred(false);
-                }, 3000);
-                handleClose();
-                return () => clearTimeout(timeoutID);
-            }
-        } else {
-            if (await mute(username, token)) {
-                setIsMuted(true);
-                setMuteActionOccurred(true);
-                const timeoutID = setTimeout(() => {
-                    setMuteActionOccurred(false);
-                }, 3000);
-                handleClose();
-                return () => clearTimeout(timeoutID);
-            }
-        }
+    const closeDeleteWindowHandler = () => {
+        setIsDeleteWindow(false);
     };
 
     const handleBlockUserWindowClose = () => {
@@ -93,24 +66,72 @@ function TweetOptionsPopDown({
         setIsBlockUserWindowOpened(true);
     };
 
-    const handleUserBlock = async () => {
-        if (await block(username, token)) {
-            setIsBlocked(true);
-            setBlockActionOccurred(true);
-            const timeoutID = setTimeout(() => {
-                setBlockActionOccurred(false);
-            }, 3000);
-            handleClose();
-            return () => clearTimeout(timeoutID);
+    const handleUserFollow = async () => {
+        if (isFollowed) {
+            try {
+                await unfollow(username, token);
+                setIsFollowed(false);
+                if (handleTweetsFiltering) {
+                    handleTweetsFiltering(`You unfollowed @${username}`);
+                }
+            } catch (error) {
+                console.error(error.message);
+            }
+        } else {
+            try {
+                await follow(username, token);
+                setIsFollowed(true);
+                if (handleTweetsFiltering) {
+                    handleTweetsFiltering(`You followed @${username}`);
+                }
+            } catch (error) {
+                console.error(error.message);
+            }
         }
         handleClose();
     };
 
-    const handleAnalytics = (e) => {
+    const handleUserMute = async () => {
+        if (isMuted) {
+            if (await unmute(username, token)) {
+                setIsMuted(false);
+                if (handleTweetsFiltering) {
+                    handleTweetsFiltering(`You unmuted @${username}`);
+                }
+            }
+        } else {
+            if (await mute(username, token)) {
+                setIsMuted(true);
+                if (handleTweetsFiltering) {
+                    handleTweetsFiltering(`You muted @${username}`);
+                }
+            }
+        }
+    };
+
+    const handleUserBlock = async () => {
+        if (isBlocked) {
+            if (await unblock(username, token)) {
+                setIsBlocked(false);
+                if (handleTweetsFiltering(username, token)) {
+                    handleTweetsFiltering(`You unblocked @${username}`);
+                }
+            }
+        } else {
+            if (await block(username, token)) {
+                setIsBlocked(true);
+                if (handleTweetsFiltering) {
+                    handleTweetsFiltering(`You blocked @${username}`);
+                }
+            }
+        }
+    };
+
+    const handleAnalytics = () => {
         getLikers({ tweetId: tweetid, token: token });
-      navigate(`/likers`, {
-           state: {
-               tweetid: tweetid,
+        navigate(`/likers`, {
+            state: {
+                tweetid: tweetid,
                 token: token,
             },
         });
@@ -126,7 +147,6 @@ function TweetOptionsPopDown({
 
     return (
         <div className="tweet-options">
-            {' '}
             <Menu
                 id="options-menu"
                 anchorEl={anchorEl}
@@ -148,16 +168,20 @@ function TweetOptionsPopDown({
                         Delete
                     </MenuItem>
                 )}
-                { (
+                {
                     <MenuItem onClick={handleAnalytics}>
                         <BarChartOutlinedIcon />
                         View post analytics
                     </MenuItem>
-                )}
+                }
                 {!isCurrentUserTweet && (
-                    <MenuItem onClick={handleUnFollow}>
-                        <PersonRemoveIcon />
-                        {`Unfollow @${username}`}
+                    <MenuItem onClick={handleUserFollow}>
+                        {isFollowed ? (
+                            <PersonRemoveIcon />
+                        ) : (
+                            <PersonAddOutlined />
+                        )}
+                        {`${isFollowed ? 'Unfollow' : 'Follow'} @${username}`}
                     </MenuItem>
                 )}
                 {!isCurrentUserTweet && (
@@ -178,24 +202,10 @@ function TweetOptionsPopDown({
                 closeHandler={closeDeleteWindowHandler}
                 deleteTweet={deleteTweetHandler}
             />
-            {muteActionOccurred && (
-                <NotifyBox
-                    text={`@${username} has been ${
-                        isMuted ? 'muted' : 'unmuted'
-                    }`}
-                />
-            )}
-            {blockActionOccurred && (
-                <NotifyBox
-                    text={`@${username} has been ${
-                        isBlocked ? 'blocked' : 'unblock'
-                    }`}
-                />
-            )}
             <BlockUserWindow
                 openWindow={isBlockUserWindowOpened}
                 closeWindow={handleBlockUserWindowClose}
-                blockUser={handleUserBlock}
+                handleUserBlock={handleUserBlock}
                 username={username}
                 isUserBlocked={false}
             />

@@ -1,7 +1,4 @@
-// import './app.css'
 import { useState, useEffect, useRef } from 'react';
-import { BiCalendar } from 'react-icons/bi';
-import AvatarBox from './AvatarBox';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
@@ -12,20 +9,17 @@ import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import './Tweet.css';
 import MediaChecker from './MediaChecker';
-import { Padding } from '@mui/icons-material';
 import { apiLikeTweet, apiDislikeTweet } from '../../apis/tweetApis/LikeTweet';
 import Avatar from '@mui/material/Avatar';
 import './Avatar.css';
 import { useNavigate } from 'react-router-dom';
-import parseDate from '../../utils/parseDate';
 import TweetDate from '../../utils/TweetDate';
 import { TweetOptionsPopDown } from './TweetOptionsPopDown';
 import { apiAddReply } from '../../apis/tweetApis/AddReply';
-import e from 'cors';
-import { abort } from 'process';
 import AddReplyWindow from './AddReplyWindow';
 import { hashText } from '../../shared/Utils';
 import TweetSelectors from '../../shared/selectors/Tweets';
+
 export default function Tweet({
     avatar,
     username,
@@ -43,9 +37,9 @@ export default function Tweet({
     userID,
     removeTweet,
     isCurrentUserTweet,
-    tweet,
+    handleTweetsFiltering,
+    followedByMe,
 }) {
-    console.log('tweet form Tweet is', tweet);
     const [tweetLikes, setTweetLikes] = useState(likes);
     const [tweetReplies, setTweetReplies] = useState(replies);
     const [tweetReposts, setTweetReposts] = useState(reposts);
@@ -60,13 +54,14 @@ export default function Tweet({
     const iconInteraction3 = useRef(null);
     const iconInteraction4 = useRef(null);
     const navigate = useNavigate();
+
     const profileRouting = (event) => {
         event.stopPropagation();
-        console.log('Manga is saying', userID);
         navigate(`/profile/${username}`, {
             state: { userID: userID },
         });
     };
+
     useEffect(() => {
         // adjust this to be useRef
 
@@ -185,206 +180,234 @@ export default function Tweet({
         }
         setLikeActive(!isLikeActive);
     };
+
     const getreplieshandler = (event) => {
         event.stopPropagation();
         navigate(`/${handle}/${tweetId}`, {
             state: { tweetId: tweetId, curtweet: tweet },
         });
     };
+
     const [anchorEl, setAnchorEl] = useState(null);
+
     const optionsClickHandler = (event) => {
         event.stopPropagation();
         setAnchorEl(event.currentTarget);
     };
+
     const optionsCloseHandler = (event) => {
         event.stopPropagation();
         setAnchorEl(null);
     };
+
     const deleteTweetHandler = (event) => {
-        event.stopPropagation();  
+        event.stopPropagation();
         removeTweet(tweetId);
     };
 
     //reply state
     const [isReplyWindow, setIsReplyWindow] = useState(false);
+
     const replyWindowClose = (event) => {
         event.stopPropagation();
         setIsReplyWindow(false);
     };
+
     const replyWindowOpen = (event) => {
         event.stopPropagation();
         setIsReplyWindow(true);
     };
-    const addReplyHandler = async ( text, images) => {
+
+    const addReplyHandler = async (text, images) => {
         if (await apiAddReply(tweetId, text, images, token)) {
             setTweetReplies((prevReplies) => prevReplies + 1);
         }
         //take any other action
     };
+
     // we should have a function to handle the change on clicking any
     return (
         <>
-        <div className="tweet" onClick={getreplieshandler}>
-            <div className="repost"></div>
-            <div className="tweet-container">
-                <div className="avatar-container ">
-                    <div className="avatar-box" onClick={profileRouting}>
-                        <Avatar src={avatar}></Avatar>
-                    </div>
-                </div>
-                <div className="tweet-main">
-                    <div className="tweet-user">
-                        <div className="info-container">
-                            <span className="username" onClick={profileRouting}>
-                                {username}
-                            </span>
-                            <span className="handle">&nbsp;{`@${handle}`}</span>
-                            <div className="dot-container">
-                                <span className="dot">.</span>
-                            </div>
-                            <span
-                                className="profileBiography-joinDate"
-                                style={{ paddingBottom: '5px' }}
-                            >
-                                {TweetDate(uploadTime)}
-                            </span>
+            <div className="tweet" onClick={getreplieshandler}>
+                <div className="repost"></div>
+                <div className="tweet-container">
+                    <div className="avatar-container ">
+                        <div className="avatar-box" onClick={profileRouting}>
+                            <Avatar src={avatar}></Avatar>
                         </div>
-                        <div
-                            data-test={hashText(
-                                TweetSelectors.TWEET_OPTIONS +
-                                    username +
-                                    tweetText
+                    </div>
+                    <div className="tweet-main">
+                        <div className="tweet-user">
+                            <div className="info-container">
+                                <span
+                                    className="username"
+                                    onClick={profileRouting}
+                                >
+                                    {username}
+                                </span>
+                                <span className="handle">
+                                    &nbsp;{`@${handle}`}
+                                </span>
+                                <div className="dot-container">
+                                    <span className="dot">.</span>
+                                </div>
+                                <span
+                                    className="profileBiography-joinDate"
+                                    style={{ paddingBottom: '5px' }}
+                                >
+                                    {TweetDate(uploadTime)}
+                                </span>
+                            </div>
+                            <div
+                                data-test={hashText(
+                                    TweetSelectors.TWEET_OPTIONS +
+                                        username +
+                                        tweetText
+                                )}
+                                className="options-container cian-hover"
+                                onClick={optionsClickHandler}
+                            >
+                                <MoreHorizIcon />
+                            </div>
+                            <TweetOptionsPopDown
+                                isCurrentUserTweet={isCurrentUserTweet}
+                                handleClose={optionsCloseHandler}
+                                anchorEl={anchorEl}
+                                deleteTweetHandler={deleteTweetHandler}
+                                tweetid={tweetId}
+                                token={token}
+                                username={handle}
+                                userID={userID}
+                                handleTweetsFiltering={handleTweetsFiltering}
+                                followedByMe={followedByMe}
+                            />
+                        </div>
+                        <div className="tweet-text-container">
+                            <span className="tweet-text">{tweetText}</span>
+                        </div>
+
+                        <div className="tweet-media-container">
+                            {/* {!tweetMedia &&  <img src="" alt="test" />} */}
+                            {tweetMedia && [tweetMedia].length > 0 && (
+                                <div style={{ height: '10px' }}></div>
                             )}
-                            className="options-container cian-hover"
-                            onClick={optionsClickHandler}
-                        >
-                            <MoreHorizIcon />
+
+                            {tweetMedia && [tweetMedia].length > 0 && (
+                                <MediaChecker media={[tweetMedia]} />
+                            )}
                         </div>
-                        <TweetOptionsPopDown
-                            isCurrentUserTweet={isCurrentUserTweet}
-                            handleClose={optionsCloseHandler}
-                            anchorEl={anchorEl}
-                            deleteTweetHandler={deleteTweetHandler}
-                            tweetid={tweetId}
-                            token={token}
-                            username={handle}
-                            userID={userID}
-                           
-                        />
-                    </div>
-                    <div className="tweet-text-container">
-                        <span className="tweet-text">{tweetText}</span>
-                    </div>
 
-                    <div className="tweet-media-container">
-                        {/* {!tweetMedia &&  <img src="" alt="test" />} */}
-                        {tweetMedia && [tweetMedia].length > 0 && (
-                            <div style={{ height: '10px' }}></div>
-                        )}
-
-                        {tweetMedia && [tweetMedia].length > 0 && (
-                            <MediaChecker media={[tweetMedia]} />
-                        )}
-                    </div>
-
-                    <div className="tweet-activity">
-                        <div className="tweet-icon">
-                            {/* icon */}
-                            <div
-                                className="activity-icon"
-                                ref={activityIcon1}
-                                onClick={replyWindowOpen}
-                            >
-                                <ChatBubbleOutlineOutlinedIcon className="" />
+                        <div className="tweet-activity">
+                            <div className="tweet-icon">
+                                {/* icon */}
+                                <div
+                                    className="activity-icon"
+                                    ref={activityIcon1}
+                                    onClick={replyWindowOpen}
+                                >
+                                    <div
+                                        className="activity-icon"
+                                        ref={activityIcon1}
+                                        onClick={replyWindowOpen}
+                                    >
+                                        <ChatBubbleOutlineOutlinedIcon className="" />
+                                    </div>
+                                    <span
+                                        className="icon-interaction"
+                                        ref={iconInteraction1}
+                                    >
+                                        <span className="interaction">
+                                            {tweetReplies != 0 &&
+                                                `${tweetReplies}`}
+                                        </span>
+                                    </span>
+                                </div>
                             </div>
-                            <span
-                                className="icon-interaction"
-                                ref={iconInteraction1}
-                            >
-                                <span className="interaction">
-                                    {tweetReplies != 0 && `${tweetReplies}`}
-                                </span>
-                            </span>
-                        </div>
 
-                        <div className="tweet-icon">
-                            {/* icon */}
-                            <div className="activity-icon" ref={activityIcon2}>
-                                <CachedOutlinedIcon />
-                            </div>
-                            <span
-                                className="icon-interaction"
-                                ref={iconInteraction2}
-                            >
-                                <span className="interaction">
-                                    {tweetReposts != 0 && `${tweetReposts}`}
+                            <div className="tweet-icon">
+                                {/* icon */}
+                                <div
+                                    className="activity-icon"
+                                    ref={activityIcon2}
+                                >
+                                    <CachedOutlinedIcon />
+                                </div>
+                                <span
+                                    className="icon-interaction"
+                                    ref={iconInteraction2}
+                                >
+                                    <span className="interaction">
+                                        {tweetReposts != 0 && `${tweetReposts}`}
+                                    </span>
                                 </span>
-                            </span>
-                        </div>
+                            </div>
 
-                        <div className="tweet-icon">
-                            {/* icon */}
-                            {/* <div ref={ctivityIcon3}></div> */}
-                            <div
-                                className="activity-icon"
-                                ref={activityIcon3}
-                                onClick={likeDislikeTweetHandler}
-                            >
-                                {!isLikeActive && (
-                                    <FavoriteBorderOutlinedIcon />
-                                )}
-                                {isLikeActive != false && (
-                                    <FavoriteIcon className="like-active" />
-                                )}
-                            </div>
-                            <span
-                                className="icon-interaction"
-                                ref={iconInteraction3}
-                                onClick={likeDislikeTweetHandler}
-                            >
-                                <span className="interaction">
-                                    {tweetLikes > 0 && `${tweetLikes}`}
+                            <div className="tweet-icon">
+                                {/* icon */}
+                                {/* <div ref={ctivityIcon3}></div> */}
+                                <div
+                                    className="activity-icon"
+                                    ref={activityIcon3}
+                                    onClick={likeDislikeTweetHandler}
+                                >
+                                    {!isLikeActive && (
+                                        <FavoriteBorderOutlinedIcon />
+                                    )}
+                                    {isLikeActive != false && (
+                                        <FavoriteIcon className="like-active" />
+                                    )}
+                                </div>
+                                <span
+                                    className="icon-interaction"
+                                    ref={iconInteraction3}
+                                    onClick={likeDislikeTweetHandler}
+                                >
+                                    <span className="interaction">
+                                        {tweetLikes > 0 && `${tweetLikes}`}
+                                    </span>
                                 </span>
-                            </span>
-                        </div>
+                            </div>
 
-                        <div className="tweet-icon">
-                            {/* icon */}
-                            <div className="activity-icon" ref={activityIcon4}>
-                                <BarChartOutlinedIcon />
-                            </div>
-                            <span
-                                className="icon-interaction"
-                                ref={iconInteraction4}
-                            >
-                                <span className="interaction">
-                                    {tweetInsights != 0 && `${tweetInsights}`}
+                            <div className="tweet-icon">
+                                {/* icon */}
+                                <div
+                                    className="activity-icon"
+                                    ref={activityIcon4}
+                                >
+                                    <BarChartOutlinedIcon />
+                                </div>
+                                <span
+                                    className="icon-interaction"
+                                    ref={iconInteraction4}
+                                >
+                                    <span className="interaction">
+                                        {tweetInsights != 0 &&
+                                            `${tweetInsights}`}
+                                    </span>
                                 </span>
-                            </span>
-                        </div>
-                        <div className="side-icon bookmark">
-                            <BookmarkBorderOutlinedIcon />
-                        </div>
-                        <div className="side-icon">
-                            <FileUploadOutlinedIcon />
+                            </div>
+                            <div className="side-icon bookmark">
+                                <BookmarkBorderOutlinedIcon />
+                            </div>
+                            <div className="side-icon">
+                                <FileUploadOutlinedIcon />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-           
-        </div>
-         {isReplyWindow && (
-            <AddReplyWindow
-                open={isReplyWindow}
-                closeHandler={replyWindowClose}
-                avatar={avatar}
-                username={username}
-                handle={handle}
-                uploadTime={uploadTime}
-                tweetText={tweetText}
-                addReplyHandler={addReplyHandler}
-            />
-        )}
+            {isReplyWindow && (
+                <AddReplyWindow
+                    open={isReplyWindow}
+                    closeHandler={replyWindowClose}
+                    avatar={avatar}
+                    username={username}
+                    handle={handle}
+                    uploadTime={uploadTime}
+                    tweetText={tweetText}
+                    addReplyHandler={addReplyHandler}
+                />
+            )}
         </>
     );
 }

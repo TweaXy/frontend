@@ -1,22 +1,35 @@
-import ProfileHeader from './ProfileHeader';
 import './Profile.css';
 import '../homePage_components/Feed.css';
-import ProfileBio from './ProfileBio';
 import { useState } from 'react';
-import TabsProfile from './tabsProfile';
-import getUserDataApi from '../../apis/getProfileData';
-import { Button, CircularProgress } from '@mui/material';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { Button } from '@mui/material';
+import LoadingPage from '../../components/LoadingPage/LoadingPage';
+import NotifyBox from '../../components/NotifyBox/NotifyBox';
+import getUserDataApi from '../../apis/getProfileData';
+import ProfileHeader from './ProfileHeader';
+import TabsProfile from './tabsProfile';
+import ProfileBio from './ProfileBio';
+
 function Profile({ token, userID, currUserId }) {
     const [ndata, setData] = useState('');
     const [isPageLoading, setIsPageLoading] = useState(true);
 
     const [viewPosts, setViewPosts] = useState(false);
 
+    const [actionOccurred, setActionOccurred] = useState(true);
+    const [actionMessage, setActionMessage] = useState('');
+
     const viewPostsHandler = () => {
         setViewPosts(true);
+    };
+
+    const actionOccurredHandler = (message = '') => {
+        setActionMessage(message);
+        const timeoutId = setTimeout(() => {
+            setActionMessage('');
+        }, 3000);
+        setActionOccurred(true);
+        return () => clearTimeout(timeoutId);
     };
 
     useEffect(() => {
@@ -26,6 +39,7 @@ function Profile({ token, userID, currUserId }) {
                     id: userID,
                     token: token,
                 });
+                console.log('fetched data: ', fetchedData);
                 setData(fetchedData);
                 setViewPosts(!fetchedData.data.user.blockedByMe);
             } catch (error) {
@@ -34,16 +48,17 @@ function Profile({ token, userID, currUserId }) {
                 setIsPageLoading(false);
             }
         };
-        setIsPageLoading(true);
-        fetchData();
-    }, []);
+        if (actionOccurred) {
+            setIsPageLoading(true);
+            fetchData();
+            setActionOccurred(false);
+        }
+    }, [actionOccurred, token, userID]);
+
     if (isPageLoading) {
-        return (
-            <div className="circular-progress-spinner">
-                <CircularProgress />
-            </div>
-        );
+        return <LoadingPage />;
     }
+
     return (
         <>
             <div className="feed">
@@ -69,6 +84,7 @@ function Profile({ token, userID, currUserId }) {
                         blockedByMe={ndata.data.user.blockedByMe}
                         blocksMe={ndata.data.user.blocksMe}
                         viewTweets={viewPosts}
+                        actionOccurredHandler={actionOccurredHandler}
                     />
                     {ndata.data.user.blocksMe ? (
                         <div className="user-blocked-container">
@@ -104,9 +120,14 @@ function Profile({ token, userID, currUserId }) {
                         <TabsProfile
                             userData={ndata.data.user}
                             userID={userID}
+                            followedByMe={ndata.data.user.followedByMe}
+                            actionOccurredHandler={actionOccurredHandler}
                         />
                     )}
                 </div>
+                {actionMessage.length !== 0 && (
+                    <NotifyBox text={actionMessage} />
+                )}
             </div>
         </>
     );
