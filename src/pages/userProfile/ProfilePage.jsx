@@ -5,11 +5,18 @@ import Widget from '../../components/homePage_components/Widget';
 import { connect, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { CircularProgress } from '@mui/material';
-import { useDispatch } from 'react-redux';
 import getUserDataApi from '../../apis/getProfileData';
-import { useLocation } from 'react-router-dom';
-
+import { useLocation } from 'react-router';
+import { clearUser } from '../../redux/actions';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
 const ProfilePage = () => {
+    // const dispatch = useDispatch();
+       // const navigate=useNavigate();
+     //useEffect(()=>{
+        //dispatch(clearUser());
+       // navigate('/');
+     //},[])
     const [isPageLoading, setIsPageLoading] = useState(true);
     const [userData, setUserData] = useState({});
 

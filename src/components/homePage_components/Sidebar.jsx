@@ -20,7 +20,7 @@ import HomePageSelectors from '../../shared/selectors/HomePage';
 
 export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
     const navigate = useNavigate();
-
+    console.log("from sidebar ",userData)
     const toProfile = () => {
         navigate(`/profile/${userData.user.username}`, {
             state: { userID: userData.user.id },
@@ -46,7 +46,17 @@ export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
             </div>
             <SidebarOption text="Explore" Icon={SearchIcon} />
             <NotificationsButton active={active === 3} token={userData.token} />
-            <SidebarOption text="Messages" Icon={MailOutlineIcon} />
+            <div
+                onClick={() => {
+                    navigate('/conversations');
+                }}
+            >
+                <SidebarOption
+                    text="Messages"
+                    Icon={MailOutlineIcon}
+                    active={active == 4}
+                />
+            </div>
             <div
                 data-test={HomePageSelectors.PROFILE_BUTTON}
                 onClick={toProfile}

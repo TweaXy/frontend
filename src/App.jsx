@@ -12,16 +12,25 @@ import ChangePasswordPage from './pages/SettingsPage/ChangePasswordPage.jsx';
 import ChangeUsernamePage from './pages/SettingsPage/ChangeUsernamePage.jsx';
 import NotificationPage from './pages/NotificationPage/NotificationPage.jsx';
 import ChangeEmailPage from './pages/SettingsPage/ChangeEmailPage.jsx';
+import MuteSettingsPage from './pages/SettingsPage/MuteSettingsPage.jsx';
+import BlockSettingsPage from './pages/SettingsPage/BlockSettingsPage.jsx';
+import LikersPage from './pages/PostEngagementPage/LikersPage.jsx';
+import RetweetersPage from './pages/PostEngagementPage/retweetersPage.jsx';
+import MessagePage from './pages/MessagesPage/MessagePage.jsx';
+import RepliesPage from './pages/RepliesPage/ReplyPage.jsx';
 function App() {
     return (
         <>
             <Router>
                 <Routes>
                     <Route index element={<WelcomePage />} />
+                    {/*} <Route index element={<LikersPage />} />*/}
                     <Route
                         path="/forget-password"
                         element={<ForgetPasswordStartPage />}
                     />
+                    <Route path="/retweets" element={<RetweetersPage />} />
+                    <Route path="/conversations" element={<MessagePage />} />
                     <Route
                         path="/profile/:username"
                         element={<ProfilePage />}
@@ -31,6 +40,7 @@ function App() {
                         path="/:username/following"
                         element={<FollowingPage />}
                     />
+                    <Route path="/likers" element={<LikersPage />} />
                     <Route
                         path="/:username/followers"
                         element={<FollowersPage />}
@@ -53,8 +63,20 @@ function App() {
                         element={<ChangeEmailPage />}
                     />
                     <Route
+                        path="/settings/mute"
+                        element={<MuteSettingsPage />}
+                    />
+                    <Route
+                        path="/settings/blocked"
+                        element={<BlockSettingsPage />}
+                    />
+                    <Route
                         path="/Notifications"
                         element={<NotificationPage />}
+                    />
+                    <Route
+                    path="/:username/:tweetid"
+                    element={<RepliesPage/>}
                     />
                 </Routes>
             </Router>

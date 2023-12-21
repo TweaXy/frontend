@@ -65,7 +65,6 @@ body {
     height: 34.75px;
     margin: -8px;
     justify-self: flex-end;
-
     align-items: center;
     justify-items: center;
 }
@@ -91,6 +90,15 @@ body {
     max-width: 100% !important;
     white-space: normal;
     color: #0f1419;
+}
+.TweetReply-container{
+    line-height: 20px;
+    word-wrap: break-word;
+    max-width: 100% !important;
+    white-space: normal;
+    color: black;
+    color: #657786;
+    margin-right: 4px;
 }
 .Notification-text-container {
     flex: 1;
