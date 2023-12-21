@@ -43,6 +43,7 @@ export default function Tweet({
     userID,
     removeTweet,
     isCurrentUserTweet,
+    handleTimelineAfterMuteOrBlock,
 }) {
     const [tweetLikes, setTweetLikes] = useState(likes);
     const [tweetReplies, setTweetReplies] = useState(replies);
@@ -189,25 +190,25 @@ export default function Tweet({
     const optionsCloseHandler = () => {
         setAnchorEl(null);
     };
-    const deleteTweetHandler =() =>{
+    const deleteTweetHandler = () => {
         removeTweet(tweetId);
-    }
+    };
 
     //reply state
-    const [isReplyWindow,setIsReplyWindow]=useState(false);
-    const replyWindowClose = ()=>{
+    const [isReplyWindow, setIsReplyWindow] = useState(false);
+    const replyWindowClose = () => {
         setIsReplyWindow(false);
-    }
-    const replyWindowOpen = () =>{
+    };
+    const replyWindowOpen = () => {
         setIsReplyWindow(true);
-    }
-    const addReplyHandler=async (text,images) =>{
+    };
+    const addReplyHandler = async (text, images) => {
         // call the api
-       if(await apiAddReply(tweetId,text,images,token)){
-       setTweetReplies((prevReplies)=> prevReplies +1);
-       }
-       //take any other action
-    }
+        if (await apiAddReply(tweetId, text, images, token)) {
+            setTweetReplies((prevReplies) => prevReplies + 1);
+        }
+        //take any other action
+    };
     // we should have a function to handle the change on clicking any
     return (
         <div className="tweet">
@@ -228,12 +229,19 @@ export default function Tweet({
                             <div className="dot-container">
                                 <span className="dot">.</span>
                             </div>
-                            <span className="profileBiography-joinDate" style={{paddingBottom:'5px'}}>
+                            <span
+                                className="profileBiography-joinDate"
+                                style={{ paddingBottom: '5px' }}
+                            >
                                 {TweetDate(uploadTime)}
                             </span>
                         </div>
                         <div
-                            data-test={hashText(TweetSelectors.TWEET_OPTIONS+username+tweetText)}
+                            data-test={hashText(
+                                TweetSelectors.TWEET_OPTIONS +
+                                    username +
+                                    tweetText
+                            )}
                             className="options-container cian-hover"
                             onClick={optionsClickHandler}
                         >
@@ -248,7 +256,9 @@ export default function Tweet({
                             token={token}
                             username={handle}
                             userID={userID}
-                           
+                            handleTimelineAfterMuteOrBlock={
+                                handleTimelineAfterMuteOrBlock
+                            }
                         />
                     </div>
                     <div className="tweet-text-container">
@@ -269,7 +279,11 @@ export default function Tweet({
                     <div className="tweet-activity">
                         <div className="tweet-icon">
                             {/* icon */}
-                            <div className="activity-icon" ref={activityIcon1}  onClick={replyWindowOpen}>
+                            <div
+                                className="activity-icon"
+                                ref={activityIcon1}
+                                onClick={replyWindowOpen}
+                            >
                                 <ChatBubbleOutlineOutlinedIcon className="" />
                             </div>
                             <span
@@ -346,7 +360,18 @@ export default function Tweet({
                     </div>
                 </div>
             </div>
-        {isReplyWindow && <AddReplyWindow open={isReplyWindow} closeHandler={replyWindowClose} avatar={avatar} username={username} handle={handle} uploadTime={uploadTime} tweetText={tweetText} addReplyHandler={addReplyHandler}/>}
+            {isReplyWindow && (
+                <AddReplyWindow
+                    open={isReplyWindow}
+                    closeHandler={replyWindowClose}
+                    avatar={avatar}
+                    username={username}
+                    handle={handle}
+                    uploadTime={uploadTime}
+                    tweetText={tweetText}
+                    addReplyHandler={addReplyHandler}
+                />
+            )}
         </div>
     );
 }

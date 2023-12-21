@@ -269,7 +269,7 @@ const ProfileBio = (props) => {
             <BlockUserWindow
                 openWindow={isBlockUserWindowOpened}
                 closeWindow={handleBlockUserWindowClose}
-                blockUser={handleBlockUser}
+                handleUserBlock={handleBlockUser}
                 username={props.username}
                 isUserBlocked={true}
             />

@@ -30,10 +30,9 @@ function TweetOptionsPopDown({
     token,
     username,
     userID,
-    
+    handleTimelineAfterMuteOrBlock,
 }) {
-   
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     const [isDeleteWindow, setIsDeleteWindow] = useState(false);
 
     const [isMuted, setIsMuted] = useState(false);
@@ -46,16 +45,13 @@ function TweetOptionsPopDown({
         useState(false);
 
     const handleDelete = () => {
-        // Implement delete functionality here
         setIsDeleteWindow(true);
-        console.log('Deleting tweet...');
         handleClose();
     };
     const closeDeleteWindowHandler = () => {
         setIsDeleteWindow(false);
     };
     const handleUnFollow = (e) => {
-        console.log('unfollowed');
         handleClose();
     };
 
@@ -63,6 +59,7 @@ function TweetOptionsPopDown({
         if (isMuted) {
             if (await unmute(username, token)) {
                 setIsMuted(false);
+                handleTimelineAfterMuteOrBlock(userID);
                 setMuteActionOccurred(true);
                 const timeoutID = setTimeout(() => {
                     setMuteActionOccurred(false);
@@ -74,6 +71,7 @@ function TweetOptionsPopDown({
             if (await mute(username, token)) {
                 setIsMuted(true);
                 setMuteActionOccurred(true);
+                handleTimelineAfterMuteOrBlock(userID);
                 const timeoutID = setTimeout(() => {
                     setMuteActionOccurred(false);
                 }, 3000);
@@ -95,6 +93,7 @@ function TweetOptionsPopDown({
         if (await block(username, token)) {
             setIsBlocked(true);
             setBlockActionOccurred(true);
+            handleTimelineAfterMuteOrBlock(userID);
             const timeoutID = setTimeout(() => {
                 setBlockActionOccurred(false);
             }, 3000);
@@ -106,9 +105,9 @@ function TweetOptionsPopDown({
 
     const handleAnalytics = (e) => {
         getLikers({ tweetId: tweetid, token: token });
-      navigate(`/likers`, {
-           state: {
-               tweetid: tweetid,
+        navigate(`/likers`, {
+            state: {
+                tweetid: tweetid,
                 token: token,
             },
         });
@@ -146,12 +145,12 @@ function TweetOptionsPopDown({
                         Delete
                     </MenuItem>
                 )}
-                { (
+                {
                     <MenuItem onClick={handleAnalytics}>
                         <BarChartOutlinedIcon />
                         View post analytics
                     </MenuItem>
-                )}
+                }
                 {!isCurrentUserTweet && (
                     <MenuItem onClick={handleUnFollow}>
                         <PersonRemoveIcon />
@@ -193,7 +192,7 @@ function TweetOptionsPopDown({
             <BlockUserWindow
                 openWindow={isBlockUserWindowOpened}
                 closeWindow={handleBlockUserWindowClose}
-                blockUser={handleUserBlock}
+                handleUserBlock={handleUserBlock}
                 username={username}
                 isUserBlocked={false}
             />

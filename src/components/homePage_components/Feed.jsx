@@ -10,10 +10,10 @@ import useGetTweets from '../../apis/timelineApis/useGetTweets';
 import LoadingPage from '../LoadingPage/LoadingPage';
 
 const Feed = ({ userData, isTherePopUpWindow }) => {
-    const [tweets, setTweets] = useState([]);  
+    const [tweets, setTweets] = useState([]);
     const [offset, setOffset] = useState(0);
     const token = useSelector((state) => state.user.token);
-  
+
     const getTweets = async () => {
         const tweetsResponse = await apiGetTweet(userData.token);
         setTweets(tweetsResponse);
@@ -25,7 +25,15 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
             prevTweets.filter((tweet) => tweet.mainInteraction.id !== tweetId)
         );
     };
-  
+
+    const handleTimelineAfterMuteOrBlock = (userId) => {
+        setTweets((prevTweets) =>
+            prevTweets.filter(
+                (tweet) => tweet.mainInteraction.user.id !== userId
+            )
+        );
+    };
+
     useEffect(() => {
         getTweets();
     }, []);
@@ -36,7 +44,7 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                 feedHeader_acitve={0}
                 isTherePopUpWindow={isTherePopUpWindow}
             />
-                  
+
             <TweetBox userData={userData} getTweets={getTweets} />
 
             {tweets.length > 0 &&
@@ -63,9 +71,11 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                         isCurrentUserTweet={
                             userData.user.id == tweet.mainInteraction.user.id
                         }
+                        handleTimelineAfterMuteOrBlock={
+                            handleTimelineAfterMuteOrBlock
+                        }
                     />
                 ))}
-
         </div>
     );
 };

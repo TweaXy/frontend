@@ -10,12 +10,12 @@ import './BlockUserWindow.css';
 const BlockUserWindow = ({
     openWindow,
     closeWindow,
-    blockUser,
+    handleUserBlock,
     username,
     isUserBlocked,
 }) => {
     const blockUserHandler = () => {
-        blockUser();
+        handleUserBlock();
         closeWindow();
     };
 
