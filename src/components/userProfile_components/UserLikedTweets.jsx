@@ -98,7 +98,7 @@ const TweetsUSerLikes = ({ userID, curUserID }) => {
                             curUserID === tweet.mainInteraction.user.id
                         }
                         handleTweetsFiltering={handleTweetsFiltering}
-                        // followedByMe={tweet.user.followedByMe}
+                        followedByMe={tweet.mainInteraction.user.followedByMe}
                         tweet={tweet}
                     />
                 ))}
