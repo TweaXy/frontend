@@ -138,8 +138,8 @@ export default function TweetBox({ userData, updateOffset }) {
         console.log(tweetImages);
         setTweetImages([]);
         setText('');
-        await apiAddTweet(text, tweetImages,userData.token);
-        // updateOffset(0);
+        await apiAddTweet(text, tweetImages, userData.token);
+        updateOffset(0);
     };
 
     const handleDisplayPrivacy = (e) => {
