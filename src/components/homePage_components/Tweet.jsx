@@ -55,7 +55,6 @@ export default function Tweet({
     const iconInteraction3 = useRef(null);
     const iconInteraction4 = useRef(null);
     const navigate = useNavigate();
-
     const profileRouting = (event) => {
         event.stopPropagation();
         navigate(`/profile/${username}`, {
@@ -182,6 +181,7 @@ export default function Tweet({
         setLikeActive(!isLikeActive);
     };
     const getreplieshandler = (event) => {
+        event.stopPropagation();
         navigate(`/${handle}/${tweetId}`, {
             state: { tweetId: tweetId, curtweet: tweet },
         });
