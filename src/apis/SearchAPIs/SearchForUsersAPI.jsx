@@ -3,8 +3,6 @@ const apiSearchForUsers = async (userNameOrName, token) => {
     console.log("token to the search for users api: "+ token);
     console.log("input to the search for users api: " + userNameOrName);
 
-    // /users/search/match?keyword=value&limit=value&offset=value
-
     const lnk =`https://tweaxybackend.mywire.org/api/v1/users/search/match?keyword=${userNameOrName}&limit=10&offset=0`;
 
     try {

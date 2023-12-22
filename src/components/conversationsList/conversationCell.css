@@ -1,0 +1,125 @@
+.conversation-cell-container {
+    width: 100%;
+    max-width: 566px;
+    min-height: 41px;
+    padding: 12px 16px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+.conversation-cell-container:hover {
+    background-color: rgb(100, 100, 100, 0.05);
+}
+
+.conversation-cell-container>.conversation-cell-avatar-container {
+    justify-content: flex-start;
+    margin-right: 12px;
+    width: 44px;
+    height: 44px;
+}
+
+.conversation-cell-container>.conversation-cell-avatar-container>.conversation-cell-avatar {
+    width: 40px;
+    height: 40px;
+}
+
+.conversation-cell-container>.conversation-cell-info-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.conversation-cell-container>.conversation-cell-info-container>.conversation-cell-upper-half {
+    width: 514px;
+    height: 41px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.conversation-cell-container>.conversation-cell-info-container>.conversation-cell-upper-half>.conversation-cell-upper-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.conversation-cell-container>.conversation-cell-info-container>.conversation-cell-upper-half>.conversation-cell-upper-left>span {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.conversation-cell-container>.conversation-cell-info-container>.conversation-cell-upper-half>.conversation-cell-upper-left>span:hover {
+    text-decoration: underline;
+}
+
+/* .conversation-cell-container>.conversation-cell-info-container>.conversation-cell-upper-half>.conversation-cell-upper-left>.conversation-cell-upper-left-down {
+    
+} */
+
+.conversation-cell-container>.conversation-cell-info-container>.conversation-cell-upper-half>.conversation-cell-upper-left>.conversation-cell-upper-left-down>span.conversation-cell-conversationname {
+    color: #536471;
+}
+
+.conversation-cell-container>.conversation-cell-info-container>.conversation-cell-upper-half>.conversation-cell-upper-left>.conversation-cell-upper-left-down>span.conversation-cell-follows-me {
+    width: 68px;
+    height: 16px;
+    padding: 2px 4px;
+    margin-left: 4px;
+    text-overflow: unset;
+    color: rgb(83, 100, 113);
+    background-color: rgba(239, 243, 244, 1.00);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 12px;
+    direction: ltr;
+    unicode-bidi: isolate;
+}
+
+
+
+.conversation-cell-container>.conversation-cell-info-container>.conversation-cell-upper-half>.conversation-cell-upper-right>button.black-small-button {
+    width: 78px;
+    height: 32px;
+    padding: 0px 16px;
+    border-radius: 9999px;
+    border: 1px solid #000;
+    min-width: 32px;
+    min-height: 32px;
+    background-color: rgb(15, 20, 25);
+    color: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    transition: background 200ms, box-shadow 200ms;
+}
+
+.conversation-cell-container>.conversation-cell-info-container>.conversation-cell-upper-half>.conversation-cell-upper-right>button.white-small-button {
+    width: 99px;
+    height: 32px;
+    padding: 0px;
+    margin-left: 12px;
+    border-radius: 9999px;
+    border: 1px solid #dadce0;
+    min-width: 99px;
+    min-height: 36px;
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500px;
+    transition: background 200ms ease, box-shadow 200ms ease;
+}
+
+.conversation-cell-container>.conversation-cell-info-container>.conversation-cell-upper-half>.conversation-cell-upper-right>button.white-small-button:hover {
+    color: red;
+}
+
+.conversation-cell-container>.conversation-cell-info-container>.conversation-cell-lower-half {
+    padding-top: 4px;
+}
+
+.conversation-cell-container>.conversation-cell-info-container>.conversation-cell-lower-half>span {
+    direction: ltr;
+    unicode-bidi: unset;
+}

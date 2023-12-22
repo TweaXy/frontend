@@ -1,15 +1,14 @@
 import './HomePage.css';
-import Sidebar from '../../components/homePage_components/Sidebar';
-import { Feed } from '../../components/homePage_components/Feed';
-import Widget from '../../components/homePage_components/Widget';
+import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router';
 import { useEffect, useState } from 'react';
 import { CircularProgress } from '@mui/material';
-import { useLocation } from 'react-router';
-import { useSelector } from 'react-redux';
-import SignUpHome from '../SignUpPage/SignUpPageHome';
-import { clearUser } from '../../redux/actions';
-import { useDispatch } from 'react-redux';
+import { Feed } from '../../components/homePage_components/Feed';
 import InitNotifications from '../../apis/NotificationsApis/InitNotifications';
+import Sidebar from '../../components/homePage_components/Sidebar';
+import Widget from '../../components/homePage_components/Widget';
+import SignUpHome from '../SignUpPage/SignUpPageHome';
+
 const HomePage = ({ isTherePopUpWindow }) => {
     // const dispatch = useDispatch();
     // dispatch(clearUser());

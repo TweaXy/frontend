@@ -1,10 +1,11 @@
-import './UsersCells.css';
-import UserCell from '../UserCell/UserCell';
+import './conversationCells.css';
+
 import { CircularProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import ConversationCell from './conversationCell';
 
-const UsersCells = ({ users }) => {
+const ConversationCells = ({ users }) => {
     const [isPageLoading, setIsPageLoading] = useState(users === undefined);
     const token = useSelector((state) => state.user.token);
     const myID = useSelector((state) => state.user.user).id;
@@ -29,19 +30,14 @@ const UsersCells = ({ users }) => {
     }
 
     return (
-        <div className="users-cells-container">
+        <div className="conversations-cells-container">
             {users.map((user) => (
-                <UserCell
-                    key={user.id}
+                <ConversationCell
                     id={user.id}
                     name={user.name}
                     username={user.username}
                     avatar={user.avatar}
                     bio={user.bio === 'null' ? '' : user.bio}
-                    followsMe={user.followsMe}
-                    followedByMe={user.followedByMe}
-                    blocksMe={user.blocksMe}
-                    blockedByMe={user.blockedByMe}
                     token={token}
                     myID={myID}
                 />
@@ -50,4 +46,4 @@ const UsersCells = ({ users }) => {
     );
 };
 
-export default UsersCells;
+export default ConversationCells;
