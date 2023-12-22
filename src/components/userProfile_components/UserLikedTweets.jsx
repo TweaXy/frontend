@@ -77,7 +77,7 @@ const TweetsUSerLikes = ({ userID, curUserID }) => {
                 tweets.map((tweet) => (
                     <Tweet
                         key={tweet.mainInteraction.id}
-                        avatar={tweet.mainInteraction.avatar}
+                        avatar={tweet.mainInteraction.user.avatar}
                         username={tweet.mainInteraction.user.name}
                         handle={tweet.mainInteraction.user.username}
                         uploadTime={tweet.mainInteraction.createdDate}
@@ -98,7 +98,7 @@ const TweetsUSerLikes = ({ userID, curUserID }) => {
                             curUserID === tweet.mainInteraction.user.id
                         }
                         handleTweetsFiltering={handleTweetsFiltering}
-                        // followedByMe={tweet.user.followedByMe}
+                        followedByMe={tweet.mainInteraction.user.followedByMe}
                         tweet={tweet}
                     />
                 ))}

@@ -3,7 +3,7 @@ import './MainTweetInteraction.css';
 import './Avatar.css';
 import Avatar from '@mui/material/Avatar';
 import TweetDate from '../../utils/TweetDate';
-import './MainTweetInteraction.css'
+import './MainTweetInteraction.css';
 export default function MainTweetInteraction({
     avatar,
     username,
@@ -15,8 +15,10 @@ export default function MainTweetInteraction({
         <div className="main-tweet-interaction">
             <div className="tweet-container">
                 <div className="avatar-container ">
-                    <div className="avatar-box" >
-                        <Avatar src={avatar}></Avatar>
+                    <div className="avatar-box">
+                        <Avatar
+                            src={`https://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
+                        ></Avatar>
                     </div>
                     <div className="avatar-line"></div>
                 </div>

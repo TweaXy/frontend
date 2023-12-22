@@ -9,7 +9,9 @@ export default function AvatarBox({ img }) {
 
     return (
         <div className="avatar-box">
-            <Avatar src={`https://tweaxybackend.mywire.org/api/v1/images/${img}  ` }></Avatar>
+            <Avatar
+                src={`https://tweaxybackend.mywire.org/api/v1/images/${img}`}
+            ></Avatar>
         </div>
     );
 }

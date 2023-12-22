@@ -112,7 +112,7 @@ const ProfileBio = (props) => {
                 <div className="profileImage">
                     <Avatar
                         sx={{ width: 134, height: 134 }}
-                        src={props.ProfileImage}
+                        src={`https://tweaxybackend.mywire.org/api/v1/images/${props.ProfileImage}`}
                     />
                 </div>
                 {props.IdProfile === props.currUserId ? (
