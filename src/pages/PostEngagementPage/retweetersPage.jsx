@@ -2,12 +2,12 @@ import './LikersPage.css';
 import UsersCells from '../../components/UsersCells/UsersCells';
 import Widget from '../../components/homePage_components/Widget';
 import Sidebar from '../../components/homePage_components/Sidebar';
-
+import { CircularProgress } from '@mui/material';
 import LikersHeader from '../../components/LikersHeader/LikersHeader';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
-
+import getRetweeters from '../../apis/getRetweeters';
 const RetweetersPage = () => {
     const location = useLocation();
     const tweetId = location.state?.tweetid;
@@ -26,34 +26,32 @@ const RetweetersPage = () => {
             });
         }
     }, [curPage, navigate]);
-    {
-        /*} 
+    
+        
    
     useEffect(() => {
         if (token) {
-            console.log('token from likers page', token);
+            console.log('token from retweeters page', token);
+            console.log('tweet id from retweeters page', tweetId);
             setIsPageLoading(false);
         } else {
-            console.log('Loading likers page...');
+            console.log('Loading retweeters page...');
         }
     }, [token]);
-   {/*} useEffect(() => {
+    useEffect(() => {
         const fetchUsers = async () => {
-            try {
-                const fetchedUsers = await getUserFollowers({
-                    username,
-                    token,
-                });
-                setUsers(fetchedUsers);
-            } catch (error) {
-                console.log('Error fetching user followers: ', error.message);
-            }
+            const fetchedUsers = await getRetweeters({
+                tweetId: tweetId,
+                token: token,
+            });
+            console.log('retweeters', fetchedUsers);
+            setUsers(fetchedUsers);
         };
    
         if (!isPageLoading) {
             fetchUsers();
         }
-    }, [username, token, isPageLoading]);
+    }, [ tweetId,token, isPageLoading]);
    
   
     if (isPageLoading) {
@@ -62,8 +60,7 @@ const RetweetersPage = () => {
                 <CircularProgress />
             </div>
         );
-    }  */
-    }
+    }  
     const arrowBackRoute = () => navigate(-1);
     return (
         <div className="analytics-page-container">

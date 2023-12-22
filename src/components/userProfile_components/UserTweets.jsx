@@ -79,6 +79,7 @@ const UserTweets = ({
                         }
                         handleTweetsFiltering={actionOccurredHandler}
                         followedByMe={followedByMe}
+                        tweet={tweet}
                     />
                 ))}
         </>

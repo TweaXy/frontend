@@ -1,0 +1,35 @@
+.settings-conversation-window-header {
+    width: 100%;
+    max-width: 600px;
+    height: 53px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background: #fff;
+}
+.settings-conversation-window-header >.edit-text {
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 20px;
+    padding: 0.25rem;
+    padding-left: 10px;
+    padding-right: 0.75rem;
+}
+
+.arrow-back-conversation {
+    cursor: pointer;
+    transition-property: all;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 10px 5px 8px 12px;
+    padding: 7px;
+    border-radius: 9999px;
+  }
+  .arrow-back-conversation:hover {
+    border-radius: 250px;
+    border-color: rgb(205, 205, 207);
+    background-color: rgb(205, 205, 207);;
+  }

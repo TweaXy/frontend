@@ -72,6 +72,7 @@ const NotificationPage = () => {
               <Notificationcell3
               fromUser={cur.fromUser}
               interaction={cur.interaction}
+              reply={cur.reply}
               uploadTime={cur.createdDate}
               token={token}  
               curusername={user.username}
