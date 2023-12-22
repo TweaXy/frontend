@@ -105,7 +105,7 @@ const ProfileMoreOptionsPopDown = ({
             <BlockUserWindow
                 openWindow={isBlockWindow}
                 closeWindow={closeBlockWindow}
-                blockUser={handleUserBlock}
+                handleUserBlock={handleUserBlock}
                 username={username}
                 isUserBlocked={isBlocked}
             />

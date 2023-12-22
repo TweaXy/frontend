@@ -1,7 +1,7 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  color-scheme: light dark;
-  background-color: #242424;
+  color-scheme: light;
+  background-color: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
@@ -12,23 +12,28 @@ span {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  white-space: normal; /* Reset white-space if it was set to nowrap */
+  white-space: normal;
+  /* Reset white-space if it was set to nowrap */
 }
 
 body {
-  height: 100vh !important; 
-  font-family: 'Segoe UI Emoji', 'Arial'; /* Use a fallback font */
+  height: 100vh !important;
+  font-family: 'Segoe UI Emoji', 'Arial';
+  /* Use a fallback font */
   padding: 0;
   margin: 0;
 }
+
 @media (prefers-color-scheme: light) {
   :root {
-    
+
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }

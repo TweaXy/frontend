@@ -7,7 +7,12 @@ import { CircularProgress } from '@mui/material';
 import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
 import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
 import React from 'react';
-const UserTweets = ({ userID, curUserID }) => {
+const UserTweets = ({
+    userID,
+    curUserID,
+    followedByMe,
+    actionOccurredHandler,
+}) => {
     const [tweets, setTweets] = useState([]);
     const [isPageLoading, setIsPageLoading] = useState(true);
     const token = useSelector((state) => state.user.token);
@@ -16,12 +21,7 @@ const UserTweets = ({ userID, curUserID }) => {
         console.log('user tweet response', tweetsResponse);
         setTweets(tweetsResponse);
     };
-    const removeTweet = (tweetId) => {
-        apiDeleteTweet(tweetId, token);
-        setTweets((prevTweets) =>
-            prevTweets.filter((tweet) => tweet.mainInteraction.id !== tweetId)
-        );
-    };
+
     useEffect(() => {
         if (token) {
             setIsPageLoading(false);
@@ -76,7 +76,11 @@ const UserTweets = ({ userID, curUserID }) => {
                         token={token}
                         userID={tweet.mainInteraction.user.id}
                         removeTweet={removeTweet}
-                        isCurrentUserTweet={userID==tweet.mainInteraction.user.id}
+                        isCurrentUserTweet={
+                            curUserID === tweet.mainInteraction.user.id
+                        }
+                        handleTweetsFiltering={actionOccurredHandler}
+                        followedByMe={followedByMe}
                     />
                 ))}
         </>

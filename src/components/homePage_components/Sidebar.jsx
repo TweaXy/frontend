@@ -20,7 +20,7 @@ import HomePageSelectors from '../../shared/selectors/HomePage';
 
 export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
     const navigate = useNavigate();
-
+    console.log("from sidebar ",userData)
     const toProfile = () => {
         navigate(`/profile/${userData.user.username}`, {
             state: { userID: userData.user.id },
