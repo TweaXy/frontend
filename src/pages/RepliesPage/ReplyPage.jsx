@@ -32,12 +32,6 @@ const RepliesPage = () => {
             prevTweets.filter((tweet) => tweet.mainInteraction.id !== tweetId)
         );
     };
-    // const addReplyHandler = async ( text, images) => {
-    //     if (await apiAddReply(tweetId, text, images, token)) {
-    //         setTweetReplies((prevReplies) => prevReplies + 1);
-    //     }
-    //     //take any other action
-    // };
     const previouspage = () => {
         console.log("error")
         navigate(-1);

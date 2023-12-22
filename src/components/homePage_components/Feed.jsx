@@ -93,6 +93,7 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                             }
                             handleTweetsFiltering={handleTweetsFiltering}
                             followedByMe={true}
+                            tweet={tweet}
                         />
                     );
                 } else {
@@ -122,6 +123,7 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                             }
                             handleTweetsFiltering={handleTweetsFiltering}
                             followedByMe={true}
+                            tweet={tweet}
                         />
                     );
                 }
