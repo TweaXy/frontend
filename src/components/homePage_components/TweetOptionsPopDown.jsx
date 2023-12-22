@@ -71,7 +71,7 @@ function TweetOptionsPopDown({
                 await unfollow(username, token);
                 setIsFollowed(false);
                 if (handleTweetsFiltering) {
-                    handleTweetsFiltering(`You unfollowed @${username}`);
+                    handleTweetsFiltering(`You unfollowed @${username}`, userID);
                 }
             } catch (error) {
                 console.error(error.message);
@@ -81,7 +81,7 @@ function TweetOptionsPopDown({
                 await follow(username, token);
                 setIsFollowed(true);
                 if (handleTweetsFiltering) {
-                    handleTweetsFiltering(`You followed @${username}`);
+                    handleTweetsFiltering(`You followed @${username}`, userID);
                 }
             } catch (error) {
                 console.error(error.message);
@@ -95,14 +95,14 @@ function TweetOptionsPopDown({
             if (await unmute(username, token)) {
                 setIsMuted(false);
                 if (handleTweetsFiltering) {
-                    handleTweetsFiltering(`You unmuted @${username}`);
+                    handleTweetsFiltering(`You unmuted @${username}`, userID);
                 }
             }
         } else {
             if (await mute(username, token)) {
                 setIsMuted(true);
                 if (handleTweetsFiltering) {
-                    handleTweetsFiltering(`You muted @${username}`);
+                    handleTweetsFiltering(`You muted @${username}`, userID);
                 }
             }
         }
@@ -114,14 +114,14 @@ function TweetOptionsPopDown({
             if (await unblock(username, token)) {
                 setIsBlocked(false);
                 if (handleTweetsFiltering(username, token)) {
-                    handleTweetsFiltering(`You unblocked @${username}`);
+                    handleTweetsFiltering(`You unblocked @${username}`, userID);
                 }
             }
         } else {
             if (await block(username, token)) {
                 setIsBlocked(true);
                 if (handleTweetsFiltering) {
-                    handleTweetsFiltering(`You blocked @${username}`);
+                    handleTweetsFiltering(`You blocked @${username}`, userID);
                 }
             }
         }

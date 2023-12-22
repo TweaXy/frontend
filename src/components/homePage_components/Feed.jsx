@@ -2,7 +2,7 @@ import './Feed.css';
 import { useSelector } from 'react-redux';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
-import useGetTweets from '../../apis/timelineApis/useGetTweets';
+// import useGetTweets from '../../apis/timelineApis/useGetTweets';
 import NotifyBox from '../../components/NotifyBox/NotifyBox';
 import LoadingPage from '../LoadingPage/LoadingPage';
 import FeedHeader from './FeedHeader';
@@ -13,12 +13,19 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
     const token = useSelector((state) => state.user.token);
 
     const [offset, setOffset] = useState(0);
-    const { tweets, hasMore, loading, error } = useGetTweets(token, offset);
+    // const { tweets, hasMore, loading, error } = useGetTweets(token, offset);
+
+    const [loading, setLoading] = useState(true);
+    const [tweets, setTweets] = useState([]);
+    const [hasMore, setHasMore] = useState(false);
 
     const [actionMessage, setActionMessage] = useState('');
 
     const removeTweet = (tweetId) => {
         apiDeleteTweet(tweetId, token);
+        setTweets(
+            tweets.filter((tweet) => tweet.mainInteraction.id !== tweetId)
+        );
     };
 
     const updateOffset = (newOffest) => {
@@ -41,15 +48,47 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
         [loading, hasMore]
     );
 
-    const handleTweetsFiltering = (message) => {
+    const handleTweetsFiltering = (message, filterID) => {
         setActionMessage(message);
         const timeoutId = setTimeout(() => {
             setActionMessage('');
         }, 3000);
-        updateOffset(0);
-        // useGetTweets(token, offset);
+        setTweets(
+            tweets.filter((tweet) => tweet.mainInteraction.user.id !== filterID)
+        );
         return () => clearTimeout(timeoutId);
     };
+
+    useEffect(() => {
+        setLoading(true);
+        const fetchData = async () => {
+            const lnk = `https://tweaxybackend.mywire.org/api/v1/home?limit=10&offset=${offset}`;
+            try {
+                const response = await fetch(lnk, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const responseData = await response.json();
+                if (responseData.status != 'success') {
+                    // DO NOTHING
+                } else {
+                    setTweets((prevTweets) => {
+                        setLoading(false);
+                        return [...prevTweets, ...responseData.data.items];
+                    });
+                    setHasMore(responseData.data.items.length > 0);
+                    setLoading(false);
+                }
+            } catch (error) {
+                console.error(error.message);
+            }
+        };
+
+        fetchData();
+    }, [token, offset]);
 
     if (loading) {
         return <LoadingPage />;
