@@ -2,7 +2,6 @@ import './Feed.css';
 import { useSelector } from 'react-redux';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
-// import useGetTweets from '../../apis/timelineApis/useGetTweets';
 import NotifyBox from '../../components/NotifyBox/NotifyBox';
 import LoadingPage from '../LoadingPage/LoadingPage';
 import FeedHeader from './FeedHeader';
@@ -13,7 +12,6 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
     const token = useSelector((state) => state.user.token);
 
     const [offset, setOffset] = useState(0);
-    // const { tweets, hasMore, loading, error } = useGetTweets(token, offset);
 
     const [loading, setLoading] = useState(true);
     const [tweets, setTweets] = useState([]);
