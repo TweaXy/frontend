@@ -8,6 +8,9 @@ const NotificationHeader = ({}) => {
         <div style={{ flex: 1 }} className="reply-header-element ">
                 <span className={'--feed-header-active'}>Notifications</span>
             </div>
+            <div className="icon-wrapper">
+                <SettingsOutlinedIcon className="timeline-settings" />
+            </div>
         </div>
     );
 };
