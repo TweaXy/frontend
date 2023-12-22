@@ -28,17 +28,15 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
         );
     };
 
-    const updateOffset = (newOffest) => {
-        setOffset(newOffest);
-    };
-
     const observer = useRef();
 
     const lastTweetElementRef = useCallback(
         (node) => {
+            console.log("HEEEEREEEE111");
             if (loading) return;
             if (observer.current) observer.current.disconnect();
             observer.current = new IntersectionObserver((entries) => {
+                console.log("HEEEEREEEE222L ", entries[0].isIntersecting, hasMore);
                 if (entries[0].isIntersecting && hasMore) {
                     setOffset((prevOffset) => prevOffset + 10);
                 }
@@ -62,6 +60,7 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
     useEffect(() => {
         setLoading(true);
         const fetchData = async () => {
+            console.log("here is the offset: ", offset);
             const lnk = `https://tweaxybackend.mywire.org/api/v1/home?limit=10&offset=${offset}`;
             try {
                 const response = await fetch(lnk, {
@@ -72,12 +71,23 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                     },
                 });
                 const responseData = await response.json();
+                console.log(responseData);
                 if (responseData.status != 'success') {
                     // DO NOTHING
                 } else {
                     setTweets((prevTweets) => {
                         setLoading(false);
-                        return [...prevTweets, ...responseData.data.items];
+                        console.log("HEREEEE33: ", responseData.data.items.length > 0);
+                        setHasMore(responseData.data.items.length > 0);
+                        return [...prevTweets, ...responseData.data.items].filter(
+                            (tweet, index, self) =>
+                                index ===
+                                self.findIndex(
+                                    (t) =>
+                                        t.mainInteraction.id ===
+                                        tweet.mainInteraction.id
+                                )
+                        );
                     });
                     setHasMore(responseData.data.items.length > 0);
                     setLoading(false);
@@ -101,14 +111,13 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                 isTherePopUpWindow={isTherePopUpWindow}
             />
 
-            <TweetBox userData={userData} updateOffset={updateOffset} />
+            <TweetBox userData={userData} />
 
             {tweets.map((tweet, index) => {
-                if (tweets.length <= index + 3) {
+                if (tweets.length === index+1) {
                     return (
+                        <div ref={lastTweetElementRef} key={index}>
                         <Tweet
-                            key={index}
-                            ref={lastTweetElementRef}
                             avatar={tweet.mainInteraction.avatar}
                             username={tweet.mainInteraction.user.name}
                             handle={tweet.mainInteraction.user.username}
@@ -134,11 +143,12 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                             followedByMe={true}
                             tweet={tweet}
                         />
+                        </ div>
                     );
                 } else {
                     return (
+                        <div key={index}>
                         <Tweet
-                            key={index}
                             avatar={tweet.mainInteraction.avatar}
                             username={tweet.mainInteraction.user.name}
                             handle={tweet.mainInteraction.user.username}
@@ -164,6 +174,7 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                             followedByMe={true}
                             tweet={tweet}
                         />
+                        </ div>
                     );
                 }
             })}
