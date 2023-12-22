@@ -183,7 +183,7 @@ export default function Tweet({
     const getreplieshandler = (event) => {
         event.stopPropagation();
         navigate(`/${handle}/${tweetId}`, {
-            state: { tweetId: tweetId, curtweet: tweet },
+            state: { tweetId: tweetId },
         });
     };
 

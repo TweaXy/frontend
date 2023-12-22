@@ -56,13 +56,11 @@ export default function Notificationcell3({
         console.log('routing to this user profile ');
         navigate(`/profile/${fromUser.username}`, { state: {userID:fromUser.id}})
     };
-    const routingHandlerTweet = () => {
-        console.log('routing to the tweet ');
-        // navigate(`/profile/${fromUser.username}`, { state: {userID:fromUser.id}})
-        //tweet-compontent
-        // route to the tweet
+    const getreplieshandler = (event) => {
+        navigate(`/${curusername}/${interaction.parentInteractionID}`, {
+            state: { tweetId: interaction.parentInteractionID },
+        });
     };
-    
     useEffect(() => {
         // adjust this to be useRef
 
@@ -167,22 +165,18 @@ export default function Notificationcell3({
     }, []);
 
     const likeDislikeTweetHandler = (e) => {
-        //call api likeDislikeTweetHandler
+        e.stopPropagation()
         if (isLikeActive) {
-            //dislike it
             apiDislikeTweet(tweetId, token);
             setTweetLikes((likes) => likes - 1);
         } else {
-            //like it
             apiLikeTweet(tweetId, token);
             setTweetLikes((likes) => likes + 1);
         }
         setLikeActive(!isLikeActive);
     };
-
-    // we should have a function to handle the change on clicking any
     return (
-        <div className="tweet" onClick={routingHandlerTweet}>
+        <div className="tweet" onClick={getreplieshandler}>
             <div className="repost"></div>
             <div className="tweet-container">
                 <div className="avatar-container">

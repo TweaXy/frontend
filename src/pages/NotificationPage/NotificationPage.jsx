@@ -65,6 +65,7 @@ const NotificationPage = () => {
                    key={index}
               fromuser={cur.fromUser}
               interaction={cur.interaction}
+              user={user}
                  />
                );
              } else {
@@ -86,7 +87,6 @@ const NotificationPage = () => {
                 </div>
                 <Widget  />         
             </div>
-            
         </>
     );
 };
