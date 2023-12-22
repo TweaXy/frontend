@@ -15,7 +15,7 @@ import { apiAddTweet } from '../../apis/tweetApis/AddTweet';
 import MediaErrorMsg from './MediaErrorMsg';
 import ImageUploader from './ImageUploader';
 import HomePageSelectors from '../../shared/selectors/HomePage';
-export default function TweetBox({userData,updateOffset}) {
+export default function TweetBox({ userData, updateOffset }) {
     const [text, setText] = useState('');
     const [privacylay, setPrivacylay] = useState(false);
     const [tweetImages, setTweetImages] = useState([]);
@@ -100,13 +100,13 @@ export default function TweetBox({userData,updateOffset}) {
         }
     };
 
-    const handlePostTweet =async (e) => {
-        console.log("this is a handler");
+    const handlePostTweet = async (e) => {
+        console.log('this is a handler');
         console.log(tweetImages);
         setTweetImages([]);
         setText('');
-        await apiAddTweet(text, tweetImages,userData.token);
-        // updateOffset(0);
+        await apiAddTweet(text, tweetImages, userData.token);
+        updateOffset(0);
     };
 
     const handleDisplayPrivacy = (e) => {
@@ -135,13 +135,16 @@ export default function TweetBox({userData,updateOffset}) {
                     />
                 </div>
                 <div className="media-container">
-                      <div className='span-padd' style={{height : '5px'}}></div>
-                      <ImageUploader tweetImages={tweetImages} setTweetImages={setTweetImages}/>
-                      {/* {tweetImages.length > 0 && (<img src={tweetImages[0]} />)} */}
-                    </div>
+                    <div className="span-padd" style={{ height: '5px' }}></div>
+                    <ImageUploader
+                        tweetImages={tweetImages}
+                        setTweetImages={setTweetImages}
+                    />
+                    {/* {tweetImages.length > 0 && (<img src={tweetImages[0]} />)} */}
+                </div>
                 {privacylay && (
                     <div className="privacy-lay">
-                        <div className="container-privacy"> 
+                        <div className="container-privacy">
                             <PublicIcon />
                             <h3>Everyone can reply</h3>
                         </div>

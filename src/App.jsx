@@ -17,6 +17,7 @@ import BlockSettingsPage from './pages/SettingsPage/BlockSettingsPage.jsx';
 import LikersPage from './pages/PostEngagementPage/LikersPage.jsx';
 import RetweetersPage from './pages/PostEngagementPage/retweetersPage.jsx';
 import MessagePage from './pages/MessagesPage/MessagePage.jsx';
+import RepliesPage from './pages/RepliesPage/ReplyPage.jsx';
 function App() {
     return (
         <>
@@ -72,6 +73,10 @@ function App() {
                     <Route
                         path="/Notifications"
                         element={<NotificationPage />}
+                    />
+                    <Route
+                    path="/:username/:tweetid"
+                    element={<RepliesPage/>}
                     />
                 </Routes>
             </Router>

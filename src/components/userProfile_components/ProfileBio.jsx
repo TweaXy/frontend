@@ -1,7 +1,7 @@
+import './ProfileBio.css';
 import { BiCalendar } from 'react-icons/bi';
 import { Avatar, IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import './ProfileBio.css';
 import EditProfile from './EditProfileButton';
 import parseDate from '../../utils/parseDate';
 import { useState } from 'react';
@@ -29,16 +29,15 @@ const ProfileBio = (props) => {
 
     const onButtonClick = async (event) => {
         event.stopPropagation();
-        console.log(`@${props.username} cell button is clicked..`);
         if (followedByMeState) {
-            console.log(`unfollow @${props.username}..`);
             if (await unfollow(props.username, props.token)) {
                 setFollowedByMeState(false);
+                props.actionOccurredHandler();
             }
         } else {
-            console.log(`follow @${props.username}..`);
             if (await follow(props.username, props.token)) {
                 setFollowedByMeState(true);
+                props.actionOccurredHandler();
             }
         }
     };
@@ -97,7 +96,6 @@ const ProfileBio = (props) => {
 
     const handleBlockUser = async () => {
         if (await unblock(props.username, props.token)) {
-            console.log('user is unblocked successfully');
             window.location.reload();
         }
     };
@@ -269,7 +267,7 @@ const ProfileBio = (props) => {
             <BlockUserWindow
                 openWindow={isBlockUserWindowOpened}
                 closeWindow={handleBlockUserWindowClose}
-                blockUser={handleBlockUser}
+                handleUserBlock={handleBlockUser}
                 username={props.username}
                 isUserBlocked={true}
             />
