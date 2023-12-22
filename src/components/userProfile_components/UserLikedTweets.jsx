@@ -99,6 +99,7 @@ const TweetsUSerLikes = ({ userID, curUserID }) => {
                         }
                         handleTweetsFiltering={handleTweetsFiltering}
                         // followedByMe={tweet.user.followedByMe}
+                        tweet={tweet}
                     />
                 ))}
             {actionMessage.length !== 0 && <NotifyBox text={actionMessage} />}
