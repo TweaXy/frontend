@@ -17,21 +17,30 @@ export default function MediaChecker({ media }) {
    
     return (
         <div className="media-checker">
-                   {media.length > 0  &&
-                        <ImageList sx={{ width: 511.2, height: 'fitContent' }} cols={2}  gap={10}>
-                        {media.map((item,index) => (
-                          <ImageListItem key={index} className={` img-lay--${index}${media.length}` } style={{height : imageHeightHandler(index,media.length) }}>
+            {media.length > 0 && (
+                <ImageList
+                    sx={{ width: 511.2, height: 'fitContent' }}
+                    cols={2}
+                    gap={10}
+                >
+                    {media.map((item, index) => (
+                        <ImageListItem
+                            key={index}
+                            className={` img-lay--${index}${media.length}`}
+                            style={{
+                                height: imageHeightHandler(index, media.length),
+                            }}
+                        >
                             <img
-                              srcSet={`${item}`}
-                              src={`${item}`}
-                              loading="lazy"
-                              style={{height: "inherit"}}
-                              
+                                srcSet={`https://tweaxybackend.mywire.org/api/v1/images/${item}`}
+                                src={`https://tweaxybackend.mywire.org/api/v1/images/${item}`}
+                                loading="lazy"
+                                style={{ height: 'inherit' }}
                             />
-                          </ImageListItem>
-                        ))}
-                      </ImageList>
-                    }
+                        </ImageListItem>
+                    ))}
+                </ImageList>
+            )}
         </div>
     );
 }

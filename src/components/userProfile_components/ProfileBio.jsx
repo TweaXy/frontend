@@ -1,7 +1,7 @@
-import { BiCalendar } from 'react-icons/bi';
-import { Avatar } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import './ProfileBio.css';
+import { BiCalendar } from 'react-icons/bi';
+import { Avatar, IconButton } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import EditProfile from './EditProfileButton';
 import parseDate from '../../utils/parseDate';
 import { useState } from 'react';
@@ -10,6 +10,11 @@ import LinkIcon from '@mui/icons-material/Link';
 import unfollow from '../../apis/unfollow';
 import follow from '../../apis/follow';
 import ProfilePageSelectors from '../../shared/selectors/ProfilePage';
+import { MoreHoriz } from '@mui/icons-material';
+import ProfileMoreOptionsPopDown from '../ProfileMoreOptionsPopDown/ProfileMoreOptionsPopDown';
+import BlockUserWindow from '../BlockUserWindow/BlockUserWindow';
+import block from '../../apis/block';
+import unblock from '../../apis/unblock';
 const ProfileBio = (props) => {
     const [isFollowingButtonHovered, setIsFollowingButtonHovered] =
         useState(false);
@@ -21,28 +26,26 @@ const ProfileBio = (props) => {
     const handleFollowingButtonHover = () => {
         setIsFollowingButtonHovered(!isFollowingButtonHovered);
     };
+
     const onButtonClick = async (event) => {
         event.stopPropagation();
-        console.log(`@${props.username} cell button is clicked..`);
         if (followedByMeState) {
-            console.log(`unfollow @${props.username}..`);
             if (await unfollow(props.username, props.token)) {
                 setFollowedByMeState(false);
+                props.actionOccurredHandler(
+                    `You unfollowed @${props.username}`
+                );
             }
         } else {
-            console.log(`follow @${props.username}..`);
             if (await follow(props.username, props.token)) {
                 setFollowedByMeState(true);
+                props.actionOccurredHandler(`You followed @${props.username}`);
             }
         }
     };
+
     const navigate = useNavigate();
-    const [isFollowing, setFollowing] = useState(false);
-    console.log('idProfile', props.IdProfile);
-    console.log('idUser', props.currUserId);
-    const toggleFollow = () => {
-        setFollowing(!isFollowing);
-    };
+
     const navigateToFollowingPage = () => {
         navigate(`/${props.username}/following`, {
             state: {
@@ -63,6 +66,42 @@ const ProfileBio = (props) => {
         });
     };
 
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    const handleMoreButtonClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const closeMoreOptionsMenu = () => {
+        setAnchorEl(null);
+    };
+
+    const [blockButtonText, setBlockButtonText] = useState('Block');
+    const [isBlockUserWindowOpened, setIsBlockUserWindowOpened] =
+        useState(false);
+
+    const handleBlockUserWindowClose = () => {
+        setIsBlockUserWindowOpened(false);
+    };
+
+    const handleBlockButtonClick = () => {
+        setIsBlockUserWindowOpened(true);
+    };
+
+    const handleOnBlockButtonMouseEnter = () => {
+        setBlockButtonText('Unblock');
+    };
+
+    const handleOnBlockButtonMouseLeave = () => {
+        setBlockButtonText('Block');
+    };
+
+    const handleBlockUser = async () => {
+        if (await unblock(props.username, props.token)) {
+            window.location.reload();
+        }
+    };
+
     return (
         <div className="biocontainer">
             <div className="backgroundImage">
@@ -73,7 +112,7 @@ const ProfileBio = (props) => {
                 <div className="profileImage">
                     <Avatar
                         sx={{ width: 134, height: 134 }}
-                        src={props.ProfileImage}
+                        src={`https://tweaxybackend.mywire.org/api/v1/images/${props.ProfileImage}`}
                     />
                 </div>
                 {props.IdProfile === props.currUserId ? (
@@ -87,21 +126,57 @@ const ProfileBio = (props) => {
                         authToken={props.token}
                     />
                 ) : (
-                    <div
-                        className="editProfile"
-                        onClick={onButtonClick}
-                        onMouseEnter={handleFollowingButtonHover}
-                        onMouseLeave={handleFollowingButtonHover}
-                        data-test={ProfilePageSelectors.FOLLOW_UNFOLLOW_BUTTON}
-                    >
-                        {/* {isFollowing ? 'Unfollow' : 'Follow'}</span>*/}
-                        <span>
-                            {followedByMeState === false
-                                ? 'Follow'
-                                : isFollowingButtonHovered
-                                ? 'Unfollow'
-                                : 'Following'}
-                        </span>
+                    <div className="profile-buttons-container">
+                        <div className="icon-btn-wrapper">
+                            <IconButton
+                                onClick={handleMoreButtonClick}
+                                aria-label="more"
+                                style={{
+                                    border: '1px solid var(--twitter-background)',
+                                }}
+                            >
+                                <MoreHoriz style={{ color: 'black' }} />
+                            </IconButton>
+                        </div>
+                        <ProfileMoreOptionsPopDown
+                            handleClose={closeMoreOptionsMenu}
+                            anchorEl={anchorEl}
+                            username={props.username}
+                            userID={props.IdProfile}
+                            token={props.token}
+                            MutedByMe={props.MutedByMe}
+                            blockedByMe={props.blockedByMe}
+                        />
+                        {props.blocksMe ? (
+                            <></>
+                        ) : props.blockedByMe ? (
+                            <button
+                                className="red-btn"
+                                onClick={handleBlockButtonClick}
+                                onMouseEnter={handleOnBlockButtonMouseEnter}
+                                onMouseLeave={handleOnBlockButtonMouseLeave}
+                            >
+                                {blockButtonText}
+                            </button>
+                        ) : (
+                            <div
+                                className="editProfile"
+                                onClick={onButtonClick}
+                                onMouseEnter={handleFollowingButtonHover}
+                                onMouseLeave={handleFollowingButtonHover}
+                                data-test={
+                                    ProfilePageSelectors.FOLLOW_UNFOLLOW_BUTTON
+                                }
+                            >
+                                <span>
+                                    {followedByMeState === false
+                                        ? 'Follow'
+                                        : isFollowingButtonHovered
+                                        ? 'Unfollow'
+                                        : 'Following'}
+                                </span>
+                            </div>
+                        )}
                     </div>
                 )}
             </div>
@@ -110,72 +185,94 @@ const ProfileBio = (props) => {
                 <span className="profileBiography-email">
                     @{props.username}
                 </span>
-                <div className="profileBiography-dateMargin">
-                    <span className="profileBiography-Bio">
-                        {props.bio === 'null' ? '' : props.bio}
-                    </span>
-                </div>
-                <div className="profileBiography-dateMargin">
-                    <span className="location">
-                        {props.location && (
-                            <>
-                                <LocationOnOutlinedIcon />
-                                {props.location === 'null'
-                                    ? ' '
-                                    : props.location}
-                            </>
-                        )}
-                    </span>
-                    <span className="profileBiography-Bio"> </span>{' '}
-                    <span className="pseudolink">
-                        {props.website && (
-                            <>
-                                <LinkIcon className="linkIcon" /> {'  '}
-                                <a className="linkIcon" href={props.website}>
-                                    {' '}
-                                    {props.website}
-                                </a>
-                            </>
-                        )}
-                    </span>
-                    <span className="profileBiography-joinDate">
-                        <BiCalendar /> Joined {parseDate(props.JoinedAt)}
-                    </span>
-                </div>
+                {!props.blocksMe && props.viewTweets && (
+                    <div className="profileBiography-dateMargin">
+                        <span className="profileBiography-Bio">
+                            {props.bio === 'null' ? '' : props.bio}
+                        </span>
+                    </div>
+                )}
+                {!props.blocksMe && props.viewTweets && (
+                    <div className="profileBiography-dateMargin">
+                        <span className="location">
+                            {props.location && (
+                                <>
+                                    <LocationOnOutlinedIcon />
+                                    {props.location === 'null'
+                                        ? ' '
+                                        : props.location}
+                                </>
+                            )}
+                        </span>
+                        <span className="profileBiography-Bio"> </span>{' '}
+                        <span className="pseudolink">
+                            {props.website && (
+                                <>
+                                    <LinkIcon className="linkIcon" /> {'  '}
+                                    <a
+                                        className="linkIcon"
+                                        href={props.website}
+                                    >
+                                        {' '}
+                                        {props.website}
+                                    </a>
+                                </>
+                            )}
+                        </span>
+                        <span className="profileBiography-joinDate">
+                            <BiCalendar /> Joined {parseDate(props.JoinedAt)}
+                        </span>
+                    </div>
+                )}
             </div>
-            <div className="profile-div-followers">
-                <span className="follow-link" onClick={navigateToFollowingPage}>
-                    <span className="profile-distance-between">
+            {!props.blocksMe && (
+                <div className="profile-div-followers">
+                    <span
+                        className="follow-link"
+                        onClick={navigateToFollowingPage}
+                    >
+                        <span className="profile-distance-between">
+                            <span
+                                className="profile-followers-following-number"
+                                data-test={ProfilePageSelectors.FOLLOWING_COUNT}
+                            >
+                                {props.followingNum}
+                            </span>
+                            <span
+                                className="profile-followers-following-text"
+                                data-test={ProfilePageSelectors.FOLLOWING_LINK}
+                            >
+                                Following
+                            </span>
+                        </span>
+                    </span>
+                    <span
+                        className="follow-link"
+                        onClick={navigateToFollowersPage}
+                    >
                         <span
                             className="profile-followers-following-number"
-                            data-test={ProfilePageSelectors.FOLLOWING_COUNT}
+                            data-test={ProfilePageSelectors.FOLLOWERS_COUNT}
                         >
-                            {props.followingNum}
+                            {' '}
+                            {props.followersNum}
                         </span>
                         <span
                             className="profile-followers-following-text"
-                            data-test={ProfilePageSelectors.FOLLOWING_LINK}
+                            data-test={ProfilePageSelectors.FOLLOWERS_LINK}
                         >
-                            Following
+                            Followers
                         </span>
                     </span>
-                </span>
-                <span className="follow-link" onClick={navigateToFollowersPage}>
-                    <span
-                        className="profile-followers-following-number"
-                        data-test={ProfilePageSelectors.FOLLOWERS_COUNT}
-                    >
-                        {' '}
-                        {props.followersNum}
-                    </span>
-                    <span
-                        className="profile-followers-following-text"
-                        data-test={ProfilePageSelectors.FOLLOWERS_LINK}
-                    >
-                        Followers
-                    </span>
-                </span>
-            </div>
+                </div>
+            )}
+            <BlockUserWindow
+                openWindow={isBlockUserWindowOpened}
+                closeWindow={handleBlockUserWindowClose}
+                handleUserBlock={handleBlockUser}
+                username={props.username}
+                isUserBlocked={true}
+            />
         </div>
     );
 };

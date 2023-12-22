@@ -39,7 +39,7 @@ export default function SearchBar({defaultText}) {
   
     const handleKeyPress = (event) => {
       if (event.key === 'Enter' && searchInput.length > 0) {
-        navigate(`/search/${searchInput}`, {state: {search: searchInput, isSearch: true}});
+        navigate(`/search/"${searchInput}"`, {state: {search: searchInput, isSearch: true}});
       }
     };
 

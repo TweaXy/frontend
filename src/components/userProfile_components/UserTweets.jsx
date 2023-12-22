@@ -6,10 +6,16 @@ import { useSelector } from 'react-redux';
 import { CircularProgress } from '@mui/material';
 import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
 import React from 'react';
-const UserTweets = ({ userID, curUserID }) => {
+const UserTweets = ({
+    userID,
+    curUserID,
+    followedByMe,
+    actionOccurredHandler,
+}) => {
     const [tweets, setTweets] = useState([]);
     const [isPageLoading, setIsPageLoading] = useState(true);
     const token = useSelector((state) => state.user.token);
+
     const getTweets = async () => {
         const tweetsResponse = await GetuserTweets(userID, token, 10, 0);
         console.log('user tweet response', tweetsResponse);
@@ -52,7 +58,7 @@ const UserTweets = ({ userID, curUserID }) => {
                 tweets.map((tweet) => (
                     <Tweet
                         key={tweet.mainInteraction.user.id}
-                        avatar={tweet.mainInteraction.avatar}
+                        avatar={tweet.mainInteraction.user.avatar}
                         username={tweet.mainInteraction.user.name}
                         handle={tweet.mainInteraction.user.username}
                         uploadTime={tweet.mainInteraction.createdDate}
@@ -72,6 +78,9 @@ const UserTweets = ({ userID, curUserID }) => {
                         isCurrentUserTweet={
                             curUserID === tweet.mainInteraction.user.id
                         }
+                        handleTweetsFiltering={actionOccurredHandler}
+                        followedByMe={followedByMe}
+                        tweet={tweet}
                     />
                 ))}
         </>

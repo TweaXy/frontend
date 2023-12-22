@@ -1,25 +1,28 @@
 import './Notificationcell.css';
 import './NotificationsAvaters.css';
 import MangaAvatar from '../../../assets/Manga.png';
-import followicon from '../../../assets/follow.png';
 import Avatar from '@mui/material/Avatar';
 import { useNavigate } from 'react-router';
-const Notificationcell2 = ({
-    fromuser,
-    interaction
-}) => {
-    const navigate=useNavigate(); 
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import { cyan } from '@mui/material/colors';
+const Notificationcell2 = ({ fromuser, interaction }) => {
+    const navigate = useNavigate();
     const routingHandlerProfile = (event) => {
         event.stopPropagation();
-        navigate(`/profile/${fromuser.username}`, { state: {userID:fromuser.id}})
-    };
-    const routingFollwers = () => {
-        console.log(fromuser.name,fromuser.username,fromuser.id)
-        navigate(`/${fromuser.username}/followers`, {
-            state: { name: fromuser.name, username: fromuser.username, userID: fromuser.id },
+        navigate(`/profile/${fromuser.username}`, {
+            state: { userID: fromuser.id },
         });
     };
-    const icon = followicon;
+    const routingFollwers = () => {
+        console.log(fromuser.name, fromuser.username, fromuser.id);
+        navigate(`/${fromuser.username}/followers`, {
+            state: {
+                name: fromuser.name,
+                username: fromuser.username,
+                userID: fromuser.id,
+            },
+        });
+    };
     return (
         <>
             <div className="tweet" onClick={routingFollwers}>
@@ -27,14 +30,16 @@ const Notificationcell2 = ({
                 <div className="tweet-container">
                     <div className="avatar-container">
                         <div className="Notification-avatar-box1">
-                            <Avatar
-                                src={icon}
-                                sx={{ width: 25, height: 25 }}
-                            ></Avatar>
+                            <PersonAddIcon
+                                sx={{ width: 30, height: 30, color: cyan[300] }}
+                            />
                         </div>
-                        <div className="Notification-avatar-box2" onClick={routingHandlerProfile}>
+                        <div
+                            className="Notification-avatar-box2"
+                            onClick={routingHandlerProfile}
+                        >
                             <Avatar
-                                src={MangaAvatar}
+                                src={`https://tweaxybackend.mywire.org/api/v1/images/${fromuser.avatar}`}
                                 sx={{ width: 30, height: 30 }}
                             ></Avatar>
                         </div>
@@ -42,7 +47,12 @@ const Notificationcell2 = ({
                     <div className="tweet-main">
                         <div className="Notfication-user">
                             <div className="InfoInteraction-container">
-                                <span className="username" onClick={routingHandlerProfile}>{fromuser.name} </span>
+                                <span
+                                    className="username"
+                                    onClick={routingHandlerProfile}
+                                >
+                                    {fromuser.name}{' '}
+                                </span>
                                 <span className="Interaction">
                                     followed you
                                 </span>

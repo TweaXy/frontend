@@ -1,0 +1,51 @@
+.reply-header {
+    z-index: 100;
+    top: 0%;
+    position: sticky;
+    border-bottom: 1px solid var(--twitter-background);
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+.reply-header .reply-header-element {
+    margin: 0;
+    padding: 15px 0;
+    font-size: 15px;
+    font-weight: bolder;
+    text-align: center;
+    color: var(--twitter-greyColor);
+}
+
+.weak-reply-header .reply-header-element {
+    margin: 0;
+    padding: 15px 0;
+    font-size: 15px;
+    font-weight: bolder;
+    text-align: center;
+    color: var(--twitter-greyColor);
+}
+.--reply-header-active {
+    color: black;
+
+    padding-bottom: 13px;
+}
+
+.--replyheader-container {
+    color: black;
+    display: flex;
+    align-items: flex-start;
+    font-size: 20px;
+    padding-left: 7px;
+}
+.Back_Arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Back_Arrow:hover {
+    background-color: var(--twitter-background);
+    border-radius: 50%;
+}
+.--replyheader-container span {
+    padding-left: 15px;
+}

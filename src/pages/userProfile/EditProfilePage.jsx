@@ -158,7 +158,6 @@ export default function EditProfilePage({
     const OnchangeHandlerUrl = (evt) => {
         handleChangeURL(evt);
         ProfileData_Handler(evt);
-       
     };
     const Data2_Handler = (evt) => {
         const changedelement = evt.target.name;
@@ -206,7 +205,7 @@ export default function EditProfilePage({
                                 <div className="profile-image">
                                     <Avatar
                                         sx={{ width: 100, height: 100 }}
-                                        src={ProfileImage}
+                                        src={`https://tweaxybackend.mywire.org/api/v1/images/${ProfileImage}`}
                                     />
                                     <CameraEnhanceOutlined className="profile-upload-2" />
                                     <input
@@ -256,7 +255,11 @@ export default function EditProfilePage({
                                 rows={3}
                                 label="Bio"
                                 name="userbio"
-                                value={ProfileData.userbio}
+                                value={
+                                    ProfileData.bio === 'null'
+                                        ? ''
+                                        : ProfileData.bio
+                                }
                                 onChange={ProfileData_Handler}
                             />
                         </div>
@@ -269,7 +272,11 @@ export default function EditProfilePage({
                                 id="outlined-basic"
                                 label="Location"
                                 name="location"
-                                value={ProfileData.location}
+                                value={
+                                    ProfileData.location === 'null'
+                                        ? ''
+                                        : ProfileData.location
+                                }
                                 onChange={ProfileData_Handler}
                             />
                         </div>
@@ -283,7 +290,6 @@ export default function EditProfilePage({
                                 value={ProfileData.website}
                                 onChange={OnchangeHandlerUrl}
                                 // optional pattern attribute for more specific validation
-                               
                             />
                             {!isValid && <p>Please enter a valid URL.</p>}
                         </div>

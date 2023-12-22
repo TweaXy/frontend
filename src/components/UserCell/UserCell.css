@@ -53,12 +53,23 @@
     text-decoration: underline;
 }
 
-/* .user-cell-container>.user-cell-info-container>.user-cell-upper-half>.user-cell-upper-left>.user-cell-upper-left-down {
-    
-} */
-
 .user-cell-container>.user-cell-info-container>.user-cell-upper-half>.user-cell-upper-left>.user-cell-upper-left-down>span.user-cell-username {
     color: #536471;
+}
+
+.user-cell-container>.user-cell-info-container>.user-cell-upper-half>.user-cell-upper-left>.user-cell-upper-left-down>span.user-cell-blocks-me {
+    width: 68px;
+    height: 16px;
+    padding: 2px 4px;
+    margin-left: 4px;
+    text-overflow: unset;
+    color: rgb(83, 100, 113);
+    background-color: rgba(239, 243, 244, 1.00);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 12px;
+    direction: ltr;
+    unicode-bidi: isolate;
 }
 
 .user-cell-container>.user-cell-info-container>.user-cell-upper-half>.user-cell-upper-left>.user-cell-upper-left-down>span.user-cell-follows-me {
@@ -113,6 +124,27 @@
 
 .user-cell-container>.user-cell-info-container>.user-cell-upper-half>.user-cell-upper-right>button.white-small-button:hover {
     color: red;
+}
+
+.user-cell-container>.user-cell-info-container>.user-cell-upper-half>.user-cell-upper-right>button.red-button {
+    width: 99px;
+    height: 32px;
+    padding: 0px;
+    margin-left: 12px;
+    border-radius: 9999px;
+    min-width: 99px;
+    min-height: 36px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    background-color: var(--twitter-redColor);
+    color: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600px;
+    transition: background 200ms ease, box-shadow 200ms ease;
+}
+
+.user-cell-container>.user-cell-info-container>.user-cell-upper-half>.user-cell-upper-right>button.red-button:hover {
+    background-color: rgb(234, 23, 36);
 }
 
 .user-cell-container>.user-cell-info-container>.user-cell-lower-half {
