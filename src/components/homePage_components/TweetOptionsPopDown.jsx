@@ -71,7 +71,10 @@ function TweetOptionsPopDown({
                 await unfollow(username, token);
                 setIsFollowed(false);
                 if (handleTweetsFiltering) {
-                    handleTweetsFiltering(`You unfollowed @${username}`, userID);
+                    handleTweetsFiltering(
+                        `You unfollowed @${username}`,
+                        userID
+                    );
                 }
             } catch (error) {
                 console.error(error.message);

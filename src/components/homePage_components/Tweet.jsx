@@ -39,7 +39,7 @@ export default function Tweet({
     isCurrentUserTweet,
     handleTweetsFiltering,
     followedByMe,
-    tweet
+    tweet,
 }) {
     const [tweetLikes, setTweetLikes] = useState(likes);
     const [tweetReplies, setTweetReplies] = useState(replies);
@@ -268,18 +268,27 @@ export default function Tweet({
                             >
                                 <MoreHorizIcon />
                             </div>
-                            <TweetOptionsPopDown
-                                isCurrentUserTweet={isCurrentUserTweet}
-                                handleClose={optionsCloseHandler}
-                                anchorEl={anchorEl}
-                                deleteTweetHandler={deleteTweetHandler}
-                                tweetid={tweetId}
-                                token={token}
-                                username={handle}
-                                userID={userID}
-                                handleTweetsFiltering={handleTweetsFiltering}
-                                followedByMe={followedByMe}
-                            />
+                            <div
+                                onClick={(event) => {
+                                    event.stopPropagation();
+                                }}
+                            >
+                                <TweetOptionsPopDown
+                                    isCurrentUserTweet={isCurrentUserTweet}
+                                    handleClose={optionsCloseHandler}
+                                    anchorEl={anchorEl}
+                                    deleteTweetHandler={deleteTweetHandler}
+                                    tweetid={tweetId}
+                                    token={token}
+                                    username={handle}
+                                    userID={userID}
+                                    handleTweetsFiltering={(msg, id) => {
+                                        setAnchorEl(null);
+                                        handleTweetsFiltering(msg, id);
+                                    }}
+                                    followedByMe={followedByMe}
+                                />
+                            </div>
                         </div>
                         <div className="tweet-text-container">
                             <span className="tweet-text">{tweetText}</span>

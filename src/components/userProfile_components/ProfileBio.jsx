@@ -32,12 +32,14 @@ const ProfileBio = (props) => {
         if (followedByMeState) {
             if (await unfollow(props.username, props.token)) {
                 setFollowedByMeState(false);
-                props.actionOccurredHandler();
+                props.actionOccurredHandler(
+                    `You unfollowed @${props.username}`
+                );
             }
         } else {
             if (await follow(props.username, props.token)) {
                 setFollowedByMeState(true);
-                props.actionOccurredHandler();
+                props.actionOccurredHandler(`You followed @${props.username}`);
             }
         }
     };
