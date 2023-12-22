@@ -7,6 +7,10 @@ export default function useGetTweets(token, offset) {
     const [hasMore, setHasMore] = useState(false);
 
     useEffect(() => {
+        setTweets([])
+      }, [offset]);
+
+    useEffect(() => {
         setLoading(true);
         setError(false);
         const fetchData = async () => {

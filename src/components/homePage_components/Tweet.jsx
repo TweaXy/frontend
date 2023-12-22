@@ -181,7 +181,6 @@ export default function Tweet({
         }
         setLikeActive(!isLikeActive);
     };
-    console.log("from tweet",tweetId)
     const getreplieshandler = (event) => {
         navigate(`/${handle}/${tweetId}`, {
             state: { tweetId: tweetId, curtweet: tweet },
