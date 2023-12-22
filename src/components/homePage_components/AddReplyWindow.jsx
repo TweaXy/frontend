@@ -8,7 +8,7 @@ import './AddReplyWindow.css'
 import CloseWindowHeader from './CloseWindowHeader';
 import ReplyBox from './ReplyBox';
 export default function AddReplyWindow({ open, closeHandler,avatar,username,handle,uploadTime,tweetText,addReplyHandler }) {
- 
+
     return (
         <div className="add-reply-window" >
             <Dialog

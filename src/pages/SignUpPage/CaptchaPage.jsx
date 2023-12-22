@@ -2,13 +2,15 @@ import React from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import captchaApi from '../../apis/captcha';
 import './SignUpPage.css';
-import { useRef } from 'react';
+import { useRef,useState } from 'react';
 
 const CaptchaPage = ({ nextWindowHandler }) => {
     const p3 = 'Step 3 of 5';
     const captchaRef = useRef(null);
+    const [iscomplete, setiscomplete] = useState(false);
     const captchaApiHandler = () => {
         captchaApi(captchaRef.current.getValue());
+        setiscomplete(true);
     };
 
     return (
@@ -22,10 +24,11 @@ const CaptchaPage = ({ nextWindowHandler }) => {
             <button
                 className="black-wide-button"
                 style={{
-                    background: 'black',
+                    background: iscomplete ? 'black' : 'gray',
                     marginTop: '170px',
                     marginBottom: '-140px',
                 }}
+                disabled={!iscomplete}
                 onClick={nextWindowHandler}
             >
                 Next

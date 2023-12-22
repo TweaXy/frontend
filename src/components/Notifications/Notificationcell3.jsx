@@ -15,6 +15,7 @@ export default function Notificationcell3({
     fromUser,
     interaction,
     uploadTime,
+    reply,
     token, 
     curusername,
     userID
@@ -23,7 +24,7 @@ export default function Notificationcell3({
     const avatar=fromUser.avatar
     const username=fromUser.name
     const handle=fromUser.username
-    const replaytext=interaction.text
+    const replaytext=reply.text
     const tweetMedia=''
     const likes=0
     const replies=0

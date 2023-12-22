@@ -21,6 +21,7 @@ import PushNotification from './utils/PushNotifications.jsx';
 import { requestForToken } from '../firebase.js'
 import { useEffect, useState } from 'react';
 
+import RepliesPage from './pages/RepliesPage/ReplyPage.jsx';
 function App() {
     requestForToken();
     return (
@@ -78,6 +79,10 @@ function App() {
                     <Route
                         path="/Notifications"
                         element={<NotificationPage />}
+                    />
+                    <Route
+                    path="/:username/:tweetid"
+                    element={<RepliesPage/>}
                     />
                 </Routes>
             </Router>

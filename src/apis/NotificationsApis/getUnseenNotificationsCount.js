@@ -16,7 +16,7 @@ const getUnseenNotificationsCount = async (token) => {
 
         if (response.ok) {
             const data = responseBody.data;
-            return data.count;
+            return data.notificationCount;
         }
 
         throw new Error(`Error: ${responseBody.message}`);

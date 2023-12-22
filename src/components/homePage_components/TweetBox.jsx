@@ -15,10 +15,12 @@ import { apiAddTweet } from '../../apis/tweetApis/AddTweet';
 import MediaErrorMsg from './MediaErrorMsg';
 import ImageUploader from './ImageUploader';
 import HomePageSelectors from '../../shared/selectors/HomePage';
-export default function TweetBox({userData,updateOffset}) {
+import VideoUploader from './VideoUploader';
+export default function TweetBox({ userData}) {
     const [text, setText] = useState('');
     const [privacylay, setPrivacylay] = useState(false);
     const [tweetImages, setTweetImages] = useState([]);
+    const [videoSrc, setVideoSrc] = useState([]);
     const [isMediaerrorVisable, setMediaerrorVisable] = useState(false);
     const fileInputRef = useRef(null);
     const textareaRef = useRef(null);
@@ -60,8 +62,10 @@ export default function TweetBox({userData,updateOffset}) {
             const isImage = (file) => {
                 return file.type.startsWith('image/');
             };
-
-            if (isImage(selectedMedia[0])) {
+            const isVideo = (file) => {
+                return file.type.startsWith('video/');
+            };
+            if (isVideo(selectedMedia[0]) && selectedMedia.length === 1) {
                 try {
                     const convertToDataUrl = (file) => {
                         return new Promise((resolve, reject) => {
@@ -83,6 +87,35 @@ export default function TweetBox({userData,updateOffset}) {
                         selectedMedia.map((file) => convertToDataUrl(file))
                     );
 
+                    setVideoSrc(imageUrls);
+                } catch (error) {
+                    console.error(
+                        'Error converting video to data URLs:',
+                        error
+                    );
+                }
+            }
+            if (isImage(selectedMedia[0])) {
+                try {
+                    const convertToDataUrl = (file) => {
+                        return new Promise((resolve, reject) => {
+                            const reader = new FileReader();
+
+                            reader.onload = () => {
+                                resolve(reader.result);
+                            };
+
+                            reader.onerror = (error) => {
+                                reject(error);
+                            };
+
+                            reader.readAsDataURL(file);
+                        });
+                    };
+
+                    const imageUrls = await Promise.all(
+                        selectedMedia.map((file) => convertToDataUrl(file))
+                    );
                     setTweetImages((prevImages) => [
                         ...prevImages,
                         ...imageUrls,
@@ -100,13 +133,12 @@ export default function TweetBox({userData,updateOffset}) {
         }
     };
 
-    const handlePostTweet =async (e) => {
-        console.log("this is a handler");
+    const handlePostTweet = async (e) => {
+        console.log('this is a handler');
         console.log(tweetImages);
         setTweetImages([]);
         setText('');
-        await apiAddTweet(text, tweetImages,userData.token);
-        // updateOffset(0);
+        await apiAddTweet(text, tweetImages, userData.token);
     };
 
     const handleDisplayPrivacy = (e) => {
@@ -135,13 +167,20 @@ export default function TweetBox({userData,updateOffset}) {
                     />
                 </div>
                 <div className="media-container">
-                      <div className='span-padd' style={{height : '5px'}}></div>
-                      <ImageUploader tweetImages={tweetImages} setTweetImages={setTweetImages}/>
-                      {/* {tweetImages.length > 0 && (<img src={tweetImages[0]} />)} */}
-                    </div>
+                    <div className="span-padd" style={{ height: '5px' }}></div>
+                    <ImageUploader
+                        tweetImages={tweetImages}
+                        setTweetImages={setTweetImages}
+                    />
+                    {/* {tweetImages.length > 0 && (<img src={tweetImages[0]} />)} */}
+                    <VideoUploader
+                        tweetVideo={videoSrc}
+                        settweetVideo={setVideoSrc}
+                    />
+                </div>
                 {privacylay && (
                     <div className="privacy-lay">
-                        <div className="container-privacy"> 
+                        <div className="container-privacy">
                             <PublicIcon />
                             <h3>Everyone can reply</h3>
                         </div>
@@ -151,7 +190,7 @@ export default function TweetBox({userData,updateOffset}) {
                     <div className="post-attach">
                         <input
                             type="file"
-                            accept="image/*"
+                            accept="image/*, video/*"
                             style={{ display: 'none' }}
                             ref={fileInputRef}
                             onChange={handleImageChange}
