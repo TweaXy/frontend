@@ -13,9 +13,9 @@ const GetuserTweets = async (_userid, token, _limit, _offset) => {
             },
         });
         const responseBody = await response.text();
-        console.log('get tweets response: ', responseBody);
+
         if (response.ok) {
-            const responseData = JSON.parse(responseBody);
+            const responseData = await JSON.parse(responseBody);
             if (responseData.status === 'success') {
                 const tweets = responseData.data.items;
                 console.log('Ok ' + tweets);

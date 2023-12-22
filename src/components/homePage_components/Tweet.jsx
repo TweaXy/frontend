@@ -232,7 +232,9 @@ export default function Tweet({
                 <div className="tweet-container">
                     <div className="avatar-container ">
                         <div className="avatar-box" onClick={profileRouting}>
-                            <Avatar src={avatar}></Avatar>
+                            <Avatar
+                                src={`https://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
+                            ></Avatar>
                         </div>
                     </div>
                     <div className="tweet-main">

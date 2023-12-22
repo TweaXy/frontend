@@ -44,7 +44,7 @@ const BlockedUserCell = ({ id, name, username, avatar, bio, token }) => {
             <div className="blocked-user-cell-avatar-container">
                 <Avatar
                     className="blocked-user-cell-avatar"
-                    src={avatar}
+                    src={`https://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
                     alt={name}
                 />
             </div>

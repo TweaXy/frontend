@@ -86,7 +86,7 @@ const RepliesPage = () => {
                     {replies.length > 0 &&
                         replies.map((curreply, index) => (
                             <Tweet
-                                avatar={curreply.mainInteraction.avatar}
+                                avatar={curreply.mainInteraction.user.avatar}
                                 username={curreply.mainInteraction.user.name}
                                 handle={curreply.mainInteraction.user.username}
                                 uploadTime={

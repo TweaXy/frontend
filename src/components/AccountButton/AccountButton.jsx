@@ -10,7 +10,13 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import HomePageSelectors from '../../shared/selectors/HomePage';
 
-const AccountButton = ({ userAvatar, name, username, token, setIsTherePopUpWindow }) => {
+const AccountButton = ({
+    userAvatar,
+    name,
+    username,
+    token,
+    setIsTherePopUpWindow,
+}) => {
     const [anchorEl, setAnchorEl] = useState(null);
 
     const [isLoginWindowOpen, setIsLoginWindowOpen] = useState(false);
@@ -31,7 +37,7 @@ const AccountButton = ({ userAvatar, name, username, token, setIsTherePopUpWindo
 
     const closeLoginPage = () => {
         setIsLoginWindowOpen(false);
-        setIsTherePopUpWindow(false)
+        setIsTherePopUpWindow(false);
     };
 
     const openSignUpWindow = () => {
@@ -75,7 +81,9 @@ const AccountButton = ({ userAvatar, name, username, token, setIsTherePopUpWindo
                     onClick={handleButtonClick}
                 >
                     <div className="account-btn-left">
-                        <Avatar src={userAvatar} />
+                        <Avatar
+                            src={`https://tweaxybackend.mywire.org/api/v1/images/${userAvatar}`}
+                        />
                         <div className="account-btn-body-wrapper">
                             <span className="name-span">{name}</span>
                             <span className="username-span">{`@${username}`}</span>

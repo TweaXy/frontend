@@ -46,7 +46,7 @@ const MutedUserCell = ({ id, name, username, avatar, bio, token }) => {
             <div className="muted-user-cell-avatar-container">
                 <Avatar
                     className="muted-user-cell-avatar"
-                    src={avatar}
+                    src={`https://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
                     alt={name}
                 />
             </div>

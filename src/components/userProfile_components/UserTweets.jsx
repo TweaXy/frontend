@@ -15,6 +15,7 @@ const UserTweets = ({
     const [tweets, setTweets] = useState([]);
     const [isPageLoading, setIsPageLoading] = useState(true);
     const token = useSelector((state) => state.user.token);
+
     const getTweets = async () => {
         const tweetsResponse = await GetuserTweets(userID, token, 10, 0);
         console.log('user tweet response', tweetsResponse);
@@ -57,7 +58,7 @@ const UserTweets = ({
                 tweets.map((tweet) => (
                     <Tweet
                         key={tweet.mainInteraction.user.id}
-                        avatar={tweet.mainInteraction.avatar}
+                        avatar={tweet.mainInteraction.user.avatar}
                         username={tweet.mainInteraction.user.name}
                         handle={tweet.mainInteraction.user.username}
                         uploadTime={tweet.mainInteraction.createdDate}

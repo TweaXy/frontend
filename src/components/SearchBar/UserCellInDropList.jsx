@@ -48,14 +48,20 @@ const UserCell = ({
     };
 
     return (
-        <div className="user-cell-in-drop-list-container" onClick={goToUserProfile}
+        <div
+            className="user-cell-in-drop-list-container"
+            onClick={goToUserProfile}
         >
             <div
                 className="user-cell-in-drop-list-avatar-container"
                 onMouseEnter={onMouseEnterAvatarField}
                 onMouseLeave={onMouseLeaveAvatarField}
             >
-                <Avatar className="user-cell-in-drop-list-avatar" src={avatar} alt={name} />
+                <Avatar
+                    className="user-cell-in-drop-list-avatar"
+                    src={`https://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
+                    alt={name}
+                />
             </div>
             <div className="user-cell-in-drop-list-info-container">
                 <div className="user-cell-in-drop-list-upper-half">

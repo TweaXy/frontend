@@ -85,7 +85,11 @@ const UserCell = ({
     return (
         <div className="user-cell-container" onClick={goToUserProfile}>
             <div className="user-cell-avatar-container">
-                <Avatar className="user-cell-avatar" src={avatar} alt={name} />
+                <Avatar
+                    className="user-cell-avatar"
+                    src={`https://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
+                    alt={name}
+                />
             </div>
             <div className="user-cell-info-container">
                 <div className="user-cell-upper-half">
@@ -121,7 +125,9 @@ const UserCell = ({
                             <button
                                 className="red-button"
                                 onClick={handleBlockButtonClick}
-                            >Block</button>
+                            >
+                                Block
+                            </button>
                         ) : (
                             <button
                                 data-test={
