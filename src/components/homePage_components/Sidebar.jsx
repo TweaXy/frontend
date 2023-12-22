@@ -17,10 +17,11 @@ import { useSelector } from 'react-redux';
 import AccountButton from '../AccountButton/AccountButton';
 import NotificationsButton from '../NotificationsButton/NotificationsButton';
 import HomePageSelectors from '../../shared/selectors/HomePage';
+import ConversationsButton from '../ConversationsButton/ConversationsButton';
 
 export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
     const navigate = useNavigate();
-    console.log("from sidebar ",userData)
+    console.log('from sidebar ', userData);
     const toProfile = () => {
         navigate(`/profile/${userData.user.username}`, {
             state: { userID: userData.user.id },
@@ -46,17 +47,7 @@ export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
             </div>
             <SidebarOption text="Explore" Icon={SearchIcon} />
             <NotificationsButton active={active === 3} token={userData.token} />
-            <div
-                onClick={() => {
-                    navigate('/conversations');
-                }}
-            >
-                <SidebarOption
-                    text="Messages"
-                    Icon={MailOutlineIcon}
-                    active={active == 4}
-                />
-            </div>
+            <ConversationsButton active={active == 4} token={userData.token} />
             <div
                 data-test={HomePageSelectors.PROFILE_BUTTON}
                 onClick={toProfile}
