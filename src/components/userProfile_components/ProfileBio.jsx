@@ -13,8 +13,8 @@ import ProfilePageSelectors from '../../shared/selectors/ProfilePage';
 import { MoreHoriz } from '@mui/icons-material';
 import ProfileMoreOptionsPopDown from '../ProfileMoreOptionsPopDown/ProfileMoreOptionsPopDown';
 import BlockUserWindow from '../BlockUserWindow/BlockUserWindow';
+import block from '../../apis/block';
 import unblock from '../../apis/unblock';
-
 const ProfileBio = (props) => {
     const [isFollowingButtonHovered, setIsFollowingButtonHovered] =
         useState(false);
