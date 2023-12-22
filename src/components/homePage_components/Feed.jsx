@@ -45,7 +45,7 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
 //     }, []);
 
     const removeTweet = (tweetId)=> {
-        apiDeleteTweet(tweetId,token);
+        apiDeleteTweet(tweetId,token
     };
 
     const updateOffset = (newOffest) => {
@@ -73,7 +73,7 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
             <TweetBox userData={userData} updateOffset={updateOffset}  />
 
              {tweets.map((tweet, index) => {
-                if (tweets.length <= index + 3) {
+                if (tweets.length === index + 1) {
                 return <Tweet
                     ref={lastTweetElementRef}
                     avatar={tweet.mainInteraction.avatar}
