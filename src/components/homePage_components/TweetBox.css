@@ -22,23 +22,23 @@
   padding-right: 1px;
   /* padding-bottom: 0; */
 }
-.tweetbox-form > .tweetbox-input  > textarea{
+.tweetbox-form > .tweetbox-input  > .text-area{
   background-color: white;
   color: black;
     /* height: 24px; */
-    padding: 10px 0;
-    box-sizing: border-box;
-    padding-left: 2px;
-    padding-top: 6px;
-    flex: 1;
-    border: none;
-    outline: none;
-    font-size: 20px;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
-    resize: none;
-    overflow-y: hidden;
-    line-height: 1.5;
+    padding: 10px 0 !important;
+    box-sizing: border-box !important;
+    padding-left: 2px !important;
+    padding-top: 6px !important;
+    flex: 1 !important;
+    border: none !important;
+    outline: none !important;
+    font-size: 20px !important;
+    font-family: Arial, sans-serif !important;
+    overflow: hidden !important;
+    resize: none !important;
+    overflow-y: hidden !important;
+    line-height: 1.5 !important;
 }
 .tweetbox-form > .tweetbox-input > .media-container{
   display: flex;
