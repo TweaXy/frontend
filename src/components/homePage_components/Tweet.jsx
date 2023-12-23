@@ -39,7 +39,6 @@ export default function Tweet({
     isCurrentUserTweet,
     handleTweetsFiltering,
     followedByMe,
-    tweet,
 }) {
     const [tweetLikes, setTweetLikes] = useState(likes);
     const [tweetReplies, setTweetReplies] = useState(replies);

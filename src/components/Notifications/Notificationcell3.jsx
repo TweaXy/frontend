@@ -55,8 +55,8 @@ export default function Notificationcell3({
         navigate(`/profile/${fromUser.username}`, { state: {userID:fromUser.id}})
     };
     const getreplieshandler = (event) => {
-        navigate(`/${curusername}/${interaction.parentInteractionID}`, {
-            state: { tweetId: interaction.parentInteractionID },
+        navigate(`/${curusername}/${interaction.id}`, {
+            state: { tweetId: interaction.id },
         });
     };
     useEffect(() => {

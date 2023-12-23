@@ -11,8 +11,8 @@ const Notificationcell1 = ({ fromuser, interaction,user }) => {
         console.log('routing to the tweet ');
     };
     const getreplieshandler = (event) => {
-        naviagate(`/${user.username}/${interaction.parentInteractionID}`, {
-            state: { tweetId: interaction.parentInteractionID },
+        naviagate(`/${user.username}/${interaction.id}`, {
+            state: { tweetId: interaction.id },
         });
     };
     const routingHandlerProfile = (event) => {
