@@ -22,7 +22,7 @@ const ConservationSetting = () => {
     const [isBlocked, setIsBlocked] = useState(false);
     const muteUserHandler = async () => {
         if (isMuted) {
-            if (await unmute(username, token)) {
+            if (await unmute(user.username, token)) {
                 setIsMuted(false);
                 setMuteActionOccurred(true);
                 const timeoutID = setTimeout(() => {
@@ -32,7 +32,7 @@ const ConservationSetting = () => {
                 return () => clearTimeout(timeoutID);
             }
         } else {
-            if (await mute(username, token)) {
+            if (await mute(user.username, token)) {
                 setIsMuted(true);
                 setMuteActionOccurred(true);
                 const timeoutID = setTimeout(() => {
@@ -46,12 +46,12 @@ const ConservationSetting = () => {
 
     const blockUserHandler = async () => {
         if (isBlocked) {
-            if (await unblock(username, token)) {
+            if (await unblock(user.username, token)) {
                 setIsBlocked(false);
                 window.location.reload();
             }
         } else {
-            if (await block(username, token)) {
+            if (await block(user.username, token)) {
                 setIsBlocked(true);
                 window.location.reload();
             }
