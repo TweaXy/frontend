@@ -1,5 +1,6 @@
-import { useState} from 'react';
+import {useRef, useState} from 'react';
 import React from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import '../../components/LoginWindowHeader/LoginWindowHeader.css';
 import SignUpPage1 from './SignUpPage1';
 import SignUpPage3 from './SignUpPage3';
@@ -45,6 +46,13 @@ const SignUpPage = ({ onClose }) => {
     const [password, setpassword] = useState('');
     const [canbeuser, setcanbeuser] = useState(true);
     const [verficationcode, setverficationcode] = useState('');
+    const [captchaVal,setCaptchaVal]=useState("");
+    const captchaRef = useRef(null);
+    const [iscomplete, setiscomplete] = useState(false);
+    const captchaApiHandler = () => {
+        setCaptchaVal(captchaRef.current.getValue());
+        setiscomplete(true);
+    };
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const nextWindowHandler = async () => {
@@ -59,6 +67,7 @@ const SignUpPage = ({ onClose }) => {
                     Data2,
                     password,
                     verficationcode,
+                    captchaVal,
                     setcanbeuser,
                     canbeuser,
                     setwindowOpned,
@@ -116,7 +125,26 @@ const SignUpPage = ({ onClose }) => {
                 />
             )}
             {windowOpened === 2 && (
-                <CaptchaPage nextWindowHandler={nextWindowHandler} />
+                 <div className="sign-up-page-body">
+                 <ReCAPTCHA
+                     sitekey="6Le61wEpAAAAAGgZRq-B51uGQpEP3J4_YIUDCU-o"
+                     onChange={captchaApiHandler}
+                     ref={captchaRef}
+                 />
+     
+                 <button
+                     className="black-wide-button"
+                     style={{
+                         background: iscomplete ? 'black' : 'gray',
+                         marginTop: '170px',
+                         marginBottom: '-140px',
+                     }}
+                     disabled={!iscomplete}
+                     onClick={nextWindowHandler}
+                 >
+                     Next
+                 </button>
+             </div>
             )}
             {windowOpened === 3 && (
                 <SignUpPage4
