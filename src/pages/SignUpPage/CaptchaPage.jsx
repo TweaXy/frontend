@@ -9,7 +9,7 @@ const CaptchaPage = ({ nextWindowHandler }) => {
     const captchaRef = useRef(null);
     const [iscomplete, setiscomplete] = useState(false);
     const captchaApiHandler = () => {
-        captchaApi(captchaRef.current.getValue());
+        //captchaApi(captchaRef.current.getValue());
         setiscomplete(true);
     };
 
