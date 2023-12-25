@@ -135,3 +135,7 @@ body {
 .interaction-leave-text-settings-conversation:hover {
     background-color: rgb(255, 225, 225);
 }
+
+.snooze-switch{
+   right: -35%;
+}

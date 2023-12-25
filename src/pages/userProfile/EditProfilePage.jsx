@@ -25,8 +25,8 @@ export default function EditProfilePage({
 }) {
     const [selectedImage, setSelectedImage] = useState(cover);
     const [ProfileImage, setProfileImage] = useState(avatar);
-    const [TempProfileImage, setTempProfileImage] = useState('');
-    const [TempselectedImage, setTempselectedImage] = useState('');
+    const [TempProfileImage, setTempProfileImage] = useState(null);
+    const [TempselectedImage, setTempselectedImage] = useState(null);
     const [ProfileData, changeProfileData] = useState({
         name: name,
         userbio: bio,
@@ -97,13 +97,9 @@ export default function EditProfilePage({
 
             reader.onloadend = () => {
                 setSelectedImage(reader.result);
-                // onAvatarChange(reader.result);
             };
             reader.readAsDataURL(file);
         }
-    };
-    const handleRemoveAvatar = () => {
-        setProfileImage(null);
     };
 
     const handleProfileImage = (e) => {
@@ -195,7 +191,7 @@ export default function EditProfilePage({
                                 <button
                                     className="remove-cover-button"
                                     onClick={() => {
-                                        setSelectedImage('');
+                                        setSelectedImage("");
                                         deleteBannerApi(authToken);
                                     }}
                                 >
@@ -205,7 +201,7 @@ export default function EditProfilePage({
                                 <div className="profile-image">
                                     <Avatar
                                         sx={{ width: 100, height: 100 }}
-                                        src={`https://tweaxybackend.mywire.org/api/v1/images/${ProfileImage}`}
+                                        src={ProfileImage}
                                     />
                                     <CameraEnhanceOutlined className="profile-upload-2" />
                                     <input

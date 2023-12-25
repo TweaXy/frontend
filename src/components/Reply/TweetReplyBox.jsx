@@ -16,7 +16,7 @@ import ImageUploader from '../homePage_components/ImageUploader';
 import HomePageSelectors from '../../shared/selectors/HomePage';
 import { apiAddReply } from '../../apis/tweetApis/AddReply';
 import { useNavigate } from 'react-router-dom';
-export default function TweetReplyBox({tweet,token,render,setrender}) {
+export default function TweetReplyBox({tweet,token,setrender}) {
     const [ok,setok]=useState(true);
     const [text, setText] = useState('');
     const [Images, setTweetImages] = useState([]);
@@ -100,7 +100,7 @@ export default function TweetReplyBox({tweet,token,render,setrender}) {
         setTweetImages([]);
         setText('');
         apiAddReply(tweet.mainInteraction.id, text, Images, token)
-        setrender(!render)
+        setrender(last=>!last)
     };
     const routingHandlerProfile = (event) => {
         console.log('routing to this user profile ');

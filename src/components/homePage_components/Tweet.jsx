@@ -39,7 +39,6 @@ export default function Tweet({
     isCurrentUserTweet,
     handleTweetsFiltering,
     followedByMe,
-    tweet,
 }) {
     const [tweetLikes, setTweetLikes] = useState(likes);
     const [tweetReplies, setTweetReplies] = useState(replies);
@@ -183,7 +182,7 @@ export default function Tweet({
     const getreplieshandler = (event) => {
         event.stopPropagation();
         navigate(`/${handle}/${tweetId}`, {
-            state: { tweetId: tweetId, curtweet: tweet },
+            state: { tweetId: tweetId },
         });
     };
 

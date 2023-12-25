@@ -5,11 +5,15 @@ import Avatar from '@mui/material/Avatar';
 import { Navigate, useNavigate } from 'react-router';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { pink } from '@mui/material/colors';
-const Notificationcell1 = ({ fromuser, interaction }) => {
+const Notificationcell1 = ({ fromuser, interaction,user }) => {
     const naviagate = useNavigate();
     const routingHandlerTweet = () => {
         console.log('routing to the tweet ');
-        // route to the tweet
+    };
+    const getreplieshandler = (event) => {
+        naviagate(`/${user.username}/${interaction.id}`, {
+            state: { tweetId: interaction.id },
+        });
     };
     const routingHandlerProfile = (event) => {
         event.stopPropagation();
@@ -21,7 +25,7 @@ const Notificationcell1 = ({ fromuser, interaction }) => {
     };
     return (
         <>
-            <div className="tweet" on onClick={routingHandlerTweet}>
+            <div className="tweet"  onClick={getreplieshandler}>
                 <div className="repost"></div>
                 <div className="tweet-container">
                     <div className="avatar-container">

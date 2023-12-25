@@ -4,8 +4,8 @@ import '../../components/homePage_components/FeedHeader.css';
 import Tweet from '../homePage_components/Tweet';
 const NotificationHeader = ({}) => {
     return (
-        <div className={'feed-header'}>
-            <div style={{ flex: 1 }} className="feed-haeder-element">
+        <div className={'reply-header'} style={{ borderBottom: 'none' }}>
+        <div style={{ flex: 1 }} className="reply-header-element ">
                 <span className={'--feed-header-active'}>Notifications</span>
             </div>
             <div className="icon-wrapper">

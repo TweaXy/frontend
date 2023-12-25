@@ -2,29 +2,15 @@ import React from 'react';
 import ConversationWindowHeader from './conversationHeader';
 import './conversation.css';
 import Button from '@mui/material/Button';
-import SettingsConversationHeader from './settingsConversationHeader';
 import { useSelector } from 'react-redux';
-import UserCell from '../UserCell/UserCell';
 import { useState, useEffect } from 'react';
 import getConversationsApi from '../../apis/getConversations';
 import ConversationCells from './conversationCells.jsx';
-
+import ConservationSetting from './conservationUserSetting.jsx';
 const ListConversation = () => {
     const token = useSelector((state) => state.user.token);
-    const myID = useSelector((state) => state.user.user).id;
-    const user = useSelector((state) => state.user.user);
     const [isSettingOpened, setIsSettingOpened] = useState(1);
     const [users, setUsers] = useState([]);
-    const leaveConversationHandler = () => {
-        console.log(' leave conversation');
-    };
-    const muteUserHandler = () => {
-        console.log(' mute user');
-    };
-
-    const blockUserHandler = () => {
-        console.log(' block user');
-    };
     const [isPageLoading, setIsPageLoading] = useState(true);
     useEffect(() => {
         if (token) {
@@ -77,50 +63,7 @@ const ListConversation = () => {
             </div>
 
             {isSettingOpened == 0 && (
-                <div className="settings-converation-style">
-                    <SettingsConversationHeader />
-                    <UserCell
-                        key={myID}
-                        id={myID}
-                        name={user.name}
-                        username={user.username}
-                        avatar={user.avatar}
-                        bio={user.bio === 'null' ? '' : user.bio}
-                        followsMe={user.followsMe}
-                        followedByMe={user.followedByMe}
-                        token={token}
-                        myID={myID}
-                    />
-                    <span className="span-notification-text-settings-conversation">
-                        <span className="text-settings-conversation-page">
-                            Notifications
-                        </span>
-                        <span className="snooze-text-settings-conversation">
-                            Snooze notifications from @{user.username}
-                        </span>
-                    </span>
-
-                    <div>
-                        <div
-                            className="interaction-text-settings-conversation"
-                            onClick={blockUserHandler}
-                        >
-                            block @{user.username}
-                        </div>
-                        <div
-                            className="interaction-text-settings-conversation"
-                            onClick={muteUserHandler}
-                        >
-                            mute @{user.username}
-                        </div>
-                        <div
-                            className="interaction-leave-text-settings-conversation"
-                            onClick={leaveConversationHandler}
-                        >
-                            Leave Conversation
-                        </div>
-                    </div>
-                </div>
+               < ConservationSetting />
             )}
         </>
     );

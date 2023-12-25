@@ -48,21 +48,17 @@ export default function Notificationcell3({
     const tweetDate = '2023-12-08T12:00:00';
     const routingHandlerProfile1 = (event) => {
         event.stopPropagation();
-        console.log('routing to this user profile ');
         navigate(`/profile/${curusername}`, { state: {userID:userID}})
     };
     const routingHandlerProfile2 = (event) => {
         event.stopPropagation();
-        console.log('routing to this user profile ');
         navigate(`/profile/${fromUser.username}`, { state: {userID:fromUser.id}})
     };
-    const routingHandlerTweet = () => {
-        console.log('routing to the tweet ');
-        // navigate(`/profile/${fromUser.username}`, { state: {userID:fromUser.id}})
-        //tweet-compontent
-        // route to the tweet
+    const getreplieshandler = (event) => {
+        navigate(`/${curusername}/${interaction.id}`, {
+            state: { tweetId: interaction.id },
+        });
     };
-    
     useEffect(() => {
         // adjust this to be useRef
 
@@ -167,27 +163,23 @@ export default function Notificationcell3({
     }, []);
 
     const likeDislikeTweetHandler = (e) => {
-        //call api likeDislikeTweetHandler
+        e.stopPropagation()
         if (isLikeActive) {
-            //dislike it
             apiDislikeTweet(tweetId, token);
             setTweetLikes((likes) => likes - 1);
         } else {
-            //like it
             apiLikeTweet(tweetId, token);
             setTweetLikes((likes) => likes + 1);
         }
         setLikeActive(!isLikeActive);
     };
-
-    // we should have a function to handle the change on clicking any
     return (
-        <div className="tweet" onClick={routingHandlerTweet}>
+        <div className="tweet" onClick={getreplieshandler}>
             <div className="repost"></div>
             <div className="tweet-container">
-                <div className="avatar-container">
+                <div className="avatar-container" >
                     {/* avatar */}
-                    <AvatarBox img={avatar} />
+                    <AvatarBox img={avatar} onClick={routingHandlerProfile2}/>
                 </div>
 
                 <div className="tweet-main">
@@ -201,9 +193,6 @@ export default function Notificationcell3({
                             <span className="profileBiography-joinDate" style={{paddingBottom:'5px'}}>
                                 {TweetDate(uploadTime)}
                             </span>
-                        </div>
-                        <div className="options-container cian-hover">
-                            <MoreHorizIcon />
                         </div>
                     </div>
                     <div className="Notification-text-container">

@@ -9,7 +9,6 @@ const deleteProfileApi = (authToken) => {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log('Response from the API:', data);
             if (data.status === 'success') {
                 console.log('picture deleted successfully');
             } else {
