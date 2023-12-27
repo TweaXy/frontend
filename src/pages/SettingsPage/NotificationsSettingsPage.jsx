@@ -12,7 +12,7 @@ const NotificationsSettingsPage = () => {
     const token = useSelector((state) => state.user.token);
     const user = useSelector((state) => state.user.user);
 
-    // TODO : add if push notifications enabled (redux)
+    // TODO : add if push notifications enabled (redux) 
     const [isPushNotificationsOn, setIsPushNotificationsOn] = useState(true);
 
     const [isPageLoading, setIsPageLoading] = useState(true);

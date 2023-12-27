@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { setUser, setToken, clearUser } from './actions';
+import { setUser, setToken, clearUser,setWebToken } from './actions';
 
 const initialState = {
     user: {},
@@ -15,9 +15,14 @@ const userReducer = createReducer(initialState, (builder) => {
         state.token = action.payload;
     });
 
+    builder.addCase(setWebToken, (state, action) => {
+        state.WebToken = action.payload;
+    });
+
     builder.addCase(clearUser, (state) => {
         state.user = {};
         state.token = null;
+        state.WebToken=null
     });
 });
 

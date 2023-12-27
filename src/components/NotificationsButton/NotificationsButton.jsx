@@ -4,9 +4,11 @@ import Badge from '@mui/material/Badge';
 import { useNavigate } from 'react-router';
 import { NotificationsActive, NotificationsNone } from '@mui/icons-material';
 import getUnseenNotificationsCount from '../../apis/NotificationsApis/getUnseenNotificationsCount';
+import PushNotification from '../../utils/PushNotifications';
 
 const NotificationsButton = ({ active, token }) => {
     const [notificationsCount, setNotificationCount] = useState(0);
+    const [updatecnt,setupdatecnt]=useState(true)
     const navigate = useNavigate();
 
     const handleNotificationsButtonClick = () => {
@@ -23,6 +25,7 @@ const NotificationsButton = ({ active, token }) => {
                     curUnseenNotificationsCount
                 );
                 setNotificationCount(curUnseenNotificationsCount);
+                setupdatecnt(false);
             } catch (error) {
                 console.error(error.message);
                 setNotificationCount(0);
@@ -31,10 +34,10 @@ const NotificationsButton = ({ active, token }) => {
 
         if (active === true) {
             setNotificationCount(0);
-        } else {
+        } else if(updatecnt===true) {
             getCurUnseenNotificationCount();
         }
-    }, [token, active]);
+    }, [token, active,updatecnt]);
 
     return (
         <div
@@ -43,6 +46,7 @@ const NotificationsButton = ({ active, token }) => {
             }`}
             onClick={handleNotificationsButtonClick}
         >
+            <PushNotification alert={()=>setupdatecnt(true)}/>
             {notificationsCount === 0 && (
                 <div className="notifications-icon-wrapper">
                     <NotificationsNone />

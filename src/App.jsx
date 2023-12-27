@@ -21,15 +21,33 @@ import MessagePage from './pages/MessagesPage/MessagePage.jsx';
 import PushNotification from './utils/PushNotifications.jsx';
 import { requestForToken } from '../firebase.js'
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import RepliesPage from './pages/RepliesPage/ReplyPage.jsx';
 import MentionsPage from './pages/MentionsPage/MentionsPage.jsx';
+import { setWebToken } from './redux/actions.js';
 function App() {
-    requestForToken();
+    const dispatch=useDispatch();
+    useEffect(()=>{
+        gettoken();
+    },[])
+    const gettoken = async () => {
+        try{
+            const token = await requestForToken();
+            console.log("from app",token)
+            dispatch(setWebToken(token));
+        }
+        catch(err){
+            console.error(err.message)
+        }
+    };
+    // requestForToken();
+
     return (
         <>
         <PushNotification/>
             <Router>
+                
                 <Routes>
                     <Route index element={<WelcomePage />} />
                     <Route
