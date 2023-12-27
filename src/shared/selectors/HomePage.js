@@ -10,7 +10,9 @@ const HomePageSelectors = {
     ACCOUNT_BUTTON: 'account_button',
     LOGOUT_BUTTON: 'log_out_button',
     SETTINGS_BUTTON: 'settings_button',
+    SEARCH_BAR: 'search_bar',
     SEARCH_FIELD: 'search_textfield',
+    USER_SEARCH_ITEM: 'user_search_item'
 };
 
 export default HomePageSelectors;

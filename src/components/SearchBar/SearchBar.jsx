@@ -85,6 +85,7 @@ export default function SearchBar({defaultText}) {
             id="widget-search"
             className="search-bar"
             placeholder="Search"
+            data-test={HomePageSelectors.SEARCH_BAR}
             value={searchInput}
             onChange = {
               (e) => setSearchInput(e.target.value)

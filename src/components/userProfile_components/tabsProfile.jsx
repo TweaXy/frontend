@@ -1,3 +1,4 @@
+import ProfilePageSelectors from '../../shared/selectors/ProfilePage';
 import '../userProfile_components/tabsProfile.css';
 import TweetsUSerLikes from './UserLikedTweets';
 import UserTweets from './UserTweets';
@@ -30,6 +31,7 @@ const TabsProfile = ({
                     </span>
                 </div>
                 <div
+                    data-test={ProfilePageSelectors.LIKES_TAB}
                     style={{ flex: 0.5 }}
                     className=" feed-haeder-element"
                     onClick={() => setActivePage(1)}

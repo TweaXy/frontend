@@ -6,6 +6,7 @@ import {
     DialogTitle,
 } from '@mui/material';
 import './BlockUserWindow.css';
+import ProfilePageSelectors from '../../shared/selectors/ProfilePage';
 
 const BlockUserWindow = ({
     openWindow,
@@ -65,6 +66,7 @@ const BlockUserWindow = ({
                             </Button>
                         ) : (
                             <Button
+                                data-test={ProfilePageSelectors.BLOCK_USER_CONFIRM_BUTTON}
                                 variant="outlined"
                                 className="block-btn"
                                 onClick={blockUserHandler}

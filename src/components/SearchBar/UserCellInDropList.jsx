@@ -4,6 +4,7 @@ import { Avatar } from '@mui/material';
 import unfollow from '../../apis/unfollow';
 import follow from '../../apis/follow';
 import { useNavigate } from 'react-router-dom';
+import HomePageSelectors from '../../shared/selectors/HomePage';
 
 const UserCell = ({
     id,
@@ -51,6 +52,7 @@ const UserCell = ({
         <div
             className="user-cell-in-drop-list-container"
             onClick={goToUserProfile}
+            data-test={`${username}-${HomePageSelectors.USER_SEARCH_ITEM}`}
         >
             <div
                 className="user-cell-in-drop-list-avatar-container"

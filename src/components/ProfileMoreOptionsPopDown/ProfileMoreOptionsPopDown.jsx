@@ -12,6 +12,7 @@ import unmute from '../../apis/unmute';
 import block from '../../apis/block';
 import mute from '../../apis/mute';
 import BlockUserWindow from '../BlockUserWindow/BlockUserWindow';
+import ProfilePageSelectors from '../../shared/selectors/ProfilePage';
 
 const ProfileMoreOptionsPopDown = ({
     handleClose,
@@ -97,7 +98,7 @@ const ProfileMoreOptionsPopDown = ({
                     {isMuted ? <VolumeMuteIcon /> : <VolumeOffIcon />}
                     {`${isMuted ? 'Unmute' : 'Mute'} @${username}`}
                 </MenuItem>
-                <MenuItem onClick={onBlockOptionClick}>
+                <MenuItem data-test={ProfilePageSelectors.BLOCK_USER_BUTTON} onClick={onBlockOptionClick}>
                     {isBlocked ? <HighlightOffIcon /> : <BlockIcon />}
                     {`${isBlocked ? 'Unblock' : 'Block'} @${username}`}
                 </MenuItem>

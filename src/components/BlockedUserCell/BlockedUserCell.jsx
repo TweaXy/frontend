@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import NotifyBox from '../NotifyBox/NotifyBox';
 import unblock from '../../apis/unblock';
 import block from '../../apis/block';
+import SettingsPageSelectors from '../../shared/selectors/SettingsPage';
 
 const BlockedUserCell = ({ id, name, username, avatar, bio, token }) => {
     const [isBlocked, setIsBlocked] = useState(true);
@@ -60,6 +61,7 @@ const BlockedUserCell = ({ id, name, username, avatar, bio, token }) => {
                     </div>
                     <div className="blocked-user-cell-upper-right">
                         <button
+                            data-test={SettingsPageSelectors.UNBLOCK_USER_CELL_BUTTON}
                             className={
                                 isBlocked === true ? 'red-btn' : 'white-btn'
                             }
