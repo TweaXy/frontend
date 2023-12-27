@@ -173,7 +173,7 @@ function TweetOptionsPopDown({
                     </MenuItem>
                 )}
                 {
-                    <MenuItem onClick={handleAnalytics}>
+                    <MenuItem data-test={TweetSelectors.VIEW_POST_ANALYTICS} onClick={handleAnalytics}>
                         <BarChartOutlinedIcon />
                         View post analytics
                     </MenuItem>
