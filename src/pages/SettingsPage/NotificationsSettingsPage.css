@@ -1,0 +1,142 @@
+.notifications-settings-page-container {
+    width: 100%;
+    display: flex;
+    height: 100vh;
+    /* max-width: 1300px; */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    padding: 0 10px;
+    background-color: white;
+    color: black;
+}
+
+.notifications-settings-page-container>.notifications-settings-widget {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--twitter-background);
+}
+
+.notifications-settings-page-container>.notifications-settings-widget>.notifications-settings-header {
+    height: 53px;
+    padding: 0px 16px;
+    display: flex;
+    flex-direction: row;
+}
+
+.notifications-settings-page-container>.notifications-settings-widget>.notifications-settings-header>.arrow-back {
+    flex: 0.1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notifications-settings-page-container>.notifications-settings-widget>.notifications-settings-header>.arrow-back>.shadow:hover {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--twitter-background);
+    border-radius: 50%;
+}
+
+.notifications-settings-page-container>.notifications-settings-widget>.notifications-settings-header>span {
+    flex: 0.9;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.notifications-settings-page-container>.notifications-settings-widget>.notifications-settings-body {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.push-notifications-switch-container {
+    width: 78%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-switch {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.push-notifications-switch-container>span {
+    font-size: 15px;
+    text-align: left;
+    color: #536471;
+}
+
+.push-notifications-button-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.push-notifications-button-container>.span-container {
+    width: 400px;
+    height: 164px;
+    margin: 96px 64px;
+    padding: 0 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.push-notifications-button-container>.span-container>span.header-span {
+    font-size: 31px;
+    font-weight: 600;
+    color: #0F1419;
+    text-align: left;
+}
+
+.push-notifications-button-container>.span-container>span.body-span {
+    margin: 12px 0;
+    text-align: left;
+    font-size: 15px;
+    color: #536471;
+}
+
+.push-notifications-btn {
+    outline: none !important;
+    background-color: var(--button-background) !important;
+    color: white !important;
+    font-weight: 550 !important;
+    font-size: 17px !important;
+    height: auto !important;
+    border-radius: 9999px !important;
+    border: none !important;
+    padding: 0 32px;
+    text-transform: inherit !important;
+    width: 128px;
+    margin-top: 0px !important;
+    align-self: flex-start;
+    align-items: stretch;
+    min-width: 52px;
+    min-height: 52px;
+    transition-duration: 0.2;
+    cursor: pointer;
+}
+
+.push-notifications-btn:hover {
+    background-color: #1a89ce !important;
+}
+
+.push-notifications-on-border {
+    width: 100%;
+    margin-top: 24px;
+    border-bottom: 1px solid var(--twitter-background);
+}
