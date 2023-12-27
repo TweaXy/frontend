@@ -252,9 +252,9 @@ export default function EditProfilePage({
                                 label="Bio"
                                 name="userbio"
                                 value={
-                                    ProfileData.bio === 'null'
+                                    ProfileData.userbio === 'null'
                                         ? ''
-                                        : ProfileData.bio
+                                        : ProfileData.userbio
                                 }
                                 onChange={ProfileData_Handler}
                             />
