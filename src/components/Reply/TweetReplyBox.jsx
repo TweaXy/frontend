@@ -16,6 +16,7 @@ import ImageUploader from '../homePage_components/ImageUploader';
 import HomePageSelectors from '../../shared/selectors/HomePage';
 import { apiAddReply } from '../../apis/tweetApis/AddReply';
 import { useNavigate } from 'react-router-dom';
+import TweetSelectors from '../../shared/selectors/Tweets';
 export default function TweetReplyBox({tweet,token,setrender}) {
     const [ok,setok]=useState(true);
     const [text, setText] = useState('');
@@ -116,8 +117,9 @@ if(ok)
         />
         {/* <Avatar src="myphoto.jpg"/> */}
         <form action="" className="reply-box-form">
-            <div className="reply-box-input">
+            <div  className="reply-box-input">
                 <TextareaAutosize
+                    data-test={TweetSelectors.TWEET_REPLY_FIELD}
                     placeholder="Post your reply"
                     value={text}
                     onChange={handleChange}
@@ -125,6 +127,7 @@ if(ok)
                     ref={textareaRef}
                 />
                             <Button
+                    data-test={TweetSelectors.TWEET_REPLY_BUTTON}
                     className="reply2-box-button"
                     onClick={replyTweetHandler}
                     disabled={true}
@@ -158,6 +161,7 @@ if(ok)
                     </div>
             <div className="reply-box-input">
                 <TextareaAutosize
+                    data-test={TweetSelectors.TWEET_REPLY_FIELD}
                     placeholder="Post your reply"
                     value={text}
                     onChange={handleChange}
@@ -208,6 +212,7 @@ if(ok)
                 </Button>}
                 
                  {text.length>0&&  <Button
+                    data-test={TweetSelectors.TWEET_REPLY_BUTTON}
                     className="reply-box-button"
                     onClick={replyTweetHandler}
                 >
