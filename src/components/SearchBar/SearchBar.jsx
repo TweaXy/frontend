@@ -13,6 +13,7 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
+import HomePageSelectors from '../../shared/selectors/HomePage';
 
 
 export default function SearchBar({defaultText}) {
@@ -78,6 +79,7 @@ export default function SearchBar({defaultText}) {
             <SearchIcon />
           </div>
           <input
+            data-test={HomePageSelectors.SEARCH_FIELD}
             type="search"
             name="widget-search"
             id="widget-search"

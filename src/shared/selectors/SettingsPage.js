@@ -15,6 +15,9 @@ const SettingsPageSelectors = {
     NEXT_BUTTON: 'next_button',
     VERIFICATION_CODE_FIELD: 'verification_code_field',
     NEW_EMAIL_FIELD: 'new_email_field',
+
+    MUTED_ACCOUNTS_LIST_BUTTON: 'mute_button',
+    UNMUTE_BUTTON: 'unmute_button',
 };
 
 export default SettingsPageSelectors;

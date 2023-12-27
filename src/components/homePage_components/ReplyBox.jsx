@@ -14,6 +14,7 @@ import './ReplyBox.css';
 import MediaErrorMsg from './MediaErrorMsg';
 import ImageUploader from './ImageUploader';
 import HomePageSelectors from '../../shared/selectors/HomePage';
+import TweetSelectors from '../../shared/selectors/Tweets';
 export default function ReplyBox({closeHandler,addReplyHandler}) {
     const [text, setText] = useState('');
     const [tweetImages, setTweetImages] = useState([]);
@@ -121,6 +122,7 @@ export default function ReplyBox({closeHandler,addReplyHandler}) {
             <form action="" className="reply-box-form">
                 <div className="reply-box-input">
                     <TextareaAutosize
+                        data-test={TweetSelectors.TWEET_REPLY_FIELD}
                         placeholder="Post your reply"
                         value={text}
                         onChange={handleChange}
@@ -164,6 +166,7 @@ export default function ReplyBox({closeHandler,addReplyHandler}) {
                         </div>
                     </div>
                     <Button
+                        data-test={TweetSelectors.TWEET_REPLY_BUTTON}
                         className="reply-box-button"
                         onClick={replyTweetHandler}
                     >
