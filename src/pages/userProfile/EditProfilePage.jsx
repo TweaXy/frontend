@@ -25,8 +25,8 @@ export default function EditProfilePage({
 }) {
     const [selectedImage, setSelectedImage] = useState(cover);
     const [ProfileImage, setProfileImage] = useState(avatar);
-    const [TempProfileImage, setTempProfileImage] = useState('');
-    const [TempselectedImage, setTempselectedImage] = useState('');
+    const [TempProfileImage, setTempProfileImage] = useState(null);
+    const [TempselectedImage, setTempselectedImage] = useState(null);
     const [ProfileData, changeProfileData] = useState({
         name: name,
         userbio: bio,
@@ -97,13 +97,9 @@ export default function EditProfilePage({
 
             reader.onloadend = () => {
                 setSelectedImage(reader.result);
-                // onAvatarChange(reader.result);
             };
             reader.readAsDataURL(file);
         }
-    };
-    const handleRemoveAvatar = () => {
-        setProfileImage(null);
     };
 
     const handleProfileImage = (e) => {
@@ -158,7 +154,6 @@ export default function EditProfilePage({
     const OnchangeHandlerUrl = (evt) => {
         handleChangeURL(evt);
         ProfileData_Handler(evt);
-       
     };
     const Data2_Handler = (evt) => {
         const changedelement = evt.target.name;
@@ -196,7 +191,7 @@ export default function EditProfilePage({
                                 <button
                                     className="remove-cover-button"
                                     onClick={() => {
-                                        setSelectedImage('');
+                                        setSelectedImage("");
                                         deleteBannerApi(authToken);
                                     }}
                                 >
@@ -256,7 +251,11 @@ export default function EditProfilePage({
                                 rows={3}
                                 label="Bio"
                                 name="userbio"
-                                value={ProfileData.bio === 'null' ? '' : ProfileData.bio}
+                                value={
+                                    ProfileData.userbio === 'null'
+                                        ? ''
+                                        : ProfileData.userbio
+                                }
                                 onChange={ProfileData_Handler}
                             />
                         </div>
@@ -269,7 +268,11 @@ export default function EditProfilePage({
                                 id="outlined-basic"
                                 label="Location"
                                 name="location"
-                                value={ProfileData.location === 'null' ? '' : ProfileData.location}
+                                value={
+                                    ProfileData.location === 'null'
+                                        ? ''
+                                        : ProfileData.location
+                                }
                                 onChange={ProfileData_Handler}
                             />
                         </div>
@@ -283,7 +286,6 @@ export default function EditProfilePage({
                                 value={ProfileData.website}
                                 onChange={OnchangeHandlerUrl}
                                 // optional pattern attribute for more specific validation
-                               
                             />
                             {!isValid && <p>Please enter a valid URL.</p>}
                         </div>

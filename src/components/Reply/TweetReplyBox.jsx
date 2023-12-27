@@ -15,13 +15,15 @@ import MediaErrorMsg from '../homePage_components/MediaErrorMsg'
 import ImageUploader from '../homePage_components/ImageUploader';
 import HomePageSelectors from '../../shared/selectors/HomePage';
 import { apiAddReply } from '../../apis/tweetApis/AddReply';
-export default function TweetReplyBox({tweetId,token}) {
+import { useNavigate } from 'react-router-dom';
+export default function TweetReplyBox({tweet,token,setrender}) {
     const [ok,setok]=useState(true);
     const [text, setText] = useState('');
     const [Images, setTweetImages] = useState([]);
     const [isMediaerrorVisable, setMediaerrorVisable] = useState(false);
     const fileInputRef = useRef(null);
     const textareaRef = useRef(null);
+    const naviagte=useNavigate();
     useEffect(() => {
         // Set initial height when the component mounts
         const textarea = document.querySelector('.reply-box-input >  textarea ');
@@ -94,17 +96,23 @@ export default function TweetReplyBox({tweetId,token}) {
         }
     };
     const replyTweetHandler =async (e) => {
+        console.log("adding a reply")
         setTweetImages([]);
         setText('');
-        apiAddReply(tweetId, text, Images, token)
+        apiAddReply(tweet.mainInteraction.id, text, Images, token)
+        setrender(last=>!last)
+    };
+    const routingHandlerProfile = (event) => {
+        console.log('routing to this user profile ');
+        naviagte(`/profile/${tweet.mainInteraction.user.username}`, { state: {userID:tweet.mainInteraction.user.id}})
     };
 if(ok)
 {
     return(
         <div className="reply-box" onClick={()=>setok(false)}>
         <AvatarBox
-            img={
-''            }
+            img={ tweet.mainInteraction.user.avatar
+       }
         />
         {/* <Avatar src="myphoto.jpg"/> */}
         <form action="" className="reply-box-form">
@@ -133,8 +141,8 @@ if(ok)
     return (
         <div className="reply-box" >
         <AvatarBox
-            img={
-''            }
+            img={ tweet.mainInteraction.user.avatar
+    }
         />
         {/* <Avatar src="myphoto.jpg"/> */}
         <form action="" className="reply-box-form">
@@ -142,9 +150,10 @@ if(ok)
                         <span className="reply-text">Replying to </span>
                         <span
                             className="username-text"
-                            // onClick={routingHandlerProfile1}
+                            style={{ cursor: 'pointer' }}
+                              onClick={routingHandlerProfile}
                         >
-                            @Manga
+                            {tweet.mainInteraction.user.username}
                         </span>
                     </div>
             <div className="reply-box-input">

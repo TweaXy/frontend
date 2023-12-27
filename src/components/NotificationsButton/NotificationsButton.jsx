@@ -10,7 +10,7 @@ const NotificationsButton = ({ active, token }) => {
     const navigate = useNavigate();
 
     const handleNotificationsButtonClick = () => {
-        navigate('/Notifications');
+        navigate('/notifications');
     };
 
     useEffect(() => {

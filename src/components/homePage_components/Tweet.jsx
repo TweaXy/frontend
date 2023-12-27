@@ -39,7 +39,6 @@ export default function Tweet({
     isCurrentUserTweet,
     handleTweetsFiltering,
     followedByMe,
-    tweet,
 }) {
     const [tweetLikes, setTweetLikes] = useState(likes);
     const [tweetReplies, setTweetReplies] = useState(replies);
@@ -55,7 +54,6 @@ export default function Tweet({
     const iconInteraction3 = useRef(null);
     const iconInteraction4 = useRef(null);
     const navigate = useNavigate();
-
     const profileRouting = (event) => {
         event.stopPropagation();
         navigate(`/profile/${username}`, {
@@ -182,8 +180,9 @@ export default function Tweet({
         setLikeActive(!isLikeActive);
     };
     const getreplieshandler = (event) => {
+        event.stopPropagation();
         navigate(`/${handle}/${tweetId}`, {
-            state: { tweetId: tweetId, curtweet: tweet },
+            state: { tweetId: tweetId },
         });
     };
 
@@ -232,7 +231,9 @@ export default function Tweet({
                 <div className="tweet-container">
                     <div className="avatar-container ">
                         <div className="avatar-box" onClick={profileRouting}>
-                            <Avatar src={avatar}></Avatar>
+                            <Avatar
+                                src={`https://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
+                            ></Avatar>
                         </div>
                     </div>
                     <div className="tweet-main">

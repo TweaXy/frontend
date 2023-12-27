@@ -15,16 +15,17 @@ import ReplyHeader from '../../components/Reply/ReplyHeader';
 import Getreplies from '../../apis/Replies';
 import TweetReplyBox from '../../components/Reply/TweetReplyBox';
 import Tweet from '../../components/homePage_components/Tweet';
-import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
+import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';  
 const RepliesPage = () => {
     const navigate=useNavigate();
     const location = useLocation();
     const token = useSelector((state) => state.user.token);
+    const userData = useSelector((state) => state.user.user);
     const [replies, setreplies] = useState([]);
     const tweetid = location.state?.tweetId;
-    const curtweet = location.state?.curtweet;
-    console.log('Tweet id from replies page=', tweetid);
-    console.log('Tweet from replies page=', curtweet);
+    const [curtweet,settweet]=useState([])
+    const [render,setrender]=useState(false)
+    const [ftime,setftime]=useState(true)
     const [isPageLoading, setIsPageLoading] = useState(true);
     const removeTweet = (tweetId) => {
         apiDeleteTweet(tweetid, token);
@@ -32,30 +33,41 @@ const RepliesPage = () => {
             prevTweets.filter((tweet) => tweet.mainInteraction.id !== tweetId)
         );
     };
-    const previouspage = () => {
-        console.log("error")
+    const previouspage = (event) => {
+        event.stopPropagation();
         navigate(-1);
       };
     useEffect(() => {
-        const fetchreplies = async () => {
-            if (token && curtweet && tweetid) {
-                try {
-                    const fetchedreplies = await Getreplies(
-                        token,
-                        tweetid,
-                        10,
-                        0
-                    );
-                    setreplies(fetchedreplies);
-                    console.log('the fetched replies are ', fetchedreplies);
-                    setIsPageLoading(false);
-                } catch (error) {
-                    console.error('Error fetching replies:', error);
-                }
+        if (token && curtweet && tweetid&&userData) {
+         fetchreplies();
+    }}, [token, tweetid,userData,render]);
+    const fetchreplies = async () => {
+        setIsPageLoading(true)
+            try {
+                const fetchedreplies = await Getreplies(
+                    token,
+                    tweetid,
+                    10,
+                    0
+                );
+
+                setreplies(fetchedreplies.interactions);
+                settweet(fetchedreplies.parent)
+                console.log('the fetched replies are ', fetchedreplies);
+                if(!ftime)
+                {
+                await new Promise(resolve=>{
+                    setTimeout(()=>{
+                        resolve()
+                    },200)
+                })
             }
-        };
-        fetchreplies();
-    }, [token, tweetid, curtweet]);
+                else setftime(false)
+                setIsPageLoading(false);
+            } catch (error) {
+                console.error('Error fetching replies:', error);
+            }
+        }
     if (isPageLoading) {
         return (
             <div
@@ -74,19 +86,20 @@ const RepliesPage = () => {
             <div className="home-page">
                 <Sidebar
                     userData={{
-                        user: curtweet.mainInteraction.user,
+                        user: userData,
                         token: token,
                     }}
                     active={-1}
                 />
                 <div className="feed">
                     <ReplyHeader previouspage={previouspage}/>
-                    <TweetReply tweet={curtweet} token={token} />
-                    <TweetReplyBox tweetId={tweetid} token={token} />
+                    <TweetReply tweet={curtweet} token={token} userData={userData}/>
+                    <TweetReplyBox tweet={curtweet} token={token}  setrender={setrender} />
                     {replies.length > 0 &&
                         replies.map((curreply, index) => (
                             <Tweet
-                                avatar={curreply.mainInteraction.avatar}
+                                key={index}
+                                avatar={curreply.mainInteraction.user.avatar}
                                 username={curreply.mainInteraction.user.name}
                                 handle={curreply.mainInteraction.user.username}
                                 uploadTime={
@@ -107,10 +120,9 @@ const RepliesPage = () => {
                                 userID={curreply.mainInteraction.user.id}
                                 removeTweet={removeTweet}
                                 isCurrentUserTweet={
-                                    curtweet.mainInteraction.user.id ==
+                                    userData.id ==
                                     curreply.mainInteraction.user.id
                                 }
-                                tweet={curreply}
                             ></Tweet>
                         ))}
                 </div>

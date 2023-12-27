@@ -4,21 +4,8 @@ import { Avatar } from '@mui/material';
 
 import { useNavigate } from 'react-router-dom';
 
-
-const ConversationCell = ({
-    id,
-    name,
-    username,
-    avatar,
-    bio,
-    token,
-    myID,
-  
-}) => {
+const ConversationCell = ({ id, name, username, avatar, bio, token, myID }) => {
     const navigate = useNavigate();
-
-    
-    
 
     const goToUserProfile = () => {
         console.log(`redirecting to @${username}...`);
@@ -45,8 +32,6 @@ const ConversationCell = ({
         console.log(`stop showing @${username} profile snippet at their name`);
     };
 
-  
-
     return (
         <div className="conversation-cell-container" onClick={goToUserProfile}>
             <div
@@ -54,13 +39,16 @@ const ConversationCell = ({
                 onMouseEnter={onMouseEnterAvatarField}
                 onMouseLeave={onMouseLeaveAvatarField}
             >
-                <Avatar className="conversation-cell-avatar" src={avatar} alt={name} />
+                <Avatar
+                    className="conversation-cell-avatar"
+                    src={`https://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
+                    alt={name}
+                />
             </div>
             <div className="conversation-cell-info-container">
                 <div className="conversation-cell-upper-half">
                     <div className="conversation-cell-upper-left">
                         <span
-                            
                             className="conversation-cell-upper-left-top"
                             onMouseEnter={onMouseEnterNameField}
                             onMouseLeave={onMouseLeaveNameField}
@@ -68,11 +56,9 @@ const ConversationCell = ({
                             {name}
                         </span>
                         <span className="conversation-cell-upper-left-down">
-                            <span className="conversation-cell-username" >{` @${username}`}</span>
-                            
+                            <span className="conversation-cell-username">{` @${username}`}</span>
                         </span>
                     </div>
-                    
                 </div>
                 <div className="conversation-cell-lower-half">
                     <span>{bio}</span>

@@ -105,14 +105,22 @@ const ProfileBio = (props) => {
     return (
         <div className="biocontainer">
             <div className="backgroundImage">
-                <img src={props.coverImage} alt="" />
+                <img
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                    }}
+                    src={`https://tweaxybackend.mywire.org/api/v1/images/${props.coverImage}`}
+                    alt=""
+                />
             </div>
 
             <div className="profileTitle">
                 <div className="profileImage">
                     <Avatar
                         sx={{ width: 134, height: 134 }}
-                        src={props.ProfileImage}
+                        src={`https://tweaxybackend.mywire.org/api/v1/images/${props.ProfileImage}`}
                     />
                 </div>
                 {props.IdProfile === props.currUserId ? (

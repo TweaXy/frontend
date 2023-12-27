@@ -78,6 +78,7 @@ function Profile({ token, userID, currUserId }) {
                         website={ndata.data.user.website}
                         location={ndata.data.user.location}
                         ProfileImage={ndata.data.user.avatar}
+                        coverImage={ndata.data.user.cover}
                         token={token}
                         JoinedAt={ndata.data.user.joinedDate}
                         followedByMe={ndata.data.user.followedByMe}

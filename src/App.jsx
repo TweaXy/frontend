@@ -22,6 +22,7 @@ import { requestForToken } from '../firebase.js'
 import { useEffect, useState } from 'react';
 
 import RepliesPage from './pages/RepliesPage/ReplyPage.jsx';
+import MentionsPage from './pages/MentionsPage/MentionsPage.jsx';
 function App() {
     requestForToken();
     return (
@@ -30,7 +31,6 @@ function App() {
             <Router>
                 <Routes>
                     <Route index element={<WelcomePage />} />
-                    {/*} <Route index element={<LikersPage />} />*/}
                     <Route
                         path="/forget-password"
                         element={<ForgetPasswordStartPage />}
@@ -77,12 +77,16 @@ function App() {
                         element={<BlockSettingsPage />}
                     />
                     <Route
-                        path="/Notifications"
+                        path="/notifications"
                         element={<NotificationPage />}
                     />
                     <Route
-                    path="/:username/:tweetid"
-                    element={<RepliesPage/>}
+                        path="/:username/:tweetid"
+                        element={<RepliesPage />}
+                    />
+                    <Route
+                        path="/notifications/mentions"
+                        element={<MentionsPage />}
                     />
                 </Routes>
             </Router>

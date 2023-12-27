@@ -17,7 +17,8 @@
 import AddReplyWindow from '../homePage_components/AddReplyWindow';
     export default function TweetReply({
         tweet,
-        token
+        token,
+        userData
     }) {
         const navigate=useNavigate();
         const avatar=tweet.mainInteraction.user.avatar
@@ -46,6 +47,7 @@ import AddReplyWindow from '../homePage_components/AddReplyWindow';
         const iconInteraction3 = useRef(null);
         const iconInteraction4 = useRef(null);
         const [isReplyWindow, setIsReplyWindow] = useState(false);
+        const isCurrentUserTweet=tweet.mainInteraction.user.id==userData.id
         const routingHandlerProfile1 = (event) => {
             event.stopPropagation();
             console.log('routing to this user profile ');
@@ -72,6 +74,15 @@ import AddReplyWindow from '../homePage_components/AddReplyWindow';
         const replyWindowOpen = (event) => {
             event.stopPropagation();
             setIsReplyWindow(true);
+        };
+        const optionsCloseHandler = (event) => {
+            event.stopPropagation();
+            setAnchorEl(null);
+        };
+        const [anchorEl, setAnchorEl] = useState(null);
+        const deleteTweetHandler = (event) => {
+            event.stopPropagation();
+            removeTweet(tweet.id);
         };
         useEffect(() => {
             // adjust this to be useRef
@@ -189,6 +200,10 @@ import AddReplyWindow from '../homePage_components/AddReplyWindow';
             }
             setLikeActive(!isLikeActive);
         };
+        const optionsClickHandler = (event) => {
+            event.stopPropagation();
+            setAnchorEl(event.currentTarget);
+        };  
 
         return (
             <>
@@ -206,9 +221,31 @@ import AddReplyWindow from '../homePage_components/AddReplyWindow';
                             </div>
                             <div
                             className="options-container cian-hover"
+                            onClick={optionsClickHandler}
                         >
                             <MoreHorizIcon />
-                        </div>          
+                        </div> 
+                        <div
+                                onClick={(event) => {
+                                    event.stopPropagation();
+                                }}
+                            >
+                                <TweetOptionsPopDown
+                                    isCurrentUserTweet={isCurrentUserTweet}
+                                    handleClose={optionsCloseHandler}
+                                    anchorEl={anchorEl}
+                                    deleteTweetHandler={deleteTweetHandler}
+                                    tweetid={tweet.mainInteraction.id}
+                                    token={token}
+                                    username={username}
+                                    userID={userData.id}
+                                    handleTweetsFiltering={(msg, id) => {
+                                        setAnchorEl(null);
+                                        handleTweetsFiltering(msg, id);
+                                    }}
+                                    followedByMe={false}
+                                />
+                            </div>         
                         </div>
                             <span
                                 className="TweetReply-container"
