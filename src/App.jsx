@@ -19,7 +19,7 @@ import LikersPage from './pages/PostEngagementPage/LikersPage.jsx';
 import RetweetersPage from './pages/PostEngagementPage/retweetersPage.jsx';
 import MessagePage from './pages/MessagesPage/MessagePage.jsx';
 import PushNotification from './utils/PushNotifications.jsx';
-import { requestForToken } from '../firebase.js'
+import { requestForToken } from '../firebase.js';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -27,27 +27,26 @@ import RepliesPage from './pages/RepliesPage/ReplyPage.jsx';
 import MentionsPage from './pages/MentionsPage/MentionsPage.jsx';
 import { setWebToken } from './redux/actions.js';
 function App() {
-    const dispatch=useDispatch();
-    useEffect(()=>{
+    const dispatch = useDispatch();
+
+    useEffect(() => {
         gettoken();
-    },[])
+    }, []);
+
     const gettoken = async () => {
-        try{
+        try {
             const token = await requestForToken();
-            console.log("from app",token)
+            console.log('from app', token);
             dispatch(setWebToken(token));
-        }
-        catch(err){
-            console.error(err.message)
+        } catch (err) {
+            console.error(err.message);
         }
     };
-    // requestForToken();
 
     return (
         <>
-        <PushNotification/>
+            <PushNotification />
             <Router>
-                
                 <Routes>
                     <Route index element={<WelcomePage />} />
                     <Route
@@ -113,7 +112,6 @@ function App() {
                     />
                 </Routes>
             </Router>
-
         </>
     );
 }

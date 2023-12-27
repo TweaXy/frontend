@@ -1,8 +1,8 @@
 const url = `https://tweaxybackend.mywire.org/api/v1/notification/deviceTokenWeb`;
 
-const InitNotifications = (token, WebToken) => {
+const disableNotifications = (token, WebToken) => {
     fetch(url, {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
@@ -13,7 +13,6 @@ const InitNotifications = (token, WebToken) => {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log('Response from the API:', data);
             if (data.status === 'success') {
                 console.log('ok from Notifications');
             } else {
@@ -24,4 +23,5 @@ const InitNotifications = (token, WebToken) => {
             throw new Error(error.message);
         });
 };
-export default InitNotifications;
+
+export default disableNotifications;

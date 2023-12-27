@@ -1,44 +1,71 @@
 import './NotificationsSettingsPage.css';
-import Sidebar from '../../components/homePage_components/Sidebar';
-import LoadingPage from '../../components/LoadingPage/LoadingPage';
-import Switch from '@mui/material/Switch';
-import { ArrowBack } from '@mui/icons-material';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
-import { useSelector } from 'react-redux';
 import { Button } from '@mui/base';
+import { useNavigate } from 'react-router';
+import { useEffect, useState } from 'react';
+import { ArrowBack } from '@mui/icons-material';
+import { requestForToken } from '../../../firebase';
+import { useDispatch, useSelector } from 'react-redux';
+import InitNotifications from '../../apis/NotificationsApis/InitNotifications';
+import getPushNotificationStatus from '../../apis/getPushNotificationStatus';
+import disableNotifications from '../../apis/disableNotifications';
+import LoadingPage from '../../components/LoadingPage/LoadingPage';
+import Sidebar from '../../components/homePage_components/Sidebar';
+import Switch from '@mui/material/Switch';
+import NotifyBox from '../../components/NotifyBox/NotifyBox';
 
 const NotificationsSettingsPage = () => {
-    const token = useSelector((state) => state.user.token);
     const user = useSelector((state) => state.user.user);
+    const token = useSelector((state) => state.user.token);
+    const [webToken, setWebToken] = useState(
+        useSelector((state) => state.user.WebToken)
+    );
 
-    // TODO : add if push notifications enabled (redux) 
-    const [isPushNotificationsOn, setIsPushNotificationsOn] = useState(true);
+    const [isPushNotificationsOn, setIsPushNotificationsOn] = useState(false);
 
     const [isPageLoading, setIsPageLoading] = useState(true);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const handlePushNotificationSwitchChange = (event) => {
-        setIsPushNotificationsOn(event.target.checked);
-    };
-
-    const handleButtonClick = () => {
-        // TODO: turn on push notifications
-    };
-
-    useEffect(() => {
-        // TODO: check first if push notifications was off.
-        if (isPushNotificationsOn) {
-            console.log('push notifications is on..');
+    const handlePushNotificationSwitchChange = async () => {
+        try {
+            if (isPushNotificationsOn) {
+                disableNotifications(token, webToken);
+                setIsPushNotificationsOn(false);
+            } else {
+                if (webToken === null) {
+                    setWebToken(await requestForToken());
+                    dispatch(setWebToken(webToken));
+                }
+                InitNotifications(token, webToken);
+                setIsPushNotificationsOn(true);
+            }
+        } catch (error) {
+            console.error(error.message);
+            setErrorMessage('Something went wrong, please try again later.');
+            const timeoutId = setTimeout(setErrorMessage(''), 3000);
+            return () => clearTimeout(timeoutId);
         }
-    }, [isPushNotificationsOn]);
+    };
+
+    const handleButtonClick = async () => {
+        if (webToken === null) {
+            setWebToken(await requestForToken());
+            dispatch(setWebToken(webToken));
+        }
+        InitNotifications(token, webToken);
+        setIsPushNotificationsOn(true);
+    };
 
     useEffect(() => {
         if (token && user) {
+            if (webToken) {
+                setIsPushNotificationsOn(getPushNotificationStatus(token));
+            }
             setIsPageLoading(false);
         }
-    }, [token, user]);
+    }, [token, user, webToken]);
 
     if (isPageLoading) {
         return <LoadingPage />;
@@ -104,6 +131,7 @@ const NotificationsSettingsPage = () => {
                     )}
                 </div>
             </div>
+            {errorMessage.length !== 0 && <NotifyBox text={errorMessage} />}
         </div>
     );
 };
