@@ -152,7 +152,6 @@ function TweetOptionsPopDown({
     return (
         <div className="tweet-options">
             <Menu
-                data-test={TweetSelectors.MORE_OPTIONS_BUTTON}
                 id="options-menu"
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
@@ -174,7 +173,7 @@ function TweetOptionsPopDown({
                     </MenuItem>
                 )}
                 {
-                    <MenuItem onClick={handleAnalytics}>
+                    <MenuItem data-test={TweetSelectors.VIEW_POST_ANALYTICS} onClick={handleAnalytics}>
                         <BarChartOutlinedIcon />
                         View post analytics
                     </MenuItem>

@@ -9,6 +9,7 @@ const TweetSelectors = {
     MUTE_USER: 'mute_user',
     TWEET_TEXT: 'tweet_text',
     TWEET_REPLY_FIELD: 'tweet_reply_textfield',
-    TWEET_REPLY_BUTTON: 'tweet_reply_button'
-
+    TWEET_REPLY_BUTTON: 'tweet_reply_button',
+    VIEW_POST_ANALYTICS: 'view_post_analytics_button'
+}
 export default TweetSelectors;
