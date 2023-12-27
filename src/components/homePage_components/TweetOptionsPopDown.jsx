@@ -190,7 +190,7 @@ function TweetOptionsPopDown({
                     </MenuItem>
                 )}
                 {!isCurrentUserTweet && (
-                    <MenuItem onClick={handleUserMute}>
+                    <MenuItem data-test={TweetSelectors.MUTE_USER} onClick={handleUserMute}>
                         {isMuted ? <VolumeMuteIcon /> : <VolumeOffIcon />}
                         {`${isMuted ? 'Unmute' : 'Mute'} @${username}`}
                     </MenuItem>

@@ -105,7 +105,15 @@ const ProfileBio = (props) => {
     return (
         <div className="biocontainer">
             <div className="backgroundImage">
-                <img src={`https://tweaxybackend.mywire.org/api/v1/images/${props.coverImage}`} alt="" />
+                <img
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                    }}
+                    src={`https://tweaxybackend.mywire.org/api/v1/images/${props.coverImage}`}
+                    alt=""
+                />
             </div>
 
             <div className="profileTitle">

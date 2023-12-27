@@ -6,6 +6,8 @@ import { useState } from 'react';
 import { Avatar, IconButton } from '@mui/material';
 import { VolumeMuteOutlined, VolumeOffOutlined } from '@mui/icons-material';
 import NotifyBox from '../NotifyBox/NotifyBox';
+import SettingsPageSelectors from '../../shared/selectors/SettingsPage';
+import { hashText } from '../../shared/Utils';
 
 const MutedUserCell = ({ id, name, username, avatar, bio, token }) => {
     const [isMuted, setIsMuted] = useState(true);
@@ -62,6 +64,7 @@ const MutedUserCell = ({ id, name, username, avatar, bio, token }) => {
                     </div>
                     <div className="muted-user-cell-upper-right">
                         <IconButton
+                            data-test={hashText(SettingsPageSelectors.UNMUTE_BUTTON+username)}
                             onClick={onButtonClickHandler}
                             aria-label={isMuted ? 'Unmute' : 'Mute'}
                             style={{
