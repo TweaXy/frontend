@@ -15,6 +15,9 @@ const SettingsPageSelectors = {
     NEXT_BUTTON: 'next_button',
     VERIFICATION_CODE_FIELD: 'verification_code_field',
     NEW_EMAIL_FIELD: 'new_email_field',
+
+    MANAGE_BLOCKS_BUTTON: 'manage_blocks_button',
+    UNBLOCK_USER_CELL_BUTTON: 'unblock_user_cell_button'
 };
 
 export default SettingsPageSelectors;
