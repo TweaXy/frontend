@@ -152,6 +152,7 @@ function TweetOptionsPopDown({
     return (
         <div className="tweet-options">
             <Menu
+                data-test={TweetSelectors.MORE_OPTIONS_BUTTON}
                 id="options-menu"
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}

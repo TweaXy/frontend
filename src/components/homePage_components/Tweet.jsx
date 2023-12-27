@@ -226,7 +226,7 @@ export default function Tweet({
     // we should have a function to handle the change on clicking any
     return (
         <>
-            <div className="tweet" onClick={getreplieshandler}>
+            <div className="tweet" onClick={getreplieshandler} data-test={TweetSelectors.TWEET}>
                 <div className="repost"></div>
                 <div className="tweet-container">
                     <div className="avatar-container ">
@@ -355,6 +355,7 @@ export default function Tweet({
                                 {/* icon */}
                                 {/* <div ref={ctivityIcon3}></div> */}
                                 <div
+                                    data-test={TweetSelectors.LIKES_BUTTON}
                                     className="activity-icon"
                                     ref={activityIcon3}
                                     onClick={likeDislikeTweetHandler}
@@ -371,7 +372,7 @@ export default function Tweet({
                                     ref={iconInteraction3}
                                     onClick={likeDislikeTweetHandler}
                                 >
-                                    <span className="interaction">
+                                    <span className="interaction" data-test={TweetSelectors.TWEET_LIKES_COUNT}>
                                         {tweetLikes > 0 && `${tweetLikes}`}
                                     </span>
                                 </span>
