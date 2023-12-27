@@ -129,6 +129,7 @@ const ProfileBio = (props) => {
                     <div className="profile-buttons-container">
                         <div className="icon-btn-wrapper">
                             <IconButton
+                                data-test={ProfilePageSelectors.MORE_OPTIONS_BUTTON}
                                 onClick={handleMoreButtonClick}
                                 aria-label="more"
                                 style={{
