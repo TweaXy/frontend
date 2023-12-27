@@ -291,7 +291,7 @@ export default function Tweet({
                                 />
                             </div>
                         </div>
-                        <div className="tweet-text-container">
+                        <div data-test={hashText(TweetSelectors.TWEET_TEXT+username+tweetText)} className="tweet-text-container">
                             <span className="tweet-text">{tweetText}</span>
                         </div>
 

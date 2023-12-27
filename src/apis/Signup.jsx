@@ -8,6 +8,7 @@ const signup = async (
     _birthdayDate,
     _password,
     _emailVerificationToken,
+    _captchaValue,
     setcanbeuser,
     setwindowOpned
 ) => {
@@ -30,6 +31,7 @@ const signup = async (
                 birthdayDate: _nwbirthdayDate,
                 password: _password,
                 emailVerificationToken: _emailVerificationToken,
+                captcha: _captchaValue
             }),
         });
 

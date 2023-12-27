@@ -79,6 +79,7 @@ export default function SearchBar({defaultText}) {
             <SearchIcon />
           </div>
           <input
+            data-test={HomePageSelectors.SEARCH_FIELD}
             type="search"
             name="widget-search"
             id="widget-search"

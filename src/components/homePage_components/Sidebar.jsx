@@ -38,7 +38,7 @@ export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
         <div className="sidebar">
             <TwitterIcon className="twitter--icon" />
 
-            <div onClick={toHome}>
+            <div data-test={HomePageSelectors.HOME_BUTTON} onClick={toHome}>
                 <SidebarOption
                     active={active === 0}
                     text="Home"

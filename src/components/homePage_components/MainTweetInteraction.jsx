@@ -4,6 +4,7 @@ import './Avatar.css';
 import Avatar from '@mui/material/Avatar';
 import TweetDate from '../../utils/TweetDate';
 import './MainTweetInteraction.css';
+import TweetSelectors from '../../shared/selectors/Tweets';
 export default function MainTweetInteraction({
     avatar,
     username,
@@ -34,7 +35,7 @@ export default function MainTweetInteraction({
                             </span>
                         </div>
                     </div>
-                    <div className="tweet-text-container">
+                    <div data-test={TweetSelectors.tweetText} className="tweet-text-container">
                         <span className="tweet-text">{tweetText}</span>
                     </div>
                 </div>
