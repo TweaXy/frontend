@@ -1,0 +1,22 @@
+.mentions-page-container {
+    display: flex;
+    height: 100vh;
+    max-width: 1300px;
+    padding: 0 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.mentions-feed {
+    display: block;
+    min-width: 600px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    border-right: 1px solid var(--twitter-background);
+}
+
+.mentions-feed::-webkit-scrollbar {
+    display: none;
+}

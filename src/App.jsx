@@ -18,13 +18,13 @@ import LikersPage from './pages/PostEngagementPage/LikersPage.jsx';
 import RetweetersPage from './pages/PostEngagementPage/retweetersPage.jsx';
 import MessagePage from './pages/MessagesPage/MessagePage.jsx';
 import RepliesPage from './pages/RepliesPage/ReplyPage.jsx';
+import MentionsPage from './pages/MentionsPage/MentionsPage.jsx';
 function App() {
     return (
         <>
             <Router>
                 <Routes>
                     <Route index element={<WelcomePage />} />
-                    {/*} <Route index element={<LikersPage />} />*/}
                     <Route
                         path="/forget-password"
                         element={<ForgetPasswordStartPage />}
@@ -71,12 +71,16 @@ function App() {
                         element={<BlockSettingsPage />}
                     />
                     <Route
-                        path="/Notifications"
+                        path="/notifications"
                         element={<NotificationPage />}
                     />
                     <Route
-                    path="/:username/:tweetid"
-                    element={<RepliesPage/>}
+                        path="/:username/:tweetid"
+                        element={<RepliesPage />}
+                    />
+                    <Route
+                        path="/notifications/mentions"
+                        element={<MentionsPage />}
                     />
                 </Routes>
             </Router>
