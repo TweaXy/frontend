@@ -131,6 +131,17 @@
   margin-left: auto !important;
   margin-top: 10px !important;
 }
+
+.tweetbox-btn-disactive{
+  background-color: rgba(29, 156, 240, 0.381) !important;
+}
+
+
 .tweetbox-button:hover {
   background-color: #1a89ce !important;
+}
+
+.tweetbox-btn-disactive:hover{
+  cursor: auto !important;
+  background-color: rgba(29, 156, 240, 0.381) !important;
 }
