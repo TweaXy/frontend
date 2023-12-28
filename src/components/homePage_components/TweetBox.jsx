@@ -134,6 +134,9 @@ export default function TweetBox({ userData }) {
     };
 
     const handlePostTweet = async (e) => {
+        if(text.length==0&& tweetImages.length==0){
+            return;
+        }
         console.log('this is a handler');
         console.log(tweetImages);
         setTweetImages([]);
@@ -214,7 +217,7 @@ export default function TweetBox({ userData }) {
                     </div>
                     <Button
                         data-test={HomePageSelectors.TWEETBOX_POST_BUTTON}
-                        className="tweetbox-button"
+                        className={`tweetbox-button ${text.length==0 &&tweetImages.length==0 ? "tweetbox-btn-disactive":""}`}
                         onClick={handlePostTweet}
                     >
                         Post

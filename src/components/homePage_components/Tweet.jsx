@@ -360,7 +360,7 @@ export default function Tweet({
                                     ref={iconInteraction2}
                                     onClick={repostHandler}
                                 >
-                                    <span className="interaction">
+                                    <span className={`interaction ${isrepostActive? "repost-active":""}`}>
                                         {tweetReposts != 0 && `${tweetReposts}`}
                                     </span>
                                 </span>

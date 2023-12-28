@@ -202,8 +202,7 @@ body {
     transition: color 200ms ease-out;
 }
 
-
-.tweet-icon > .activity-icon > .repost-active {
-    color: var(--twitter-greenColor);
+ .repost-active {
+    color: var(--twitter-greenColor) !important;
     /* transition: color 200ms ease-out; */
 }
