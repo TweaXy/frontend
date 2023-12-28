@@ -6,6 +6,7 @@ import EditProfile from './EditProfileButton';
 import parseDate from '../../utils/parseDate';
 import { useState } from 'react';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import LinkIcon from '@mui/icons-material/Link';
 import unfollow from '../../apis/unfollow';
 import follow from '../../apis/follow';
@@ -102,6 +103,10 @@ const ProfileBio = (props) => {
         }
     };
 
+    const handleChatWithUser = () => {
+        // CHAT WITH USER
+    };
+
     return (
         <div className="biocontainer">
             <div className="backgroundImage">
@@ -135,6 +140,16 @@ const ProfileBio = (props) => {
                     />
                 ) : (
                     <div className="profile-buttons-container">
+                        <div className="icon-btn-wrapper">
+                            <IconButton
+                                onClick={handleChatWithUser}
+                                style={{
+                                    border: '1px solid var(--twitter-background)',
+                                }}
+                            >
+                                <EmailOutlinedIcon style={{ color: 'black' }} />
+                            </IconButton>
+                        </div>
                         <div className="icon-btn-wrapper">
                             <IconButton
                                 onClick={handleMoreButtonClick}
