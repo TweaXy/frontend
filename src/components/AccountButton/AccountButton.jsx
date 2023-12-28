@@ -9,6 +9,7 @@ import { clearUser } from '../../redux/actions';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import HomePageSelectors from '../../shared/selectors/HomePage';
+import socket from '../../socket';
 
 const AccountButton = ({
     userAvatar,
@@ -58,6 +59,7 @@ const AccountButton = ({
     const handleLogout = async () => {
         const response = await logout(token);
         if (response) {
+            socket.disconnect();
             setIsUserLoggedOut(true);
         }
     };

@@ -16,6 +16,7 @@ import ProfileMoreOptionsPopDown from '../ProfileMoreOptionsPopDown/ProfileMoreO
 import BlockUserWindow from '../BlockUserWindow/BlockUserWindow';
 import block from '../../apis/block';
 import unblock from '../../apis/unblock';
+import createConversation from '../../apis/createConversation';
 const ProfileBio = (props) => {
     const [isFollowingButtonHovered, setIsFollowingButtonHovered] =
         useState(false);
@@ -103,8 +104,19 @@ const ProfileBio = (props) => {
         }
     };
 
-    const handleChatWithUser = () => {
-        // CHAT WITH USER
+    const handleChatWithUser = async () => {
+        try {
+            const conversationInfo = await createConversation(
+                props.username,
+                props.token
+            );
+
+            navigate('/conversations', {
+                state: { conversation: conversationInfo },
+            });
+        } catch (error) {
+            console.error(error.message);
+        }
     };
 
     return (
