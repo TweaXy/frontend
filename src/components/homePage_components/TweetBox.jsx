@@ -42,104 +42,37 @@ export default function TweetBox({ userData }) {
         console.log('new img');
         fileInputRef.current.click();
     };
-
-    useEffect(() => {
-        console.log(tweetImages);
-    }, [tweetImages]);
+    const [imageURL,setImageUrl] =useState([]);
 
     const handleImageChange = async (e) => {
+
+        
         const selectedMedia = [...Array.from(e.target.files)];
-
-        if (selectedMedia.length + tweetImages.length > 4) {
+        if (selectedMedia.length + imageURL.length > 4) {
             setMediaerrorVisable(true);
-
             const timeoutId = setTimeout(() => {
                 setMediaerrorVisable(false);
             }, 3000);
 
             return () => clearTimeout(timeoutId);
-        } else {
-            const isImage = (file) => {
-                return file.type.startsWith('image/');
-            };
-            const isVideo = (file) => {
-                return file.type.startsWith('video/');
-            };
-            if (isVideo(selectedMedia[0]) && selectedMedia.length === 1) {
-                try {
-                    const convertToDataUrl = (file) => {
-                        return new Promise((resolve, reject) => {
-                            const reader = new FileReader();
-
-                            reader.onload = () => {
-                                resolve(reader.result);
-                            };
-
-                            reader.onerror = (error) => {
-                                reject(error);
-                            };
-
-                            reader.readAsDataURL(file);
-                        });
-                    };
-
-                    const imageUrls = await Promise.all(
-                        selectedMedia.map((file) => convertToDataUrl(file))
-                    );
-
-                    setVideoSrc(imageUrls);
-                } catch (error) {
-                    console.error(
-                        'Error converting video to data URLs:',
-                        error
-                    );
-                }
-            }
-            if (isImage(selectedMedia[0])) {
-                try {
-                    const convertToDataUrl = (file) => {
-                        return new Promise((resolve, reject) => {
-                            const reader = new FileReader();
-
-                            reader.onload = () => {
-                                resolve(reader.result);
-                            };
-
-                            reader.onerror = (error) => {
-                                reject(error);
-                            };
-
-                            reader.readAsDataURL(file);
-                        });
-                    };
-
-                    const imageUrls = await Promise.all(
-                        selectedMedia.map((file) => convertToDataUrl(file))
-                    );
-                    setTweetImages((prevImages) => [
-                        ...prevImages,
-                        ...imageUrls,
-                    ]);
-                } catch (error) {
-                    console.error(
-                        'Error converting images to data URLs:',
-                        error
-                    );
-                }
-            }
-            setTimeout(() => {
-                e.target.value = '';
-            }, 100);
         }
+        const newImageURLs = selectedMedia.map((file) => URL.createObjectURL(file));
+        console.log(newImageURLs);
+        setImageUrl((prevURLs) => [...prevURLs, ...newImageURLs]);
+        const formData = new FormData();
+        selectedMedia.map((file) => formData.append('file', file));
+        setTweetImages((prevImages) => [...prevImages, formData]);
+        console.log(formData);
     };
 
     const handlePostTweet = async (e) => {
-        if(text.length==0&& tweetImages.length==0){
+        if (text.length == 0 && tweetImages.length == 0) {
             return;
         }
         console.log('this is a handler');
         console.log(tweetImages);
         setTweetImages([]);
+        setImageUrl([]);
         setText('');
         await apiAddTweet(text, tweetImages, userData.token);
     };
@@ -168,14 +101,12 @@ export default function TweetBox({ userData }) {
                 <div className="media-container">
                     <div className="span-padd" style={{ height: '5px' }}></div>
                     <ImageUploader
-                        tweetImages={tweetImages}
+                        tweetImages={imageURL.map((image)=>image)}
                         setTweetImages={setTweetImages}
+                        setImageUrl={setImageUrl}
+                        tweetUrl={imageURL}
                     />
                     {/* {tweetImages.length > 0 && (<img src={tweetImages[0]} />)} */}
-                    <VideoUploader
-                        tweetVideo={videoSrc}
-                        settweetVideo={setVideoSrc}
-                    />
                 </div>
                 {privacylay && (
                     <div className="privacy-lay">
@@ -217,7 +148,11 @@ export default function TweetBox({ userData }) {
                     </div>
                     <Button
                         data-test={HomePageSelectors.TWEETBOX_POST_BUTTON}
-                        className={`tweetbox-button ${text.length==0 &&tweetImages.length==0 ? "tweetbox-btn-disactive":""}`}
+                        className={`tweetbox-button ${
+                            text.length == 0 && tweetImages.length == 0
+                                ? 'tweetbox-btn-disactive'
+                                : ''
+                        }`}
                         onClick={handlePostTweet}
                     >
                         Post

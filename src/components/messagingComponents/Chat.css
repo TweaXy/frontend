@@ -12,5 +12,5 @@
 }
 
 .chat-wrapper::-webkit-scrollbar {
-    display: none;
+    display: normal;
 }

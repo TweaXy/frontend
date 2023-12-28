@@ -4,14 +4,17 @@ import ImageListItem from '@mui/material/ImageListItem';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import './ImageUploader.css'
 import styled from '@emotion/styled';
-export default function ImageUploader({tweetImages,setTweetImages}){
+export default function ImageUploader({tweetUrl,tweetImages,setTweetImages,setImageUrl}){
 
  
     const deleteImageHandler=(index) =>{
       setTweetImages(tweetImages.filter((img,ind) => ind != index ));
+      setImageUrl(tweetUrl.filter((img,ind)=> ind!=index));
+      console.log("handle delete");
     }
 
     const imageHeightHandler = (index,length) =>{
+      console.log(tweetImages);
       if(index== 0 && length == 1){
         return "172.88px";
       }else if ((index == 1 || index==0) && length==2  ){
