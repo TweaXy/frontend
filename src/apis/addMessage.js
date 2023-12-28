@@ -1,4 +1,4 @@
-const MessageURL = `https://tweaxybackend.mywire.org/api/v1/`;
+const MessageURL = `https://tweaxybackend.mywire.org/api/v1`;
 const addMessage = async (
     Conversationid,
     data,
@@ -14,8 +14,8 @@ const addMessage = async (
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify({ text: data.text ,
-                media:data.media
+            body: JSON.stringify({ text: data ,
+                media:null
             }),
         });
         const responseBody = await response.text();

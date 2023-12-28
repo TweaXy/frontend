@@ -1,15 +1,17 @@
 import './conversationCell.css';
 import { useState } from 'react';
 import { Avatar } from '@mui/material';
-
+import createConversation from '../../apis/createConversation';
 import { useNavigate } from 'react-router-dom';
 
 const ConversationCell = ({ id, name, username, avatar, bio, token, myID }) => {
     const navigate = useNavigate();
 
-    const goToUserProfile = () => {
-        console.log(`redirecting to @${username}...`);
-        navigate(`/profile/${username}`, { state: { userID: id } });
+    const goToConversation = async () => {
+        const conversationInfo = await createConversation(username, token);
+        navigate(`/conversations/`, {
+            state: { conversationInfo: conversationInfo },
+        });
     };
 
     const onMouseEnterAvatarField = () => {
@@ -33,7 +35,7 @@ const ConversationCell = ({ id, name, username, avatar, bio, token, myID }) => {
     };
 
     return (
-        <div className="conversation-cell-container" onClick={goToUserProfile}>
+        <div className="conversation-cell-container" onClick={goToConversation}>
             <div
                 className="conversation-cell-avatar-container"
                 onMouseEnter={onMouseEnterAvatarField}
