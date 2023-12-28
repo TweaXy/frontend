@@ -1,29 +1,18 @@
-import './Chat.css'
-import Message from './Message'
-export default function Chat({}){
-
-
+import './Chat.css';
+import Message from './Message';
+export default function Chat({ messages, userId }) {
     return (
         <div className="chat-wrapper">
-            <Message text={"Hello kory"} user={0}/>
-            <Message text={"Hello ahmed"} user={1}/>
-            <Message text={"how are you doing?"} user={0}/>
-            <Message text={"i heard you died yesterday"} user={0}/>
-            <Message text={"yes, indeed it was crazy yesterday"} user={1}/>
-            <Message text={"i had fun"} user={1}/>
-            <Message text={"Hello kory"} user={0}/>
-            <Message text={"Hello ahmed"} user={1}/>
-            <Message text={"how are you doing?"} user={0}/>
-            <Message text={"i heard you died yesterday"} user={0}/>
-            <Message text={"yes, indeed it was crazy yesterday"} user={1}/>
-            <Message text={"i had fun"} user={1}/>
-            <Message text={"Hello kory"} user={0}/>
-            <Message text={"Hello ahmed"} user={1}/>
-            <Message text={"how are you doing?"} user={0}/>
-            <Message text={"i heard you died yesterday"} user={0}/>
-            <Message text={"yes, indeed it was crazy yesterday"} user={1}/>
-            <Message text={"i had funasdddddddddddddddddddddd"} user={1}/>
-            
+            {messages.map((message) => {
+                console.log('message:', message);
+                return (
+                    <Message
+                        key={message.id}
+                        text={message.text}
+                        user={message.senderId == userId ? 0 : 1}
+                    />
+                );
+            })}
         </div>
-    )
+    );
 }

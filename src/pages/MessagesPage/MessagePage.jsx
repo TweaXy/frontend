@@ -30,9 +30,12 @@ const MessagePage = () => {
         <>
             <div className="message-page">
                 <Sidebar userData={{ user, token }} active={4} />
-
                 <ListConversation />
-                <ChatWindow conversationInfo={conversationInfo} token={token} />
+                <ChatWindow
+                    conversationInfo={conversationInfo}
+                    token={token}
+                    userId={user.id}
+                />
             </div>
         </>
     );
