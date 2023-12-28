@@ -17,7 +17,7 @@ const MessagePage = () => {
     const conversationInfo = location.state?.conversationInfo;
 
     useEffect(() => {
-        if (token && user && conversationInfo != undefined) {
+        if (token && user && conversationInfo !== undefined) {
             setIsPageLoading(false);
         }
     }, [token, user, conversationInfo]);
