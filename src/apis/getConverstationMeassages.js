@@ -1,4 +1,4 @@
-const MessageURL = `https://tweaxybackend.mywire.org/api/v1/`;
+const MessageURL = `https://tweaxybackend.mywire.org/api/v1`;
 const getConversationMessages = async (
     Conversationid,
     token,

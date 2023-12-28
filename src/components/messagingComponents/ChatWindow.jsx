@@ -5,6 +5,7 @@ import ChatHeader from './ChatHeader';
 import { useEffect, useState } from 'react';
 import LoadingPage from '../LoadingPage/LoadingPage';
 import socket from '../../socket';
+import getConversationMessages from '../../apis/getConverstationMeassages';
 
 export default function ChatWindow({ conversationInfo, token, userId }) {
     const [isPageLoading, setIsPageLoading] = useState(true);
@@ -68,7 +69,18 @@ export default function ChatWindow({ conversationInfo, token, userId }) {
     }, []);
 
     useEffect(() => {
+        const getPreviousMessages = async () => {
+            const previousMessages = await getConversationMessages(
+                conversationInfo.conversation.id,
+                token,
+                10,
+                10
+            );
+            setMessages(previousMessages);
+        };
+
         if (conversationInfo !== undefined && token) {
+            getPreviousMessages();
             setIsPageLoading(false);
         }
     }, [conversationInfo, token]);
