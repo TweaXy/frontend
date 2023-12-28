@@ -21,12 +21,7 @@ const UserTweets = ({
         console.log('user tweet response', tweetsResponse);
         setTweets(tweetsResponse);
     };
-    const removeTweet = (tweetId) => {
-        apiDeleteTweet(tweetId, token);
-        setTweets((prevTweets) =>
-            prevTweets.filter((tweet) => tweet.mainInteraction.id !== tweetId)
-        );
-    };
+
     useEffect(() => {
         if (token) {
             setIsPageLoading(false);
@@ -51,6 +46,12 @@ const UserTweets = ({
             </div>
         );
     }
+
+    const removeTweet = (tweetId)=>{
+        apiDeleteTweet(tweetId,token);
+       setTweets((prevTweets) =>prevTweets.filter((tweet)=>tweet.mainInteraction.id!==tweetId));
+      
+   }
     return (
         <>
             {tweets &&

@@ -1,13 +1,19 @@
 .feed {
-  flex: 0.475;
+  flex: 1;
   border-right: 1px solid var(--twitter-background);
   overflow-y: scroll;
-  /* min-width: fit-content; */
+  min-width: fit-content;
   -ms-overflow-style: none;
   scrollbar-width: none;
   font-family: 'Segoe UI Emoji', 'Arial'; /* Use a fallback font */
+  min-width: 400px;
 }
 
 .feed::-webkit-scrollbar {
   display: none;
 }
+
+
+
+
+

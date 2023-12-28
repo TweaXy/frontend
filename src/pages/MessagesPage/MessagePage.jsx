@@ -4,6 +4,7 @@ import { connect, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { CircularProgress } from '@mui/material';
 import ListConversation from '../../components/conversationsList/conversation';
+import ChatWindow from '../../components/messagingComponents/ChatWindow';
 
 const MessagePage = () => {
     const token = useSelector((state) => state.user.token);
@@ -42,7 +43,7 @@ const MessagePage = () => {
                 <Sidebar userData={{user,token}} active={4} />
                 
                 <ListConversation />
-              
+                <ChatWindow/>
 
               
             </div>
