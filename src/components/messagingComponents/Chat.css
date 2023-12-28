@@ -1,0 +1,11 @@
+.chat-wrapper{
+    /* display: flex; */
+flex: 1;
+padding: 0px 16px;
+
+/* height: 30px; */
+}
+
+.chat-wrapper > h1{
+    margin: 0;
+}

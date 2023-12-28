@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { CircularProgress } from '@mui/material';
 import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
-import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
 import React from 'react';
 const UserTweets = ({
     userID,
