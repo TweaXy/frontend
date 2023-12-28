@@ -17,10 +17,10 @@ const MessagePage = () => {
     const conversationInfo = location.state?.conversationInfo;
 
     useEffect(() => {
-        if (token && user) {
+        if (token && user && conversationInfo != undefined) {
             setIsPageLoading(false);
         }
-    }, [token, user]);
+    }, [token, user, conversationInfo]);
 
     if (isPageLoading) {
         return <LoadingPage />;
