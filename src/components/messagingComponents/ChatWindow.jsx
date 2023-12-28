@@ -11,6 +11,7 @@ export default function ChatWindow({ conversationInfo, token, userId }) {
     const [isPageLoading, setIsPageLoading] = useState(true);
 
     const [messages, setMessages] = useState([]);
+    const [messageSent, setMessageSent] = useState(null);
 
     useEffect(() => {
         const connectSocket = async () => {
@@ -83,7 +84,12 @@ export default function ChatWindow({ conversationInfo, token, userId }) {
             getPreviousMessages();
             setIsPageLoading(false);
         }
-    }, [conversationInfo, token]);
+
+        if (setMessageSent) {
+            getPreviousMessages();
+            setMessageSent(false);
+        }
+    }, [conversationInfo, token, setMessageSent]);
 
     if (isPageLoading) {
         return <LoadingPage />;
@@ -108,6 +114,7 @@ export default function ChatWindow({ conversationInfo, token, userId }) {
             <Chat messages={messages} userId={userId} />
             <MessageBox
                 Conversation_id={conversationInfo.conversation.id}
+                handleMessageSent={() => setMessageSent(true)}
                 token={token}
             />
         </div>

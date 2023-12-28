@@ -4,7 +4,7 @@ import BrokenImageOutlinedIcon from '@mui/icons-material/BrokenImageOutlined';
 import TextareaAutosize from 'react-textarea-autosize';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import addMessage from '../../apis/addMessage';
-export default function MessageBox({Conversation_id,token}) {
+export default function MessageBox({ Conversation_id, token, handleMessageSent }) {
     const [text, setText] = useState('');
     const [textAreaClass, setTextareaClass] = useState('scroll-disable');
     const handleChange = (e) => {
@@ -33,8 +33,8 @@ export default function MessageBox({Conversation_id,token}) {
     };
 
     const textBoxRef = useRef(null);
+    // Set initial height when the component mounts
     useEffect(() => {
-        // Set initial height when the component mounts
         const textarea = document.querySelector(
             '.text-field-wrapper > .text-container > textarea '
         );
@@ -48,7 +48,9 @@ export default function MessageBox({Conversation_id,token}) {
         if (text.length <= 0) {
             return;
         }
-      addMessage(Conversation_id,{text:text ,media:null},token);
+        addMessage(Conversation_id, text, token);
+        handleMessageSent();
+        setText('');
     };
     return (
         <div className="message-box-wrapper">
