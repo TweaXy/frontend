@@ -82,6 +82,7 @@ const UserTweets = ({
                         handleTweetsFiltering={actionOccurredHandler}
                         followedByMe={followedByMe}
                         tweet={tweet}
+                        isUserInteract={tweet.mainInteraction.isUserInteract}
                     />
                 ))}
         </>

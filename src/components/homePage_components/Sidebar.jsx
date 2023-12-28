@@ -2,18 +2,11 @@ import SidebarOption from './SidebarOption';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import SearchIcon from '@mui/icons-material/Search';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import ListAltIcon from '@mui/icons-material/ListAlt';
-import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import SettingsIcon from '@mui/icons-material/Settings';
 import Button from '@mui/material/Button';
-import getUserDataApi from '../../apis/getProfileData';
 import './Sidebar.css';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import AccountButton from '../AccountButton/AccountButton';
 import NotificationsButton from '../NotificationsButton/NotificationsButton';
 import HomePageSelectors from '../../shared/selectors/HomePage';
@@ -21,7 +14,7 @@ import ConversationsButton from '../ConversationsButton/ConversationsButton';
 
 export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
     const navigate = useNavigate();
-    console.log('from sidebar ', userData);
+
     const toProfile = () => {
         navigate(`/profile/${userData.user.username}`, {
             state: { userID: userData.user.id },
@@ -45,7 +38,15 @@ export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
                     Icon={HomeOutlinedIcon}
                 />
             </div>
-            <SidebarOption text="Explore" Icon={SearchIcon} />
+            <div
+                onClick={() => {
+                    navigate('/search/explore', {
+                        state: { search: 'explore', isSearch: true },
+                    });
+                }}
+            >
+                <SidebarOption text="Explore" Icon={SearchIcon} />
+            </div>
             <NotificationsButton active={active === 3} token={userData.token} />
             <ConversationsButton active={active == 4} token={userData.token} />
             <div

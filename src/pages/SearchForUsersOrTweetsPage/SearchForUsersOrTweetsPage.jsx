@@ -14,11 +14,10 @@ import { apiSearchForTweets } from '../../apis/SearchAPIs/SearchForTweetsAPI.jsx
 const SearchForUsersOrTweetsPage = () => {
     const location = useLocation();
     const searchInput = location.state?.search;
-    const isSearch = location.state?.isSearch; // if isSearch is false then it is trends call
+    const isSearch = location.state?.isSearch;
     const token = useSelector((state) => state.user.token);
     const user = useSelector((state) => state.user.user);
     const userData = { user, token };
-    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlwiY2xwcTJnMTB4MDAyMjIwYmxuaGQ5bHZ3eFwiIiwiaWF0IjoxNzAxNjQzMjMyLCJleHAiOjE3MDQyMzUyMzJ9.iDJhBcxBfwxCX9NKk2eYqyXAJwWNRvcXzR_w-IrdibE";
 
     const [fetchedUsers, setFetchedUsers] = useState([]);
     const [fetchedTweets, setFetchedTweets] = useState([]);
@@ -30,9 +29,15 @@ const SearchForUsersOrTweetsPage = () => {
             if (curPage == 2) {
                 if (isSearch) {
                     try {
-                        const tempFetchedUsers = await apiSearchForUsers(searchInput, token);
+                        const tempFetchedUsers = await apiSearchForUsers(
+                            searchInput,
+                            token
+                        );
                         setFetchedUsers(tempFetchedUsers);
-                        console.log('these are the fetched users from the search: ', fetchedUsers);
+                        console.log(
+                            'these are the fetched users from the search: ',
+                            fetchedUsers
+                        );
                     } catch (error) {
                         console.error('Error fetching searched users:', error);
                     }
@@ -47,27 +52,42 @@ const SearchForUsersOrTweetsPage = () => {
             if (curPage == 0) {
                 if (isSearch) {
                     try {
-                        const tempFetchedTweets = await apiSearchForTweets(searchInput, token, user.username);
+                        const tempFetchedTweets = await apiSearchForTweets(
+                            searchInput,
+                            token,
+                            user.username
+                        );
                         setFetchedTweets(tempFetchedTweets);
-                        console.log('these are the fetched Tweets from the search: ', fetchedTweets);
+                        console.log(
+                            'these are the fetched Tweets from the search: ',
+                            fetchedTweets
+                        );
                     } catch (error) {
                         console.error('Error fetching searched Tweets:', error);
                     }
-                }
-                else {
+                } else {
                     try {
-                        const tempFetchedTweets = await apiGetTrendingTweets(searchInput, token);
+                        const tempFetchedTweets = await apiGetTrendingTweets(
+                            searchInput,
+                            token
+                        );
                         setFetchedTweets(tempFetchedTweets);
-                        console.log('these are the fetched Tweets from the trend: ', fetchedTweets);
+                        console.log(
+                            'these are the fetched Tweets from the trend: ',
+                            fetchedTweets
+                        );
                     } catch (error) {
-                        console.error('Error fetching trending tweets: ', error);
+                        console.error(
+                            'Error fetching trending tweets: ',
+                            error
+                        );
                     }
                 }
             }
         };
         fetchTweets();
     }, [searchInput, isSearch, curPage]);
-    
+
     const navigate = useNavigate();
 
     const goBack = () => {
@@ -76,56 +96,44 @@ const SearchForUsersOrTweetsPage = () => {
 
     return (
         <div className="Search-for-users-or-tweets-page-container">
-            <Sidebar userData={userData} active={0}/>
+            <Sidebar userData={userData} active={0} />
             <div className="search-for-tweets-or-users-widget">
                 <SearchForTweetsOrUsersHeader
-                    searchedInput={isSearch ? searchInput : '"'+searchInput+'"'}
+                    searchedInput={
+                        isSearch ? searchInput : '"' + searchInput + '"'
+                    }
                     activePage={curPage}
                     setActivePage={setCurPage}
                     goBack={goBack}
                 />
-                {curPage == 0 && (
+                {curPage == 0 &&
                     fetchedTweets.map((tweet) => (
-                            <Tweet
-                                avatar={tweet.mainInteraction.avatar}
-                                username={tweet.mainInteraction.user.name}
-                                handle={tweet.mainInteraction.user.username}
-                                uploadTime={tweet.mainInteraction.createdDate}
-                                tweetText={tweet.mainInteraction.text}
-                                tweetMedia={tweet.mainInteraction.media}
-                                replies={tweet.mainInteraction.commentsCount}
-                                reposts={tweet.mainInteraction.retweetsCount}
-                                likes={tweet.mainInteraction.likesCount}
-                                insights={tweet.mainInteraction.viewsCount}
-                                tweetId={tweet.mainInteraction.id}
-                                isUserLiked={tweet.mainInteraction.isUserInteract.isUserLiked}
-                                token={userData.token}
-                                userID={tweet.mainInteraction.user.id}
-                            />
-                        ))
-                )}
-                {/* {curPage == 1 && (
-                    <UsersCells
-                        users={fetchedUsers}
-                    />
-                )} */}
-                {curPage == 2 && (
-                    <UsersCells
-                        users={fetchedUsers}
-                    />
-                )}
-                {/* {curPage == 3 && (
-                    <UsersCells
-                        users={fetchedUsers}
-                    />
-                )} */}
-                {/* {curPage == 4 && (
-                    <UsersCells
-                        users={fetchedUsers}
-                    />
-                )} */}
+                        <Tweet
+                            key={tweet.mainInteraction.id}
+                            avatar={tweet.mainInteraction.user.avatar}
+                            username={tweet.mainInteraction.user.name}
+                            handle={tweet.mainInteraction.user.username}
+                            uploadTime={tweet.mainInteraction.createdDate}
+                            tweetText={tweet.mainInteraction.text}
+                            tweetMedia={tweet.mainInteraction.media}
+                            replies={tweet.mainInteraction.commentsCount}
+                            reposts={tweet.mainInteraction.retweetsCount}
+                            likes={tweet.mainInteraction.likesCount}
+                            insights={tweet.mainInteraction.viewsCount}
+                            tweetId={tweet.mainInteraction.id}
+                            isUserLiked={
+                                tweet.mainInteraction.isUserInteract.isUserLiked
+                            }
+                            token={userData.token}
+                            userID={tweet.mainInteraction.user.id}
+                            isUserInteract={
+                                tweet.mainInteraction.isUserInteract
+                            }
+                        />
+                    ))}
+                {curPage == 2 && <UsersCells users={fetchedUsers} />}
             </div>
-            <Widget hideSearchBar={true}/>
+            <Widget hideSearchBar={true} />
         </div>
     );
 };

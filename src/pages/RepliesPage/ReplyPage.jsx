@@ -123,6 +123,8 @@ const RepliesPage = () => {
                                     userData.id ==
                                     curreply.mainInteraction.user.id
                                 }
+                                followedByMe={curreply.mainInteraction.user.followedByMe}
+                                isUserInteract={curreply.mainInteraction.isUserInteract}
                             ></Tweet>
                         ))}
                 </div>
