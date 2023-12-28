@@ -143,6 +143,7 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                                 handleTweetsFiltering={handleTweetsFiltering}
                                 followedByMe={true}
                                 tweet={tweet}
+                                isUserInteract={tweet.mainInteraction.isUserInteract}
                             />
                         </div>
                     );
@@ -175,6 +176,7 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                                 handleTweetsFiltering={handleTweetsFiltering}
                                 followedByMe={true}
                                 tweet={tweet}
+                                isUserInteract={tweet.mainInteraction.isUserInteract}
                             />
                         </div>
                     );

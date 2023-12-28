@@ -19,6 +19,7 @@ import { apiAddReply } from '../../apis/tweetApis/AddReply';
 import AddReplyWindow from './AddReplyWindow';
 import { hashText } from '../../shared/Utils';
 import TweetSelectors from '../../shared/selectors/Tweets';
+import { apiRepost,apiDeleteRepost } from '../../apis/tweetApis/repostTweet';
 
 export default function Tweet({
     avatar,
@@ -39,12 +40,14 @@ export default function Tweet({
     isCurrentUserTweet,
     handleTweetsFiltering,
     followedByMe,
+    isUserInteract
 }) {
     const [tweetLikes, setTweetLikes] = useState(likes);
     const [tweetReplies, setTweetReplies] = useState(replies);
     const [tweetReposts, setTweetReposts] = useState(reposts);
     const [tweetInsights, setTweetInsights] = useState(insights);
     const [isLikeActive, setLikeActive] = useState(isUserLiked);
+    const [isrepostActive,setRepostActive]=useState(isUserInteract.isUserRetweeted)
     const activityIcon1 = useRef(null);
     const activityIcon2 = useRef(null);
     const activityIcon3 = useRef(null);
@@ -54,6 +57,7 @@ export default function Tweet({
     const iconInteraction3 = useRef(null);
     const iconInteraction4 = useRef(null);
     const navigate = useNavigate();
+    console.log("from tweet",isrepostActive)
     const profileRouting = (event) => {
         event.stopPropagation();
         navigate(`/profile/${username}`, {
@@ -114,10 +118,11 @@ export default function Tweet({
             });
 
             activityIcon.addEventListener('mouseleave', () => {
+              
                 // Reset styles when mouse leaves
                 activityIcon.style.backgroundColor = ''; // Set to the default or remove this line if not needed
                 activityIcon.style.borderRadius = '';
-                if (!(index == 2 && isLikeActive)) {
+                if (!(index == 2 && isLikeActive)&&!(index==1 &&isrepostActive)) {
                     icons[index].style.color = 'var(--twitter-greyColor)';
                     iconInteractions[index].style.color = '';
                 }
@@ -154,14 +159,16 @@ export default function Tweet({
             });
 
             iconInteraction.addEventListener('mouseleave', () => {
+                if(!(index==1 &&isrepostActive))
+                {
                 activityIcons[index].style.backgroundColor = '';
                 activityIcons[index].style.borderRadius = '';
-                if (!(index == 2 && isLikeActive)) {
+                if (!(index == 2 && isLikeActive)&&!(index==1 &&isrepostActive)) {
                     iconInteraction.style.color = '';
                     icons[index].style.color = 'var(--twitter-greyColor)';
                 }
                 activityIcons[index].style.transition = '';
-            });
+            }});
         });
     }, []);
 
@@ -179,6 +186,18 @@ export default function Tweet({
         }
         setLikeActive(!isLikeActive);
     };
+    const repostHandler=(event)=>{
+        event.stopPropagation();
+        if(isrepostActive){
+            apiDeleteRepost(tweetId,token);
+            setTweetReposts((reposts)=>reposts-1);
+        }
+        else{
+            apiRepost(tweetId,token);
+            setTweetReposts((reposts)=>reposts+1);
+        }
+        setRepostActive((isrepostActive)=>!isrepostActive)
+    }
     const getreplieshandler = (event) => {
         event.stopPropagation();
         navigate(`/${handle}/${tweetId}`, {
@@ -222,7 +241,7 @@ export default function Tweet({
         }
         //take any other action
     };
-
+  
     // we should have a function to handle the change on clicking any
     return (
         <>
@@ -331,12 +350,15 @@ export default function Tweet({
                                 <div
                                     className="activity-icon"
                                     ref={activityIcon2}
+                                    onClick={repostHandler}
                                 >
-                                    <CachedOutlinedIcon />
+                                    {/* <CachedOutlinedIcon/> */}
+         {isrepostActive?<CachedOutlinedIcon className="repost-active"  />:<CachedOutlinedIcon/>}
                                 </div>
                                 <span
                                     className="icon-interaction"
                                     ref={iconInteraction2}
+                                    onClick={repostHandler}
                                 >
                                     <span className="interaction">
                                         {tweetReposts != 0 && `${tweetReposts}`}
