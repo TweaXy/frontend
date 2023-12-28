@@ -1,3 +1,10 @@
+/**
+ * Description
+ * @date 2023-12-28
+ * @param {any} tweetId
+ * @param {any} token
+ * @returns {any}
+ */
 const apiRepost = async (tweetId, token) => {
     const repostTweetURL =
         `https://tweaxybackend.mywire.org/api/v1/interactions/${tweetId}/retweet`;

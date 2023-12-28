@@ -12,6 +12,8 @@ import signup from '../../apis/Signup';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setToken, setUser } from '../../redux/actions';
+
+/** @type {*} */
 const Errors = {
     Email: '',
     Username: '',
@@ -21,6 +23,8 @@ const Errors = {
     Signup: '',
     Name: 'Name must be at least 4 characters',
 };
+
+/** @type {*} */
 const months = [
     'January',
     'February',
@@ -35,6 +39,18 @@ const months = [
     'November',
     'December',
 ];
+
+/**
+ *
+ *
+ * @param {*} { onClose }
+ * @return {*} 
+/**
+ *
+ *
+ * @param {*} { onClose }
+ * @return {*} 
+ */
 const SignUpPage = ({ onClose }) => {
     const [windowOpened, setwindowOpned] = useState(0);
     const [Data1, changeData1] = useState({
