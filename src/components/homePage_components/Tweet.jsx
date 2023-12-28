@@ -314,23 +314,16 @@ export default function Tweet({
                                     ref={activityIcon1}
                                     onClick={replyWindowOpen}
                                 >
-                                    <div
-                                        className="activity-icon"
-                                        ref={activityIcon1}
-                                        onClick={replyWindowOpen}
-                                    >
-                                        <ChatBubbleOutlineOutlinedIcon className="" />
-                                    </div>
-                                    <span
-                                        className="icon-interaction"
-                                        ref={iconInteraction1}
-                                    >
-                                        <span className="interaction">
-                                            {tweetReplies != 0 &&
-                                                `${tweetReplies}`}
-                                        </span>
-                                    </span>
+                                    <ChatBubbleOutlineOutlinedIcon />
                                 </div>
+                                <span
+                                    className="icon-interaction"
+                                    ref={iconInteraction1}
+                                >
+                                    <span className="interaction">
+                                        {tweetReplies != 0 && `${tweetReplies}`}
+                                    </span>
+                                </span>
                             </div>
 
                             <div className="tweet-icon">
