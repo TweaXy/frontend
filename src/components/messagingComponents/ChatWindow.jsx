@@ -17,8 +17,6 @@ export default function ChatWindow({ conversationInfo }) {
         );
     }
 
-    console.log('conversation info', conversationInfo);
-
     return (
         <div className="chat-window">
             <ChatHeader username={conversationInfo.conversation.user.name} />

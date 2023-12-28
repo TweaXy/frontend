@@ -60,21 +60,30 @@ export default function TweetBox({ userData }) {
         console.log(newImageURLs);
         setImageUrl((prevURLs) => [...prevURLs, ...newImageURLs]);
         const formData = new FormData();
-        selectedMedia.map((file) => formData.append('file', file));
-        setTweetImages((prevImages) => [...prevImages, formData]);
-        console.log(formData);
+        selectedMedia.forEach((file, index) => {
+          formData.append("file", file);
+          console.log("This is the form appendingggggggg");
+          console.log(file);
+          console.log("this is the selected media form ");
+          console.log(formData);
+        });
+        console.log("get output");
+        console.log(formData.get("file"));
+        setTweetImages ( (prevImages) => [...prevImages, formData.get("file")]);
+        // console.log("The form Data is" );
+        // console.log(prevImages);
     };
 
     const handlePostTweet = async (e) => {
         if (text.length == 0 && tweetImages.length == 0) {
             return;
         }
-        console.log('this is a handler');
+        console.log('this is the form images');
         console.log(tweetImages);
+        await apiAddTweet(text, tweetImages, userData.token);
         setTweetImages([]);
         setImageUrl([]);
         setText('');
-        await apiAddTweet(text, tweetImages, userData.token);
     };
 
     const handleDisplayPrivacy = (e) => {
