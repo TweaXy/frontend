@@ -32,7 +32,7 @@ const MessagePage = () => {
                 <Sidebar userData={{ user, token }} active={4} />
 
                 <ListConversation />
-                <ChatWindow conversationInfo={conversationInfo} />
+                <ChatWindow conversationInfo={conversationInfo} token={token} />
             </div>
         </>
     );

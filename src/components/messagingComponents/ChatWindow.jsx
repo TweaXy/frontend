@@ -3,7 +3,8 @@ import Chat from './Chat';
 import MessageBox from './MessageBox';
 import ChatHeader from './ChatHeader';
 
-export default function ChatWindow({ conversationInfo }) {
+export default function ChatWindow({ conversationInfo,token }) {
+    console.log('from Chatwindowa', conversationInfo);
     if (conversationInfo === null) {
         return (
             <div className="empty-conversations-container">
@@ -18,12 +19,11 @@ export default function ChatWindow({ conversationInfo }) {
     }
 
     console.log('conversation info', conversationInfo);
-
     return (
         <div className="chat-window">
             <ChatHeader username={conversationInfo.conversation.user.name} />
             <Chat />
-            <MessageBox />
+            <MessageBox id={conversationInfo.id} token={token} />
         </div>
     );
 }
