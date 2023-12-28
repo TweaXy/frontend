@@ -14,19 +14,13 @@ const MessagePage = () => {
     const [isPageLoading, setIsPageLoading] = useState(true);
 
     const location = useLocation();
-    const conversation = location.state?.conversation;
+    const conversationInfo = location.state?.conversationInfo;
 
     useEffect(() => {
         if (token && user) {
             setIsPageLoading(false);
         }
     }, [token, user]);
-
-    useEffect(() => {
-        if (conversation) {
-            console.log('conversation info: ', conversation);
-        }
-    }, [conversation]);
 
     if (isPageLoading) {
         return <LoadingPage />;
@@ -38,7 +32,7 @@ const MessagePage = () => {
                 <Sidebar userData={{ user, token }} active={4} />
 
                 <ListConversation />
-                <ChatWindow />
+                <ChatWindow conversationInfo={conversationInfo} />
             </div>
         </>
     );

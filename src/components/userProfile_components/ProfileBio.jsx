@@ -112,7 +112,7 @@ const ProfileBio = (props) => {
             );
 
             navigate('/conversations', {
-                state: { conversation: conversationInfo },
+                state: { conversationInfo: conversationInfo },
             });
         } catch (error) {
             console.error(error.message);
