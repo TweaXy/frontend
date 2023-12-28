@@ -5,14 +5,14 @@ import ChatHeader from './ChatHeader';
 import { useEffect, useState } from 'react';
 import LoadingPage from '../LoadingPage/LoadingPage';
 
-export default function ChatWindow({ conversationInfo }) {
+export default function ChatWindow({ conversationInfo, token }) {
     const [isPageLoading, setIsPageLoading] = useState(true);
 
     useEffect(() => {
-        if (conversationInfo !== undefined) {
+        if (conversationInfo !== undefined && token) {
             setIsPageLoading(false);
         }
-    }, [conversationInfo]);
+    }, [conversationInfo, token]);
 
     if (isPageLoading) {
         return <LoadingPage />;
@@ -35,7 +35,7 @@ export default function ChatWindow({ conversationInfo }) {
         <div className="chat-window">
             <ChatHeader username={conversationInfo.conversation.user.name} />
             <Chat />
-            <MessageBox />
+            <MessageBox id={conversationInfo.id} token={token} />
         </div>
     );
 }
