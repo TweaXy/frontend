@@ -1,12 +1,22 @@
 .message {
     display: flex;
-    justify-content: end;
+    flex-direction: column;
+}
+.user-message {
+    align-self: end;
+    padding-left: 12px;
+    /* border: 5px solid  red; */
+}
+.friend-message {
+    align-self: start;
+    flex-direction: row-reverse;
+    padding-right: 12px;
 }
 .message > .message-flex {
+    /* align-self: ; */
     display: flex;
     box-sizing: border-box;
     width: 87.5%;
-    padding-left: 12px;
     justify-content: flex-end;
 }
 .message > .message-flex > .flex-space {
@@ -17,14 +27,44 @@
     flex-shrink: 1;
 }
 
-.message-flex > .message-wrapper > .text-padding{
-    padding: 12px 16px;
-    background-color: rgba(29,155,240,1.00);
-    border-radius:24px ;
+.message-flex > .message-wrapper > .text-padding {
+    padding: 11px 16px;
+    border-radius: 24px;
     box-sizing: border-box;
-    border-bottom-right-radius:4px ;
 }
 
-.message-flex > .message-wrapper > .text-padding > .text-span{
+.user-message > .message-wrapper > .text-padding {
+    border-bottom-right-radius: 4px;
+    background-color: rgba(29, 155, 240, 1);
+}
+.friend-message > .message-wrapper > .text-padding {
+    border-bottom-left-radius: 4px;
+    background-color: #eff3f4;
+}
+
+.message-flex > .message-wrapper > .text-padding > .text-span {
+    font-size: 15px;
+    max-width: 300px; 
+    /* overflow: hidden; */
+    /* text-overflow: ; */
+    line-height: 1.3; 
+    display: block;
+    word-wrap: break-word;
+}
+
+.message > .message-padding {
+    height: 5px;
+}
+
+.user-message > .message-wrapper > .text-padding > .text-span {
     color: white;
+}
+.friend-message > .message-wrapper > .text-padding > .text-span {
+    color: black;
+}
+
+
+.message > .message-flex > .message-wrapper > .text-padding > .text-span::after {
+    display: inline-block;
+    vertical-align: middle;
 }

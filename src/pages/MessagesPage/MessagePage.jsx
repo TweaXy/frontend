@@ -10,8 +10,8 @@ const MessagePage = () => {
     const token = useSelector((state) => state.user.token);
     const user = useSelector((state) => state.user.user);
     const [isPageLoading, setIsPageLoading] = useState(true);
-    
-   /* useEffect(() => {
+
+    /* useEffect(() => {
         if (token && userID && user) {
             setUserData({user, token});
             setIsPageLoading(false);
@@ -22,7 +22,7 @@ const MessagePage = () => {
         }
     }, [token, userID, user]);*/
 
-  /* if (isPageLoading) {
+    /* if (isPageLoading) {
         return (
             <div
                 style={{
@@ -39,13 +39,10 @@ const MessagePage = () => {
     return (
         <>
             <div className="message-page">
-                
-                <Sidebar userData={{user,token}} active={4} />
-                
-                <ListConversation />
-                <ChatWindow/>
+                <Sidebar userData={{ user, token }} active={4} />
 
-              
+                <ListConversation />
+                <ChatWindow />
             </div>
         </>
     );

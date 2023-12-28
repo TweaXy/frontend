@@ -2,6 +2,7 @@
     /* display: flex; */
 flex: 1;
 padding: 0px 16px;
+overflow-y: scroll;
 
 /* height: 30px; */
 }
