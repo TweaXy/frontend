@@ -2,8 +2,22 @@ import './ChatWindow.css';
 import Chat from './Chat';
 import MessageBox from './MessageBox';
 import ChatHeader from './ChatHeader';
+import { useEffect, useState } from 'react';
+import LoadingPage from '../LoadingPage/LoadingPage';
 
 export default function ChatWindow({ conversationInfo }) {
+    const [isPageLoading, setIsPageLoading] = useState(true);
+
+    useEffect(() => {
+        if (conversationInfo !== undefined) {
+            setIsPageLoading(false);
+        }
+    }, [conversationInfo]);
+
+    if (isPageLoading) {
+        return <LoadingPage />;
+    }
+
     if (conversationInfo === null) {
         return (
             <div className="empty-conversations-container">
@@ -16,8 +30,6 @@ export default function ChatWindow({ conversationInfo }) {
             </div>
         );
     }
-
-    console.log('conversation info', conversationInfo);
 
     return (
         <div className="chat-window">
