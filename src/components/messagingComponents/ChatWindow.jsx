@@ -97,8 +97,8 @@ export default function ChatWindow({ conversationInfo, token, userId }) {
                 <div className="span-container">
                     <span className="header-span">Start a conversation</span>
                     <span className="body-span">
-                        Once you select a conversation, chat will appear here.
-                    </span>
+                        Once you select a conversation, chat will appear here.{' '}
+                    </span>{' '}
                 </div>
             </div>
         );

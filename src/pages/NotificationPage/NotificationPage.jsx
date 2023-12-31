@@ -71,7 +71,7 @@ const NotificationPage = () => {
                                         user={user}
                                     />
                                 );
-                            } else {
+                            } else if(cur.action==='REPLY') {
                                 return (
                                     <Notificationcell3
                                         fromUser={cur.fromUser}
