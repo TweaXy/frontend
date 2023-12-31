@@ -61,16 +61,17 @@ const NotificationPage = () => {
                                         interaction={cur.interaction}
                                     />
                                 );
-                            } else if (cur.action === 'LIKE') {
+                            } else if (cur.action === 'LIKE' || cur.action==='RETWEET') {
                                 return (
                                     <Notificationcell1
                                         key={index}
+                                        action={cur.action}
                                         fromuser={cur.fromUser}
                                         interaction={cur.interaction}
                                         user={user}
                                     />
                                 );
-                            } else {
+                            } else if(cur.action==='REPLY') {
                                 return (
                                     <Notificationcell3
                                         fromUser={cur.fromUser}

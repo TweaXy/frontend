@@ -1,0 +1,36 @@
+.chat-window {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    border-right: 1px solid;
+    border-color: var(--twitter-background);
+    transform: translate3d(0px, 0px, 0px);
+    max-width: 600px;
+}
+
+.empty-conversations-container {
+    height: 100%;
+    align-items: center;
+}
+
+.empty-conversations-container>.span-container {
+    width: 400px;
+    height: 128px;
+    margin: 256px 99px;
+    padding: 0 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+.empty-conversations-container>.span-container>span.header-span {
+    font-size: 31px;
+    font-weight: 600;
+    color: #0F1419;
+    text-align: left;
+}
+
+.empty-conversations-container>.span-container>span.body-span {
+    text-align: left;
+    font-size: 15px;
+    color: #536471;
+}

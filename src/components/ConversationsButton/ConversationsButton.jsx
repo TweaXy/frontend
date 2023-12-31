@@ -10,7 +10,9 @@ const ConversationsButton = ({ active, token }) => {
     const navigate = useNavigate();
 
     const handleConversationsButtonClick = () => {
-        navigate('/conversations');
+        navigate('/conversations', {
+            state: { conversationInfo: null },
+        });
     };
 
     useEffect(() => {

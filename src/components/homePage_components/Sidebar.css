@@ -7,8 +7,9 @@
     /* min-width: 250px; */
     display: flex;
     flex-direction: column;
-    flex: 0.195;
+    /* flex: 0.195; */
     height: 100vh;
+    width: 250px;
 }
 
 

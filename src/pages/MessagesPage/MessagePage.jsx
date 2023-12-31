@@ -1,50 +1,41 @@
 import './MessagePage.css';
 import Sidebar from '../../components/homePage_components/Sidebar';
-import { connect, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { CircularProgress } from '@mui/material';
 import ListConversation from '../../components/conversationsList/conversation';
+import ChatWindow from '../../components/messagingComponents/ChatWindow';
+import LoadingPage from '../../components/LoadingPage/LoadingPage';
+import { useLocation } from 'react-router';
 
 const MessagePage = () => {
-    const token = useSelector((state) => state.user.token);
     const user = useSelector((state) => state.user.user);
-    const [isPageLoading, setIsPageLoading] = useState(true);
-    
-   /* useEffect(() => {
-        if (token && userID && user) {
-            setUserData({user, token});
-            setIsPageLoading(false);
-            console.log('user id from profile page', userID);
-            console.log('user token from profile page', token);
-        } else {
-            console.log('profile page is loading');
-        }
-    }, [token, userID, user]);*/
+    const token = useSelector((state) => state.user.token);
 
-  /* if (isPageLoading) {
-        return (
-            <div
-                style={{
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    height: '100vh',
-                }}
-            >
-                <CircularProgress />
-            </div>
-        );
-    }*/
+    const [isPageLoading, setIsPageLoading] = useState(true);
+
+    const location = useLocation();
+    const conversationInfo = location.state?.conversationInfo;
+
+    useEffect(() => {
+        if (token && user && conversationInfo !== undefined) {
+            setIsPageLoading(false);
+        }
+    }, [token, user, conversationInfo]);
+
+    if (isPageLoading) {
+        return <LoadingPage />;
+    }
 
     return (
         <>
             <div className="message-page">
-                
-                <Sidebar userData={{user,token}} active={4} />
-                
+                <Sidebar userData={{ user, token }} active={4} />
                 <ListConversation />
-              
-
-              
+                <ChatWindow
+                    conversationInfo={conversationInfo}
+                    token={token}
+                    userId={user.id}
+                />
             </div>
         </>
     );

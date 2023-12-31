@@ -6,10 +6,11 @@ import signInWithGoogle from '../../apis/signInWithGoogle';
 import SignInErrors from '../../shared/errors/SignInErrors';
 import LoginWindowHeader from '../../components/LoginWindowHeader/LoginWindowHeader';
 import login from '../../apis/login';
-import { setToken, setUser } from '../../redux/actions';
+import { setSocket, setToken, setUser } from '../../redux/actions';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import socket from '../../socket';
 
 const LoginPage = ({ onClose, openSignUpWindow }) => {
     const dispatch = useDispatch();
@@ -71,6 +72,9 @@ const LoginPage = ({ onClose, openSignUpWindow }) => {
                 const userData = await login(formData.UUID, formData.password);
 
                 if (userData) {
+                    socket.auth = { token: userData.token };
+                    await socket.connect();
+                    dispatch(setSocket(socket));
                     dispatch(setUser(userData.user));
                     dispatch(setToken(userData.token));
                     navigate('/home', { state: { firstTime: false } });

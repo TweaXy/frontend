@@ -16,22 +16,22 @@ export default function Notificationcell3({
     interaction,
     uploadTime,
     reply,
-    token, 
+    token,
     curusername,
-    userID
+    userID,
 }) {
-    const navigate=useNavigate();
-    const avatar=fromUser.avatar
-    const username=fromUser.name
-    const handle=fromUser.username
-    const replaytext=reply.text
-    const tweetMedia=''
-    const likes=0
-    const replies=0
-    const reposts=0
-    const insights=0
-    const tweetId=interaction.parentInteractionID
-    const isUserLiked=false;
+    const navigate = useNavigate();
+    const avatar = fromUser.avatar;
+    const username = fromUser.name;
+    const handle = fromUser.username;
+    const replaytext = reply.text;
+    const tweetMedia = '';
+    const likes = 0;
+    const replies = 0;
+    const reposts = 0;
+    const insights = 0;
+    const tweetId = interaction.parentInteractionID;
+    const isUserLiked = false;
     const [tweetLikes, setTweetLikes] = useState(likes);
     const [tweetReplies, setTweetComments] = useState(replies);
     const [tweetReposts, setTweetReposts] = useState(reposts);
@@ -48,11 +48,13 @@ export default function Notificationcell3({
     const tweetDate = '2023-12-08T12:00:00';
     const routingHandlerProfile1 = (event) => {
         event.stopPropagation();
-        navigate(`/profile/${curusername}`, { state: {userID:userID}})
+        navigate(`/profile/${curusername}`, { state: { userID: userID } });
     };
     const routingHandlerProfile2 = (event) => {
         event.stopPropagation();
-        navigate(`/profile/${fromUser.username}`, { state: {userID:fromUser.id}})
+        navigate(`/profile/${fromUser.username}`, {
+            state: { userID: fromUser.id },
+        });
     };
     const getreplieshandler = (event) => {
         navigate(`/${curusername}/${interaction.id}`, {
@@ -163,7 +165,7 @@ export default function Notificationcell3({
     }, []);
 
     const likeDislikeTweetHandler = (e) => {
-        e.stopPropagation()
+        e.stopPropagation();
         if (isLikeActive) {
             apiDislikeTweet(tweetId, token);
             setTweetLikes((likes) => likes - 1);
@@ -177,20 +179,28 @@ export default function Notificationcell3({
         <div className="tweet" onClick={getreplieshandler}>
             <div className="repost"></div>
             <div className="tweet-container">
-                <div className="avatar-container" >
+                <div className="avatar-container">
                     {/* avatar */}
-                    <AvatarBox img={avatar} onClick={routingHandlerProfile2}/>
+                    <AvatarBox img={avatar} onClick={routingHandlerProfile2} />
                 </div>
 
                 <div className="tweet-main">
                     <div className="tweet-user">
                         <div className="info-container">
-                            <span className="username" onClick={routingHandlerProfile2}>{username}</span>
+                            <span
+                                className="username"
+                                onClick={routingHandlerProfile2}
+                            >
+                                {username}
+                            </span>
                             <span className="handle">&nbsp;{`@${handle}`}</span>
                             <div className="dot-container">
                                 <span className="dot">.</span>
                             </div>
-                            <span className="profileBiography-joinDate" style={{paddingBottom:'5px'}}>
+                            <span
+                                className="profileBiography-joinDate"
+                                style={{ paddingBottom: '5px' }}
+                            >
                                 {TweetDate(uploadTime)}
                             </span>
                         </div>

@@ -1,15 +1,16 @@
 import './SettingsPage.css';
-import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Sidebar from '../../components/homePage_components/Sidebar';
-import ChangePasswordButton from '../../components/ChangePasswordButton/ChangePasswordButton';
-import ChangeUsernameButton from '../../components/ChangeUsernameButton/ChangeUsernameButton';
 import { clearUser } from '../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
 import LoadingPage from '../../components/LoadingPage/LoadingPage';
+import Sidebar from '../../components/homePage_components/Sidebar';
 import ChangeEmailButton from '../../components/ChangeEmailButton/ChangeEmailButton';
 import MuteSettingsButton from '../../components/MuteSettingsButton/MuteSettingsButton';
 import BlockSettingsButton from '../../components/BlockSettingsButton/BlockSettingsButton';
+import ChangePasswordButton from '../../components/ChangePasswordButton/ChangePasswordButton';
+import ChangeUsernameButton from '../../components/ChangeUsernameButton/ChangeUsernameButton';
+import NotificationsSettingsButton from '../../components/NotificationsSettingsButton/NotificationsSettingsButton';
 
 const SettingsPage = () => {
     const [isPageLoading, setIsPageLoading] = useState(true);
@@ -45,10 +46,10 @@ const SettingsPage = () => {
         <div className="settings-page-container">
             <Sidebar userData={{ user, token }} active={2} />
             <div className="settings-widget">
-                <span className="header-span">Your Account</span>
+                <span className="header-span">Settings</span>
                 <span>
-                    See information about your account, update your account
-                    information, or change your account password.
+                    Update your account information, manage what information you
+                    see and share on TweaXy, or manage notifications.
                 </span>
                 <ChangeUsernameButton
                     onClickHandler={() => {
@@ -73,6 +74,11 @@ const SettingsPage = () => {
                 <BlockSettingsButton
                     onClickHandler={() => {
                         navigate('/settings/blocked');
+                    }}
+                />
+                <NotificationsSettingsButton
+                    onClickHandler={() => {
+                        navigate('/settings/notifications');
                     }}
                 />
             </div>

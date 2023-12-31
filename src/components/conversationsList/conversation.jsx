@@ -9,29 +9,26 @@ import ConversationCells from './conversationCells.jsx';
 import ConservationSetting from './conservationUserSetting.jsx';
 const ListConversation = () => {
     const token = useSelector((state) => state.user.token);
-    const [isSettingOpened, setIsSettingOpened] = useState(1);
-    const [users, setUsers] = useState([]);
+
+    const [conversations, setConversations] = useState([]);
     const [isPageLoading, setIsPageLoading] = useState(true);
+
     useEffect(() => {
         if (token) {
-            console.log('token from conversation api page', token);
-
             setIsPageLoading(false);
-        } else {
-            console.log('Loading conversation page...');
         }
     }, [token]);
+
     useEffect(() => {
-        const fetchUsers = async () => {
-            const fetchedUsers = await getConversationsApi({
+        const fetchConversations = async () => {
+            const fetchedConversations = await getConversationsApi({
                 token: token,
             });
-            console.log('conversations', fetchedUsers);
-            setUsers(fetchedUsers);
+            setConversations(fetchedConversations);
         };
 
         if (!isPageLoading) {
-            fetchUsers();
+            fetchConversations();
         }
     }, [isPageLoading, token]);
 
@@ -40,8 +37,8 @@ const ListConversation = () => {
             <div className="conversation-body">
                 <ConversationWindowHeader />
 
-                <ConversationCells users={users} />
-                {users.length == 0 && (
+                <ConversationCells conversations={conversations} />
+                {conversations.length == 0 && (
                     <div className="empty-messages-style">
                         <span className="header-inbox-span">
                             Welcome to your inbox!
@@ -61,10 +58,6 @@ const ListConversation = () => {
                     </div>
                 )}
             </div>
-
-            {isSettingOpened == 0 && (
-               < ConservationSetting />
-            )}
         </>
     );
 };

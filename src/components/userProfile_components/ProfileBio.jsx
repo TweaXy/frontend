@@ -6,6 +6,7 @@ import EditProfile from './EditProfileButton';
 import parseDate from '../../utils/parseDate';
 import { useState } from 'react';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import LinkIcon from '@mui/icons-material/Link';
 import unfollow from '../../apis/unfollow';
 import follow from '../../apis/follow';
@@ -15,6 +16,7 @@ import ProfileMoreOptionsPopDown from '../ProfileMoreOptionsPopDown/ProfileMoreO
 import BlockUserWindow from '../BlockUserWindow/BlockUserWindow';
 import block from '../../apis/block';
 import unblock from '../../apis/unblock';
+import createConversation from '../../apis/createConversation';
 const ProfileBio = (props) => {
     const [isFollowingButtonHovered, setIsFollowingButtonHovered] =
         useState(false);
@@ -102,6 +104,21 @@ const ProfileBio = (props) => {
         }
     };
 
+    const handleChatWithUser = async () => {
+        try {
+            const conversationInfo = await createConversation(
+                props.username,
+                props.token
+            );
+
+            navigate('/conversations', {
+                state: { conversationInfo: conversationInfo },
+            });
+        } catch (error) {
+            console.error(error.message);
+        }
+    };
+
     return (
         <div className="biocontainer">
             <div className="backgroundImage">
@@ -135,6 +152,16 @@ const ProfileBio = (props) => {
                     />
                 ) : (
                     <div className="profile-buttons-container">
+                        <div className="icon-btn-wrapper">
+                            <IconButton
+                                onClick={handleChatWithUser}
+                                style={{
+                                    border: '1px solid var(--twitter-background)',
+                                }}
+                            >
+                                <EmailOutlinedIcon style={{ color: 'black' }} />
+                            </IconButton>
+                        </div>
                         <div className="icon-btn-wrapper">
                             <IconButton
                                 onClick={handleMoreButtonClick}

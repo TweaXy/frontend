@@ -14,14 +14,38 @@ import NotificationPage from './pages/NotificationPage/NotificationPage.jsx';
 import ChangeEmailPage from './pages/SettingsPage/ChangeEmailPage.jsx';
 import MuteSettingsPage from './pages/SettingsPage/MuteSettingsPage.jsx';
 import BlockSettingsPage from './pages/SettingsPage/BlockSettingsPage.jsx';
+import NotificationsSettingsPage from './pages/SettingsPage/NotificationsSettingsPage.jsx';
 import LikersPage from './pages/PostEngagementPage/LikersPage.jsx';
 import RetweetersPage from './pages/PostEngagementPage/retweetersPage.jsx';
 import MessagePage from './pages/MessagesPage/MessagePage.jsx';
+import PushNotification from './utils/PushNotifications.jsx';
+import { requestForToken } from '../firebase.js';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import RepliesPage from './pages/RepliesPage/ReplyPage.jsx';
 import MentionsPage from './pages/MentionsPage/MentionsPage.jsx';
+import { setWebToken } from './redux/actions.js';
 function App() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        gettoken();
+    }, []);
+
+    const gettoken = async () => {
+        try {
+            const token = await requestForToken();
+            console.log('from app', token);
+            dispatch(setWebToken(token));
+        } catch (err) {
+            console.error(err.message);
+        }
+    };
+
     return (
         <>
+            <PushNotification />
             <Router>
                 <Routes>
                     <Route index element={<WelcomePage />} />
@@ -69,6 +93,10 @@ function App() {
                     <Route
                         path="/settings/blocked"
                         element={<BlockSettingsPage />}
+                    />
+                    <Route
+                        path="/settings/notifications"
+                        element={<NotificationsSettingsPage />}
                     />
                     <Route
                         path="/notifications"

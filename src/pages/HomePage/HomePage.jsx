@@ -1,5 +1,5 @@
 import './HomePage.css';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
 import { useEffect, useState } from 'react';
 import { CircularProgress } from '@mui/material';
@@ -10,9 +10,7 @@ import Widget from '../../components/homePage_components/Widget';
 import SignUpHome from '../SignUpPage/SignUpPageHome';
 
 const HomePage = ({ isTherePopUpWindow }) => {
-    // const dispatch = useDispatch();
-    // dispatch(clearUser());
-
+     const dispatch = useDispatch();
     const Location = useLocation();
     const Ft = Location.state?.firstTime;
 
@@ -20,7 +18,7 @@ const HomePage = ({ isTherePopUpWindow }) => {
 
     const token = useSelector((state) => state.user.token);
     const user = useSelector((state) => state.user.user);
-
+    const WebToken=useSelector((state)=>state.user.WebToken);
     const [userData, setUserData] = useState({});
 
     const [isPageLoading, setIsPageLoading] = useState(true);
@@ -32,12 +30,15 @@ const HomePage = ({ isTherePopUpWindow }) => {
     useEffect(() => {
         if (user && token) {
             setUserData({ user: user, token: token });
-            InitNotifications(token);
+            if(WebToken!==null)
+            {
+            InitNotifications(token,WebToken);
+            }
             setIsPageLoading(false);
         } else {
             console.log('Loading home page..');
         }
-    }, [user, token]);
+    }, [user, token,WebToken]);
 
     if (isPageLoading) {
         return (

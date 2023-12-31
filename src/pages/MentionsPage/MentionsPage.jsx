@@ -101,6 +101,9 @@ const MentionsPage = () => {
                             handleTweetsFiltering={handleTweetsFiltering}
                             followedByMe={true}
                             tweet={tweet}
+                            isUserInteract={
+                                tweet.mainInteraction.isUserInteract
+                            }
                         />
                     );
                 })}

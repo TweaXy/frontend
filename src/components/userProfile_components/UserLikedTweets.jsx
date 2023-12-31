@@ -100,6 +100,7 @@ const TweetsUSerLikes = ({ userID, curUserID }) => {
                         handleTweetsFiltering={handleTweetsFiltering}
                         followedByMe={tweet.mainInteraction.user.followedByMe}
                         tweet={tweet}
+                        isUserInteract={tweet.mainInteraction.isUserInteract}
                     />
                 ))}
             {actionMessage.length !== 0 && <NotifyBox text={actionMessage} />}

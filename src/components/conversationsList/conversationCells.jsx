@@ -1,43 +1,43 @@
 import './conversationCells.css';
-
-import { CircularProgress } from '@mui/material';
-import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import ConversationCell from './conversationCell';
+import LoadingPage from '../../components/LoadingPage/LoadingPage';
 
-const ConversationCells = ({ users }) => {
-    const [isPageLoading, setIsPageLoading] = useState(users === undefined);
+const ConversationCells = ({ conversations }) => {
     const token = useSelector((state) => state.user.token);
     const myID = useSelector((state) => state.user.user).id;
 
+    const [isPageLoading, setIsPageLoading] = useState(true);
+
     useEffect(() => {
-        if (users !== undefined && token && myID) {
+        if (conversations && token && myID) {
             setIsPageLoading(false);
-            console.log(users);
         }
-    }, [users, token, myID]);
+    }, [conversations, token, myID]);
 
     if (isPageLoading) {
-        return (
-            <div className="circular-progress-spinner">
-                <CircularProgress />
-            </div>
-        );
+        return <LoadingPage />;
     }
 
-    if (users.length === 0) {
+    if (conversations.length === 0) {
         return <></>;
     }
 
     return (
         <div className="conversations-cells-container">
-            {users.map((user) => (
+            {conversations.map((conversation) => (
                 <ConversationCell
-                    id={user.id}
-                    name={user.name}
-                    username={user.username}
-                    avatar={user.avatar}
-                    bio={user.bio === 'null' ? '' : user.bio}
+                    key={conversation.id}
+                    id={conversation.user.id}
+                    name={conversation.user.name}
+                    username={conversation.user.username}
+                    avatar={conversation.user.avatar}
+                    bio={
+                        conversation.user.bio === 'null'
+                            ? ''
+                            : conversation.user.bio
+                    }
                     token={token}
                     myID={myID}
                 />

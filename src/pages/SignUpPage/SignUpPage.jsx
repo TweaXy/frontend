@@ -1,4 +1,4 @@
-import {useRef, useState} from 'react';
+import { useRef, useState } from 'react';
 import React from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import '../../components/LoginWindowHeader/LoginWindowHeader.css';
@@ -11,7 +11,10 @@ import { sendEmailVerification } from '../../apis/EmailVerfication';
 import signup from '../../apis/Signup';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setToken, setUser } from '../../redux/actions';
+import { setSocket, setToken, setUser } from '../../redux/actions';
+import socket from '../../socket';
+
+/** @type {*} */
 const Errors = {
     Email: '',
     Username: '',
@@ -21,6 +24,8 @@ const Errors = {
     Signup: '',
     Name: 'Name must be at least 4 characters',
 };
+
+/** @type {*} */
 const months = [
     'January',
     'February',
@@ -35,6 +40,18 @@ const months = [
     'November',
     'December',
 ];
+
+/**
+ *
+ *
+ * @param {*} { onClose }
+ * @return {*} 
+/**
+ *
+ *
+ * @param {*} { onClose }
+ * @return {*} 
+ */
 const SignUpPage = ({ onClose }) => {
     const [windowOpened, setwindowOpned] = useState(0);
     const [Data1, changeData1] = useState({
@@ -46,7 +63,7 @@ const SignUpPage = ({ onClose }) => {
     const [password, setpassword] = useState('');
     const [canbeuser, setcanbeuser] = useState(true);
     const [verficationcode, setverficationcode] = useState('');
-    const [captchaVal,setCaptchaVal]=useState("");
+    const [captchaVal, setCaptchaVal] = useState('');
     const captchaRef = useRef(null);
     const [iscomplete, setiscomplete] = useState(false);
     const captchaApiHandler = () => {
@@ -73,6 +90,9 @@ const SignUpPage = ({ onClose }) => {
                     setwindowOpned,
                     windowOpened
                 );
+                socket.auth = { token: userData.token };
+                await socket.connect();
+                dispatch(setSocket(socket));
                 dispatch(setUser(userData.user));
                 dispatch(setToken(userData.token));
                 navigate(`/home`, { state: { firstTime: true } });
@@ -125,26 +145,26 @@ const SignUpPage = ({ onClose }) => {
                 />
             )}
             {windowOpened === 2 && (
-                 <div className="sign-up-page-body">
-                 <ReCAPTCHA
-                     sitekey="6Le61wEpAAAAAGgZRq-B51uGQpEP3J4_YIUDCU-o"
-                     onChange={captchaApiHandler}
-                     ref={captchaRef}
-                 />
-     
-                 <button
-                     className="black-wide-button"
-                     style={{
-                         background: iscomplete ? 'black' : 'gray',
-                         marginTop: '170px',
-                         marginBottom: '-140px',
-                     }}
-                     disabled={!iscomplete}
-                     onClick={nextWindowHandler}
-                 >
-                     Next
-                 </button>
-             </div>
+                <div className="sign-up-page-body">
+                    <ReCAPTCHA
+                        sitekey="6Le61wEpAAAAAGgZRq-B51uGQpEP3J4_YIUDCU-o"
+                        onChange={captchaApiHandler}
+                        ref={captchaRef}
+                    />
+
+                    <button
+                        className="black-wide-button"
+                        style={{
+                            background: iscomplete ? 'black' : 'gray',
+                            marginTop: '170px',
+                            marginBottom: '-140px',
+                        }}
+                        disabled={!iscomplete}
+                        onClick={nextWindowHandler}
+                    >
+                        Next
+                    </button>
+                </div>
             )}
             {windowOpened === 3 && (
                 <SignUpPage4
