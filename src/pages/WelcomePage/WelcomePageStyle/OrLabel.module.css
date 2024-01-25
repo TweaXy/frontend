@@ -1,0 +1,8 @@
+.straightLine {
+  border: 0.2px solid rgb(239, 243, 244);
+  width: 130px;
+  height: 1px;
+}
+.label {
+  font-size: small;
+}

@@ -1,0 +1,143 @@
+.conversation-body {
+    height: 100vh;
+    max-width: 480px;
+    width: 388.5px;
+    display: flex;
+    flex-direction:column ;
+    border-right: 1px var(--twitter-background) solid;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.settings-converation-style {
+    height: 100vh;
+    width: 550px;
+
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+.empty-messages-style {
+    margin: 32px 24px;
+    padding: 0px 37px;
+}
+
+.header-inbox-span {
+    font-size: xx-large;
+    font-family: fantasy;
+    width: 250px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+}
+
+.write-message-button {
+    outline: none !important;
+    background-color: var(--button-background) !important;
+    color: white !important;
+    font-weight: 550 !important;
+    font-size: 17px !important;
+    height: 55px !important;
+    border-radius: 30px !important;
+    border: none !important;
+    text-transform: inherit !important;
+    width: 200px;
+    margin-top: 5px !important;
+}
+.empty-text-conversation {
+    font-size: 15px;
+    color: #536471;
+}
+body {
+    --twitter-color: #35a4f4;
+    --twitter-background: #e6ecf0;
+    --twitter-cianHover: #d8eaf8ed;
+    --twitter-greyColor: #536471;
+    --twitter-greyHover: #eae9e9;
+    --widget-background: rgba(38, 90, 101, 0.059);
+}
+.text-settings-conversation-page {
+    display: inline-block;
+    color: rgb(0, 0, 0);
+    font-weight: bolder;
+
+    margin-left: 10px;
+
+    margin-right: 10px;
+
+    font-size: 23px;
+    padding: 0.25rem;
+    padding-left: 10px;
+    padding-right: 0.75rem;
+    padding-top: 10px;
+    padding-bottom: 0.75rem;
+}
+.span-notification-text-settings-conversation {
+    border-bottom: 1px rgb(228, 228, 228) solid;
+    border-top: 1px rgb(228, 228, 228) solid;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 115%;
+    padding-top: 10px;
+    padding-bottom: 0.75rem;
+    display: grid;
+}
+.snooze-text-settings-conversation {
+    display: inline-block;
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+
+    margin-left: 10px;
+
+    margin-right: 10px;
+
+    font-size: 15px;
+    padding: 0.25rem;
+    padding-left: 10px;
+    padding-right: 0.75rem;
+    padding-top: 10px;
+    padding-bottom: 0.75rem;
+}
+.interaction-text-settings-conversation {
+    display: flex;
+    cursor: pointer;
+    color: var(--twitter-color);
+    font-weight: 500;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 17px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 0.25rem;
+    padding-left: 10px;
+    padding-right: 0.75rem;
+    padding-top: 10px;
+    padding-bottom: 0.75rem;
+}
+.interaction-text-settings-conversation:hover {
+    background-color: var(--twitter-cianHover);
+}
+.interaction-leave-text-settings-conversation {
+    display: flex;
+    cursor: pointer;
+    color: red;
+    font-weight: 500;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 17px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 0.25rem;
+    padding-left: 10px;
+    padding-right: 0.75rem;
+    padding-top: 10px;
+    padding-bottom: 0.75rem;
+}
+.interaction-leave-text-settings-conversation:hover {
+    background-color: rgb(255, 225, 225);
+}
+
+.snooze-switch{
+   right: -35%;
+}

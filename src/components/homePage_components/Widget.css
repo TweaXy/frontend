@@ -1,0 +1,43 @@
+.widget {
+    /* flex: 0.33; */
+    display: flex;
+    font-family: 'Segoe UI Emoji', 'Arial'; /* Use a fallback font */
+    /* flex-shrink: 1 !important; */
+    width: 410px;
+    min-width: 0;
+}
+
+.widget > .widget-main {
+    max-width: 348.4px;
+}
+.empty-container {
+    width: 30px;
+}
+
+.widget > .widget-main {
+    flex: 1;
+}
+
+@media only screen and (min-width: 1007px) and (max-width: 1107px) {
+  
+  .widget{
+    width: fit-content;
+  }
+  
+  .widget-main {
+    /* margin-left: 20%; */
+    /* width: 90%;
+      padding-right: 20px; */
+    /* float: left; */
+    /* border: 5px solid  red; */
+    /* width: 170px; */
+    width: 270px;
+    
+  }
+}
+
+@media only screen and (max-width: 1006px){
+.widget{
+  display: none;
+}
+}

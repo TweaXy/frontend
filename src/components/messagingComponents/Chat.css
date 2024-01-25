@@ -1,0 +1,16 @@
+.chat-wrapper {
+    /* display: flex; */
+    flex: 1;
+    padding: 0px 16px;
+    overflow-y: scroll;
+
+    /* height: 30px; */
+}
+
+.chat-wrapper>h1 {
+    margin: 0;
+}
+
+.chat-wrapper::-webkit-scrollbar {
+    display: none;
+}

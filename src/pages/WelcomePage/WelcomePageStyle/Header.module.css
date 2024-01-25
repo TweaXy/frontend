@@ -1,0 +1,27 @@
+.container {
+    margin-top: 2%;
+    box-sizing: border-box;
+    font-size: 105%;
+}
+
+.Xlogo {
+    width: 0px;
+}
+@media only screen and (min-width: 0px) and (max-width: 1000px) {
+    .Xlogo {
+        width: 80px;
+    }
+}
+.heading {
+    font-size: 270%;
+    font-weight: 900;
+    margin-top: 12%;
+}
+
+.content {
+    box-sizing: border-box;
+    font-weight: 900;
+    font-size: 130%;
+    margin-top: 7%;
+    margin-bottom: 4%;
+}

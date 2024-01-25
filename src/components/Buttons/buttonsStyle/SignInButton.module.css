@@ -1,0 +1,55 @@
+.heading {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 70%;
+  font-weight: 750;
+  margin-top: 10%;
+  margin-bottom: 4%;
+  padding: 0 3px;
+}
+.buttonSignIn {
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid #dadce0;
+  border-radius: 20px;
+  color: rgb(29, 155, 240);
+  font-size: 70%;
+  font-weight: bold;  
+  height: 40px;
+  text-align: center;
+  width: 300px;
+  
+  
+}
+
+.buttonSignIn:hover {
+  background-color: #f8faff;
+  border-color: #d2e3fc;
+  cursor: pointer;
+}
+
+
+.content {
+  font-family: Arial, Helvetica, sans-serif;
+  color:white;
+  font-weight: 700;
+  font-size: 60%;
+  text-align: center;
+  margin-top: 8px;
+ 
+}
+
+@media only screen and (min-width: 0px) and (max-width: 700px) {
+  .container {
+    margin-top: 20%;
+    margin-bottom: 12%;
+  }
+}
+
+@media only screen and (min-width: 540px) and (max-width: 540px) {
+  .container {
+    margin-top: 10%;
+  }
+}

@@ -1,0 +1,34 @@
+button.login-with-button {
+    height: 40px;
+    width: 300px;
+    min-width: 36px;
+    min-height: 36px;
+    margin: 12px 0;
+    padding: 0 16px;
+    border-radius: 9999px;
+    border: 1px solid #dadce0;
+    background: #fff;
+    color: #3c4043;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-overflow: ellipsis;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: "Google Sans", arial, sans-serif;
+    transition: background 200ms, border 200ms, box-shadow 200ms;
+}
+
+button.login-with-button:hover {
+    background: #f1f1f1;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px #ccc;
+}
+
+button.login-with-button img {
+    margin: 0 4px 0 0;
+    width: 20px;
+    height: 20px;
+}

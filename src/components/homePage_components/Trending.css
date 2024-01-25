@@ -1,0 +1,65 @@
+.trending {
+  display: flex;
+  flex-direction: column;
+  font-family: "Segoe UI Emoji", "Arial"; /* Use a fallback font */
+  background-color: transparent;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  width: inherit;
+}
+.trending:hover {
+  background-color: #eae9e98f;
+  transition: background-color 200ms ease-out;
+  cursor: pointer;
+}
+
+.trending > .trend-country-container {
+  display: flex;
+  font-size: 13px;
+  color: var(--twitter-greyColor);
+  font-weight: lighter;
+}
+
+.trend-country-container > .country {
+  flex: 1;
+}
+
+.trend-country-container > .options-container {
+  display: flex;
+  width: 34.75px;
+  height: 34.75px;
+  margin: -8px;
+  justify-self: flex-end;
+  align-items: center;
+  justify-items: center;
+}
+.trend-country-container > .options-container > .MuiSvgIcon-root {
+  color: var(--twitter-greyColor);
+  font-weight: lighter !important;
+  font-size: 20px;
+  margin: auto;
+}
+
+.trend-country-container > .options-container:hover {
+  background-color: var(--twitter-cianHover);
+  border-radius: 50%;
+  transition: background-color 200ms ease-out;
+}
+
+.trend-country-container > .options-container:hover .MuiSvgIcon-root {
+  color: var(--twitter-color);
+}
+
+.trending > .trend-container {
+  font-weight: bolder;
+  color: black;
+  margin-top: 4px;
+  font-size: 15px;
+}
+
+.trending > .numbers-container {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--twitter-greyColor);
+  font-weight: lighter;
+}

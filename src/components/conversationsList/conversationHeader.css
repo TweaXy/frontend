@@ -1,0 +1,36 @@
+.conversation-window-header {
+    /* width: 100%; */
+    max-width: 448px;
+    height: 53px;
+    display: flex;
+    padding: 0 16px;
+    align-items: center;
+    position: relative;
+    background: #fff;
+}
+
+.conversation-window-header > .icon-settings-wrapper {
+    flex: 0.08;
+    display: flex;
+    justify-content: flex-end;
+    right: 13%;
+    position: absolute;
+  }
+  .conversation-window-header > .icon-add-message-wrapper {
+    flex: 0.08;
+    display: flex;
+    justify-content: flex-end;
+    right: 5%;
+    position: absolute;
+  }
+  .conversation-window-header >.edit-text {
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 20px;
+    padding: 0.25rem;
+    padding-left: 10px;
+    padding-right: 0.75rem;
+}

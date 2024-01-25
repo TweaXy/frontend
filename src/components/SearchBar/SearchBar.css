@@ -1,0 +1,43 @@
+.search-bar-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-bar-container {
+    background-color: var(--widget-background);
+    border-radius: 50px;
+    border: none;
+    display: flex;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+    margin-top: 6px;
+    width: inherit;
+  }
+  
+  .search-bar {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    flex: 1;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: 0;
+  }
+  
+  .search-bar::-webkit-search-cancel-button {
+    appearance: none;
+  }
+  
+  .search-icon-container {
+    display: flex;
+    width: 44px;
+    height: 42.5px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .search-bar-container > .search-icon-container > .MuiSvgIcon-root {
+    color: var(--twitter-greyColor);
+    padding-left: 12px !important;
+    font-size: 23px;
+  }
