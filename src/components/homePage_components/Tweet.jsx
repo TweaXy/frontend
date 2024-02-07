@@ -22,26 +22,27 @@ import TweetSelectors from '../../shared/selectors/Tweets';
 import { apiRepost, apiDeleteRepost } from '../../apis/tweetApis/repostTweet';
 
 export default function Tweet({
-    avatar,
-    username,
-    handle,
-    uploadTime,
-    tweetText,
-    tweetMedia,
-    replies,
-    reposts,
-    likes,
-    insights,
-    tweetId,
-    isUserLiked,
-    token,
-    userID,
+    tweet,
     removeTweet,
-    isCurrentUserTweet,
     handleTweetsFiltering,
+    token,
     followedByMe,
-    isUserInteract,
+    isCurrentUserTweet,
 }) {
+    const avatar = tweet.mainInteraction.user.avatar;
+    const username = tweet.mainInteraction.user.name;
+    const handle = tweet.mainInteraction.user.username;
+    const uploadTime = tweet.mainInteraction.createdDate;
+    const tweetText = tweet.mainInteraction.text;
+    const tweetMedia = tweet.mainInteraction.media;
+    const replies = tweet.mainInteraction.commentsCount;
+    const reposts = tweet.mainInteraction.retweetsCount;
+    const likes = tweet.mainInteraction.likesCount;
+    const insights = tweet.mainInteraction.viewsCount;
+    const tweetId = tweet.mainInteraction.id;
+    const isUserLiked = tweet.mainInteraction.isUserInteract.isUserLiked;
+    const userID = tweet.mainInteraction.user.id;
+    const isUserInteract = tweet.mainInteraction.isUserInteract;
     const [tweetLikes, setTweetLikes] = useState(likes);
     const [tweetReplies, setTweetReplies] = useState(replies);
     const [tweetReposts, setTweetReposts] = useState(reposts);
@@ -61,15 +62,13 @@ export default function Tweet({
     const navigate = useNavigate();
     console.log('from tweet', isrepostActive);
     const profileRouting = (event) => {
-        event.stopPropagation();
-        navigate(`/profile/${username}`, {
+        navigate(`/profile/${handle}`, {
             state: { userID: userID },
         });
+        event.stopPropagation();
     };
 
     useEffect(() => {
-        // adjust this to be useRef
-
         const activityIcons = [
             activityIcon1.current,
             activityIcon2.current,
@@ -181,13 +180,11 @@ export default function Tweet({
 
     const likeDislikeTweetHandler = (e) => {
         e.stopPropagation();
-        //call api likeDislikeTweetHandler
         if (isLikeActive) {
             //dislike it
             apiDislikeTweet(tweetId, token);
             setTweetLikes((likes) => likes - 1);
         } else {
-            //like it
             apiLikeTweet(tweetId, token);
             setTweetLikes((likes) => likes + 1);
         }
@@ -227,8 +224,6 @@ export default function Tweet({
         event.stopPropagation();
         removeTweet(tweetId);
     };
-
-    //reply state
     const [isReplyWindow, setIsReplyWindow] = useState(false);
 
     const replyWindowClose = (event) => {
@@ -245,10 +240,7 @@ export default function Tweet({
         if (await apiAddReply(tweetId, text, images, token)) {
             setTweetReplies((prevReplies) => prevReplies + 1);
         }
-        //take any other action
     };
-
-    // we should have a function to handle the change on clicking any
     return (
         <>
             <div className="tweet" onClick={getreplieshandler}>
@@ -257,7 +249,7 @@ export default function Tweet({
                     <div className="avatar-container ">
                         <div className="avatar-box" onClick={profileRouting}>
                             <Avatar
-                                src={`https://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
+                                src={`http://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
                             ></Avatar>
                         </div>
                     </div>
@@ -370,7 +362,13 @@ export default function Tweet({
                                     ref={iconInteraction2}
                                     onClick={repostHandler}
                                 >
-                                    <span className={`interaction ${isrepostActive? "repost-active":""}`}>
+                                    <span
+                                        className={`interaction ${
+                                            isrepostActive
+                                                ? 'repost-active'
+                                                : ''
+                                        }`}
+                                    >
                                         {tweetReposts != 0 && `${tweetReposts}`}
                                     </span>
                                 </span>
@@ -419,12 +417,6 @@ export default function Tweet({
                                             `${tweetInsights}`}
                                     </span>
                                 </span>
-                            </div>
-                            <div className="side-icon bookmark">
-                                <BookmarkBorderOutlinedIcon />
-                            </div>
-                            <div className="side-icon">
-                                <FileUploadOutlinedIcon />
                             </div>
                         </div>
                     </div>

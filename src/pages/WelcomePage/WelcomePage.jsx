@@ -33,13 +33,6 @@ export default function WelcomePage() {
     const closeSignInWindow = () => {
         setIsSignInWindowOpen(false);
     };
-
-    useEffect(() => {
-        if (user && token) {
-            navigate('/home');
-        }
-    }, [user, token, navigate]);
-
     return (
         <React.Fragment>
             <div>
@@ -62,7 +55,7 @@ export default function WelcomePage() {
                                 openWindow={openSignUpWindow}
                                 onClose={closeSignUpWindow}
                             />
-                            
+
                             <SignInButton
                                 isWindowOpen={isSignInWindowOpen}
                                 openWindow={openSignInWindow}

@@ -1,5 +1,5 @@
 const unfollow = async (username, token) => {
-    const url = `https://tweaxybackend.mywire.org/api/v1/users/follow/${username}`;
+    const url = `http://tweaxybackend.mywire.org/api/v1/users/follow/${username}`;
 
     try {
         const response = await fetch(url, {

@@ -1,6 +1,6 @@
 
 const apiLikeTweet =async (tweetId,token) => {
-    const likeTweetURL =`https://tweaxybackend.mywire.org/api/v1/interactions/${tweetId}/like`;
+    const likeTweetURL =`http://tweaxybackend.mywire.org/api/v1/interactions/${tweetId}/like`;
     // console.log("this is a token" + token);
     try {
       const response = await fetch(likeTweetURL, {
@@ -27,7 +27,7 @@ const apiLikeTweet =async (tweetId,token) => {
 
 
   const apiDislikeTweet =async (tweetId,token) => {
-    const DislikeTweetURL =`https://tweaxybackend.mywire.org/api/v1/interactions/${tweetId}/like`;
+    const DislikeTweetURL =`http://tweaxybackend.mywire.org/api/v1/interactions/${tweetId}/like`;
     // console.log("this is a token" + token);
     try {
       const response = await fetch(DislikeTweetURL, {

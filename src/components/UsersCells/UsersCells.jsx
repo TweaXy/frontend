@@ -18,9 +18,7 @@ const UsersCells = ({ users }) => {
 
     if (isPageLoading) {
         return (
-            <div className="circular-progress-spinner">
-                <CircularProgress />
-            </div>
+            <LoadingPage/>
         );
     }
 

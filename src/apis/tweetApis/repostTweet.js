@@ -7,7 +7,7 @@
  */
 const apiRepost = async (tweetId, token) => {
     const repostTweetURL =
-        `https://tweaxybackend.mywire.org/api/v1/interactions/${tweetId}/retweet`;
+        `http://tweaxybackend.mywire.org/api/v1/interactions/${tweetId}/retweet`;
     try {
         const response = await fetch(repostTweetURL, {
             method: 'POST',
@@ -35,7 +35,7 @@ const apiRepost = async (tweetId, token) => {
 const apiDeleteRepost = async (tweetId, token) => {
    
     const repostTweetURL =
-        `https://tweaxybackend.mywire.org/api/v1/interactions/retweet/${tweetId}`;
+        `http://tweaxybackend.mywire.org/api/v1/interactions/retweet/${tweetId}`;
     try {
         const response = await fetch(repostTweetURL, {
             method: 'DELETE',

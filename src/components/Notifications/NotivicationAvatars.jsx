@@ -10,7 +10,7 @@ export default function NotificationAvatars({ type, useravatar }) {
             </div>
             <div className="Notification-avatar-box2">
                 <Avatar
-                    src={`https://tweaxybackend.mywire.org/api/v1/images/${useravatar}`}
+                    src={`http://tweaxybackend.mywire.org/api/v1/images/${useravatar}`}
                     sx={{ width: 30, height: 30 }}
                 ></Avatar>
             </div>

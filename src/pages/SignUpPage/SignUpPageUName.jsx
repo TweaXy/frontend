@@ -22,10 +22,17 @@ const SignUpPageuserName = ({ next_Handler, UN, token, user }) => {
         },
         [username]
     );
-    const clickHandler = () => {
-        UsernameUpdate(username, token);
-        dispatch(setUser({ ...user, username: username }));
-        next_Handler();
+    const clickHandler = async () => {
+        if (username.length < 4) {
+            next_Handler();
+            return;
+        }
+        const data = await UsernameUpdate(username, token);
+        console.log('Data is', data);
+        if (data == username) {
+            dispatch(setUser({ ...user, username: username }));
+            next_Handler();
+        } else setisuniqueusername(false);
     };
     return (
         <>

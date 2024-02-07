@@ -16,7 +16,7 @@ import MediaErrorMsg from './MediaErrorMsg';
 import ImageUploader from './ImageUploader';
 import HomePageSelectors from '../../shared/selectors/HomePage';
 import VideoUploader from './VideoUploader';
-export default function TweetBox({ userData }) {
+export default function TweetBox({ userData, avatar }) {
     const [text, setText] = useState('');
     const [privacylay, setPrivacylay] = useState(false);
     const [tweetImages, setTweetImages] = useState([]);
@@ -134,7 +134,7 @@ export default function TweetBox({ userData }) {
     };
 
     const handlePostTweet = async (e) => {
-        if(text.length==0&& tweetImages.length==0){
+        if (text.length == 0 && tweetImages.length == 0) {
             return;
         }
         console.log('this is a handler');
@@ -152,7 +152,7 @@ export default function TweetBox({ userData }) {
     };
     return (
         <div className="tweetbox" onClick={handleDisplayPrivacy}>
-            <AvatarBox img={userData.user.avatar} />
+            <AvatarBox img={avatar} />
             {/* <Avatar src="myphoto.jpg"/> */}
             <form action="" className="tweetbox-form">
                 <div className="tweetbox-input">
@@ -217,7 +217,11 @@ export default function TweetBox({ userData }) {
                     </div>
                     <Button
                         data-test={HomePageSelectors.TWEETBOX_POST_BUTTON}
-                        className={`tweetbox-button ${text.length==0 &&tweetImages.length==0 ? "tweetbox-btn-disactive":""}`}
+                        className={`tweetbox-button ${
+                            text.length == 0 && tweetImages.length == 0
+                                ? 'tweetbox-btn-disactive'
+                                : ''
+                        }`}
                         onClick={handlePostTweet}
                     >
                         Post

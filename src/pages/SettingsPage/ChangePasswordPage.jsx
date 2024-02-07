@@ -51,9 +51,7 @@ const ChangePasswordPage = () => {
 
     if (isPageLoading) {
         return (
-            <div className="loading-page">
-                <CircularProgress />
-            </div>
+            <LoadingPage/>
         );
     }
 

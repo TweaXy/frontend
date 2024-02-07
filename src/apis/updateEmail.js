@@ -1,5 +1,5 @@
 const updateEmail = async (email, verificationToken, token) => {
-    const url = 'https://tweaxybackend.mywire.org/api/v1/users/email';
+    const url = 'http://tweaxybackend.mywire.org/api/v1/users/email';
 
     try {
         const response = await fetch(url, {

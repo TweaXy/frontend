@@ -1,4 +1,4 @@
-const urlFollowing = 'https://tweaxybackend.mywire.org/api/v1/users/followings/';
+const urlFollowing = 'http://tweaxybackend.mywire.org/api/v1/users/followings/';
 
 const getUserFollowing = async ({ username, token }) => {
     const fullUrl = `${urlFollowing}${username}`;

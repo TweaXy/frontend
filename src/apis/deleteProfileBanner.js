@@ -1,6 +1,7 @@
-let urlDeleteBanner = 'https://tweaxybackend.mywire.org/api/v1/users/profileBanner';
+let urlDeleteBanner = 'http://tweaxybackend.mywire.org/api/v1/users/profileBanner';
 
 const deleteBannerApi = (authToken) => {
+    console.log("from deleting profile banner ",authToken);
     fetch(urlDeleteBanner, {
         method: 'DELETE',
         headers: {

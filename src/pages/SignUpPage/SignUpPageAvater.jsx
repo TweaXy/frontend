@@ -3,31 +3,47 @@ import './SignUpHome.css';
 import Pictureupload from '../../apis/Pictureupload';
 import './Avater.css';
 import img from '../../../assets/default.jpeg';
+import { useDispatch } from 'react-redux';
 const UN = 'Pick a profile picture';
 const uniq = 'Have a favorite selfie? Upload it now.';
-
-const SignUpPageAvater = ({ next_Handler, authToken }) => {
-    const [avatar, setAvatar] = useState(img);
+import { setUser } from '../../redux/actions';
+import NotifyBox from '../../components/NotifyBox/NotifyBox';
+const SignUpPageAvater = ({ next_Handler, token, user }) => {
+    const [avatar, setavatar] = useState(img);
+    const [SentImage, setSentImage] = useState(null);
+    const [Message, setMessage] = useState('');
+    const dispatch = useDispatch();
     const handleAvatarChange = (event) => {
         const file = event.target.files[0];
-
+        setSentImage(file);
         if (file) {
             const reader = new FileReader();
 
             reader.onloadend = () => {
-                setAvatar(reader.result);
-                // onAvatarChange(reader.result);
+                setavatar(reader.result);
             };
             reader.readAsDataURL(file);
         }
     };
-
-    const handleRemoveAvatar = () => {
-        setAvatar(null);
+    const actionOccurredHandler = (message) => {
+        setMessage(message);
+        const timeoutId = setTimeout(() => {
+            setMessage('');
+        }, 3000);
+        return () => clearTimeout(timeoutId);
     };
-    const updatepicture = () => {
-        Pictureupload(avatar, authToken);
-        next_Handler(); 
+    const handleRemoveAvatar = () => {
+        setavatar(null);
+    };
+    const updatepicture = async () => {
+        const res = await Pictureupload(SentImage, token);
+        if (res == true) {
+            console.log('Avatar Updated Successfully');
+            actionOccurredHandler('Avatar added Successfully');
+            setTimeout(() => {
+                next_Handler();
+            }, 500);
+        } else next_Handler();
     };
     return (
         <>
@@ -72,6 +88,7 @@ const SignUpPageAvater = ({ next_Handler, authToken }) => {
                 >
                     Next
                 </button>
+                {Message.length !== 0 && <NotifyBox text={Message} />}
             </div>
         </>
     );

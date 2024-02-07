@@ -1,91 +1,113 @@
-import '../homePage_components/Feed.css';
-import Tweet from '../homePage_components/Tweet';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import GetuserTweets from '../../apis/tweetApis/UserTweet';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { CircularProgress } from '@mui/material';
 import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
-import React from 'react';
+import LoadingPage from '../LoadingPage/LoadingPage';
+import Tweet from '../homePage_components/Tweet';
+
 const UserTweets = ({
     userID,
     curUserID,
     followedByMe,
     actionOccurredHandler,
+    setnumposts,
+    token,
 }) => {
     const [tweets, setTweets] = useState([]);
-    const [isPageLoading, setIsPageLoading] = useState(true);
-    const token = useSelector((state) => state.user.token);
+    const [offset, setOffset] = useState(0);
+    const [loading, setLoading] = useState(true);
+    const [hasMore, setHasMore] = useState(false);
+    const observer = useRef();
 
-    const getTweets = async () => {
-        const tweetsResponse = await GetuserTweets(userID, token, 10, 0);
-        console.log('user tweet response', tweetsResponse);
-        setTweets(tweetsResponse);
+    const fetchData = async () => {
+        try {
+            const tweetsResponse = await GetuserTweets(
+                userID,
+                token,
+                10,
+                offset
+            );
+            console.log('user tweet response', tweetsResponse);
+
+            setTweets((prevTweets) => {
+                setLoading(false);
+                return [...prevTweets, ...tweetsResponse.data.items].filter(
+                    (tweet, index, self) =>
+                        index ===
+                        self.findIndex(
+                            (t) =>
+                                t.mainInteraction.id ===
+                                tweet.mainInteraction.id
+                        )
+                );
+            });
+            setnumposts(tweetsResponse.pagination.totalCount);
+            setHasMore(tweetsResponse.data.items.length > 0);
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching user tweets:', error);
+            setLoading(false);
+        }
     };
 
-    useEffect(() => {
-        if (token) {
-            setIsPageLoading(false);
-        } else {
-            console.log('profile page is loading');
+    const removeTweet = async (tweetId) => {
+        try {
+            await apiDeleteTweet(tweetId, token);
+            setTweets((prevTweets) =>
+                prevTweets.filter(
+                    (tweet) => tweet.mainInteraction.id !== tweetId
+                )
+            );
+        } catch (error) {
+            console.error('Error deleting tweet:', error);
         }
-    }, [token]);
+    };
+
+    const lastTweetElementRef = useCallback(
+        (node) => {
+            if (loading || !hasMore) return;
+
+            if (observer.current) observer.current.disconnect();
+            observer.current = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    setOffset((prevOffset) => prevOffset + 10);
+                }
+            });
+            if (node) observer.current.observe(node);
+        },
+        [loading, hasMore]
+    );
+
     useEffect(() => {
-        if (!isPageLoading) getTweets();
-    }, [isPageLoading]);
-    if (isPageLoading) {
-        return (
-            <div
-                data-testid="loading-element"
-                style={{
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    height: '100vh',
-                }}
-            >
-                <CircularProgress />
-            </div>
-        );
+        fetchData();
+    }, [offset]);
+
+    if (loading) {
+        return <LoadingPage />;
     }
 
-    const removeTweet = (tweetId)=>{
-        apiDeleteTweet(tweetId,token);
-       setTweets((prevTweets) =>prevTweets.filter((tweet)=>tweet.mainInteraction.id!==tweetId));
-      
-   }
     return (
         <>
-            {tweets &&
-                tweets.length > 0 &&
-                tweets.map((tweet) => (
+            {tweets.map((tweet, index) => (
+                <div
+                    key={index}
+                    ref={
+                        tweets.length === index + 1 ? lastTweetElementRef : null
+                    }
+                >
                     <Tweet
-                        key={tweet.mainInteraction.user.id}
-                        avatar={tweet.mainInteraction.user.avatar}
-                        username={tweet.mainInteraction.user.name}
-                        handle={tweet.mainInteraction.user.username}
-                        uploadTime={tweet.mainInteraction.createdDate}
-                        tweetText={tweet.mainInteraction.text}
-                        tweetMedia={tweet.mainInteraction.media}
-                        replies={tweet.mainInteraction.commentsCount}
-                        reposts={tweet.mainInteraction.retweetsCount}
-                        likes={tweet.mainInteraction.likesCount}
-                        insights={tweet.mainInteraction.viewsCount}
-                        tweetId={tweet.mainInteraction.id}
-                        isUserLiked={
-                            tweet.mainInteraction.isUserInteract.isUserLiked
-                        }
-                        token={token}
-                        userID={tweet.mainInteraction.user.id}
+                        tweet={tweet}
                         removeTweet={removeTweet}
+                        handleTweetsFiltering={actionOccurredHandler}
+                        token={token}
+                        followedByMe={followedByMe}
                         isCurrentUserTweet={
                             curUserID === tweet.mainInteraction.user.id
                         }
-                        handleTweetsFiltering={actionOccurredHandler}
-                        followedByMe={followedByMe}
-                        tweet={tweet}
-                        isUserInteract={tweet.mainInteraction.isUserInteract}
                     />
-                ))}
+                </div>
+            ))}
         </>
     );
 };
+
 export default UserTweets;

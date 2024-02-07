@@ -1,9 +1,9 @@
 import { Errors } from "../pages/SignUpPage/SignUpPage";
 
 let emailVerficationUrl =
-  "https://tweaxybackend.mywire.org/api/v1/auth/sendEmailVerification";
+  "http://tweaxybackend.mywire.org/api/v1/auth/sendEmailVerification";
 let checkEmailVerificationUrl =
-  "https://tweaxybackend.mywire.org/api/v1/auth/checkEmailVerification";
+  "http://tweaxybackend.mywire.org/api/v1/auth/checkEmailVerification";
 const sendEmailVerification = (usermail) => {
   fetch(emailVerficationUrl, {
     method: "POST",

@@ -55,9 +55,7 @@ const LikersPage = () => {
 
     if (isPageLoading) {
         return (
-            <div className="loading-page">
-                <CircularProgress />
-            </div>
+            <LoadingPage/>
         );
     }
     const arrowBackRoute = () => navigate(-1);

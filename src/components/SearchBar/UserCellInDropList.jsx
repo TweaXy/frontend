@@ -59,7 +59,7 @@ const UserCell = ({
             >
                 <Avatar
                     className="user-cell-in-drop-list-avatar"
-                    src={`https://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
+                    src={`http://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
                     alt={name}
                 />
             </div>

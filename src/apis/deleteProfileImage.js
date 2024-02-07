@@ -1,5 +1,5 @@
 const urlDeleteProfile =
-    'https://tweaxybackend.mywire.org/api/v1/users/profilePicture';
+    'http://tweaxybackend.mywire.org/api/v1/users/profilePicture';
 const deleteProfileApi = (authToken) => {
     fetch(urlDeleteProfile, {
         method: 'DELETE',

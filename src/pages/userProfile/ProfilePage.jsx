@@ -2,68 +2,50 @@ import './HomePage.css';
 import Sidebar from '../../components/homePage_components/Sidebar';
 import Profile from '../../components/userProfile_components/Profile';
 import Widget from '../../components/homePage_components/Widget';
-import { connect, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { CircularProgress } from '@mui/material';
-import getUserDataApi from '../../apis/getProfileData';
+import LoadingPage from '../../components/LoadingPage/LoadingPage';
 import { useLocation } from 'react-router';
-import { clearUser } from '../../redux/actions';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router';
 const ProfilePage = () => {
-    // const dispatch = useDispatch();
-       // const navigate=useNavigate();
-     //useEffect(()=>{
-        //dispatch(clearUser());
-       // navigate('/');
-     //},[])
     const [isPageLoading, setIsPageLoading] = useState(true);
     const [userData, setUserData] = useState({});
-
+    const [renderSidebar, setrenderSidebar] = useState(false);
+    const [avatar, setavatar] = useState(null);
     const location = useLocation();
     const userID = location.state?.userID;
 
     const token = useSelector((state) => state.user.token);
     const user = useSelector((state) => state.user.user);
-    const currUserId= useSelector((state) => state.user.user.id);
-    // console.log('token from profile: ', token);
-    // console.log('user id from profile:', userID);
-    // console.log('user id from profile:', currUserId);
-
+    const currUserId = useSelector((state) => state.user.user.id);
     useEffect(() => {
-        if (token && userID && user) {
-            setUserData({user, token});
+        if (token && userID && user && currUserId) {
+            setUserData({ user, token, currUserId });
             setIsPageLoading(false);
             console.log('user id from profile page', userID);
             console.log('user token from profile page', token);
         } else {
             console.log('profile page is loading');
         }
-    }, [token, userID, user]);
+    }, [token, userID, user, currUserId]);
 
     if (isPageLoading) {
-        return (
-            <div
-                style={{
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    height: '100vh',
-                }}
-            >
-                <CircularProgress />
-            </div>
-        );
+        return <LoadingPage />;
     }
 
     return (
         <>
             <div className="home-page">
                 {/**Side bar */}
-                <Sidebar userData={userData} active={1} />
+                {renderSidebar && (
+                    <Sidebar userData={userData} active={1} avatar={avatar} />
+                )}
                 {/**News feed */}
-
-                <Profile token={token} userID={userID} currUserId={currUserId} />
-
+                <Profile
+                    userData={userData}
+                    userID={userID}
+                    renderSidebar={setrenderSidebar}
+                    setavatar={setavatar}
+                />
                 {/**Widgets */}
                 <Widget />
             </div>

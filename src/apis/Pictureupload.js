@@ -1,28 +1,29 @@
-const PictureupdateUrl = 'https://tweaxybackend.mywire.org/api/v1/users';
+let PictureupdateUrl = 'http://tweaxybackend.mywire.org/api/v1/users';
 
-const Pictureupload = (_avater, authToken) => {
-    console.log('auth token is', authToken);
+const Pictureupload = async (_avater, authToken) => {
+    console.log('Avatar is', _avater);
+    console.log('auth token is ', authToken);
     const formData = new FormData();
     formData.append('avatar', _avater);
-    fetch(PictureupdateUrl, {
-        method: 'PATCH',
-        headers: {
-            Authorization: `Bearer ${authToken}`,
-        },
-        body: formData,
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log('Response from the API:', data);
-            if (data.status === 'success') {
-                console.log('picture updated successfully');
-            } else {
-                console.log(data.message);
-            }
-        })
-        .catch((error) => {
-            console.log('error from server');
+    try {
+        const response = await fetch(PictureupdateUrl, {
+            method: 'PATCH',
+            headers: {
+                Authorization: `Bearer ${authToken}`,
+            },
+            body: formData,
         });
+        const data = await response.json();
+        console.log('Response from the API:', data);
+        if (response.ok) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (error) {
+        console.error('Avatar update api:', error.message);
+        throw error;
+    }
 };
 
 export default Pictureupload;

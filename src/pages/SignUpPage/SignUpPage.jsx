@@ -13,8 +13,6 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setSocket, setToken, setUser } from '../../redux/actions';
 import socket from '../../socket';
-
-/** @type {*} */
 const Errors = {
     Email: '',
     Username: '',
@@ -24,8 +22,6 @@ const Errors = {
     Signup: '',
     Name: 'Name must be at least 4 characters',
 };
-
-/** @type {*} */
 const months = [
     'January',
     'February',
@@ -40,18 +36,6 @@ const months = [
     'November',
     'December',
 ];
-
-/**
- *
- *
- * @param {*} { onClose }
- * @return {*} 
-/**
- *
- *
- * @param {*} { onClose }
- * @return {*} 
- */
 const SignUpPage = ({ onClose }) => {
     const [windowOpened, setwindowOpned] = useState(0);
     const [Data1, changeData1] = useState({
@@ -91,7 +75,6 @@ const SignUpPage = ({ onClose }) => {
                     windowOpened
                 );
                 socket.auth = { token: userData.token };
-                await socket.connect();
                 dispatch(setSocket(socket));
                 dispatch(setUser(userData.user));
                 dispatch(setToken(userData.token));

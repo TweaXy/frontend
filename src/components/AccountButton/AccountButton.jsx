@@ -84,7 +84,7 @@ const AccountButton = ({
                 >
                     <div className="account-btn-left">
                         <Avatar
-                            src={`https://tweaxybackend.mywire.org/api/v1/images/${userAvatar}`}
+                            src={`http://tweaxybackend.mywire.org/api/v1/images/${userAvatar}`}
                         />
                         <div className="account-btn-body-wrapper">
                             <span className="name-span">{name}</span>

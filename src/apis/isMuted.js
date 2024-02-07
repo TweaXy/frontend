@@ -1,5 +1,5 @@
 const isUserMuted = async (userID, token) => {
-    const url = `https://tweaxybackend.mywire.org/api/v1/users/mute/check/${userID}`;
+    const url = `http://tweaxybackend.mywire.org/api/v1/users/mute/check/${userID}`;
 
     try {
         const response = await fetch(url, {

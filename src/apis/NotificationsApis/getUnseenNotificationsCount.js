@@ -1,5 +1,5 @@
 const getUnseenNotificationsCount = async (token) => {
-    const url = `https://tweaxybackend.mywire.org/api/v1/notification/unseenNotification`;
+    const url = `http://tweaxybackend.mywire.org/api/v1/notification/unseenNotification`;
 
     console.log('get notifications count token: ', token);
 

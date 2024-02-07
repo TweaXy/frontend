@@ -1,5 +1,5 @@
 const logout = async (token) => {
-    const url = 'https://tweaxybackend.mywire.org/api/v1/auth/logout';
+    const url = 'http://tweaxybackend.mywire.org/api/v1/auth/logout';
 
     try {
         const response = await fetch(url, {

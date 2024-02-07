@@ -10,19 +10,19 @@ import ProfileHeader from './ProfileHeader';
 import TabsProfile from './tabsProfile';
 import ProfileBio from './ProfileBio';
 
-function Profile({ token, userID, currUserId }) {
+function Profile({ userData, userID, renderSidebar, setavatar }) {
+    const token = userData.token;
+    const currUserId = userData.currUserId;
     const [ndata, setData] = useState('');
     const [isPageLoading, setIsPageLoading] = useState(true);
-
+    const [numposts, setnumposts] = useState(0);
     const [viewPosts, setViewPosts] = useState(false);
-
     const [actionOccurred, setActionOccurred] = useState(true);
     const [actionMessage, setActionMessage] = useState('');
-
+    const [curuser, setcuruser] = useState({});
     const viewPostsHandler = () => {
         setViewPosts(true);
     };
-
     const actionOccurredHandler = (message = '') => {
         setActionMessage(message);
         const timeoutId = setTimeout(() => {
@@ -41,7 +41,10 @@ function Profile({ token, userID, currUserId }) {
                 });
                 console.log('fetched data: ', fetchedData);
                 setData(fetchedData);
+                setcuruser(fetchedData.data.user);
                 setViewPosts(!fetchedData.data.user.blockedByMe);
+                setavatar(fetchedData.data.user.avatar);
+                renderSidebar(true);
             } catch (error) {
                 console.log('Failed With Error', error.message);
             } finally {
@@ -65,27 +68,14 @@ function Profile({ token, userID, currUserId }) {
                 <div className="profile">
                     <ProfileHeader
                         username={ndata.data.user.name}
-                        noPosts={0}
+                        noPosts={numposts}
                     />
                     <ProfileBio
-                        currUserId={currUserId}
-                        IdProfile={ndata.data.user.id}
-                        name={ndata.data.user.name}
-                        username={ndata.data.user.username}
-                        followingNum={ndata.data.user._count.following}
-                        followersNum={ndata.data.user._count.followedBy}
-                        bio={ndata.data.user.bio}
-                        website={ndata.data.user.website}
-                        location={ndata.data.user.location}
-                        ProfileImage={ndata.data.user.avatar}
-                        coverImage={ndata.data.user.cover}
-                        token={token}
-                        JoinedAt={ndata.data.user.joinedDate}
-                        followedByMe={ndata.data.user.followedByMe}
-                        blockedByMe={ndata.data.user.blockedByMe}
-                        blocksMe={ndata.data.user.blocksMe}
+                        curuser={curuser}
                         viewTweets={viewPosts}
                         actionOccurredHandler={actionOccurredHandler}
+                        token={token}
+                        currUserId={currUserId}
                     />
                     {ndata.data.user.blocksMe ? (
                         <div className="user-blocked-container">
@@ -124,6 +114,8 @@ function Profile({ token, userID, currUserId }) {
                             curUserID={currUserId}
                             followedByMe={ndata.data.user.followedByMe}
                             actionOccurredHandler={actionOccurredHandler}
+                            setnumposts={setnumposts}
+                            token={token}
                         />
                     )}
                 </div>

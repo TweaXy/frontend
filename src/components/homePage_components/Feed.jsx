@@ -1,5 +1,4 @@
 import './Feed.css';
-import { useSelector } from 'react-redux';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { apiDeleteTweet } from '../../apis/tweetApis/deleteTweet';
 import NotifyBox from '../../components/NotifyBox/NotifyBox';
@@ -8,8 +7,9 @@ import FeedHeader from './FeedHeader';
 import TweetBox from './TweetBox';
 import Tweet from './Tweet';
 
-const Feed = ({ userData, isTherePopUpWindow }) => {
-    const token = useSelector((state) => state.user.token);
+const Feed = ({ userData, isTherePopUpWindow, avatar }) => {
+    console.log('from feed', userData);
+    const token = userData.token;
 
     const [offset, setOffset] = useState(0);
 
@@ -61,7 +61,9 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
     console.log('tweets:', tweets);
     useEffect(() => {
         const fetchData = async () => {
-            const lnk = `https://tweaxybackend.mywire.org/api/v1/home?limit=10&offset=${offset}`;
+            console.log('token from feed is', token);
+
+            const lnk = `http://tweaxybackend.mywire.org/api/v1/home?limit=10&offset=${offset}`;
             try {
                 const response = await fetch(lnk, {
                     method: 'GET',
@@ -72,7 +74,6 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                 });
                 const responseData = await response.json();
                 if (responseData.status != 'success') {
-                    // DO NOTHING
                 } else {
                     setTweets((prevTweets) => {
                         setLoading(false);
@@ -103,7 +104,6 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
     if (loading) {
         return <LoadingPage />;
     }
-
     return (
         <div className="feed">
             <FeedHeader
@@ -111,39 +111,22 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                 isTherePopUpWindow={isTherePopUpWindow}
             />
 
-            <TweetBox userData={userData} />
+            <TweetBox userData={userData} avatar={avatar} />
 
             {tweets.map((tweet, index) => {
                 if (tweets.length === index + 1) {
                     return (
                         <div ref={lastTweetElementRef} key={index}>
                             <Tweet
-                                avatar={tweet.mainInteraction.user.avatar}
-                                username={tweet.mainInteraction.user.name}
-                                handle={tweet.mainInteraction.user.username}
-                                uploadTime={tweet.mainInteraction.createdDate}
-                                tweetText={tweet.mainInteraction.text}
-                                tweetMedia={tweet.mainInteraction.media}
-                                replies={tweet.mainInteraction.commentsCount}
-                                reposts={tweet.mainInteraction.retweetsCount}
-                                likes={tweet.mainInteraction.likesCount}
-                                insights={tweet.mainInteraction.viewsCount}
-                                tweetId={tweet.mainInteraction.id}
-                                isUserLiked={
-                                    tweet.mainInteraction.isUserInteract
-                                        .isUserLiked
-                                }
-                                token={userData.token}
-                                userID={tweet.mainInteraction.user.id}
+                                tweet={tweet}
                                 removeTweet={removeTweet}
+                                handleTweetsFiltering={handleTweetsFiltering}
+                                token={userData.token}
+                                followedByMe={true}
                                 isCurrentUserTweet={
                                     userData.user.id ==
                                     tweet.mainInteraction.user.id
                                 }
-                                handleTweetsFiltering={handleTweetsFiltering}
-                                followedByMe={true}
-                                tweet={tweet}
-                                isUserInteract={tweet.mainInteraction.isUserInteract}
                             />
                         </div>
                     );
@@ -151,32 +134,15 @@ const Feed = ({ userData, isTherePopUpWindow }) => {
                     return (
                         <div key={index}>
                             <Tweet
-                                avatar={tweet.mainInteraction.user.avatar}
-                                username={tweet.mainInteraction.user.name}
-                                handle={tweet.mainInteraction.user.username}
-                                uploadTime={tweet.mainInteraction.createdDate}
-                                tweetText={tweet.mainInteraction.text}
-                                tweetMedia={tweet.mainInteraction.media}
-                                replies={tweet.mainInteraction.commentsCount}
-                                reposts={tweet.mainInteraction.retweetsCount}
-                                likes={tweet.mainInteraction.likesCount}
-                                insights={tweet.mainInteraction.viewsCount}
-                                tweetId={tweet.mainInteraction.id}
-                                isUserLiked={
-                                    tweet.mainInteraction.isUserInteract
-                                        .isUserLiked
-                                }
-                                token={userData.token}
-                                userID={tweet.mainInteraction.user.id}
+                                tweet={tweet}
                                 removeTweet={removeTweet}
+                                handleTweetsFiltering={handleTweetsFiltering}
+                                token={userData.token}
+                                followedByMe={true}
                                 isCurrentUserTweet={
                                     userData.user.id ==
                                     tweet.mainInteraction.user.id
                                 }
-                                handleTweetsFiltering={handleTweetsFiltering}
-                                followedByMe={true}
-                                tweet={tweet}
-                                isUserInteract={tweet.mainInteraction.isUserInteract}
                             />
                         </div>
                     );

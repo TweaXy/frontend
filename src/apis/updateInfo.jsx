@@ -1,11 +1,8 @@
-
-const PictureupdateUrl = 'https://tweaxybackend.mywire.org/api/v1/users';
-const updateInfo = (
+let UpdateInfoUrl = 'http://tweaxybackend.mywire.org/api/v1/users';
+const updateInfo = async (
     _name,
     _birthdayDate,
     _bio,
-    _phone,
-    _website,
     _avatar,
     _cover,
     _location,
@@ -24,30 +21,28 @@ const updateInfo = (
     if (_birthdayDate.month && _birthdayDate.year && _birthdayDate.day)
         formData.append('birthdayDate', _nwbirthdayDate);
     if (_bio != 'null') formData.append('bio', _bio);
-    if (_website != 'null') formData.append('website', _website);
-    //formData.append('phone', _phone);
     if (_location != 'null') formData.append('location', _location);
     formData.append('name', _name);
-
     console.log('Data is ', formData.entries);
-    fetch(PictureupdateUrl, {
-        method: 'PATCH',
-        headers: {
-            Authorization: `Bearer ${authToken}`,
-        },
-        body: formData,
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log('Response from the API:', data);
-            if (data.status === 'success') {
-                console.log('picture updated successfully');
-            } else {
-                console.log(data.message);
-            }
-        })
-        .catch((error) => {
-            console.log('error from server');
+    try {
+        const response = await fetch(UpdateInfoUrl, {
+            method: 'PATCH',
+            headers: {
+                Authorization: `Bearer ${authToken}`,
+            },
+            body: formData,
         });
+        const data = await response.json();
+        console.log('Response from the API:', data);
+        if (response.ok) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (error) {
+        console.error('Avatar update api:', error.message);
+        throw error;
+    }
 };
-export { updateInfo };
+
+export default updateInfo;

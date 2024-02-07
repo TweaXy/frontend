@@ -87,7 +87,7 @@ const UserCell = ({
             <div className="user-cell-avatar-container">
                 <Avatar
                     className="user-cell-avatar"
-                    src={`https://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
+                    src={`http://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
                     alt={name}
                 />
             </div>

@@ -1,5 +1,5 @@
 const getBlockedUsers = async (token) => {
-    const url = `https://tweaxybackend.mywire.org/api/v1/users/block/list`;
+    const url = `http://tweaxybackend.mywire.org/api/v1/users/block/list`;
 
     try {
         const response = await fetch(url, {

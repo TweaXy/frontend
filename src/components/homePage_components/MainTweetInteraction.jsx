@@ -17,7 +17,7 @@ export default function MainTweetInteraction({
                 <div className="avatar-container ">
                     <div className="avatar-box">
                         <Avatar
-                            src={`https://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
+                            src={`http://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
                         ></Avatar>
                     </div>
                     <div className="avatar-line"></div>

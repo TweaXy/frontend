@@ -1,6 +1,6 @@
 import { Errors } from '../pages/SignUpPage/SignUpPage';
 
-let urlsignup = 'https://tweaxybackend.mywire.org/api/v1/auth/signup';
+let urlsignup = 'http://tweaxybackend.mywire.org/api/v1/auth/signup';
 import { months } from '../pages/SignUpPage/SignUpPage';
 const signup = async (
     _usermail,
@@ -9,8 +9,7 @@ const signup = async (
     _password,
     _emailVerificationToken,
     _captchaValue,
-    setcanbeuser,
-    setwindowOpned
+    setcanbeuser
 ) => {
     const _nwbirthdayDate =
         months[_birthdayDate.month - 1] +
@@ -31,7 +30,7 @@ const signup = async (
                 birthdayDate: _nwbirthdayDate,
                 password: _password,
                 emailVerificationToken: _emailVerificationToken,
-                captcha: _captchaValue
+                captcha: _captchaValue,
             }),
         });
 

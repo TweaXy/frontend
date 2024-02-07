@@ -1,15 +1,13 @@
 import React from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import captchaApi from '../../apis/captcha';
 import './SignUpPage.css';
-import { useRef,useState } from 'react';
+import { useRef, useState } from 'react';
 
 const CaptchaPage = ({ nextWindowHandler }) => {
     const p3 = 'Step 3 of 5';
     const captchaRef = useRef(null);
     const [iscomplete, setiscomplete] = useState(false);
     const captchaApiHandler = () => {
-        //captchaApi(captchaRef.current.getValue());
         setiscomplete(true);
     };
 

@@ -1,9 +1,9 @@
-const UserLikedTweetsURL = `https://tweaxybackend.mywire.org/api/v1/users`;
+const UserLikedTweetsURL = `http://tweaxybackend.mywire.org/api/v1/users`;
 const GetTweetsuserLikes = async (_userid, token, _limit, _offset) => {
     console.log('username from getLikedtweets is', _userid, 'token is', token);
     const urlWithQueryParam = `${UserLikedTweetsURL}/tweets/liked/${encodeURIComponent(
         _userid
-    )}?limit=${_limit}?offset=${_offset}`;
+    )}?limit=${_limit}&offset=${_offset}`;
     try {
         const response = await fetch(urlWithQueryParam, {
             method: 'GET',
@@ -12,13 +12,11 @@ const GetTweetsuserLikes = async (_userid, token, _limit, _offset) => {
                 Authorization: `Bearer ${token}`,
             },
         });
-        const responseBody = await response.text();
-        console.log('get tweets response: ', responseBody);
         if (response.ok) {
-            const responseData = JSON.parse(responseBody);
+            const responseData = await response.json();
             if (responseData.status === 'success') {
-                const tweets = responseData.data.items;
-                console.log('Ok ' + tweets);
+                const tweets = responseData;
+                console.log('Ok ', tweets);
                 return tweets;
             } else {
                 console.log('Error From Failing the TweetAPI');
@@ -28,7 +26,7 @@ const GetTweetsuserLikes = async (_userid, token, _limit, _offset) => {
             throw new Error(`Error: ${response.status}`);
         }
     } catch (err) {
-        console.error('Error getting user followers: ', err);
+        console.error('Error getting user tweets: ', err);
         throw err;
     }
 };

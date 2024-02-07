@@ -1,5 +1,5 @@
 const getUserMentions = async (userId, token) => {
-    const url = `https://tweaxybackend.mywire.org/api/v1/users/tweets/mentioned/${userId}`;
+    const url = `http://tweaxybackend.mywire.org/api/v1/users/tweets/mentioned/${userId}`;
 
     try {
         const response = await fetch(url, {

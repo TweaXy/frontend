@@ -1,9 +1,10 @@
-const UserTweetsURL = `https://tweaxybackend.mywire.org/api/v1/users`;
-const GetuserTweets = async (_userid, token, _limit, _offset) => {
-    console.log('username from gettweets is', _userid, 'token is', token);
+const UserTweetsURL = `http://tweaxybackend.mywire.org/api/v1/users`;
+
+const GetuserTweets = async (userID, token, limit, offset) => {
+    console.log('userID from gettweets is', userID, 'token is', token);
     const urlWithQueryParam = `${UserTweetsURL}/tweets/${encodeURIComponent(
-        _userid
-    )}?limit=${_limit}?offset=${_offset}`;
+        userID
+    )}?limit=${limit}&offset=${offset}`;
     try {
         const response = await fetch(urlWithQueryParam, {
             method: 'GET',
@@ -12,13 +13,11 @@ const GetuserTweets = async (_userid, token, _limit, _offset) => {
                 Authorization: `Bearer ${token}`,
             },
         });
-        const responseBody = await response.text();
-
         if (response.ok) {
-            const responseData = await JSON.parse(responseBody);
+            const responseData = await response.json();
             if (responseData.status === 'success') {
-                const tweets = responseData.data.items;
-                console.log('Ok ' + tweets);
+                const tweets = responseData;
+                console.log('Ok ', tweets);
                 return tweets;
             } else {
                 console.log('Error From Failing the TweetAPI');
@@ -28,8 +27,9 @@ const GetuserTweets = async (_userid, token, _limit, _offset) => {
             throw new Error(`Error: ${response.status}`);
         }
     } catch (err) {
-        console.error('Error getting user followers: ', err);
+        console.error('Error getting user tweets: ', err);
         throw err;
     }
 };
+
 export default GetuserTweets;

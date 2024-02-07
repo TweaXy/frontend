@@ -1,7 +1,7 @@
 const apiDeleteTweet = async (tweetId, token) => {
     // console.log("this is a token" + token);
     const deleteTweetURL =
-        'https://tweaxybackend.mywire.org/api/v1/interactions/' + tweetId;
+        'http://tweaxybackend.mywire.org/api/v1/interactions/' + tweetId;
     try {
         const response = await fetch(deleteTweetURL, {
             method: 'DELETE',

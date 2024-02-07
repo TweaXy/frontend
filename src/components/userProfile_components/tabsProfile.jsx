@@ -9,6 +9,8 @@ const TabsProfile = ({
     curUserID,
     followedByMe,
     actionOccurredHandler,
+    setnumposts,
+    token,
 }) => {
     const [feedHeader_acitve, setActivePage] = useState(0);
     return (
@@ -49,10 +51,16 @@ const TabsProfile = ({
                     curUserID={curUserID}
                     followedByMe={followedByMe}
                     actionOccurredHandler={actionOccurredHandler}
+                    setnumposts={setnumposts}
+                    token={token}
                 />
             )}
             {feedHeader_acitve === 1 && (
-                <TweetsUSerLikes userID={userID} curUserID={curUserID} />
+                <TweetsUSerLikes
+                    userID={userID}
+                    curUserID={curUserID}
+                    token={token}
+                />
             )}
         </>
     );

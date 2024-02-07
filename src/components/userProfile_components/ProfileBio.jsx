@@ -1,3 +1,4 @@
+// ProfileBio.js
 import './ProfileBio.css';
 import { BiCalendar } from 'react-icons/bi';
 import { Avatar, IconButton } from '@mui/material';
@@ -17,12 +18,13 @@ import BlockUserWindow from '../BlockUserWindow/BlockUserWindow';
 import block from '../../apis/block';
 import unblock from '../../apis/unblock';
 import createConversation from '../../apis/createConversation';
+
 const ProfileBio = (props) => {
     const [isFollowingButtonHovered, setIsFollowingButtonHovered] =
         useState(false);
 
     const [followedByMeState, setFollowedByMeState] = useState(
-        props.followedByMe
+        props.curuser.followedByMe
     );
 
     const handleFollowingButtonHover = () => {
@@ -32,16 +34,18 @@ const ProfileBio = (props) => {
     const onButtonClick = async (event) => {
         event.stopPropagation();
         if (followedByMeState) {
-            if (await unfollow(props.username, props.token)) {
+            if (await unfollow(props.curuser.username, props.token)) {
                 setFollowedByMeState(false);
                 props.actionOccurredHandler(
-                    `You unfollowed @${props.username}`
+                    `You unfollowed @${props.curuser.username}`
                 );
             }
         } else {
-            if (await follow(props.username, props.token)) {
+            if (await follow(props.curuser.username, props.token)) {
                 setFollowedByMeState(true);
-                props.actionOccurredHandler(`You followed @${props.username}`);
+                props.actionOccurredHandler(
+                    `You followed @${props.curuser.username}`
+                );
             }
         }
     };
@@ -49,21 +53,21 @@ const ProfileBio = (props) => {
     const navigate = useNavigate();
 
     const navigateToFollowingPage = () => {
-        navigate(`/${props.username}/following`, {
+        navigate(`/${props.curuser.username}/following`, {
             state: {
-                name: props.name,
-                username: props.username,
-                userID: props.IdProfile,
+                name: props.curuser.name,
+                username: props.curuser.username,
+                userID: props.curuser.id,
             },
         });
     };
 
     const navigateToFollowersPage = () => {
-        navigate(`/${props.username}/followers`, {
+        navigate(`/${props.curuser.username}/followers`, {
             state: {
-                name: props.name,
-                username: props.username,
-                userID: props.IdProfile,
+                name: props.curuser.name,
+                username: props.curuser.username,
+                userID: props.curuser.id,
             },
         });
     };
@@ -99,7 +103,7 @@ const ProfileBio = (props) => {
     };
 
     const handleBlockUser = async () => {
-        if (await unblock(props.username, props.token)) {
+        if (await unblock(props.curuser.username, props.token)) {
             window.location.reload();
         }
     };
@@ -107,7 +111,7 @@ const ProfileBio = (props) => {
     const handleChatWithUser = async () => {
         try {
             const conversationInfo = await createConversation(
-                props.username,
+                props.curuser.username,
                 props.token
             );
 
@@ -128,8 +132,7 @@ const ProfileBio = (props) => {
                         height: '100%',
                         objectFit: 'cover',
                     }}
-                    src={`https://tweaxybackend.mywire.org/api/v1/images/${props.coverImage}`}
-                    alt=""
+                    src={`http://tweaxybackend.mywire.org/api/v1/images/${props.curuser.cover}`}
                 />
             </div>
 
@@ -137,19 +140,11 @@ const ProfileBio = (props) => {
                 <div className="profileImage">
                     <Avatar
                         sx={{ width: 134, height: 134 }}
-                        src={`https://tweaxybackend.mywire.org/api/v1/images/${props.ProfileImage}`}
+                        src={`http://tweaxybackend.mywire.org/api/v1/images/${props.curuser.avatar}`}
                     />
                 </div>
-                {props.IdProfile === props.currUserId ? (
-                    <EditProfile
-                        name={props.name}
-                        cover={props.coverImage}
-                        bio={props.bio}
-                        location={props.location}
-                        website={props.website}
-                        avatar={props.ProfileImage}
-                        authToken={props.token}
-                    />
+                {props.curuser.id === props.currUserId ? (
+                    <EditProfile curuser={props.curuser} token={props.token} />
                 ) : (
                     <div className="profile-buttons-container">
                         <div className="icon-btn-wrapper">
@@ -176,15 +171,15 @@ const ProfileBio = (props) => {
                         <ProfileMoreOptionsPopDown
                             handleClose={closeMoreOptionsMenu}
                             anchorEl={anchorEl}
-                            username={props.username}
-                            userID={props.IdProfile}
+                            username={props.curuser.username}
+                            userID={props.curuser.id}
                             token={props.token}
-                            MutedByMe={props.MutedByMe}
-                            blockedByMe={props.blockedByMe}
+                            MutedByMe={props.curuser.MutedByMe}
+                            blockedByMe={props.curuser.blockedByMe}
                         />
-                        {props.blocksMe ? (
+                        {props.curuser.blocksMe ? (
                             <></>
-                        ) : props.blockedByMe ? (
+                        ) : props.curuser.blockedByMe ? (
                             <button
                                 className="red-btn"
                                 onClick={handleBlockButtonClick}
@@ -216,51 +211,31 @@ const ProfileBio = (props) => {
                 )}
             </div>
             <div className="profileBiography">
-                <span className="profileBiography-username">{props.name}</span>
-                <span className="profileBiography-email">
-                    @{props.username}
+                <span className="profileBiography-username">
+                    {props.curuser.name}
                 </span>
-                {!props.blocksMe && props.viewTweets && (
+                <span className="profileBiography-email">
+                    @{props.curuser.username}
+                </span>
+                {!props.curuser.blocksMe && props.viewTweets && (
                     <div className="profileBiography-dateMargin">
                         <span className="profileBiography-Bio">
-                            {props.bio === 'null' ? '' : props.bio}
+                            {props.curuser.bio === 'null'
+                                ? ''
+                                : props.curuser.bio}
                         </span>
                     </div>
                 )}
-                {!props.blocksMe && props.viewTweets && (
+                {!props.curuser.blocksMe && props.viewTweets && (
                     <div className="profileBiography-dateMargin">
-                        <span className="location">
-                            {props.location && (
-                                <>
-                                    <LocationOnOutlinedIcon />
-                                    {props.location === 'null'
-                                        ? ' '
-                                        : props.location}
-                                </>
-                            )}
-                        </span>
-                        <span className="profileBiography-Bio"> </span>{' '}
-                        <span className="pseudolink">
-                            {props.website && (
-                                <>
-                                    <LinkIcon className="linkIcon" /> {'  '}
-                                    <a
-                                        className="linkIcon"
-                                        href={props.website}
-                                    >
-                                        {' '}
-                                        {props.website}
-                                    </a>
-                                </>
-                            )}
-                        </span>
                         <span className="profileBiography-joinDate">
-                            <BiCalendar /> Joined {parseDate(props.JoinedAt)}
+                            <BiCalendar /> Joined{' '}
+                            {parseDate(props.curuser.joinedDate)}
                         </span>
                     </div>
                 )}
             </div>
-            {!props.blocksMe && (
+            {!props.curuser.blocksMe && (
                 <div className="profile-div-followers">
                     <span
                         className="follow-link"
@@ -271,7 +246,7 @@ const ProfileBio = (props) => {
                                 className="profile-followers-following-number"
                                 data-test={ProfilePageSelectors.FOLLOWING_COUNT}
                             >
-                                {props.followingNum}
+                                {props.curuser._count.following}
                             </span>
                             <span
                                 className="profile-followers-following-text"
@@ -290,7 +265,7 @@ const ProfileBio = (props) => {
                             data-test={ProfilePageSelectors.FOLLOWERS_COUNT}
                         >
                             {' '}
-                            {props.followersNum}
+                            {props.curuser._count.followedBy}
                         </span>
                         <span
                             className="profile-followers-following-text"
@@ -305,7 +280,7 @@ const ProfileBio = (props) => {
                 openWindow={isBlockUserWindowOpened}
                 closeWindow={handleBlockUserWindowClose}
                 handleUserBlock={handleBlockUser}
-                username={props.username}
+                username={props.curuser.username}
                 isUserBlocked={true}
             />
         </div>

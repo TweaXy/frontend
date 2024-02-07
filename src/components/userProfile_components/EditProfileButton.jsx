@@ -2,21 +2,42 @@ import './ProfileBio.css';
 import { useState } from 'react';
 import EditProfilePage from '../../pages/userProfile/EditProfilePage';
 import ProfilePageSelectors from '../../shared/selectors/ProfilePage';
-export default function EditProfile({name,authToken,cover,avatar,bio,location,website}) {
+import NotifyBox from '../NotifyBox/NotifyBox';
+export default function EditProfile(props) {
     const [isWindowOpen, setIsWindowOpen] = useState(false);
+    const [Message, setMessage] = useState('');
     const openWindow = () => {
         setIsWindowOpen(true);
     };
     const closeWindow = () => {
         setIsWindowOpen(false);
     };
-    console.log("edit Profile Button",avatar);
+    const actionOccurredHandler = () => {
+        setMessage('Info updated Successfully');
+        const timeoutId = setTimeout(() => {
+            setMessage('');
+        }, 2000);
+        return () => clearTimeout(timeoutId);
+    };
+    console.log('edit Profile Button', props.curuser);
     return (
         <>
-            <div data-test={ProfilePageSelectors.EDIT_PROFILE_BUTTON} className="editProfile" onClick={openWindow}>
+            <div
+                data-test={ProfilePageSelectors.EDIT_PROFILE_BUTTON}
+                className="editProfile"
+                onClick={openWindow}
+            >
                 <span>Edit profile</span>
+                {Message.length !== 0 && <NotifyBox text={Message} />}
             </div>
-            {isWindowOpen && <EditProfilePage name={name} bio={bio} location={location} website={website} cover={cover} avatar={avatar} authToken={authToken} onClose={closeWindow} />}
+            {isWindowOpen && (
+                <EditProfilePage
+                    curuser={props.curuser}
+                    onClose={closeWindow}
+                    authToken={props.token}
+                    setMessage={actionOccurredHandler}
+                />
+            )}
         </>
     );
 }

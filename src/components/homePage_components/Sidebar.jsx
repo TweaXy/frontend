@@ -12,9 +12,14 @@ import NotificationsButton from '../NotificationsButton/NotificationsButton';
 import HomePageSelectors from '../../shared/selectors/HomePage';
 import ConversationsButton from '../ConversationsButton/ConversationsButton';
 
-export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
+export default function Sidebar({
+    userData,
+    active,
+    setIsTherePopUpWindow,
+    avatar,
+}) {
     const navigate = useNavigate();
-
+    console.log('from sidebar', avatar);
     const toProfile = () => {
         navigate(`/profile/${userData.user.username}`, {
             state: { userID: userData.user.id },
@@ -77,7 +82,7 @@ export default function Sidebar({ userData, active, setIsTherePopUpWindow }) {
 
             <div className="account-btn">
                 <AccountButton
-                    userAvatar={userData.user.avatar}
+                    userAvatar={avatar}
                     name={userData.user.name}
                     username={userData.user.username}
                     token={userData.token}

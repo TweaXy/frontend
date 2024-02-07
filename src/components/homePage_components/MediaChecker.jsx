@@ -32,8 +32,8 @@ export default function MediaChecker({ media }) {
                             }}
                         >
                             <img
-                                srcSet={`https://tweaxybackend.mywire.org/api/v1/images/${item}`}
-                                src={`https://tweaxybackend.mywire.org/api/v1/images/${item}`}
+                                srcSet={`http://tweaxybackend.mywire.org/api/v1/images/${item}`}
+                                src={`http://tweaxybackend.mywire.org/api/v1/images/${item}`}
                                 loading="lazy"
                                 style={{ height: 'inherit' }}
                             />

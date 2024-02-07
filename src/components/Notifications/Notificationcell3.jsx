@@ -28,9 +28,9 @@ export default function Notificationcell3({
     const tweetMedia = '';
     const likes = 0;
     const replies = 0;
-    const reposts = 0;
+    const reposts = 0; // not passed in the API
     const insights = 0;
-    const tweetId = interaction.parentInteractionID;
+    const tweetId = reply.id;
     const isUserLiked = false;
     const [tweetLikes, setTweetLikes] = useState(likes);
     const [tweetReplies, setTweetComments] = useState(replies);
@@ -45,7 +45,6 @@ export default function Notificationcell3({
     const iconInteraction2 = useRef(null);
     const iconInteraction3 = useRef(null);
     const iconInteraction4 = useRef(null);
-    const tweetDate = '2023-12-08T12:00:00';
     const routingHandlerProfile1 = (event) => {
         event.stopPropagation();
         navigate(`/profile/${curusername}`, { state: { userID: userID } });
@@ -62,8 +61,6 @@ export default function Notificationcell3({
         });
     };
     useEffect(() => {
-        // adjust this to be useRef
-
         const activityIcons = [
             activityIcon1.current,
             activityIcon2.current,
@@ -111,10 +108,8 @@ export default function Notificationcell3({
                 activityIcon.style.transition =
                     'background-color 200ms ease-out';
             });
-
             activityIcon.addEventListener('mouseleave', () => {
-                // Reset styles when mouse leaves
-                activityIcon.style.backgroundColor = ''; // Set to the default or remove this line if not needed
+                activityIcon.style.backgroundColor = '';
                 activityIcon.style.borderRadius = '';
                 if (!(index == 2 && isLikeActive)) {
                     icons[index].style.color = 'var(--twitter-greyColor)';
@@ -165,6 +160,7 @@ export default function Notificationcell3({
     }, []);
 
     const likeDislikeTweetHandler = (e) => {
+        console.log('from NOtification cell3', tweetId);
         e.stopPropagation();
         if (isLikeActive) {
             apiDislikeTweet(tweetId, token);
@@ -180,7 +176,6 @@ export default function Notificationcell3({
             <div className="repost"></div>
             <div className="tweet-container">
                 <div className="avatar-container">
-                    {/* avatar */}
                     <AvatarBox img={avatar} onClick={routingHandlerProfile2} />
                 </div>
 

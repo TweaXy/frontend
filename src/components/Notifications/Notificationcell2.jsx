@@ -39,7 +39,7 @@ const Notificationcell2 = ({ fromuser, interaction }) => {
                             onClick={routingHandlerProfile}
                         >
                             <Avatar
-                                src={`https://tweaxybackend.mywire.org/api/v1/images/${fromuser.avatar}`}
+                                src={`http://tweaxybackend.mywire.org/api/v1/images/${fromuser.avatar}`}
                                 sx={{ width: 30, height: 30 }}
                             ></Avatar>
                         </div>

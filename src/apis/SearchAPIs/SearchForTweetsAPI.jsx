@@ -3,7 +3,7 @@ const apiSearchForTweets = async (searchInput, token, username) => {
 
     console.log("input to the search for tweets api: " + searchInput);
 
-    const lnk =`https://tweaxybackend.mywire.org/api/v1/tweets/search?keyword=${searchInput}&username=${username}&limit=10&offset=0`;
+    const lnk =`http://tweaxybackend.mywire.org/api/v1/tweets/search?keyword=${searchInput}&username=${username}&limit=10&offset=0`;
 
     try {
       const response = await fetch(lnk, {

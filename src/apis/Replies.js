@@ -1,4 +1,4 @@
-const Getrepliesurl = `https://tweaxybackend.mywire.org/api/v1/interactions`;
+const Getrepliesurl = `http://tweaxybackend.mywire.org/api/v1/interactions`;
 const Getreplies = async (token,tweetid, _limit, _offset) => {
     console.log('tweet id from getreplies ', tweetid);
     console.log('token  from getreplies ', token);
