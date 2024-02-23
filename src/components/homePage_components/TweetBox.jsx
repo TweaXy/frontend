@@ -16,7 +16,7 @@ import MediaErrorMsg from './MediaErrorMsg';
 import ImageUploader from './ImageUploader';
 import HomePageSelectors from '../../shared/selectors/HomePage';
 import VideoUploader from './VideoUploader';
-export default function TweetBox({ userData, avatar }) {
+export default function TweetBox({ userData }) {
     const [text, setText] = useState('');
     const [privacylay, setPrivacylay] = useState(false);
     const [tweetImages, setTweetImages] = useState([]);
@@ -25,7 +25,6 @@ export default function TweetBox({ userData, avatar }) {
     const fileInputRef = useRef(null);
     const textareaRef = useRef(null);
     useEffect(() => {
-        // Set initial height when the component mounts
         const textarea = document.querySelector('.tweetbox-input > textarea ');
         textarea.style.height = '50px';
     }, []); //
@@ -152,7 +151,7 @@ export default function TweetBox({ userData, avatar }) {
     };
     return (
         <div className="tweetbox" onClick={handleDisplayPrivacy}>
-            <AvatarBox img={avatar} />
+            <AvatarBox img={userData.user.avatar} />
             {/* <Avatar src="myphoto.jpg"/> */}
             <form action="" className="tweetbox-form">
                 <div className="tweetbox-input">

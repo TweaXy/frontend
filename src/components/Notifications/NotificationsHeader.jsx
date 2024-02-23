@@ -1,6 +1,6 @@
 import './NotificationsHeader.css';
 import { useNavigate } from 'react-router-dom';
-
+import React from 'react';
 const NotificationHeader = ({ activePage }) => {
     const navigate = useNavigate();
 

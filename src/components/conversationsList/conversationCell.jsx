@@ -43,7 +43,7 @@ const ConversationCell = ({ id, name, username, avatar, bio, token, myID }) => {
             >
                 <Avatar
                     className="conversation-cell-avatar"
-                    src={`http://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
+                    src={`https://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
                     alt={name}
                 />
             </div>

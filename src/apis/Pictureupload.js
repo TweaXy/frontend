@@ -1,4 +1,4 @@
-let PictureupdateUrl = 'http://tweaxybackend.mywire.org/api/v1/users';
+let PictureupdateUrl = 'https://tweaxybackend.mywire.org/api/v1/users';
 
 const Pictureupload = async (_avater, authToken) => {
     console.log('Avatar is', _avater);

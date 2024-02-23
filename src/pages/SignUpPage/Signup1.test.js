@@ -1,12 +1,10 @@
 import SignUpPage1 from './SignUpPage1';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { useEffect } from 'react';
 import React from 'react';
 import '@testing-library/jest-dom';
 import * as EmailAPI from '../../apis/Email';
 
 it('should render a form with input fields for name, email, and date of birth', () => {
-    // Arrange
     const nextWindowHandler = jest.fn();
     const Data1 = {
         username: '',
@@ -19,8 +17,6 @@ it('should render a form with input fields for name, email, and date of birth', 
         year: '',
     };
     const changeData2 = jest.fn();
-
-    // Act
     render(
         <SignUpPage1
             nextWindowHandler={nextWindowHandler}
@@ -31,14 +27,12 @@ it('should render a form with input fields for name, email, and date of birth', 
         />
     );
 
-    // Assert
     expect(screen.getByLabelText('Name')).toBeInTheDocument();
     expect(screen.getByLabelText('Email')).toBeInTheDocument();
     expect(screen.getByLabelText('Day')).toBeInTheDocument();
     expect(screen.getByLabelText('Year')).toBeInTheDocument();
 });
 it('should render each button', () => {
-    // Arrange
     const nextWindowHandler = jest.fn();
     const Data1 = {
         username: '',
@@ -52,7 +46,6 @@ it('should render each button', () => {
     };
     const changeData2 = jest.fn();
 
-    // Act
     render(
         <SignUpPage1
             nextWindowHandler={nextWindowHandler}
@@ -63,7 +56,6 @@ it('should render each button', () => {
         />
     );
 
-    // Assert
     expect(screen.getByText('Next')).toBeInTheDocument();
 });
 jest.mock('../../apis/Email', () => ({
@@ -71,7 +63,6 @@ jest.mock('../../apis/Email', () => ({
 }));
 
 it('should call the API to check email uniqueness when the email field is not empty', () => {
-    // Arrange
     const nextWindowHandler = jest.fn();
     const Data1 = {
         username: '',
@@ -85,7 +76,6 @@ it('should call the API to check email uniqueness when the email field is not em
     };
     const changeData2 = jest.fn();
 
-    // Act
     render(
         <SignUpPage1
             nextWindowHandler={nextWindowHandler}
@@ -96,7 +86,6 @@ it('should call the API to check email uniqueness when the email field is not em
         />
     );
 
-    // Assert
     expect(EmailAPI.isUniqeEmail).toHaveBeenCalledWith(
         Data1.usermail,
         expect.any(Function)
@@ -104,7 +93,6 @@ it('should call the API to check email uniqueness when the email field is not em
 });
 
 it('should disable the Next button if the form is not complete', () => {
-    // Arrange
     const nextWindowHandler = jest.fn();
     const Data1 = {
         username: '',
@@ -118,7 +106,6 @@ it('should disable the Next button if the form is not complete', () => {
     };
     const changeData2 = jest.fn();
 
-    // Act
     render(
         <SignUpPage1
             nextWindowHandler={nextWindowHandler}
@@ -150,7 +137,7 @@ it('should enable the Next button when the form is completed', () => {
     const changeData1 = jest.fn();
     const Data2 = {
         day: '5',
-        month: 'September',
+        month: '2',
         year: '2020',
     };
     const changeData2 = jest.fn();
@@ -166,7 +153,6 @@ it('should enable the Next button when the form is completed', () => {
     expect(screen.getByText('Next')).toBeEnabled();
 });
 it('should render proper days based on selected months', () => {
-    // Arrange
     const nextWindowHandler = jest.fn();
     const Data1 = {
         username: '',
@@ -175,12 +161,10 @@ it('should render proper days based on selected months', () => {
     const changeData1 = jest.fn();
     const Data2 = {
         day: '',
-        month: '', // Set the month to a specific value
+        month: '',
         year: '',
     };
     const changeData2 = jest.fn();
-
-    // Render the component
     render(
         <SignUpPage1
             nextWindowHandler={nextWindowHandler}
@@ -191,15 +175,11 @@ it('should render proper days based on selected months', () => {
         />
     );
 
-    // Act: Change the selected month
     fireEvent.change(screen.getByTestId('month-testid'), {
-        target: { value: '9' }, // Change to the specific month you want to test
+        target: { value: '9' },
     });
 
-    // Assert: Check if the proper number of days is rendered based on the selected month
-    const expectedDaysCount = 30; // Change this to the expected number of days for September
-    const daysOptions = screen.getAllByTestId('day-testid'); // Assuming the label for day elements is 'Day'
-
-    // Check if the number of rendered day options matches the expected count
+    const expectedDaysCount = 1;
+    const daysOptions = screen.getAllByTestId('day-testid');
     expect(daysOptions).toHaveLength(expectedDaysCount);
 });

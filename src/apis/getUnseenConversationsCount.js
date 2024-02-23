@@ -1,5 +1,5 @@
 const getUnseenConversationsCount = async (token) => {
-    const url = `http://tweaxybackend.mywire.org/api/v1/conversations/unseen`;
+    const url = `https://tweaxybackend.mywire.org/api/v1/conversations/unseen`;
 
     try {
         const response = await fetch(url, {

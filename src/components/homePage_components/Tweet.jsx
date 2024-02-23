@@ -1,15 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
-import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import CachedOutlinedIcon from '@mui/icons-material/CachedOutlined';
 import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import './Tweet.css';
 import MediaChecker from './MediaChecker';
-import { apiLikeTweet, apiDislikeTweet } from '../../apis/tweetApis/LikeTweet';
+import { apiLikeTweet } from '../../apis/tweetApis/LikeTweet';
 import Avatar from '@mui/material/Avatar';
 import './Avatar.css';
 import { useNavigate } from 'react-router-dom';
@@ -20,7 +18,17 @@ import AddReplyWindow from './AddReplyWindow';
 import { hashText } from '../../shared/Utils';
 import TweetSelectors from '../../shared/selectors/Tweets';
 import { apiRepost, apiDeleteRepost } from '../../apis/tweetApis/repostTweet';
-
+import PropTypes from 'prop-types';
+/**
+ * Tweet component for displaying a tweet.
+ * @param {Object} props - The props for the Tweet component.
+ * @param {Object} props.tweet - The tweet object containing tweet information.
+ * @param {Function} props.removeTweet - Function to remove a tweet.
+ * @param {Function} props.handleTweetsFiltering - Function to handle tweet filtering.
+ * @param {string} props.token - User authentication token.
+ * @param {boolean} props.followedByMe - Indicates whether the tweet is liked by the current user.
+ * @param {boolean} props.isCurrentUserTweet - Indicates whether the tweet belongs to the current user.
+ */
 export default function Tweet({
     tweet,
     removeTweet,
@@ -80,7 +88,7 @@ export default function Tweet({
             iconInteraction2.current,
             iconInteraction3.current,
             iconInteraction4.current,
-        ]; // Added a dot before 'icon-interaction'
+        ];
         const icons = [
             activityIcon1.current.querySelector('.MuiSvgIcon-root'),
             activityIcon2.current.querySelector('.MuiSvgIcon-root'),
@@ -120,7 +128,7 @@ export default function Tweet({
 
             activityIcon.addEventListener('mouseleave', () => {
                 // Reset styles when mouse leaves
-                activityIcon.style.backgroundColor = ''; // Set to the default or remove this line if not needed
+                activityIcon.style.backgroundColor = '';
                 activityIcon.style.borderRadius = '';
                 if (
                     !(index == 2 && isLikeActive) &&
@@ -181,11 +189,10 @@ export default function Tweet({
     const likeDislikeTweetHandler = (e) => {
         e.stopPropagation();
         if (isLikeActive) {
-            //dislike it
-            apiDislikeTweet(tweetId, token);
+            apiLikeTweet(tweetId, token, 'DELETE');
             setTweetLikes((likes) => likes - 1);
         } else {
-            apiLikeTweet(tweetId, token);
+            apiLikeTweet(tweetId, token, 'POST');
             setTweetLikes((likes) => likes + 1);
         }
         setLikeActive(!isLikeActive);
@@ -249,7 +256,7 @@ export default function Tweet({
                     <div className="avatar-container ">
                         <div className="avatar-box" onClick={profileRouting}>
                             <Avatar
-                                src={`http://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
+                                src={`https://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
                             ></Avatar>
                         </div>
                     </div>
@@ -313,7 +320,6 @@ export default function Tweet({
                         </div>
 
                         <div className="tweet-media-container">
-                            {/* {!tweetMedia &&  <img src="" alt="test" />} */}
                             {tweetMedia && [tweetMedia].length > 0 && (
                                 <div style={{ height: '10px' }}></div>
                             )}
@@ -325,7 +331,6 @@ export default function Tweet({
 
                         <div className="tweet-activity">
                             <div className="tweet-icon">
-                                {/* icon */}
                                 <div
                                     className="activity-icon"
                                     ref={activityIcon1}
@@ -344,13 +349,12 @@ export default function Tweet({
                             </div>
 
                             <div className="tweet-icon">
-                                {/* icon */}
                                 <div
                                     className="activity-icon"
                                     ref={activityIcon2}
                                     onClick={repostHandler}
                                 >
-                                    {/* <CachedOutlinedIcon/> */}{' '}
+                                    {' '}
                                     {isrepostActive ? (
                                         <CachedOutlinedIcon className="repost-active" />
                                     ) : (
@@ -375,8 +379,6 @@ export default function Tweet({
                             </div>
 
                             <div className="tweet-icon">
-                                {/* icon */}
-                                {/* <div ref={ctivityIcon3}></div> */}
                                 <div
                                     className="activity-icon"
                                     ref={activityIcon3}
@@ -401,7 +403,6 @@ export default function Tweet({
                             </div>
 
                             <div className="tweet-icon">
-                                {/* icon */}
                                 <div
                                     className="activity-icon"
                                     ref={activityIcon4}
@@ -437,3 +438,11 @@ export default function Tweet({
         </>
     );
 }
+Tweet.propTypes = {
+    tweet: PropTypes.object.isRequired,
+    removeTweet: PropTypes.func.isRequired,
+    handleTweetsFiltering: PropTypes.func.isRequired,
+    token: PropTypes.string.isRequired,
+    followedByMe: PropTypes.bool.isRequired,
+    isCurrentUserTweet: PropTypes.bool.isRequired,
+};

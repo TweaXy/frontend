@@ -1,5 +1,5 @@
 const createConversation = async (username, token) => {
-    const url = `http://tweaxybackend.mywire.org/api/v1/conversations`;
+    const url = `https://tweaxybackend.mywire.org/api/v1/conversations`;
 
     try {
         const response = await fetch(url, {

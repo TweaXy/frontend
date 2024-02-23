@@ -1,4 +1,4 @@
-const urlLikers = 'http://tweaxybackend.mywire.org/api/v1/interactions/';
+const urlLikers = 'https://tweaxybackend.mywire.org/api/v1/interactions/';
 const lasturlLikers="/likers"
 const getLikers = async ({ tweetId, token }) => {
     const fullUrl = `${urlLikers}${tweetId}${lasturlLikers}`;

@@ -1,6 +1,6 @@
 import { Errors } from '../pages/SignUpPage/SignUpPage';
 let UsernameupdateUrl =
-    'http://tweaxybackend.mywire.org/api/v1/users/updateUserName';
+    'https://tweaxybackend.mywire.org/api/v1/users/updateUserName';
 const UsernameUpdate = async (_username, authToken) => {
     console.log('auth token is ', authToken);
     try {

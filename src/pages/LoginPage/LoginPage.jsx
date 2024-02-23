@@ -6,11 +6,21 @@ import signInWithGoogle from '../../apis/signInWithGoogle';
 import SignInErrors from '../../shared/errors/SignInErrors';
 import LoginWindowHeader from '../../components/LoginWindowHeader/LoginWindowHeader';
 import login from '../../apis/login';
-import { setSocket, setToken, setUser } from '../../redux/actions';
+import { setToken, setUser } from '../../redux/actions';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import socket from '../../socket';
+import PropTypes from 'prop-types';
+/**
+ * LoginPage component handles the login process, including entering UUID (username or email)
+ * and password. It also provides options for signing in with Google, handling forgot password,
+ * and navigating to the sign-up page.
+ * @param {Object} props - Component props.
+ * @param {Function} props.onClose - Function to close the login window.
+ * @param {Function} props.openSignUpWindow - Function to open the sign-up window.
+ * @returns {JSX.Element} LoginPage component JSX.
+ */
 
 const LoginPage = ({ onClose, openSignUpWindow }) => {
     const dispatch = useDispatch();
@@ -72,9 +82,8 @@ const LoginPage = ({ onClose, openSignUpWindow }) => {
                 const userData = await login(formData.UUID, formData.password);
 
                 if (userData) {
+                    console.log('from login', userData);
                     socket.auth = { token: userData.token };
-                    await socket.connect();
-                    dispatch(setSocket(socket));
                     dispatch(setUser(userData.user));
                     dispatch(setToken(userData.token));
                     navigate('/home', { state: { firstTime: false } });
@@ -84,7 +93,7 @@ const LoginPage = ({ onClose, openSignUpWindow }) => {
                 }
             } catch (error) {
                 console.error('Error signing in:', error.message);
-                setLoginError('An error has occurred. Please try again.');
+                setLoginError('Wrong password.');
             }
         }
     };
@@ -92,8 +101,8 @@ const LoginPage = ({ onClose, openSignUpWindow }) => {
     const handleLoginWithGoogle = async (token) => {
         try {
             const userData = await signInWithGoogle(token);
-
             if (userData) {
+                console.log('from login', userData);
                 dispatch(setUser(userData.user));
                 dispatch(setToken(userData.token));
                 navigate('/home', { state: { firstTime: false } });
@@ -144,6 +153,11 @@ const LoginPage = ({ onClose, openSignUpWindow }) => {
             )}
         </div>
     );
+};
+// PropTypes
+LoginPage.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    openSignUpWindow: PropTypes.func.isRequired,
 };
 
 export default LoginPage;

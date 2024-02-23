@@ -1,4 +1,4 @@
-const urlconversatioData = 'http://tweaxybackend.mywire.org/api/v1/conversations';
+const urlconversatioData = 'https://tweaxybackend.mywire.org/api/v1/conversations';
 
 const getConversationsApi = async ({ token }) => {
     const fullUrl = `${urlconversatioData}`;

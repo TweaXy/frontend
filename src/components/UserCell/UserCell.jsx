@@ -5,9 +5,23 @@ import unfollow from '../../apis/unfollow';
 import follow from '../../apis/follow';
 import { useNavigate } from 'react-router-dom';
 import UsersCellsSelectors from '../../shared/selectors/UsersCells';
-import unblock from '../../apis/unblock';
-import NotifyBox from '../NotifyBox/NotifyBox';
+import React from 'react';
+import PropTypes from 'prop-types';
 
+/**
+ *
+ * @param {object} props - Component props.
+ * @param {string} props.id - User ID.
+ * @param {string} props.name - User's name.
+ * @param {string} props.username - User's username.
+ * @param {string} props.avatar - URL of the user's avatar.
+ * @param {string} props.bio - User's bio.
+ * @param {boolean} props.followsMe - Whether the user follows the current user.
+ * @param {boolean} props.followedByMe - Whether the current user follows the user.
+ * @param {string} props.token - Authorization token for API requests.
+ * @param {string} props.myID - ID of the current user.
+ * @returns {JSX.Element} - UserCell component.
+ */
 const UserCell = ({
     id,
     name,
@@ -16,24 +30,13 @@ const UserCell = ({
     bio,
     followsMe,
     followedByMe,
-    blocksMe,
-    blockedByMe,
     token,
     myID,
 }) => {
     const navigate = useNavigate();
-
-    console.log('user cell: ', username, followedByMe, followsMe);
-
     const [isFollowingButtonHovered, setIsFollowingButtonHovered] =
         useState(false);
-
     const [followedByMeState, setFollowedByMeState] = useState(followedByMe);
-
-    const [isBlockedByMe, setIsBlockedByMe] = useState(blockedByMe);
-
-    const [notificationMessage, setNotificationMessage] = useState('');
-
     const handleFollowingButtonHover = () => {
         setIsFollowingButtonHovered(!isFollowingButtonHovered);
     };
@@ -43,7 +46,7 @@ const UserCell = ({
         navigate(`/profile/${username}`, { state: { userID: id } });
     };
 
-    const onButtonClick = async (event) => {
+    const FollowClick = async (event) => {
         event.stopPropagation();
         if (followedByMeState) {
             console.log(`unfollow @${username}..`);
@@ -58,36 +61,12 @@ const UserCell = ({
         }
     };
 
-    const handleBlockButtonClick = async (event) => {
-        event.stopPropagation();
-        if (await unblock(username, token)) {
-            setIsBlockedByMe(false);
-            setNotificationMessage(
-                `@${username} has been unblocked successfully`
-            );
-            const timeoutId = setTimeout(
-                () => setNotificationMessage(''),
-                3000
-            );
-            return () => clearTimeout(timeoutId);
-        } else {
-            setNotificationMessage(
-                `something went wrong. please try again later.`
-            );
-            const timeoutId = setTimeout(
-                () => setNotificationMessage(''),
-                3000
-            );
-            return () => clearTimeout(timeoutId);
-        }
-    };
-
     return (
         <div className="user-cell-container" onClick={goToUserProfile}>
             <div className="user-cell-avatar-container">
                 <Avatar
                     className="user-cell-avatar"
-                    src={`http://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
+                    src={`https://tweaxybackend.mywire.org/api/v1/images/${avatar}`}
                     alt={name}
                 />
             </div>
@@ -105,29 +84,16 @@ const UserCell = ({
                                 className="user-cell-username"
                                 data-test={UsersCellsSelectors.USERNAME}
                             >{`@${username}`}</span>
-                            {blocksMe ? (
-                                <span className="user-cell-blocks-me">
-                                    Blocks you
-                                </span>
-                            ) : followsMe ? (
+                            {followsMe && (
                                 <span className="user-cell-follows-me">
                                     Follows you
                                 </span>
-                            ) : (
-                                <></>
                             )}
                         </div>
                     </div>
                     <div className="user-cell-upper-right">
-                        {myID === id || blocksMe ? (
+                        {myID === id ? (
                             <></>
-                        ) : isBlockedByMe ? (
-                            <button
-                                className="red-button"
-                                onClick={handleBlockButtonClick}
-                            >
-                                Block
-                            </button>
                         ) : (
                             <button
                                 data-test={
@@ -138,7 +104,7 @@ const UserCell = ({
                                         ? 'black-small-button'
                                         : 'white-small-button'
                                 }
-                                onClick={onButtonClick}
+                                onClick={FollowClick}
                                 onMouseEnter={handleFollowingButtonHover}
                                 onMouseLeave={handleFollowingButtonHover}
                             >
@@ -155,11 +121,19 @@ const UserCell = ({
                     <span>{bio}</span>
                 </div>
             </div>
-            {notificationMessage.length !== 0 && (
-                <NotifyBox text={notificationMessage} />
-            )}
         </div>
     );
+};
+UserCell.propTypes = {
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+    bio: PropTypes.string.isRequired,
+    followsMe: PropTypes.bool.isRequired,
+    followedByMe: PropTypes.bool.isRequired,
+    token: PropTypes.string.isRequired,
+    myID: PropTypes.string.isRequired,
 };
 
 export default UserCell;

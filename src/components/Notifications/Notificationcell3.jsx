@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import AvatarBox from '../../components/homePage_components/AvatarBox';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import CachedOutlinedIcon from '@mui/icons-material/CachedOutlined';
@@ -8,9 +7,22 @@ import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import '../../components/homePage_components/Tweet.css';
 import MediaChecker from '../../components/homePage_components//MediaChecker';
-import { apiLikeTweet, apiDislikeTweet } from '../../apis/tweetApis/LikeTweet';
+import { apiLikeTweet } from '../../apis/tweetApis/LikeTweet';
 import TweetDate from '../../utils/TweetDate';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+/**
+ * Notificationcell3 component for displaying notifications related to replies.
+ * @param {Object} props - The props for the Notificationcell3 component.
+ * @param {Object} props.fromUser - The user who replied to the tweet.
+ * @param {Object} props.interaction - The interaction details of the tweet.
+ * @param {string} props.uploadTime - The timestamp when the reply was uploaded.
+ * @param {Object} props.reply - The reply details.
+ * @param {string} props.token - The authentication token of the current user.
+ * @param {string} props.curusername - The username of the current user.
+ * @param {string} props.userID - The user ID of the current user.
+ * @returns JSX element representing the Notificationcell3 component.
+ */
 export default function Notificationcell3({
     fromUser,
     interaction,
@@ -72,7 +84,7 @@ export default function Notificationcell3({
             iconInteraction2.current,
             iconInteraction3.current,
             iconInteraction4.current,
-        ]; // Added a dot before 'icon-interaction'
+        ];
         const icons = [
             activityIcon1.current.querySelector('.MuiSvgIcon-root'),
             activityIcon2.current.querySelector('.MuiSvgIcon-root'),
@@ -163,10 +175,10 @@ export default function Notificationcell3({
         console.log('from NOtification cell3', tweetId);
         e.stopPropagation();
         if (isLikeActive) {
-            apiDislikeTweet(tweetId, token);
+            apiLikeTweet(tweetId, token, 'DELETE');
             setTweetLikes((likes) => likes - 1);
         } else {
-            apiLikeTweet(tweetId, token);
+            apiLikeTweet(tweetId, token, 'POST');
             setTweetLikes((likes) => likes + 1);
         }
         setLikeActive(!isLikeActive);
@@ -213,11 +225,10 @@ export default function Notificationcell3({
                         <span className="tweet-text">{replaytext}</span>
                     </div>
                     <div className="tweet-media-container">
-                        {/* {!tweetMedia &&  <img src="" alt="test" />} */}
+                        {' '}
                         {tweetMedia && [tweetMedia].length > 0 && (
                             <div style={{ height: '10px' }}></div>
                         )}
-
                         {tweetMedia && [tweetMedia].length > 0 && (
                             <MediaChecker media={[tweetMedia]} />
                         )}
@@ -225,7 +236,6 @@ export default function Notificationcell3({
 
                     <div className="tweet-activity">
                         <div className="tweet-icon">
-                            {/* icon */}
                             <div className="activity-icon" ref={activityIcon1}>
                                 <ChatBubbleOutlineOutlinedIcon className="" />
                             </div>
@@ -240,7 +250,6 @@ export default function Notificationcell3({
                         </div>
 
                         <div className="tweet-icon">
-                            {/* icon */}
                             <div className="activity-icon" ref={activityIcon2}>
                                 <CachedOutlinedIcon />
                             </div>
@@ -279,7 +288,6 @@ export default function Notificationcell3({
                         </div>
 
                         <div className="tweet-icon">
-                            {/* icon */}
                             <div className="activity-icon" ref={activityIcon4}>
                                 <BarChartOutlinedIcon />
                             </div>
@@ -298,3 +306,12 @@ export default function Notificationcell3({
         </div>
     );
 }
+Notificationcell3.propTypes = {
+    fromUser: PropTypes.object.isRequired,
+    interaction: PropTypes.object.isRequired,
+    uploadTime: PropTypes.string.isRequired,
+    reply: PropTypes.object.isRequired,
+    token: PropTypes.string.isRequired,
+    curusername: PropTypes.string.isRequired,
+    userID: PropTypes.string.isRequired,
+};

@@ -1,5 +1,5 @@
 const block = async (username, token) => {
-    const url = `http://tweaxybackend.mywire.org/api/v1/users/block/${username}`;
+    const url = `https://tweaxybackend.mywire.org/api/v1/users/block/${username}`;
 
     try {
         const response = await fetch(url, {

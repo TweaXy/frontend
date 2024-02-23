@@ -17,6 +17,7 @@ import updateUsername from '../../apis/updateUsername';
 import { setUser } from '../../redux/actions';
 import NotifyBox from '../../components/NotifyBox/NotifyBox';
 import SettingsPageSelectors from '../../shared/selectors/SettingsPage';
+import LoadingPage from '../../components/LoadingPage/LoadingPage';
 
 const ChangeUsernamePage = () => {
     const token = useSelector((state) => state.user.token);

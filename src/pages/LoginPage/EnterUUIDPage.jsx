@@ -3,7 +3,21 @@ import { TextField } from '@mui/material';
 import { GoogleLogin } from '@react-oauth/google';
 import SignInSelectors from '../../shared/selectors/SignIn';
 import LoginOrSpan from '../../components/LoginOrSpan/LoginOrSpan';
+import React from 'react';
+import PropTypes from 'prop-types';
 
+/**
+ * Component for rendering the page where users enter their UUID (phone, email, or username) to login.
+ * @param {object} props - The props for the EnterUUIDPage component.
+ * @param {string} props.UUID - The UUID (phone, email, or username) entered by the user.
+ * @param {string} props.UUIDError - Error message for UUID input validation.
+ * @param {string} props.LoginWithGoogleError - Error message for Google login.
+ * @param {Function} props.handleUUIDChange - Function to handle changes in UUID input.
+ * @param {Function} props.handleUUIDSubmit - Function to handle UUID submission.
+ * @param {Function} props.handleForgotPassword - Function to handle clicking on "Forgot password?".
+ * @param {Function} props.handleLoginWithGoogle - Function to handle Google login.
+ * @param {Function} props.handleSignUp - Function to handle clicking on "Sign up".
+ */
 const EnterUUIDPage = ({
     UUID,
     UUIDError,
@@ -17,16 +31,7 @@ const EnterUUIDPage = ({
     return (
         <div className="login-page-body">
             <h1>Login to TweaXy</h1>
-            <div
-                style={{
-                    height: '40px',
-                    width: '300px',
-                    margin: '12px 0',
-                    padding: '0 16px',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-            >
+            <div className="Google-login">
                 <GoogleLogin
                     size="large"
                     shape="pill"
@@ -73,5 +78,15 @@ const EnterUUIDPage = ({
         </div>
     );
 };
-
+// PropTypes
+EnterUUIDPage.propTypes = {
+    UUID: PropTypes.string.isRequired,
+    UUIDError: PropTypes.string,
+    LoginWithGoogleError: PropTypes.string,
+    handleUUIDChange: PropTypes.func.isRequired,
+    handleUUIDSubmit: PropTypes.func.isRequired,
+    handleForgotPassword: PropTypes.func.isRequired,
+    handleLoginWithGoogle: PropTypes.func.isRequired,
+    handleSignUp: PropTypes.func.isRequired,
+};
 export default EnterUUIDPage;

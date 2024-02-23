@@ -1,5 +1,5 @@
 import './NotificationsButton.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, React } from 'react';
 import Badge from '@mui/material/Badge';
 import { useNavigate } from 'react-router';
 import { NotificationsActive, NotificationsNone } from '@mui/icons-material';
@@ -8,7 +8,7 @@ import PushNotification from '../../utils/PushNotifications';
 
 const NotificationsButton = ({ active, token }) => {
     const [notificationsCount, setNotificationCount] = useState(0);
-    const [updatecnt,setupdatecnt]=useState(true)
+    const [updatecnt, setupdatecnt] = useState(true);
     const navigate = useNavigate();
 
     const handleNotificationsButtonClick = () => {
@@ -20,10 +20,6 @@ const NotificationsButton = ({ active, token }) => {
             try {
                 const curUnseenNotificationsCount =
                     await getUnseenNotificationsCount(token);
-                console.log(
-                    'cur notifications count: ',
-                    curUnseenNotificationsCount
-                );
                 setNotificationCount(curUnseenNotificationsCount);
                 setupdatecnt(false);
             } catch (error) {
@@ -34,10 +30,10 @@ const NotificationsButton = ({ active, token }) => {
 
         if (active === true) {
             setNotificationCount(0);
-        } else if(updatecnt===true) {
+        } else if (updatecnt === true) {
             getCurUnseenNotificationCount();
         }
-    }, [token, active,updatecnt]);
+    }, [token, active, updatecnt]);
 
     return (
         <div
@@ -46,7 +42,7 @@ const NotificationsButton = ({ active, token }) => {
             }`}
             onClick={handleNotificationsButtonClick}
         >
-            <PushNotification alert={()=>setupdatecnt(true)}/>
+            <PushNotification alert={() => setupdatecnt(true)} />
             {notificationsCount === 0 && (
                 <div className="notifications-icon-wrapper">
                     <NotificationsNone />

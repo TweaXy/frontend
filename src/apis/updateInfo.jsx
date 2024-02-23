@@ -1,4 +1,4 @@
-let UpdateInfoUrl = 'http://tweaxybackend.mywire.org/api/v1/users';
+let UpdateInfoUrl = 'https://tweaxybackend.mywire.org/api/v1/users';
 const updateInfo = async (
     _name,
     _birthdayDate,

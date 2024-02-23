@@ -1,5 +1,5 @@
 const checkPassword = async (password, token) => {
-    const url = 'http://tweaxybackend.mywire.org/api/v1/users/checkPassword';
+    const url = 'https://tweaxybackend.mywire.org/api/v1/users/checkPassword';
 
     console.log('checking user password...');
 

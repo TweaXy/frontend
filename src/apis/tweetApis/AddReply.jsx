@@ -1,6 +1,6 @@
 const apiAddReply = async (mainTweetId,replyText, replyMedia, token) => {
     const addTweetURL =
-        `http://tweaxybackend.mywire.org/api/v1/interactions/${mainTweetId}/replies`;
+        `https://tweaxybackend.mywire.org/api/v1/interactions/${mainTweetId}/replies`;
     // console.log('this is a token' + token);
     try {
         const response = await fetch(addTweetURL, {

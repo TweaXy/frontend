@@ -1,5 +1,5 @@
 
-const addTweetURL ="http://tweaxybackend.mywire.org/api/v1/tweets/";
+const addTweetURL ="https://tweaxybackend.mywire.org/api/v1/tweets/";
 const apiAddTweet =async (tweetText,tweetMedia,token) => {
     console.log("this is a token" + token);
     try {
@@ -17,8 +17,10 @@ const apiAddTweet =async (tweetText,tweetMedia,token) => {
       if (responseData.status != "success") {
         // take action 
         console.log("cant add tweet");
+        return false;
       } else {
         console.log("Tweet ADDED");
+        return true;
       }
     } catch (error) {
       // Handle errors during the fetch

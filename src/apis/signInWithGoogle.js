@@ -1,5 +1,5 @@
 const signInWithGoogle = async (response) => {
-    const url = 'http://tweaxybackend.mywire.org/api/v1/auth/google';
+    const url = 'https://tweaxybackend.mywire.org/api/v1/auth/google';
 
     try {
         const fetchResponse = await fetch(url, {

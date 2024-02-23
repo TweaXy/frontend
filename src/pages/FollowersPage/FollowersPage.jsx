@@ -7,42 +7,24 @@ import FollowingFollowersHeader from '../../components/FollowingFollowersHeader/
 import LoadingPage from '../../components/LoadingPage/LoadingPage';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
-import { clearUser } from '../../redux/actions';
+import { useSelector } from 'react-redux';
 import UsersCellsSelectors from '../../shared/selectors/UsersCells';
-
 const FollowersPage = () => {
     const location = useLocation();
     const name = location.state?.name;
     const userID = location.state?.userID;
     const username = location.state?.username;
-
     const [users, setUsers] = useState([]);
     const [curPage, setCurPage] = useState(0);
     const [isPageLoading, setIsPageLoading] = useState(true);
-
     const token = useSelector((state) => state.user.token);
     const user = useSelector((state) => state.user.user);
-
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-
     useEffect(() => {
         if (token && user) {
             setIsPageLoading(false);
         }
-
-        const timeoutId = setTimeout(() => {
-            if (token && user) {
-                setIsPageLoading(false);
-            } else {
-                dispatch(clearUser());
-                navigate('/');
-            }
-        }, 2000);
-
-        return () => clearTimeout(timeoutId);
-    }, [token, user, dispatch, navigate]);
+    }, [token, user]);
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -56,7 +38,6 @@ const FollowersPage = () => {
                 console.log('Error fetching user followers: ', error.message);
             }
         };
-
         if (!isPageLoading) {
             fetchUsers();
         }
@@ -94,7 +75,10 @@ const FollowersPage = () => {
                 {users.length === 0 && (
                     <div className="empty-users-cells-container">
                         <div className="span-container">
-                            <span className="header-span" data-test={UsersCellsSelectors.MESSAGE_HEADER}>{`@${username} has no followers`}</span>
+                            <span
+                                className="header-span"
+                                data-test={UsersCellsSelectors.MESSAGE_HEADER}
+                            >{`@${username} has no followers`}</span>
                             <span className="body-span">
                                 Once the account has followers, they'll show up
                                 here.

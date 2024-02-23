@@ -1,4 +1,4 @@
-const getnotifactions = `http://tweaxybackend.mywire.org/api/v1/notification`;
+const getnotifactions = `https://tweaxybackend.mywire.org/api/v1/notification`;
 const getAllNotifications = async (token, _limit, _offset) => {
     console.log('from AllNotications token is', token);
     const urlWithQueryParam = `${getnotifactions}?limit=${_limit}?offset=${_offset}`;

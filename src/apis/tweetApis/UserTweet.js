@@ -1,4 +1,4 @@
-const UserTweetsURL = `http://tweaxybackend.mywire.org/api/v1/users`;
+const UserTweetsURL = `https://tweaxybackend.mywire.org/api/v1/users`;
 
 const GetuserTweets = async (userID, token, limit, offset) => {
     console.log('userID from gettweets is', userID, 'token is', token);

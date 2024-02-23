@@ -1,9 +1,7 @@
 import './UsersCells.css';
 import UserCell from '../UserCell/UserCell';
-import { CircularProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-
 const UsersCells = ({ users }) => {
     const [isPageLoading, setIsPageLoading] = useState(users === undefined);
     const token = useSelector((state) => state.user.token);

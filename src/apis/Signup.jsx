@@ -1,6 +1,6 @@
 import { Errors } from '../pages/SignUpPage/SignUpPage';
 
-let urlsignup = 'http://tweaxybackend.mywire.org/api/v1/auth/signup';
+let urlsignup = 'https://tweaxybackend.mywire.org/api/v1/auth/signup';
 import { months } from '../pages/SignUpPage/SignUpPage';
 const signup = async (
     _usermail,

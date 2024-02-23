@@ -7,7 +7,7 @@ import FeedHeader from './FeedHeader';
 import TweetBox from './TweetBox';
 import Tweet from './Tweet';
 
-const Feed = ({ userData, isTherePopUpWindow, avatar }) => {
+const Feed = ({ userData, isTherePopUpWindow }) => {
     console.log('from feed', userData);
     const token = userData.token;
 
@@ -63,7 +63,7 @@ const Feed = ({ userData, isTherePopUpWindow, avatar }) => {
         const fetchData = async () => {
             console.log('token from feed is', token);
 
-            const lnk = `http://tweaxybackend.mywire.org/api/v1/home?limit=10&offset=${offset}`;
+            const lnk = `https://tweaxybackend.mywire.org/api/v1/home?limit=10&offset=${offset}`;
             try {
                 const response = await fetch(lnk, {
                     method: 'GET',
@@ -111,7 +111,7 @@ const Feed = ({ userData, isTherePopUpWindow, avatar }) => {
                 isTherePopUpWindow={isTherePopUpWindow}
             />
 
-            <TweetBox userData={userData} avatar={avatar} />
+            <TweetBox userData={userData} />
 
             {tweets.map((tweet, index) => {
                 if (tweets.length === index + 1) {

@@ -1,4 +1,4 @@
-const url = `http://tweaxybackend.mywire.org/api/v1/notification/deviceTokenWeb`;
+const url = `https://tweaxybackend.mywire.org/api/v1/notification/deviceTokenWeb`;
 
 const disableNotifications = (token, WebToken) => {
     fetch(url, {

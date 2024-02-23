@@ -7,41 +7,23 @@ import FollowingFollowersHeader from '../../components/FollowingFollowersHeader/
 import LoadingPage from '../../components/LoadingPage/LoadingPage';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
-import { clearUser } from '../../redux/actions';
+import { useSelector } from 'react-redux';
 import UsersCellsSelectors from '../../shared/selectors/UsersCells';
-
 const FollowingPage = () => {
     const location = useLocation();
     const name = location.state?.name;
     const userID = location.state?.userID;
     const username = location.state?.username;
-
     const [users, setUsers] = useState([]);
     const [curPage, setCurPage] = useState(1);
     const [isPageLoading, setIsPageLoading] = useState(true);
-
     const token = useSelector((state) => state.user.token);
     const user = useSelector((state) => state.user.user);
-
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     useEffect(() => {
-        if (token && user) {
-            setIsPageLoading(false);
-        }
-
-        const timeoutId = setTimeout(() => {
-            if (token && user) {
-                setIsPageLoading(false);
-            } else {
-                dispatch(clearUser());
-                navigate('/');
-            }
-        }, 2000);
-        return () => clearTimeout(timeoutId);
-    }, [token, user, dispatch, navigate]);
+        if (token && user) setIsPageLoading(false);
+    }, [token, user]);
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -93,7 +75,10 @@ const FollowingPage = () => {
                 {users.length === 0 && (
                     <div className="empty-users-cells-container">
                         <div className="span-container">
-                            <span className="header-span" data-test={UsersCellsSelectors.MESSAGE_HEADER}>
+                            <span
+                                className="header-span"
+                                data-test={UsersCellsSelectors.MESSAGE_HEADER}
+                            >
                                 {`@${username} isn't following anyone`}
                             </span>
                             <span className="body-span">

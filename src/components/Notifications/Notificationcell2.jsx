@@ -1,10 +1,18 @@
 import './Notificationcell.css';
 import './NotificationsAvaters.css';
-import MangaAvatar from '../../../assets/Manga.png';
 import Avatar from '@mui/material/Avatar';
 import { useNavigate } from 'react-router';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { cyan } from '@mui/material/colors';
+import React from 'react';
+import PropTypes from 'prop-types';
+/**
+ * Notificationcell2 component for displaying notifications related to follow actions.
+ * @param {Object} props - The props for the Notificationcell2 component.
+ * @param {Object} props.fromuser - The user who initiated the follow action.
+ * @param {Object} props.interaction - Additional interaction details (if any).
+ * @returns JSX element representing the Notificationcell2 component.
+ */
 const Notificationcell2 = ({ fromuser, interaction }) => {
     const navigate = useNavigate();
     const routingHandlerProfile = (event) => {
@@ -37,9 +45,10 @@ const Notificationcell2 = ({ fromuser, interaction }) => {
                         <div
                             className="Notification-avatar-box2"
                             onClick={routingHandlerProfile}
+                            data-testid="avatar"
                         >
                             <Avatar
-                                src={`http://tweaxybackend.mywire.org/api/v1/images/${fromuser.avatar}`}
+                                src={`https://tweaxybackend.mywire.org/api/v1/images/${fromuser.avatar}`}
                                 sx={{ width: 30, height: 30 }}
                             ></Avatar>
                         </div>
@@ -63,5 +72,15 @@ const Notificationcell2 = ({ fromuser, interaction }) => {
             </div>
         </>
     );
+};
+// PropTypes for Notificationcell2 component
+Notificationcell2.propTypes = {
+    fromuser: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        username: PropTypes.string.isRequired,
+        avatar: PropTypes.string.isRequired,
+    }).isRequired,
+    interaction: PropTypes.object, // Additional interaction details (optional)
 };
 export default Notificationcell2;

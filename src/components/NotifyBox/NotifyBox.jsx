@@ -1,5 +1,5 @@
 import './NotifyBox.css';
-
+import React from 'react';
 const NotifyBox = ({ text }) => {
     return (
         <div className="notify-box-msg">

@@ -1,4 +1,4 @@
-const urlProfileData = 'http://tweaxybackend.mywire.org/api/v1/users/';
+const urlProfileData = 'https://tweaxybackend.mywire.org/api/v1/users/';
 
 const getUserDataApi = async ({ id, token }) => {
     const fullUrl = `${urlProfileData}${id}`;

@@ -9,7 +9,20 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import './LoginPage.css';
 import SignInSelectors from '../../shared/selectors/SignIn';
+import React from 'react';
+import PropTypes from 'prop-types'; // Import PropTypes
 
+/**
+ * Component for rendering the page where users enter their password to login.
+ * @param {object} props - The props for the EnterPasswordPage component.
+ * @param {string} props.UUID - The UUID of the user.
+ * @param {string} props.password - The password entered by the user.
+ * @param {string} props.LoginError - Error message for login validation.
+ * @param {Function} props.handlePasswordChange - Function to handle changes in the password input.
+ * @param {Function} props.handleLogin - Function to handle login.
+ * @param {Function} props.handleForgotPassword - Function to handle clicking on "Forgot password?".
+ * @param {Function} props.handleSignUp - Function to handle clicking on "Sign up".
+ */
 const EnterPasswordPage = ({
     UUID,
     password,
@@ -50,15 +63,7 @@ const EnterPasswordPage = ({
                 }}
                 variant="outlined"
             />
-            <FormControl
-                sx={{
-                    m: 1,
-                    width: '100%',
-                    height: '62px',
-                    maxWidth: '440px',
-                }}
-                variant="outlined"
-            >
+            <FormControl className="password-form-control" variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password">
                     Password
                 </InputLabel>
@@ -109,5 +114,14 @@ const EnterPasswordPage = ({
         </div>
     );
 };
-
+// PropTypes
+EnterPasswordPage.propTypes = {
+    UUID: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    LoginError: PropTypes.string,
+    handlePasswordChange: PropTypes.func.isRequired,
+    handleLogin: PropTypes.func.isRequired,
+    handleForgotPassword: PropTypes.func.isRequired,
+    handleSignUp: PropTypes.func.isRequired,
+};
 export default EnterPasswordPage;

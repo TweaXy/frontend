@@ -1,5 +1,5 @@
 const getPushNotificationStatus = async (token, webToken) => {
-    const url = `http://tweaxybackend.mywire.org/api/v1/notification/satatus`;
+    const url = `https://tweaxybackend.mywire.org/api/v1/notification/satatus`;
 
     try {
         const response = await fetch(url, {
